@@ -1,0 +1,6 @@
+numpy
+Cython
+keras
+scikit-learn
+word2vec
+
