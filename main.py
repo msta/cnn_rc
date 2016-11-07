@@ -11,6 +11,8 @@ from keras.layers import Convolution1D as Conv1D
 from keras.layers.core import Dropout
 from keras.layers.pooling import MaxPooling1D
 from keras.regularizers import l2
+from keras.callbacks import TensorBoard
+from keras import backend as K
 
 from prep import Preprocessor
 from model import get_model
@@ -18,10 +20,65 @@ from model import get_model
 from keras.optimizers import Adadelta
 from keras.utils.np_utils import to_categorical
 
+def debug_print(input, msg):
+    print "#" * 30
+    print msg
+    for line in input:
+        print line
+    print "#" * 30
+
+def fbetascore(y_true, y_pred, beta=1):
+    from keras import backend as K
+    '''Compute F score, the weighted harmonic mean of precision and recall.
+    
+    This is useful for multi-label classification where input samples can be
+    tagged with a set of labels. By only using accuracy (precision) a model
+    would achieve a perfect score by simply assigning every class to every
+    input. In order to avoid this, a metric should penalize incorrect class
+    assignments as well (recall). The F-beta score (ranged from 0.0 to 1.0)
+    computes this, as a weighted mean of the proportion of correct class
+    assignments vs. the proportion of incorrect class assignments.
+    
+    With beta = 1, this is equivalent to a F-measure. With beta < 1, assigning
+    correct classes becomes more important, and with beta > 1 the metric is
+    instead weighted towards penalizing incorrect class assignments.
+    
+    '''
+    if beta < 0:
+        raise ValueError('The lowest choosable beta is zero (only precision).')
+
+    # Count positive samples.
+    c1 = K.sum(K.round(K.clip(y_true * y_pred, 0, 1)))
+    c2 = K.sum(K.round(K.clip(y_pred, 0, 1)))
+    c3 = K.sum(K.round(K.clip(y_true, 0, 1)))
+    
+    # If there are no true samples, fix the F score at 0.
+    if c3 == 0:
+        return 0
+    
+    # How many selected items are relevant?
+    precision = c1 / c2
+    
+    # How many relevant items are selected?
+    recall = c1 / c3
+    
+    # Weight precision and recall together as a single scalar.
+    beta2 = beta ** 2
+    f_score = (1 + beta2) * (precision * recall) / (beta2 * precision + recall)
+    return f_score
+
+
+
+
+
+
 parser = argparse.ArgumentParser(description='CNN')
-parser.add_argument("-d", "--debug", default=False, type=bool)
-parser.add_argument("-p", "--with_pos", default=False, type=bool)
-parser.add_argument("-bi", "--bidirectional_classes", default=True, type=bool)
+parser.add_argument("--debug", action="store_true")
+parser.add_argument("--with_pos",  action="store_true")
+parser.add_argument("--merge_classes",  action="store_true")
+parser.add_argument("--rand",  action="store_true")
+parser.add_argument("--clipping",  action="store_true")
+
 args = parser.parse_args()
 
 DEBUG = args.debug
@@ -31,14 +88,17 @@ INCLUDE_POS_EMB = args.with_pos
 
 WORD_EMBEDDING_DIMENSION = 300
 
+word_embeddings = {}
+
+
 if DEBUG:
     EPOCHS = 2
-    word_embeddings = {}
-    oov_vector = np.zeros(WORD_EMBEDDING_DIMENSION)
 else:
-    EPOCHS = 100
-    word_embeddings = word2vec.load("word_embeddings.bin", encoding='ISO-8859-1')
-    oov_vector = np.mean(word_embeddings.vectors[len(word_embeddings.vectors) - 1000:], axis=0)
+    EPOCHS = 25
+    if not args.rand:
+        word_embeddings = word2vec.load("word_embeddings.bin", encoding='ISO-8859-1')
+    #oov_vector = np.mean(word_embeddings.vectors[len(word_embeddings.vectors) - 1000:], axis=0)
+    
     #word_embeddings = {}
 
 # classes in the problem
@@ -72,8 +132,10 @@ def clean_classes(dict):
         o[c] = count
         count += 1
     return o
-if not args.bidirectional_classes:
+if args.merge_classes:
+    print "Cleaning classes"
     output_dict = clean_classes(output_dict)
+
 NO_OF_CLASSES = len(output_dict)
 
 
@@ -102,7 +164,7 @@ for line in dataset:
     if i == 0:
         X_raw.append(process_train(line))
     if i == 1:
-        if not args.bidirectional_classes:
+        if args.merge_classes:
             Y.append(output_dict[line.strip().split("(")[0]])
         else:
             Y.append(output_dict[line.strip()])
@@ -121,21 +183,28 @@ print "#" * 30
 X_full = np.asarray(X_raw)
 Y_full = np.asarray(Y) 
 
-prep = Preprocessor(X_full, DEBUG)
 
-X_padded, X_nom_pos1, X_nom_pos2 = prep.preprocess(X_full)
-Y = Y_full
+
+prep = Preprocessor(X_full, 
+    Y_full, 
+    DEBUG, 
+    args.rand, 
+    args.clipping)
+
+X_padded, X_nom_pos1, X_nom_pos2, Y = prep.preprocess(X_full)
+
+
+
+zeros = [x for b in X_padded for x in b if x == 0]
+print "Total amt of zeros " , len(zeros)
+print "Avg zeros " , len(zeros) / len(X_padded)
+
+
 
 word_index = prep.word_idx()
 
 n = prep.n
 
-def debug_print(input, msg):
-    print "#" * 30
-    print msg
-    for line in input:
-        print line
-    print "#" * 30
 
 
 if DEBUG:
@@ -143,7 +212,9 @@ if DEBUG:
     print "DEBUG INFO"
     debug_print(X_raw, "Training samples")
     debug_print(X_padded, "Embedding Input")
-    debug_print(X_nom_pos, "Nominal positions: ")
+    debug_print(X_nom_pos1, "Nominal positions1: ")
+    debug_print(X_nom_pos2, "Nominal positions2: ")
+    debug_print(prep.reverse_sequence(X_padded), "Reverse")
     print "-" * 30
     print "Word_index: "
     print word_index
@@ -151,25 +222,40 @@ if DEBUG:
     print "-" * 30
 
 
-
 debug_print([], "SENTENCES SEQUENCED AND NOMINAL POSITIONS CALCULATED")
 
-model = get_model(word_embeddings, 
+model = get_model( 
+    word_embeddings,
     word_index, 
     n, 
     WORD_EMBEDDING_DIMENSION,
     INCLUDE_POS_EMB,
     DROPOUT_RATE,
-    NO_OF_CLASSES, 
-    oov_vector)
+    NO_OF_CLASSES
+    )
 
-X=[X_padded]
+## x is random permutation 1 fold
+x = np.random.rand(len(X_padded), 10)
+indices = np.random.permutation(x.shape[0])
 
+split = len(X_padded) / 10 * 9
+
+train_idx, test_idx = indices[:split], indices[split:]
+
+
+X_train = [X_padded[train_idx]]
+X_test = [X_padded[test_idx]]
 if INCLUDE_POS_EMB:
-    X.append(X_nom_pos1, X_nom_pos2)
+    X_train.append(X_nom_pos1[train_idx])
+    X_train.append(X_nom_pos2[train_idx])
+    X_test.append(X_nom_pos1[test_idx])
+    X_test.append(X_nom_pos2[test_idx])
+
 
 #X = [X_padded, X_nom_pos]
-Y_final = to_categorical(Y, nb_classes=NO_OF_CLASSES)
+Y_train = to_categorical(Y[train_idx], nb_classes=NO_OF_CLASSES)
+Y_test = to_categorical(Y[test_idx], nb_classes=NO_OF_CLASSES)
+
 
 #Y_test = to_categorical(Y_test, nb_classes=NO_OF_CLASSES) 
 
@@ -178,8 +264,30 @@ def train_model_kv(model):
         print model.summary()
         #print model.get_config()
         #print model.get_weights();
-        model.fit(X, Y_final, nb_epoch=EPOCHS, validation_split=0.1, batch_size=50, shuffle=True)
+        model.fit(X_train, Y_train, nb_epoch=EPOCHS, 
+            batch_size=50, 
+            shuffle=True)
         #print model.get_weights();
 train_model_kv(model)
+
+print "#" * 30
+print "EVALUATING MODEL"
+
+print model.evaluate(X_test, Y_test)
+print "EVALUATING DONE"
+print "#" * 30
+
+
+
+weights = model.get_weights()
+print len(weights)
+print "#" * 30
+print model.get_weights()[10].shape
+print model.get_weights()[10]
+print "#" * 30
+print model.get_weights()[9].shape
+print model.get_weights()[9]
+
+
 
 
