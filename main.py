@@ -14,6 +14,8 @@ from keras.regularizers import l2
 from keras.callbacks import TensorBoard
 from keras import backend as K
 
+from sklearn.model_selection import KFold
+
 from prep import Preprocessor
 from model import get_model
 
@@ -69,37 +71,46 @@ def fbetascore(y_true, y_pred, beta=1):
 
 
 
+def clean_classes(dict):
+    clean = set([x.split("(")[0] for x in dict])
+    count = 0
+    o = {}
+    for c in clean:
+        o[c] = count
+        count += 1
+    return o
 
 
-
-parser = argparse.ArgumentParser(description='CNN')
-parser.add_argument("--debug", action="store_true")
-parser.add_argument("--with_pos",  action="store_true")
-parser.add_argument("--merge_classes",  action="store_true")
-parser.add_argument("--rand",  action="store_true")
-parser.add_argument("--clipping",  action="store_true")
-
-args = parser.parse_args()
-
-DEBUG = args.debug
-DROPOUT_RATE = 0.5
-
-INCLUDE_POS_EMB = args.with_pos
-
-WORD_EMBEDDING_DIMENSION = 300
-
-word_embeddings = {}
+def process_train(line):
+    # split on quotes and get the raw text
+    stripped = re.sub("\d{0,4}", "", line, count=1).strip()
+    return stripped[1:len(stripped)-2]
 
 
-if DEBUG:
-    EPOCHS = 2
-else:
-    EPOCHS = 25
-    if not args.rand:
-        word_embeddings = word2vec.load("word_embeddings.bin", encoding='ISO-8859-1')
-    #oov_vector = np.mean(word_embeddings.vectors[len(word_embeddings.vectors) - 1000:], axis=0)
-    
-    #word_embeddings = {}
+def read_dataset(dataset, output_dict, merge_classes=False):
+
+    # input text
+    X_raw = []
+    # pred
+    Y = []
+    # process dataset
+    i = 0
+
+    for line in dataset:
+        if i == 0:
+            X_raw.append(process_train(line))
+        if i == 1:
+            if args.merge_classes:
+                Y.append(output_dict[line.strip().split("(")[0]])
+            else:
+                Y.append(output_dict[line.strip()])
+        if i == 2 or i == 3:
+            pass
+        i += 1
+        if i % 4 == 0:
+            i = 0
+    return X_raw, Y
+
 
 # classes in the problem
 output_dict = {
@@ -124,55 +135,51 @@ output_dict = {
     "Other" : 18
 }
 
-def clean_classes(dict):
-    clean = set([x.split("(")[0] for x in dict])
-    count = 0
-    o = {}
-    for c in clean:
-        o[c] = count
-        count += 1
-    return o
+
+parser = argparse.ArgumentParser(description='CNN')
+parser.add_argument("--debug", action="store_true")
+parser.add_argument("--with_pos",  action="store_true")
+parser.add_argument("--merge_classes",  action="store_true")
+parser.add_argument("--rand",  action="store_true")
+parser.add_argument("--clipping",  action="store_true")
+parser.add_argument("--markup",  action="store_true")
+args = parser.parse_args()
+
 if args.merge_classes:
     print "Cleaning classes"
     output_dict = clean_classes(output_dict)
 
+
+######## Experiment begin ##################
+
+FOLDS = 10
+EPOCHS = 20
+DEBUG = args.debug
+DROPOUT_RATE = 0.5
+INCLUDE_POS_EMB = args.with_pos
+WORD_EMBEDDING_DIMENSION = 300
+
+word_embeddings = {}
+
+
 NO_OF_CLASSES = len(output_dict)
 
 
-
-def process_train(line):
-    # split on quotes and get the raw text
-    stripped = re.sub("\d{0,4}", "", line, count=1).strip()
-    return stripped[1:len(stripped)-2]
+if DEBUG:
+    EPOCHS = 2
+else:
+    if not args.rand:
+        word_embeddings = word2vec.load("word_embeddings.bin", encoding='ISO-8859-1')
 
 # load dataset
 if DEBUG:
-    dataset = open("task8/training/TRAIN_FILE_MEDIUM.txt", "r")
+    dataset = open("task8/training/TRAIN_FILE_SMALL.txt", "r")
 else:
     dataset = open("task8/training/TRAIN_FILE.txt", "r")
 
-# input text
-X_raw = []
 
-# pred
-Y = []
+X_raw, Y = read_dataset(dataset, output_dict, args.merge_classes)
 
-# process dataset
-i = 0
-
-for line in dataset:
-    if i == 0:
-        X_raw.append(process_train(line))
-    if i == 1:
-        if args.merge_classes:
-            Y.append(output_dict[line.strip().split("(")[0]])
-        else:
-            Y.append(output_dict[line.strip()])
-    if i == 2 or i == 3:
-        pass
-    i += 1
-    if i % 4 == 0:
-        i = 0
 
 print "#" * 30
 print "DATA SPLIT AND LOADED"
@@ -184,25 +191,25 @@ X_full = np.asarray(X_raw)
 Y_full = np.asarray(Y) 
 
 
-
 prep = Preprocessor(X_full, 
     Y_full, 
     DEBUG, 
     args.rand, 
-    args.clipping)
+    args.clipping,
+    args.markup)
 
 X_padded, X_nom_pos1, X_nom_pos2, Y = prep.preprocess(X_full)
 
-
+### Calculate avg nr of zeros for info
 
 zeros = [x for b in X_padded for x in b if x == 0]
 print "Total amt of zeros " , len(zeros)
 print "Avg zeros " , len(zeros) / len(X_padded)
 
+#####
 
 
 word_index = prep.word_idx()
-
 n = prep.n
 
 
@@ -221,72 +228,77 @@ if DEBUG:
     print "Word idx length: ", len(word_index) 
     print "-" * 30
 
-
+### Beginning K-Fold validation
 debug_print([], "SENTENCES SEQUENCED AND NOMINAL POSITIONS CALCULATED")
 
-model = get_model( 
-    word_embeddings,
-    word_index, 
-    n, 
-    WORD_EMBEDDING_DIMENSION,
-    INCLUDE_POS_EMB,
-    DROPOUT_RATE,
-    NO_OF_CLASSES
-    )
+all_results = []
+kf = KFold(n_splits=FOLDS)
 
-## x is random permutation 1 fold
-x = np.random.rand(len(X_padded), 10)
-indices = np.random.permutation(x.shape[0])
+for train_idx, test_idx in kf.split(X_padded):
 
-split = len(X_padded) / 10 * 9
-
-train_idx, test_idx = indices[:split], indices[split:]
+    model = get_model( 
+        word_embeddings,
+        word_index, 
+        n, 
+        WORD_EMBEDDING_DIMENSION,
+        INCLUDE_POS_EMB,
+        DROPOUT_RATE,
+        NO_OF_CLASSES
+        )
 
 
-X_train = [X_padded[train_idx]]
-X_test = [X_padded[test_idx]]
-if INCLUDE_POS_EMB:
-    X_train.append(X_nom_pos1[train_idx])
-    X_train.append(X_nom_pos2[train_idx])
-    X_test.append(X_nom_pos1[test_idx])
-    X_test.append(X_nom_pos2[test_idx])
+    X_train = [X_padded[train_idx]]
+    X_test = [X_padded[test_idx]]
+    if INCLUDE_POS_EMB:
+        X_train.append(X_nom_pos1[train_idx])
+        X_train.append(X_nom_pos2[train_idx])
+        X_test.append(X_nom_pos1[test_idx])
+        X_test.append(X_nom_pos2[test_idx])
 
 
-#X = [X_padded, X_nom_pos]
-Y_train = to_categorical(Y[train_idx], nb_classes=NO_OF_CLASSES)
-Y_test = to_categorical(Y[test_idx], nb_classes=NO_OF_CLASSES)
+    #X = [X_padded, X_nom_pos]
+    Y_train = to_categorical(Y[train_idx], nb_classes=NO_OF_CLASSES)
+    Y_test = to_categorical(Y[test_idx], nb_classes=NO_OF_CLASSES)
 
 
-#Y_test = to_categorical(Y_test, nb_classes=NO_OF_CLASSES) 
+    #Y_test = to_categorical(Y_test, nb_classes=NO_OF_CLASSES) 
 
-def train_model_kv(model):
-       # print X_padded[train]
-        print model.summary()
-        #print model.get_config()
-        #print model.get_weights();
-        model.fit(X_train, Y_train, nb_epoch=EPOCHS, 
-            batch_size=50, 
-            shuffle=True)
-        #print model.get_weights();
-train_model_kv(model)
+    def train_model_kv(model):
+           # print X_padded[train]
+            #print model.summary()
+            #print model.get_config()
+            #print model.get_weights();
+            model.fit(X_train, Y_train, nb_epoch=EPOCHS, 
+                batch_size=50, 
+                shuffle=True)
+            #print model.get_weights();
+    train_model_kv(model)
+
+    print "#" * 30
+    print "EVALUATING MODEL"
+
+    result = model.evaluate(X_test, Y_test)
+    all_results.append(result)
+    print result
+    print "EVALUATING DONE"
+    print "#" * 30
+
+
+final_f1 = sum([x[2] for x in all_results if not np.isnan(x[2]) ]) / FOLDS
 
 print "#" * 30
-print "EVALUATING MODEL"
-
-print model.evaluate(X_test, Y_test)
-print "EVALUATING DONE"
-print "#" * 30
+print "FINAL F1 VALUE: " , final_f1
+print "#" * 30 
 
 
-
-weights = model.get_weights()
-print len(weights)
-print "#" * 30
-print model.get_weights()[10].shape
-print model.get_weights()[10]
-print "#" * 30
-print model.get_weights()[9].shape
-print model.get_weights()[9]
+# weights = model.get_weights()
+# print len(weights)
+# print "#" * 30
+# print model.get_weights()[10].shape
+# print model.get_weights()[10]
+# print "#" * 30
+# print model.get_weights()[9].shape
+# print model.get_weights()[9]
 
 
 
