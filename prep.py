@@ -11,22 +11,21 @@ class Preprocessor():
 
     def __init__(self, 
         texts, 
-        Y, 
+        Y,
+        clipping_value=18,
         debug=False, 
-        rand=False, 
-        clipping=False, 
         markup=False):
         self.tokenizer = Tokenizer()
         self.tokenizer.fit_on_texts(texts)
         self.texts = texts
         self.nom1_idx = self.tokenizer.word_index['e1']
         self.nom2_idx = self.tokenizer.word_index['e2']
+        self.clipping = True
         self.debug = debug
-        self.clipping = clipping
         self.markup = markup
         self.Y = Y
         self.n_values = []
-        self.clipping_value = 18
+        self.clipping_value = clipping_value
 
     def sequence(self, texts):
         return self.tokenizer.texts_to_sequences(texts)
@@ -183,9 +182,6 @@ class Preprocessor():
         debug_print(att_list_1, "Attention pair list 1")
         debug_print(att_list_2, "Attention pair list 2")
 
-        import ipdb
-        ipdb.sset_trace()
-        
         return (padded_sequences, 
             nominal_positions1, nominal_positions2, 
             att_idx, att_list_1, att_list_2,

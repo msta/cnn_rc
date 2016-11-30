@@ -1,7 +1,7 @@
 
 import numpy as np
 
-from keras.optimizers import Adadelta
+from keras.optimizers import Adadelta, SGD
 from keras.utils.np_utils import to_categorical
 from keras.models import Model
 from keras.layers import Dense, Activation, Embedding, Input, merge, Flatten, Reshape
@@ -21,7 +21,7 @@ def get_model(
     n, 
     word_entity_dictionary={},
     WORD_EMBEDDING_DIM=300,
-    POS_EMBEDDING_DIM=50,
+    POS_EMBEDDING_DIM=25,
     L2_NORM_MAX=3,
     INCLUDE_POS_EMB=True,
     ACTIVATION_FUNCTION="tanh",
@@ -133,7 +133,7 @@ def get_model(
 
     for w in windows:
         reshaped = Reshape((1,n,CIP))(conv_input)
-        window = Conv2D(100,1, w, 
+        window = Conv2D(1000,1, w, 
             border_mode='valid',
             activation=g,
             W_constraint=maxnorm(L2_NORM_MAX), 
@@ -165,6 +165,9 @@ def get_model(
     model = Model(input=input_arr, output=[final_layer])
     
     opt_ada = Adadelta(epsilon=1e-06)
+    opt_sgd = SGD(lr=0.03)
+    opt = opt_ada
+    
 
-    model.compile(optimizer=opt_ada, loss='categorical_crossentropy', metrics=["accuracy", fbetascore])
+    model.compile(optimizer=opt_sgd, loss='categorical_crossentropy', metrics=["accuracy", fbetascore])
     return model
