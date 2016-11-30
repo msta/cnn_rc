@@ -4,6 +4,8 @@ import re
 import math
 import word2vec
 import argparse
+import logging
+
 
 from keras.models import Model
 from keras.layers import Dense, Activation, Embedding, Input, merge, Flatten, Reshape
@@ -16,10 +18,11 @@ from keras import backend as K
 from keras.optimizers import Adadelta
 from keras.utils.np_utils import to_categorical
 
-from semeval import output_dict
-
 from sklearn.model_selection import KFold
 
+### My own stuff ###
+from semeval import output_dict
+from functions import debug_print, fbetascore, clean_classes, process_train
 from prep import Preprocessor
 from model import get_model
 
@@ -28,8 +31,13 @@ from model import get_model
 parser = argparse.ArgumentParser(description='CNN')
 parser.add_argument("--debug", action="store_true")
 parser.add_argument("--no_pos",  
-                    action="store_false",
-                    default=True)
+                    action="store_true",
+                    default=False)
+
+parser.add_argument("--folds", 
+                    action="store_true",
+                    default=False)
+
 
 parser.add_argument("--merge_classes",  action="store_true")
 
@@ -42,83 +50,10 @@ if args.merge_classes:
     print "Cleaning classes"
     output_dict = clean_classes(output_dict)
 
-
-
-
-def debug_print(input, msg):
-    print "#" * 30
-    print msg
-    for line in input:
-        print line
-    print "#" * 30
-
-def fbetascore(y_true, y_pred, beta=1):
-    from keras import backend as K
-    '''Compute F score, the weighted harmonic mean of precision and recall.
-    
-    This is useful for multi-label classification where input samples can be
-    tagged with a set of labels. By only using accuracy (precision) a model
-    would achieve a perfect score by simply assigning every class to every
-    input. In order to avoid this, a metric should penalize incorrect class
-    assignments as well (recall). The F-beta score (ranged from 0.0 to 1.0)
-    computes this, as a weighted mean of the proportion of correct class
-    assignments vs. the proportion of incorrect class assignments.
-    
-    With beta = 1, this is equivalent to a F-measure. With beta < 1, assigning
-    correct classes becomes more important, and with beta > 1 the metric is
-    instead weighted towards penalizing incorrect class assignments.
-    
-    '''
-    if beta < 0:
-        raise ValueError('The lowest choosable beta is zero (only precision).')
-
-    # Count positive samples.
-    c1 = K.sum(K.round(K.clip(y_true * y_pred, 0, 1)))
-    c2 = K.sum(K.round(K.clip(y_pred, 0, 1)))
-    c3 = K.sum(K.round(K.clip(y_true, 0, 1)))
-    
-    # If there are no true samples, fix the F score at 0.
-    if c3 == 0:
-        return 0
-    
-    # How many selected items are relevant?
-    precision = c1 / c2
-    
-    # How many relevant items are selected?
-    recall = c1 / c3
-    
-    # Weight precision and recall together as a single scalar.
-    beta2 = beta ** 2
-    f_score = (1 + beta2) * (precision * recall) / (beta2 * precision + recall)
-    return f_score
-
-
-
-def clean_classes(dict):
-    clean = set([x.split("(")[0] for x in dict])
-    count = 0
-    o = {}
-    for c in clean:
-        o[c] = count
-        count += 1
-    return o
-
-
-def process_train(line):
-    # split on quotes and get the raw text
-    stripped = re.sub("\d{0,4}", "", line, count=1).strip()
-    return stripped[1:len(stripped)-2]
-
-
 def read_dataset(dataset, output_dict, merge_classes=False):
-
-    # input text
     X_raw = []
-    # pred
     Y = []
-    # process dataset
     i = 0
-
     for line in dataset:
         if i == 0:
             X_raw.append(process_train(line))
@@ -134,9 +69,6 @@ def read_dataset(dataset, output_dict, merge_classes=False):
             i = 0
     return X_raw, Y
 
-
-
-
 ######## Experiment begin ##################
 
 FOLDS = 10
@@ -144,9 +76,7 @@ EPOCHS = 20
 DEBUG = args.debug
 DROPOUT_RATE = 0.5
 INCLUDE_POS_EMB = not args.no_pos
-WORD_EMBEDDING_DIMENSION = store_false
-
-word_embeddings = {}
+WORD_EMBEDDING_DIMENSION = 300
 
 
 NO_OF_CLASSES = len(output_dict)
@@ -154,9 +84,12 @@ NO_OF_CLASSES = len(output_dict)
 
 if DEBUG:
     EPOCHS = 2
+
+if not args.rand:
+    word_embeddings = word2vec.load("word_embeddings.bin", encoding='ISO-8859-1')
 else:
-    if not args.rand:
-        word_embeddings = word2vec.load("word_embeddings.bin", encoding='ISO-8859-1')
+    word_embeddings = {}
+
 
 # load dataset
 if DEBUG:
@@ -165,14 +98,16 @@ else:
     dataset = open("task8/training/TRAIN_FILE.txt", "r")
 
 
+
+#############################################################################
+############### DATASET READING #############################################
+#############################################################################
+
 X_raw, Y = read_dataset(dataset, output_dict, args.merge_classes)
 
-
-print "#" * 30
-print "DATA SPLIT AND LOADED"
-print "#" * 30
-
-# In[300]:
+logging.info("#" * 30)
+logging.info("DATA SPLIT AND LOADED")
+logging.info("#" * 30)
 
 X_full = np.asarray(X_raw)
 Y_full = np.asarray(Y) 
@@ -185,7 +120,9 @@ prep = Preprocessor(X_full,
     args.clipping,
     args.markup)
 
-X_padded, X_nom_pos1, X_nom_pos2, Y = prep.preprocess(X_full)
+(X_padded, X_nom_pos1, X_nom_pos2, 
+    att_idx, att_list_1, att_list_2,
+    Y) = prep.preprocess(X_full)
 
 ### Calculate avg nr of zeros for info
 
@@ -198,8 +135,6 @@ print "Avg zeros " , len(zeros) / len(X_padded)
 
 word_index = prep.word_idx()
 n = prep.n
-
-
 
 if DEBUG:
     print "#" * 30
@@ -216,7 +151,7 @@ if DEBUG:
     print "-" * 30
 
 ### Beginning K-Fold validation
-debug_print([], "SENTENCES SEQUENCED AND NOMINAL POSITIONS CALCULATED")
+logging.info("SENTENCES SEQUENCED AND NOMINAL POSITIONS CALCULATED")
 
 all_results = []
 kf = KFold(n_splits=FOLDS)
@@ -224,23 +159,30 @@ kf = KFold(n_splits=FOLDS)
 for train_idx, test_idx in kf.split(X_padded):
 
     model = get_model( 
-        word_embeddings,
-        word_index, 
-        n, 
-        WORD_EMBEDDING_DIMENSION,
-        INCLUDE_POS_EMB,
-        DROPOUT_RATE,
-        NO_OF_CLASSES
+        word_embeddings=word_embeddings,
+        word_index=word_index, 
+        n=n,
+        word_entity_dictionary=att_idx, 
+        WORD_EMBEDDING_DIM=WORD_EMBEDDING_DIMENSION,
+        INCLUDE_POS_EMB=INCLUDE_POS_EMB,
+        DROPOUT_RATE=DROPOUT_RATE,
+        NO_OF_CLASSES=NO_OF_CLASSES
         )
-
 
     X_train = [X_padded[train_idx]]
     X_test = [X_padded[test_idx]]
+    
     if INCLUDE_POS_EMB:
         X_train.append(X_nom_pos1[train_idx])
         X_train.append(X_nom_pos2[train_idx])
         X_test.append(X_nom_pos1[test_idx])
         X_test.append(X_nom_pos2[test_idx])
+
+    X_train.append(att_list_1[train_idx])
+    X_train.append(att_list_2[train_idx])
+
+    X_test.append(att_list_1[test_idx])
+    X_test.append(att_list_2[test_idx])
 
 
     #X = [X_padded, X_nom_pos]
@@ -252,34 +194,36 @@ for train_idx, test_idx in kf.split(X_padded):
 
     def train_model_kv(model):
            # print X_padded[train]
-            #print model.summary()
-            #print model.get_config()
-            #print model.get_weights();
-            model.fit(X_train, Y_train, nb_epoch=EPOCHS, 
+            logging.info(model.summary())
+            #logging.info( model.get_config())
+            #logging.info( model.get_weights();)
+            model.fit(X_train, 
+                Y_train, 
+                nb_epoch=EPOCHS, 
                 batch_size=50, 
                 shuffle=True)
-            #print model.get_weights();
+            #logging.info( model.get_weights();)
     train_model_kv(model)
 
-    print "#" * 30
-    print "EVALUATING MODEL"
+    logging.info( "#" * 30)
+    logging.info( "EVALUATING MODEL")
 
     result = model.evaluate(X_test, Y_test)
     all_results.append(result)
-    print result
-    print "EVALUATING DONE"
-    print "#" * 30
+    logging.info( result)
+    logging.info( "EVALUATING DONE")
+    logging.info( "#" * 30)
 
 
 final_f1 = sum([x[2] for x in all_results if not np.isnan(x[2]) ]) / FOLDS
 
-print "#" * 30
-print "FINAL F1 VALUE: " , final_f1
-print "#" * 30 
+logging.info( "#" * 30)
+logging.info( "FINAL F1 VALUE: " , final_f1)
+logging.info( "#" * 30 )
 
 
 # weights = model.get_weights()
-# print len(weights)
+# logging.info( len(weights))
 # print "#" * 30
 # print model.get_weights()[10].shape
 # print model.get_weights()[10]
@@ -290,3 +234,4 @@ print "#" * 30
 
 
 
+1

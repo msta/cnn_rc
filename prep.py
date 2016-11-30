@@ -1,8 +1,8 @@
 import numpy as np
 import math
+import logging
 from keras.preprocessing.text import Tokenizer
 from keras.preprocessing.sequence import pad_sequences
-
 
 class Preprocessor():
 
@@ -128,17 +128,40 @@ class Preprocessor():
                 tok != 'e1' and tok != 'e2'])
         return cleaned_seq
 
+    def make_att_dict(self, seqs, nominals):
+        attentions_idx = {}
+        att_list_1 = []
+        att_list_2 = []
+
+        def add_to_dict_and_list(pair, att_list, att_dict):
+            if pair not in att_dict: 
+                att_dict[pair] = len(att_dict) + 1 
+            att_list.append(att_dict[pair])
+
+        for seq_idx, seq in enumerate(seqs):
+            att_sub_list_1 = []
+            att_sub_list_2 = []
+            for tok_idx, tok in enumerate(seq):
+                nominal_idx_1, nominal_idx_2 = nominals[seq_idx]
+                pair_1 = min(tok, nominal_idx_1), max(tok, nominal_idx_1)
+                pair_2 = min(tok, nominal_idx_2), max(tok, nominal_idx_2)
+
+                add_to_dict_and_list(pair_1, att_sub_list_1, attentions_idx)
+                add_to_dict_and_list(pair_2, att_sub_list_2, attentions_idx)
+            att_list_1.append(att_sub_list_1)
+            att_list_2.append(att_sub_list_2)
+
+
+        return attentions_idx, np.asarray(att_list_1), np.asarray(att_list_2)
+
     def preprocess(self, X):
 
-        import ipdb
-        ipdb.sset_trace()
         sequences = self.sequence(X)
         
         nominal_relations, nominal_heads, sequences_clip = self.nominal_positions_and_clip(sequences)
 
         self.find_n(nominal_relations)
         print "Maximum nominal distance: " , self.n
-
 
         if not self.markup:
             ## shift nominal relations to the left due to markups being removed
@@ -149,4 +172,13 @@ class Preprocessor():
         padded_sequences = self.pad_and_heads(sequences_clip, nominal_relations, nominal_heads)
         nominal_positions1, nominal_positions2 = self.nominal_positions(padded_sequences, nominal_heads)         
         
-        return padded_sequences, nominal_positions1, nominal_positions2, self.Y
+        logging.info("Attention dictionarys created with nominal HEADS only")
+        att_idx, att_list_1, att_list_2 = self.make_att_dict(padded_sequences, nominal_heads)
+
+        return (padded_sequences, 
+            nominal_positions1, nominal_positions2, 
+            att_idx, att_list_1, att_list_2,
+            self.Y)
+
+
+

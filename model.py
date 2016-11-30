@@ -5,43 +5,18 @@ from keras.optimizers import Adadelta
 from keras.utils.np_utils import to_categorical
 from keras.models import Model
 from keras.layers import Dense, Activation, Embedding, Input, merge, Flatten, Reshape
+from keras.layers import Merge
 from keras.layers import Convolution2D as Conv2D
 from keras.layers.core import Dropout
 from keras.layers.pooling import GlobalMaxPooling2D
 from keras.regularizers import l2
 from keras.constraints import maxnorm
 
-
-''' courtesy of keras.io '''
-def fbetascore(y_true, y_pred, beta=1):
-    from keras import backend as K
-
-    if beta < 0:
-        raise ValueError('The lowest choosable beta is zero (only precision).')
-
-    # Count positive samples.
-    c1 = K.sum(K.round(K.clip(y_true * y_pred, 0, 1)))
-    c2 = K.sum(K.round(K.clip(y_pred, 0, 1)))
-    c3 = K.sum(K.round(K.clip(y_true, 0, 1)))
-    
-    # If there are no true samples, fix the F score at 0.
-    if c3 == 0:
-        return 0
-    
-    # How many selected items are relevant?
-    precision = c1 / c2
-    
-    # How many relevant items are selected?
-    recall = c1 / c3
-    
-    # Weight precision and recall together as a single scalar.
-    beta2 = beta ** 2
-    f_score = (1 + beta2) * (precision * recall) / (beta2 * precision + recall)
-    return f_score
+from functions import fbetascore
 
 
 def get_model(
-    word_embeddings={},
+    word_embeddings,
     word_index, 
     n, 
     word_entity_dictionary={},
@@ -97,7 +72,7 @@ def get_model(
                                    trainable=True)
 
     ### Attention matrice
-    att_embbeding = Embedding(len(word_entity_pairs)+1,
+    att_embbeding = Embedding(len(word_entity_dictionary)+1,
                                 1,
                                 weights=[attention_matrix],
                                 input_length=n,
@@ -132,17 +107,19 @@ def get_model(
     else:
         CIP = WORD_EMBEDDING_DIM
         conv_input = word_embeddings
-    
 
+    def att_comp(tensor_list):
+        import tensorflow as tf 
+        return tf.mul(tensor_list[0],tensor_list[1]) 
+    
     ## composition layer
     att_merged = merge([attention_score_1, attention_score_2], 
-                        mode="ave", 
-                        concat_axis=1)
+                        mode="ave")
     
 
     conv_input = merge([att_merged, conv_input], 
-                        mode="dot",
-                        concat_axis=1)
+                        mode=att_comp,
+                        output_shape=(n, CIP))
 
 
     ## activation function according to paper
@@ -152,6 +129,7 @@ def get_model(
     windows = [3]
 
     p_list = []
+
 
     for w in windows:
         reshaped = Reshape((1,n,CIP))(conv_input)
@@ -169,10 +147,8 @@ def get_model(
     #pooling_concat = merge(p_list, mode="concat", concat_axis=1)
 
     # print pooling_concat
-    pooling_concat = Flatten()(pooling_concat)
+    #pooling_concat = Flatten()(pooling_concat)
     pooling_concat = Dropout(DROPOUT_RATE)(pooling_concat)
-
-    pooling_concat = Dense(100, W_constraint=maxnorm(L2_NORM_MAX))(pooling_concat)
 
     final_layer = Dense(NO_OF_CLASSES, 
         activation='softmax', 
@@ -181,7 +157,11 @@ def get_model(
     input_arr = [sequence_input]
     if INCLUDE_POS_EMB:
         input_arr.append(position_input_1)
-        input_arr.append(position_input_2) 
+        input_arr.append(position_input_2)
+
+    input_arr.append(attention_input_1)
+    input_arr.append(attention_input_2)
+
     model = Model(input=input_arr, output=[final_layer])
     
     opt_ada = Adadelta(epsilon=1e-06)
