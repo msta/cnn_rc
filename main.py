@@ -34,14 +34,15 @@ parser.add_argument("--debug", action="store_true")
 parser.add_argument("--no_pos",  
                     action="store_true",
                     default=False)
-
 parser.add_argument("--folds", 
                     type=int,
                     default=10)
-
 parser.add_argument("--epochs",
                     type=int,
                     default=20)
+parser.add_argument("--clipping",
+                    type=int,
+                    default=18)
 
 
 parser.add_argument("--clipping",
@@ -50,9 +51,7 @@ parser.add_argument("--clipping",
 
 
 parser.add_argument("--merge_classes",  action="store_true")
-
 parser.add_argument("--rand",  action="store_true")
-parser.add_argument("--clipping",  action="store_true")
 parser.add_argument("--markup",  action="store_true")
 args = parser.parse_args()
 
@@ -134,7 +133,7 @@ Y_full = np.asarray(Y)
 prep = Preprocessor(texts=X_full, 
                     Y=Y_full, 
                     debug=DEBUG,
-                    clipping_value=args.clipping 
+                    clipping_value=args.clipping,
                     markup=args.markup)
 
 
