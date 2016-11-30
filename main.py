@@ -23,6 +23,7 @@ from sklearn.model_selection import KFold
 ### My own stuff ###
 from semeval import output_dict
 from functions import debug_print, fbetascore, clean_classes, process_train
+from functions import debug_print_dict
 from prep import Preprocessor
 from model import get_model
 
@@ -35,9 +36,12 @@ parser.add_argument("--no_pos",
                     default=False)
 
 parser.add_argument("--folds", 
-                    action="store_true",
-                    default=False)
+                    type=int,
+                    default=10)
 
+parser.add_argument("--epochs",
+                    type=int,
+                    default=20)
 
 parser.add_argument("--merge_classes",  action="store_true")
 
@@ -45,6 +49,14 @@ parser.add_argument("--rand",  action="store_true")
 parser.add_argument("--clipping",  action="store_true")
 parser.add_argument("--markup",  action="store_true")
 args = parser.parse_args()
+
+
+loglevel = logging.DEBUG if args.debug else logging.INFO
+
+logging.basicConfig(
+    level=loglevel,
+    format="[%(asctime)s] %(levelname)s:%(message)s")
+
 
 if args.merge_classes:
     print "Cleaning classes"
@@ -71,8 +83,8 @@ def read_dataset(dataset, output_dict, merge_classes=False):
 
 ######## Experiment begin ##################
 
-FOLDS = 10
-EPOCHS = 20
+FOLDS = args.folds 
+EPOCHS = args.epochs
 DEBUG = args.debug
 DROPOUT_RATE = 0.5
 INCLUDE_POS_EMB = not args.no_pos
@@ -136,19 +148,12 @@ print "Avg zeros " , len(zeros) / len(X_padded)
 word_index = prep.word_idx()
 n = prep.n
 
-if DEBUG:
-    print "#" * 30
-    print "DEBUG INFO"
-    debug_print(X_raw, "Training samples")
-    debug_print(X_padded, "Embedding Input")
-    debug_print(X_nom_pos1, "Nominal positions1: ")
-    debug_print(X_nom_pos2, "Nominal positions2: ")
-    debug_print(prep.reverse_sequence(X_padded), "Reverse")
-    print "-" * 30
-    print "Word_index: "
-    print word_index
-    print "Word idx length: ", len(word_index) 
-    print "-" * 30
+debug_print(X_raw, "Training samples")
+debug_print(X_padded, "Embedding Input")
+debug_print(X_nom_pos1, "Nominal positions1: ")
+debug_print(X_nom_pos2, "Nominal positions2: ")
+debug_print(prep.reverse_sequence(X_padded), "Reverse")
+debug_print_dict(word_index, "Word index")
 
 ### Beginning K-Fold validation
 logging.info("SENTENCES SEQUENCED AND NOMINAL POSITIONS CALCULATED")
@@ -193,7 +198,6 @@ for train_idx, test_idx in kf.split(X_padded):
     #Y_test = to_categorical(Y_test, nb_classes=NO_OF_CLASSES) 
 
     def train_model_kv(model):
-           # print X_padded[train]
             logging.info(model.summary())
             #logging.info( model.get_config())
             #logging.info( model.get_weights();)
@@ -202,11 +206,12 @@ for train_idx, test_idx in kf.split(X_padded):
                 nb_epoch=EPOCHS, 
                 batch_size=50, 
                 shuffle=True)
-            #logging.info( model.get_weights();)
     train_model_kv(model)
 
     logging.info( "#" * 30)
     logging.info( "EVALUATING MODEL")
+    import ipdb
+    ipdb.sset_trace()
 
     result = model.evaluate(X_test, Y_test)
     all_results.append(result)

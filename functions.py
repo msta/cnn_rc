@@ -1,4 +1,5 @@
 import re
+import logging
 
 from keras import backend as K
 
@@ -29,15 +30,21 @@ def fbetascore(y_true, y_pred, beta=1):
     f_score = (1 + beta2) * (precision * recall) / (beta2 * precision + recall)
     return f_score
 
-
-
+def debug_print_dict(input, msg):
+    logging.debug("#" * 30)
+    logging.debug(msg)
+    for k, v in input.iteritems():
+        logging.debug(str(k) + " : " + str(v))
+    logging.debug(msg + " length: ")
+    logging.debug(len(input))
+    logging.debug("#" * 30)
 
 def debug_print(input, msg):
-    print "#" * 30
-    print msg
+    logging.debug("#" * 30)
+    logging.debug(msg)
     for line in input:
-        print line
-    print "#" * 30
+        logging.debug(line)
+    logging.debug("#" * 30)
 
 def fbetascore(y_true, y_pred, beta=1):
   

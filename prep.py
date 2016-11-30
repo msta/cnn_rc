@@ -1,6 +1,9 @@
 import numpy as np
 import math
+
 import logging
+
+from functions import debug_print, debug_print_dict
 from keras.preprocessing.text import Tokenizer
 from keras.preprocessing.sequence import pad_sequences
 
@@ -173,8 +176,16 @@ class Preprocessor():
         nominal_positions1, nominal_positions2 = self.nominal_positions(padded_sequences, nominal_heads)         
         
         logging.info("Attention dictionarys created with nominal HEADS only")
+
         att_idx, att_list_1, att_list_2 = self.make_att_dict(padded_sequences, nominal_heads)
 
+        debug_print(att_idx, "Attention Indices")
+        debug_print(att_list_1, "Attention pair list 1")
+        debug_print(att_list_2, "Attention pair list 2")
+
+        import ipdb
+        ipdb.sset_trace()
+        
         return (padded_sequences, 
             nominal_positions1, nominal_positions2, 
             att_idx, att_list_1, att_list_2,
