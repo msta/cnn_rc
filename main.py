@@ -43,6 +43,12 @@ parser.add_argument("--epochs",
                     type=int,
                     default=20)
 
+
+parser.add_argument("--clipping",
+                    type=int,
+                    default=18)
+
+
 parser.add_argument("--merge_classes",  action="store_true")
 
 parser.add_argument("--rand",  action="store_true")
@@ -125,12 +131,12 @@ X_full = np.asarray(X_raw)
 Y_full = np.asarray(Y) 
 
 
-prep = Preprocessor(X_full, 
-    Y_full, 
-    DEBUG, 
-    args.rand, 
-    args.clipping,
-    args.markup)
+prep = Preprocessor(texts=X_full, 
+                    Y=Y_full, 
+                    debug=DEBUG,
+                    clipping_value=args.clipping 
+                    markup=args.markup)
+
 
 (X_padded, X_nom_pos1, X_nom_pos2, 
     att_idx, att_list_1, att_list_2,
@@ -210,8 +216,6 @@ for train_idx, test_idx in kf.split(X_padded):
 
     logging.info( "#" * 30)
     logging.info( "EVALUATING MODEL")
-    import ipdb
-    ipdb.sset_trace()
 
     result = model.evaluate(X_test, Y_test)
     all_results.append(result)

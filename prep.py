@@ -11,9 +11,9 @@ class Preprocessor():
 
     def __init__(self, 
         texts, 
-        Y, 
+        Y,
+        clipping_value=18 
         debug=False, 
-        rand=False, 
         clipping=False, 
         markup=False):
         self.tokenizer = Tokenizer()
@@ -26,7 +26,7 @@ class Preprocessor():
         self.markup = markup
         self.Y = Y
         self.n_values = []
-        self.clipping_value = 18
+        self.clipping_value = clipping
 
     def sequence(self, texts):
         return self.tokenizer.texts_to_sequences(texts)
@@ -185,7 +185,7 @@ class Preprocessor():
 
         import ipdb
         ipdb.sset_trace()
-        
+
         return (padded_sequences, 
             nominal_positions1, nominal_positions2, 
             att_idx, att_list_1, att_list_2,
