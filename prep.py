@@ -6,7 +6,13 @@ from keras.preprocessing.sequence import pad_sequences
 
 class Preprocessor():
 
-    def __init__(self, texts, Y, debug=False, rand=False, clipping=False, markup=False):
+    def __init__(self, 
+        texts, 
+        Y, 
+        debug=False, 
+        rand=False, 
+        clipping=False, 
+        markup=False):
         self.tokenizer = Tokenizer()
         self.tokenizer.fit_on_texts(texts)
         self.texts = texts
@@ -93,7 +99,6 @@ class Preprocessor():
             nominal_heads[seq_idx] = old_head1 - h, old_head2 - h
         return pad_sequences(padded_sequence, maxlen=self.n)
 
-
     def nominal_positions(self, X_pad, X_nom_heads):
         nominal_positions1 = []
         nominal_positions2 = []
@@ -125,6 +130,8 @@ class Preprocessor():
 
     def preprocess(self, X):
 
+        import ipdb
+        ipdb.sset_trace()
         sequences = self.sequence(X)
         
         nominal_relations, nominal_heads, sequences_clip = self.nominal_positions_and_clip(sequences)

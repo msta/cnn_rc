@@ -5,5 +5,10 @@ __pycache__/
 
 /logs
 
+*.pdf
+*.png
+
+task8/
+
 *.bin
 word_embeddings.bin 

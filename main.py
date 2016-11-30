@@ -13,14 +13,37 @@ from keras.layers.pooling import MaxPooling1D
 from keras.regularizers import l2
 from keras.callbacks import TensorBoard
 from keras import backend as K
+from keras.optimizers import Adadelta
+from keras.utils.np_utils import to_categorical
+
+from semeval import output_dict
 
 from sklearn.model_selection import KFold
 
 from prep import Preprocessor
 from model import get_model
 
-from keras.optimizers import Adadelta
-from keras.utils.np_utils import to_categorical
+
+
+parser = argparse.ArgumentParser(description='CNN')
+parser.add_argument("--debug", action="store_true")
+parser.add_argument("--no_pos",  
+                    action="store_false",
+                    default=True)
+
+parser.add_argument("--merge_classes",  action="store_true")
+
+parser.add_argument("--rand",  action="store_true")
+parser.add_argument("--clipping",  action="store_true")
+parser.add_argument("--markup",  action="store_true")
+args = parser.parse_args()
+
+if args.merge_classes:
+    print "Cleaning classes"
+    output_dict = clean_classes(output_dict)
+
+
+
 
 def debug_print(input, msg):
     print "#" * 30
@@ -112,42 +135,6 @@ def read_dataset(dataset, output_dict, merge_classes=False):
     return X_raw, Y
 
 
-# classes in the problem
-output_dict = {
-    "Cause-Effect(e1,e2)" : 0,
-    "Cause-Effect(e2,e1)" : 1,
-    "Instrument-Agency(e1,e2)" : 2,
-    "Instrument-Agency(e2,e1)" : 3,
-    "Product-Producer(e1,e2)" : 4,
-    "Product-Producer(e2,e1)" : 5,
-    "Content-Container(e1,e2)" : 6,
-    "Content-Container(e2,e1)" : 7,
-    "Entity-Origin(e1,e2)" : 8,
-    "Entity-Origin(e2,e1)" : 9,
-    "Entity-Destination(e1,e2)" : 10,
-    "Entity-Destination(e2,e1)" : 11,
-    "Component-Whole(e1,e2)" : 12,
-    "Component-Whole(e2,e1)" : 13,
-    "Member-Collection(e1,e2)" : 14,
-    "Member-Collection(e2,e1)" : 15,
-    "Message-Topic(e1,e2)" : 16,
-    "Message-Topic(e2,e1)" : 17,
-    "Other" : 18
-}
-
-
-parser = argparse.ArgumentParser(description='CNN')
-parser.add_argument("--debug", action="store_true")
-parser.add_argument("--with_pos",  action="store_true")
-parser.add_argument("--merge_classes",  action="store_true")
-parser.add_argument("--rand",  action="store_true")
-parser.add_argument("--clipping",  action="store_true")
-parser.add_argument("--markup",  action="store_true")
-args = parser.parse_args()
-
-if args.merge_classes:
-    print "Cleaning classes"
-    output_dict = clean_classes(output_dict)
 
 
 ######## Experiment begin ##################
@@ -156,8 +143,8 @@ FOLDS = 10
 EPOCHS = 20
 DEBUG = args.debug
 DROPOUT_RATE = 0.5
-INCLUDE_POS_EMB = args.with_pos
-WORD_EMBEDDING_DIMENSION = 300
+INCLUDE_POS_EMB = not args.no_pos
+WORD_EMBEDDING_DIMENSION = store_false
 
 word_embeddings = {}
 
