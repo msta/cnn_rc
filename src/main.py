@@ -44,12 +44,6 @@ parser.add_argument("--clipping",
                     type=int,
                     default=18)
 
-
-parser.add_argument("--clipping",
-                    type=int,
-                    default=18)
-
-
 parser.add_argument("--merge_classes",  action="store_true")
 parser.add_argument("--rand",  action="store_true")
 parser.add_argument("--markup",  action="store_true")

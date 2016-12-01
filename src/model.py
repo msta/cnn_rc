@@ -133,7 +133,7 @@ def get_model(
 
     for w in windows:
         reshaped = Reshape((1,n,CIP))(conv_input)
-        window = Conv2D(1000,1, w, 
+        window = Conv2D(100,1, w, 
             border_mode='valid',
             activation=g,
             W_constraint=maxnorm(L2_NORM_MAX), 
@@ -166,8 +166,8 @@ def get_model(
     
     opt_ada = Adadelta(epsilon=1e-06)
     opt_sgd = SGD(lr=0.03)
-    opt = opt_ada
+    opt = opt_sgd
     
 
-    model.compile(optimizer=opt_sgd, loss='categorical_crossentropy', metrics=["accuracy", fbetascore])
+    model.compile(optimizer=opt, loss='categorical_crossentropy', metrics=["accuracy", fbetascore])
     return model

@@ -5,10 +5,15 @@ __pycache__/
 
 /logs
 
-*.pdf
 *.png
 
 task8/
 
 *.bin
 word_embeddings.bin 
+
+*.aux
+*.fdb_latexmk
+*.fls
+*.log
+*.synctex.gz
