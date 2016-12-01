@@ -30,23 +30,32 @@ from model import get_model
 
 
 parser = argparse.ArgumentParser(description='CNN')
-parser.add_argument("--debug", action="store_true")
+parser.add_argument("--debug", 
+                    action="store_true")
 parser.add_argument("--no_pos",  
                     action="store_true",
                     default=False)
-parser.add_argument("--folds", 
+parser.add_argument("-f", "--folds", 
                     type=int,
                     default=10)
-parser.add_argument("--epochs",
+parser.add_argument("-a", "--attention", 
+                    action="store_true",
+                    default=False)
+parser.add_argument("-e", "--epochs",
                     type=int,
                     default=20)
 parser.add_argument("--clipping",
                     type=int,
                     default=18)
-
-parser.add_argument("--merge_classes",  action="store_true")
-parser.add_argument("--rand",  action="store_true")
-parser.add_argument("--markup",  action="store_true")
+parser.add_argument("--merge_classes",  
+                    action="store_true")
+parser.add_argument("-r", "--rand",  
+                    action="store_true")
+parser.add_argument("--markup",  
+                    action="store_true")
+parser.add_argument("-o", "--optimizer",
+                    type=str,
+                    choices=["sgd", "ada"])
 args = parser.parse_args()
 
 
@@ -58,7 +67,7 @@ logging.basicConfig(
 
 
 if args.merge_classes:
-    print "Cleaning classes"
+    logging.info("Cleaning classes")
     output_dict = clean_classes(output_dict)
 
 def read_dataset(dataset, output_dict, merge_classes=False):
@@ -88,7 +97,7 @@ DEBUG = args.debug
 DROPOUT_RATE = 0.5
 INCLUDE_POS_EMB = not args.no_pos
 WORD_EMBEDDING_DIMENSION = 300
-
+INCLUDE_ATTENTION = args.attention
 
 NO_OF_CLASSES = len(output_dict)
 
@@ -169,8 +178,10 @@ for train_idx, test_idx in kf.split(X_padded):
         word_entity_dictionary=att_idx, 
         WORD_EMBEDDING_DIM=WORD_EMBEDDING_DIMENSION,
         INCLUDE_POS_EMB=INCLUDE_POS_EMB,
+        INCLUDE_ATTENTION=INCLUDE_ATTENTION,
         DROPOUT_RATE=DROPOUT_RATE,
-        NO_OF_CLASSES=NO_OF_CLASSES
+        NO_OF_CLASSES=NO_OF_CLASSES,
+        optimizer=args.optimizer
         )
 
     X_train = [X_padded[train_idx]]
@@ -182,11 +193,12 @@ for train_idx, test_idx in kf.split(X_padded):
         X_test.append(X_nom_pos1[test_idx])
         X_test.append(X_nom_pos2[test_idx])
 
-    X_train.append(att_list_1[train_idx])
-    X_train.append(att_list_2[train_idx])
+    if INCLUDE_ATTENTION:
+        X_train.append(att_list_1[train_idx])
+        X_train.append(att_list_2[train_idx])
 
-    X_test.append(att_list_1[test_idx])
-    X_test.append(att_list_2[test_idx])
+        X_test.append(att_list_1[test_idx])
+        X_test.append(att_list_2[test_idx])
 
 
     #X = [X_padded, X_nom_pos]
