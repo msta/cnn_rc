@@ -12,8 +12,8 @@ class Preprocessor():
     def __init__(self, 
         texts, 
         Y,
-        clipping_value=18,
         debug=False, 
+        clipping_value=18,
         markup=False):
         self.tokenizer = Tokenizer()
         self.tokenizer.fit_on_texts(texts)

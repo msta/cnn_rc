@@ -136,7 +136,7 @@ Y_full = np.asarray(Y)
 prep = Preprocessor(texts=X_full, 
                     Y=Y_full, 
                     debug=DEBUG,
-                    clipping_value=args.clipping, 
+                    clipping_value=args.clipping,
                     markup=args.markup)
 
 
