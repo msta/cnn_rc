@@ -190,6 +190,8 @@ for train_idx, test_idx in kf.split(X_padded):
 
 
     #X = [X_padded, X_nom_pos]
+
+    
     Y_train = to_categorical(Y[train_idx], nb_classes=NO_OF_CLASSES)
     Y_test = to_categorical(Y[test_idx], nb_classes=NO_OF_CLASSES)
 
