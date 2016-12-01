@@ -21,10 +21,12 @@ def get_model(
     n, 
     word_entity_dictionary={},
     WORD_EMBEDDING_DIM=300,
-    POS_EMBEDDING_DIM=25,
+    POS_EMBEDDING_DIM=50,
     L2_NORM_MAX=3,
     INCLUDE_POS_EMB=True,
+    INCLUDE_ATTENTION=False,
     ACTIVATION_FUNCTION="tanh",
+    optimizer='ada',
     DROPOUT_RATE=0.5, 
     NO_OF_CLASSES=19):
     # NOTE TO SELF - Don't let the vector be all-zeroes when the word is not present
@@ -42,18 +44,14 @@ def get_model(
         finally:
             embedding_matrix[i] = embedding_vector
 
-
+    #### attention matrix initialization 
     attention_matrix = np.zeros((len(word_entity_dictionary) + 1, 1))
     for (w,e),idx in word_entity_dictionary.iteritems():
-        emb1 = embedding_matrix[e]
-        emb2 = embedding_matrix[i]
+        emb1 = embedding_matrix[w]
+        emb2 = embedding_matrix[e]
         a_val = np.inner(emb1, emb2)
         attention_matrix[idx] = a_val
 
-    ## sum and normalize
-    sum_att = sum(attention_matrix)
-
-    attention_matrix = np.asarray([ val/sum_att for val in attention_matrix])
 
 
 
@@ -83,18 +81,20 @@ def get_model(
     sequence_input = Input(shape=(n,), dtype="int32")
     position_input_1 = Input(shape=(n,), dtype="int32")
     position_input_2 = Input(shape=(n,), dtype="int32")
-    
-    attention_input_1 = Input(shape=(n,), dtype="int32")
-    attention_input_2 = Input(shape=(n,), dtype="int32")
+
 
     word_embeddings = embedding_layer(sequence_input)
     position_embeddings_1 = position_embedding(position_input_1)
     position_embeddings_2 = position_embedding(position_input_2)
+
     
-    attention_score_1 = att_embbeding(attention_input_1)
-    attention_score_2 = att_embbeding(attention_input_2)
-
-
+    if INCLUDE_ATTENTION:
+        attention_input_1 = Input(shape=(n,), dtype="int32")
+        attention_input_2 = Input(shape=(n,), dtype="int32")
+        attention_score_1 = att_embbeding(attention_input_1)
+        attention_score_1 = Activation('softmax')(attention_score_1)
+        attention_score_2 = att_embbeding(attention_input_2)
+        attention_score_2 = Activation('softmax')(attention_score_2)
 
 
     if INCLUDE_POS_EMB:
@@ -108,32 +108,33 @@ def get_model(
         CIP = WORD_EMBEDDING_DIM
         conv_input = word_embeddings
 
+
     def att_comp(tensor_list):
         import tensorflow as tf 
         return tf.mul(tensor_list[0],tensor_list[1]) 
-    
-    ## composition layer
-    att_merged = merge([attention_score_1, attention_score_2], 
-                        mode="ave")
-    
 
-    conv_input = merge([att_merged, conv_input], 
-                        mode=att_comp,
-                        output_shape=(n, CIP))
+    if INCLUDE_ATTENTION:
+        ## composition layer
+        att_merged = merge([attention_score_1, attention_score_2], 
+                            mode="ave")
+        
+
+        conv_input = merge([att_merged, conv_input], 
+                            mode=att_comp,
+                            output_shape=(n, CIP))
 
 
     ## activation function according to paper
     g = ACTIVATION_FUNCTION
 
-    #windows = [2,3,4,5]
-    windows = [3]
+    windows = [2,3,4,5]
+    #windows = [3]
 
     p_list = []
 
-
     for w in windows:
         reshaped = Reshape((1,n,CIP))(conv_input)
-        window = Conv2D(1000,1, w, 
+        window = Conv2D(100,1, w, 
             border_mode='valid',
             activation=g,
             W_constraint=maxnorm(L2_NORM_MAX), 
@@ -155,19 +156,22 @@ def get_model(
         W_constraint=maxnorm(L2_NORM_MAX))(pooling_concat)
 
     input_arr = [sequence_input]
+    
     if INCLUDE_POS_EMB:
         input_arr.append(position_input_1)
         input_arr.append(position_input_2)
 
-    input_arr.append(attention_input_1)
-    input_arr.append(attention_input_2)
+    if INCLUDE_ATTENTION:
+        input_arr.append(attention_input_1)
+        input_arr.append(attention_input_2)
 
     model = Model(input=input_arr, output=[final_layer])
     
-    opt_ada = Adadelta(epsilon=1e-06)
-    opt_sgd = SGD(lr=0.03)
-    opt = opt_ada
-    
+    if optimizer == 'ada':
+        opt = Adadelta(epsilon=1e-06)
+    ### from the att matrix paper
+    elif optimizer == 'sgd':
+        opt_sgd = SGD(lr=0.03)
 
-    model.compile(optimizer=opt_sgd, loss='categorical_crossentropy', metrics=["accuracy", fbetascore])
+    model.compile(optimizer=opt, loss='categorical_crossentropy', metrics=["accuracy", fbetascore])
     return model
