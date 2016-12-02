@@ -12,7 +12,7 @@ from keras.layers.pooling import GlobalMaxPooling2D
 from keras.regularizers import l2
 from keras.constraints import maxnorm
 
-from functions import fbetascore
+from functions import fbetascore, margin_loss
 
 
 def get_model(
@@ -27,7 +27,7 @@ def get_model(
     INCLUDE_ATTENTION=False,
     ACTIVATION_FUNCTION="tanh",
     optimizer='ada',
-    loss='categorical_crossentropy',
+    loss=margin_loss,
     DROPOUT_RATE=0.5, 
     NO_OF_CLASSES=19):
     # NOTE TO SELF - Don't let the vector be all-zeroes when the word is not present

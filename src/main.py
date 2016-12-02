@@ -57,6 +57,11 @@ parser.add_argument("-o", "--optimizer",
                     type=str,
                     default='ada',
                     choices=["sgd", "ada"])
+# parser.add_argument("-obj",
+#                     type=str,
+#                     default="categorical_crossentropy")
+
+
 args = parser.parse_args()
 
 
