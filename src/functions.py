@@ -55,12 +55,21 @@ def process_train(line):
     stripped = re.sub("\d{0,4}", "", line, count=1).strip()
     return stripped[1:len(stripped)-2]
 
-def new_dist(output, relation):
-    unit = output / np.linalg.norm(output, 1)
-    return np.linalg.norm(unit - relation, 2)
+''' NOVEL DISTANCE FUNCTION EH? '''
+def new_dist(relation, actual):
+    import tensorflow as tf
+    actual_sum = tf.reduce_sum(actual, 1, keep_dims=True)
+    unit_actual = actual / actual_sum
+    return tf.sqrt(tf.reduce_sum(K.square(unit_actual - relation), 1, keep_dims=True))
 
-def margin_loss(true, pred):
-    
 
+### TODO test this shit!!!! :D ###
+def margin_loss(true, actual):
+    ## here the relation is the ground truth label
+    true_dist = new_dist(true,actual)
+    incorrect = tf.argmax((actual-true-true), 1)
+    inc_one_hots = tf.one_hot(inc, actual.get_shape()[1])    
+    incorrect_dist = new_dist(inc_one_hots, actual)
+    return 1.0 + true_dist - incorrect_dist
 
 

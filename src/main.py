@@ -23,7 +23,7 @@ from sklearn.model_selection import KFold
 ### My own stuff ###
 from semeval import output_dict
 from functions import debug_print, fbetascore, clean_classes, process_train
-from functions import debug_print_dict
+from functions import debug_print_dict, margin_loss
 from prep import Preprocessor
 from model import get_model
 
@@ -55,6 +55,7 @@ parser.add_argument("--markup",
                     action="store_true")
 parser.add_argument("-o", "--optimizer",
                     type=str,
+                    default='ada',
                     choices=["sgd", "ada"])
 args = parser.parse_args()
 
@@ -181,7 +182,8 @@ for train_idx, test_idx in kf.split(X_padded):
         INCLUDE_ATTENTION=INCLUDE_ATTENTION,
         DROPOUT_RATE=DROPOUT_RATE,
         NO_OF_CLASSES=NO_OF_CLASSES,
-        optimizer=args.optimizer
+        optimizer=args.optimizer,
+        loss=margin_loss
         )
 
     X_train = [X_padded[train_idx]]
@@ -207,6 +209,8 @@ for train_idx, test_idx in kf.split(X_padded):
     Y_train = to_categorical(Y[train_idx], nb_classes=NO_OF_CLASSES)
     Y_test = to_categorical(Y[test_idx], nb_classes=NO_OF_CLASSES)
 
+    import ipdb
+    ipdb.sset_trace()
 
     #Y_test = to_categorical(Y_test, nb_classes=NO_OF_CLASSES) 
 

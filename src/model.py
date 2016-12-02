@@ -27,6 +27,7 @@ def get_model(
     INCLUDE_ATTENTION=False,
     ACTIVATION_FUNCTION="tanh",
     optimizer='ada',
+    loss='categorical_crossentropy',
     DROPOUT_RATE=0.5, 
     NO_OF_CLASSES=19):
     # NOTE TO SELF - Don't let the vector be all-zeroes when the word is not present
@@ -171,7 +172,7 @@ def get_model(
         opt = Adadelta(epsilon=1e-06)
     ### from the att matrix paper
     elif optimizer == 'sgd':
-        opt_sgd = SGD(lr=0.03)
+        opt = SGD(lr=0.03)
 
-    model.compile(optimizer=opt, loss='categorical_crossentropy', metrics=["accuracy", fbetascore])
+    model.compile(optimizer=opt, loss=loss, metrics=["accuracy", fbetascore])
     return model
