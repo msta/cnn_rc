@@ -1,18 +1,47 @@
 \documentclass{article}
 \usepackage{fullpage}
 \usepackage{times}
+\usepackage{cite}
+\usepackage{hyperref}
+\usepackage{algorithmic}
+\usepackage{amssymb}
+\usepackage{algorithm}
+\usepackage{adjustbox}
+\usepackage{graphicx}
 
-
+\newcommand{\code}[1]{\texttt{#1}}
 \begin{document}
+
+\begin{center}
+    \vspace{2cm}
+    \huge { Thesis Preparation Report \\ }
+    \vspace{2cm}
+    \large {Magnus Stahl (msta@itu.dk)\\
+    IT-University of Copenhagen\\
+    Fall 2016}
+\end{center}
+
 
 \section{Introduction}
  
-Hello
+This report details introductory thesis work as part of a spring 2017 thesis at the ITUniversity of Copenhagen. The report will describe the work undertaken so far, and a plan for how the thesis will be completed in the spring. \\
+
+The topic of the thesis is neural networks applied to the task of relation classification. The task of relation classification can be defined as:
+Given a sentence $S$ and two labeled entities \textless e1\textgreater  and \textless e2\textgreater , classify the relation between the entities and the (sometimes optionally) ordering of the relation. Here is an example:
+
+Given sentence $S$: \emph{``The train rolled onto the platform with a peculiar choo choo.''}
+and entities \textless e1 \textgreater \emph{train}, \textless e2 \textgreater \emph{platform} the relation is of the form Entity-Destination(e1,e2).
+
+
+
 
 
 \section{Work so far}
 
 \subsection{Motivation}
+
+This section motivates why the subject of the thesis is important and interesting.\\
+
 
 Classification ... ``Actor dependent classification''
 
@@ -20,16 +49,21 @@ That includes sentence-level understanding of the text to recognize entities and
 
 \subsection{Research done}
 
+The material I have investigated are grouped into two broad categories: general educational material about deep learning in NLP, and recent research about neural networks in relation classification in particular,  
+
+
 Papers read and problems along the way...?
 
 
 \subsection{Implementation and current baseline}
 
-...
+I'll wait with this until just before the hand-in I guess.
+
 
 \section{Thesis plan}
 
-
+\ref{att_cnn}
+\cite{att_cnn}
 Gant diagram including,
 Implementing pairwise margin-based loss function
 
@@ -47,6 +81,8 @@ sets (legal documents)
 Try cutting off 1 entity and then classifying the relation along with the other entity?
 
 
+\bibliographystyle{plain}
+\bibliography{Bibliography}
 
 
     

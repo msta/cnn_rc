@@ -214,8 +214,6 @@ for train_idx, test_idx in kf.split(X_padded):
     Y_train = to_categorical(Y[train_idx], nb_classes=NO_OF_CLASSES)
     Y_test = to_categorical(Y[test_idx], nb_classes=NO_OF_CLASSES)
 
-    import ipdb
-    ipdb.sset_trace()
 
     #Y_test = to_categorical(Y_test, nb_classes=NO_OF_CLASSES) 
 
