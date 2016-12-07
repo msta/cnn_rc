@@ -5,10 +5,12 @@ from keras.optimizers import Adadelta, SGD
 from keras.utils.np_utils import to_categorical
 from keras.models import Model
 from keras.layers import Dense, Activation, Embedding, Input, merge, Flatten, Reshape
-from keras.layers import Merge
+from keras.layers import Merge, Lambda
 from keras.layers import Convolution2D as Conv2D
+from keras.layers import Convolution1D as Conv1D
+from keras.layers.local import LocallyConnected1D
 from keras.layers.core import Dropout
-from keras.layers.pooling import GlobalMaxPooling2D
+from keras.layers.pooling import GlobalMaxPooling2D, GlobalMaxPooling1D
 from keras.regularizers import l2
 from keras.constraints import maxnorm
 from keras import backend as K
@@ -21,13 +23,15 @@ def get_model(
     n, 
     word_entity_dictionary={},
     WORD_EMBEDDING_DIM=300,
-    POS_EMBEDDING_DIM=50,
+    POS_EMBEDDING_DIM=25,
     L2_NORM_MAX=3,
     INCLUDE_POS_EMB=True,
     INCLUDE_ATTENTION=False,
     ACTIVATION_FUNCTION="tanh",
     optimizer='ada',
     loss=margin_loss,
+    window_size=1000,
+
     DROPOUT_RATE=0.5, 
     NO_OF_CLASSES=19):
     # NOTE TO SELF - Don't let the vector be all-zeroes when the word is not present
@@ -54,15 +58,11 @@ def get_model(
         attention_matrix[idx] = a_val
 
 
-
-
     embedding_layer = Embedding(len(word_index) + 1,
                                 WORD_EMBEDDING_DIM,
                                 weights=[embedding_matrix],
                                 input_length=n,
                                 trainable=True)
-
-
 
     position_embedding = Embedding(2 * n - 1,
                                    POS_EMBEDDING_DIM,
@@ -76,8 +76,6 @@ def get_model(
                                 weights=[attention_matrix],
                                 input_length=n,
                                 trainable=True)
-    
-
 
     sequence_input = Input(shape=(n,), dtype="int32")
     position_input_1 = Input(shape=(n,), dtype="int32")
@@ -134,9 +132,10 @@ def get_model(
     p_list = []
 
     for w in windows:
-        conv = Reshape((1,n,CIP))(conv_input)
-        conv = Conv2D(1000,1, w, 
-            border_mode='valid',
+        conv = conv_input   
+        #conv = Reshape((1,n,CIP))(conv_input)
+        conv = Conv1D(window_size, w, 
+            border_mode='same',
             activation=g,
             W_constraint=maxnorm(L2_NORM_MAX), 
             bias=True,
@@ -144,22 +143,52 @@ def get_model(
         #conv = GlobalMaxPooling2D()(conv)
         p_list.append(conv)
 
-    import ipdb
-    ipdb.sset_trace()
+    convolved = p_list[0]
+    network = Reshape((window_size, n))(convolved)
 
-    pooling_concat = p_list[0]
-    #pooling_concat = conv_input
-    #pooling_concat = merge(p_list, mode="concat", concat_axis=1)
 
-    pooling_concat = K.transpose(pooling_concat)
-    pooling_concat = Flatten()(pooling_concat)
-    #pooling_concat = Dropout(DROPOUT_RATE)(pooling_concat)
+    #convolved = conv_input
+    #convolved = merge(p_list, mode="concat", concat_axis=1)
 
-    final_layer = Dense(NO_OF_CLASSES, activation='softmax')(pooling_concat)
-        #,activation='softmax', 
-        #W_constraint=maxnorm(L2_NORM_MAX))(pooling_concat)
-        
+    # print convolved
+    #network = Flatten()(convolved)
     
+
+    #network = Lambda(lambda x: K.transpose(x))(network)
+    
+    #network = Dropout(DROPOUT_RATE)(network)
+    #import ipdb
+    #ipdb.sset_trace()
+    
+    corr_matrix = LocallyConnected1D(NO_OF_CLASSES,
+                                    1,
+                                    activation='softmax')(network)
+
+    # corr_matrix = Dense(window_size * NO_OF_CLASSES, 
+    #     activation='softmax', 
+    #     #W_constraint=maxnorm(L2_NORM_MAX))(network)
+    #     )(network)
+
+    #corr_matrix = Reshape((window_size, NO_OF_CLASSES))(corr_matrix)
+
+
+    def att_comp2(tensor_list):
+        import tensorflow as tf
+        return tf.batch_matmul(tensor_list[0],tensor_list[1]) 
+
+    #import ipdb
+    #ipdb.sset_trace()
+    network = merge([convolved, corr_matrix],
+                        mode=att_comp2,
+                        output_shape=(n, NO_OF_CLASSES))
+
+    network = GlobalMaxPooling1D()(network) 
+
+
+#    final_layer = Dense(NO_OF_CLASSES, activation='softmax')(network)
+        #,activation='softmax', 
+        #W_constraint=maxnorm(L2_NORM_MAX))(network)
+        
     input_arr = [sequence_input]
     
     if INCLUDE_POS_EMB:
@@ -170,7 +199,7 @@ def get_model(
         input_arr.append(attention_input_1)
         input_arr.append(attention_input_2)
 
-    model = Model(input=input_arr, output=[final_layer])
+    model = Model(input=input_arr, output=[network])
     
     if optimizer == 'ada':
         opt = Adadelta(epsilon=1e-06)
