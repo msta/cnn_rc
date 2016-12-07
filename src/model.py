@@ -21,13 +21,15 @@ def get_model(
     n, 
     word_entity_dictionary={},
     WORD_EMBEDDING_DIM=300,
-    POS_EMBEDDING_DIM=50,
+    POS_EMBEDDING_DIM=25,
     L2_NORM_MAX=3,
     INCLUDE_POS_EMB=True,
     INCLUDE_ATTENTION=False,
     ACTIVATION_FUNCTION="tanh",
     optimizer='ada',
     loss=margin_loss,
+    window_size=400,
+
     DROPOUT_RATE=0.5, 
     NO_OF_CLASSES=19):
     # NOTE TO SELF - Don't let the vector be all-zeroes when the word is not present
@@ -54,15 +56,11 @@ def get_model(
         attention_matrix[idx] = a_val
 
 
-
-
     embedding_layer = Embedding(len(word_index) + 1,
                                 WORD_EMBEDDING_DIM,
                                 weights=[embedding_matrix],
                                 input_length=n,
                                 trainable=True)
-
-
 
     position_embedding = Embedding(2 * n - 1,
                                    POS_EMBEDDING_DIM,
@@ -76,8 +74,6 @@ def get_model(
                                 weights=[attention_matrix],
                                 input_length=n,
                                 trainable=True)
-    
-
 
     sequence_input = Input(shape=(n,), dtype="int32")
     position_input_1 = Input(shape=(n,), dtype="int32")
@@ -135,26 +131,28 @@ def get_model(
 
     for w in windows:
         reshaped = Reshape((1,n,CIP))(conv_input)
-        window = Conv2D(100,1, w, 
+        window = Conv2D(window_size,1, w, 
             border_mode='valid',
             activation=g,
             W_constraint=maxnorm(L2_NORM_MAX), 
             bias=True,
             init='glorot_normal')(reshaped)
-        pool = GlobalMaxPooling2D()(window)
-        p_list.append(pool)
+        result = GlobalMaxPooling2D()(window)
+        #result = window
+        p_list.append(result)
 
-    pooling_concat = p_list[0]
-    #pooling_concat = conv_input
-    #pooling_concat = merge(p_list, mode="concat", concat_axis=1)
+    convolved = p_list[0]
+    #convolved = conv_input
+    #convolved = merge(p_list, mode="concat", concat_axis=1)
 
-    # print pooling_concat
-    #pooling_concat = Flatten()(pooling_concat)
-    pooling_concat = Dropout(DROPOUT_RATE)(pooling_concat)
+    # print convolved
+    #convolved = Flatten()(convolved)
+    #convolved = Dropout(DROPOUT_RATE)(convolved)
 
-    final_layer = Dense(NO_OF_CLASSES, 
+    class_embedding = Dense(NO_OF_CLASSES, 
         activation='softmax', 
-        W_constraint=maxnorm(L2_NORM_MAX))(pooling_concat)
+        #W_constraint=maxnorm(L2_NORM_MAX))(convolved)
+        )(convolved)
 
     input_arr = [sequence_input]
     
@@ -166,7 +164,7 @@ def get_model(
         input_arr.append(attention_input_1)
         input_arr.append(attention_input_2)
 
-    model = Model(input=input_arr, output=[final_layer])
+    model = Model(input=input_arr, output=[class_embedding])
     
     if optimizer == 'ada':
         opt = Adadelta(epsilon=1e-06)

@@ -57,12 +57,21 @@ parser.add_argument("-o", "--optimizer",
                     type=str,
                     default='ada',
                     choices=["sgd", "ada"])
-# parser.add_argument("-obj",
-#                     type=str,
-#                     default="categorical_crossentropy")
+parser.add_argument("-obj",
+                    type=str,
+                    default="categorical_crossentropy")
+
+
 
 
 args = parser.parse_args()
+
+
+
+if args.obj == 'margin_loss':
+    loss = margin_loss
+else:
+    loss = args.obj
 
 
 loglevel = logging.DEBUG if args.debug else logging.INFO
@@ -188,7 +197,7 @@ for train_idx, test_idx in kf.split(X_padded):
         DROPOUT_RATE=DROPOUT_RATE,
         NO_OF_CLASSES=NO_OF_CLASSES,
         optimizer=args.optimizer,
-        loss=margin_loss
+        loss=loss
         )
 
     X_train = [X_padded[train_idx]]
@@ -209,13 +218,13 @@ for train_idx, test_idx in kf.split(X_padded):
 
 
     #X = [X_padded, X_nom_pos]
+    Y_train = Y[train_idx]
+    Y_test = Y[test_idx]
 
-    
-    Y_train = to_categorical(Y[train_idx], nb_classes=NO_OF_CLASSES)
-    Y_test = to_categorical(Y[test_idx], nb_classes=NO_OF_CLASSES)
 
-    import ipdb
-    ipdb.sset_trace()
+    Y_train = to_categorical(Y_train, nb_classes=NO_OF_CLASSES)
+    Y_test = to_categorical(Y_test, nb_classes=NO_OF_CLASSES)
+
 
     #Y_test = to_categorical(Y_test, nb_classes=NO_OF_CLASSES) 
 
@@ -223,11 +232,12 @@ for train_idx, test_idx in kf.split(X_padded):
             logging.info(model.summary())
             #logging.info( model.get_config())
             #logging.info( model.get_weights();)
-            model.fit(X_train, 
+            history = model.fit(X_train, 
                 Y_train, 
                 nb_epoch=EPOCHS, 
                 batch_size=50, 
                 shuffle=True)
+            
     train_model_kv(model)
 
     logging.info( "#" * 30)
@@ -259,4 +269,3 @@ logging.info( "#" * 30 )
 
 
 
-1

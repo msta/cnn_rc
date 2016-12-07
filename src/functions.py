@@ -68,6 +68,7 @@ def new_dist(relation, actual):
 def margin_loss(true, actual):
     ## here the relation is the ground truth label
     true_dist = new_dist(true,actual)
+    # hack to find the arg max!
     incorrect = tf.argmax((actual-true-true), 1)
     inc_one_hots = tf.one_hot(incorrect, actual.get_shape()[1])    
     incorrect_dist = new_dist(inc_one_hots, actual)
