@@ -222,9 +222,12 @@ for train_idx, test_idx in kf.split(X_padded):
     Y_test = Y[test_idx]
 
 
+<<<<<<< HEAD
     Y_train = to_categorical(Y_train, nb_classes=NO_OF_CLASSES)
     Y_test = to_categorical(Y_test, nb_classes=NO_OF_CLASSES)
 
+=======
+>>>>>>> 38668403f62eea296a661cf449a0aa0bf3df7775
 
     #Y_test = to_categorical(Y_test, nb_classes=NO_OF_CLASSES) 
 

@@ -131,7 +131,11 @@ def get_model(
 
     for w in windows:
         reshaped = Reshape((1,n,CIP))(conv_input)
+<<<<<<< HEAD
         window = Conv2D(window_size,1, w, 
+=======
+        window = Conv2D(1000,1, w, 
+>>>>>>> 38668403f62eea296a661cf449a0aa0bf3df7775
             border_mode='valid',
             activation=g,
             W_constraint=maxnorm(L2_NORM_MAX), 
@@ -145,6 +149,7 @@ def get_model(
     #convolved = conv_input
     #convolved = merge(p_list, mode="concat", concat_axis=1)
 
+<<<<<<< HEAD
     # print convolved
     #convolved = Flatten()(convolved)
     #convolved = Dropout(DROPOUT_RATE)(convolved)
@@ -154,6 +159,17 @@ def get_model(
         #W_constraint=maxnorm(L2_NORM_MAX))(convolved)
         )(convolved)
 
+=======
+    # print pooling_concat
+    #pooling_concat = Flatten()(pooling_concat)
+    #pooling_concat = Dropout(DROPOUT_RATE)(pooling_concat)
+
+    final_layer = Dense(NO_OF_CLASSES, 
+        #activation='softmax', 
+        #W_constraint=maxnorm(L2_NORM_MAX))(pooling_concat)
+        )(pooling_concat)
+    
+>>>>>>> 38668403f62eea296a661cf449a0aa0bf3df7775
     input_arr = [sequence_input]
     
     if INCLUDE_POS_EMB:
