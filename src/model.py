@@ -11,7 +11,7 @@ from keras.layers.core import Dropout
 from keras.layers.pooling import GlobalMaxPooling2D
 from keras.regularizers import l2
 from keras.constraints import maxnorm
-
+from keras import backend as K
 from functions import fbetascore, margin_loss
 
 
@@ -128,34 +128,37 @@ def get_model(
     ## activation function according to paper
     g = ACTIVATION_FUNCTION
 
-    windows = [2,3,4,5]
-    #windows = [3]
+    #windows = [2,3,4,5]
+    windows = [3]
 
     p_list = []
 
     for w in windows:
-        reshaped = Reshape((1,n,CIP))(conv_input)
-        window = Conv2D(1000,1, w, 
+        conv = Reshape((1,n,CIP))(conv_input)
+        conv = Conv2D(1000,1, w, 
             border_mode='valid',
             activation=g,
             W_constraint=maxnorm(L2_NORM_MAX), 
             bias=True,
-            init='glorot_normal')(reshaped)
-        pool = GlobalMaxPooling2D()(window)
-        p_list.append(pool)
+            init='glorot_normal')(conv)
+        #conv = GlobalMaxPooling2D()(conv)
+        p_list.append(conv)
+
+    import ipdb
+    ipdb.sset_trace()
 
     pooling_concat = p_list[0]
     #pooling_concat = conv_input
     #pooling_concat = merge(p_list, mode="concat", concat_axis=1)
 
-    # print pooling_concat
-    #pooling_concat = Flatten()(pooling_concat)
+    pooling_concat = K.transpose(pooling_concat)
+    pooling_concat = Flatten()(pooling_concat)
     #pooling_concat = Dropout(DROPOUT_RATE)(pooling_concat)
 
-    final_layer = Dense(NO_OF_CLASSES, 
-        #activation='softmax', 
+    final_layer = Dense(NO_OF_CLASSES, activation='softmax')(pooling_concat)
+        #,activation='softmax', 
         #W_constraint=maxnorm(L2_NORM_MAX))(pooling_concat)
-        )(pooling_concat)
+        
     
     input_arr = [sequence_input]
     
