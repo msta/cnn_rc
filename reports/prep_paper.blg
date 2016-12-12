@@ -3,42 +3,34 @@ Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: prep_paper.aux
 The style file: plain.bst
 Database file #1: Bibliography.bib
-I was expecting a `,' or a `}'---line 26 of file Bibliography.bib
- :     year = "
- :             2000",
-I'm skipping whatever remains of this entry
-Too many commas in name 1 of "Linlin Wang, Zhu Cao1, Gerard de Melo, Zhiyuan Liu" for entry att_cnn
-while executing---line 1049 of file plain.bst
-Too many commas in name 1 of "Linlin Wang, Zhu Cao1, Gerard de Melo, Zhiyuan Liu" for entry att_cnn
-while executing---line 1090 of file plain.bst
 You've used 1 entry,
             2118 wiz_defined-function locations,
-            501 strings with 4120 characters,
-and the built_in function-call counts, 217 in all, are:
-= -- 17
-> -- 7
+            501 strings with 4129 characters,
+and the built_in function-call counts, 315 in all, are:
+= -- 24
+> -- 23
 < -- 0
-+ -- 3
-- -- 2
-* -- 8
-:= -- 41
++ -- 9
+- -- 8
+* -- 21
+:= -- 59
 add.period$ -- 2
 call.type$ -- 1
-change.case$ -- 4
+change.case$ -- 7
 chr.to.int$ -- 0
 cite$ -- 1
 duplicate$ -- 7
 empty$ -- 23
-format.name$ -- 2
-if$ -- 44
+format.name$ -- 8
+if$ -- 61
 int.to.chr$ -- 0
 int.to.str$ -- 1
 missing$ -- 0
 newline$ -- 7
 num.names$ -- 2
-pop$ -- 9
+pop$ -- 12
 preamble$ -- 1
-purify$ -- 3
+purify$ -- 6
 quote$ -- 0
 skip$ -- 8
 stack$ -- 0
@@ -52,4 +44,3 @@ warning$ -- 0
 while$ -- 2
 width$ -- 2
 write$ -- 10
-(There were 3 error messages)

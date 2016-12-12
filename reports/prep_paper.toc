@@ -1,0 +1,6 @@
+\contentsline {section}{\numberline {1}Introduction}{1}{section.1}
+\contentsline {section}{\numberline {2}Work so far}{1}{section.2}
+\contentsline {subsection}{\numberline {2.1}Motivation}{1}{subsection.2.1}
+\contentsline {subsection}{\numberline {2.2}Research done}{1}{subsection.2.2}
+\contentsline {subsection}{\numberline {2.3}Implementation and current baseline}{1}{subsection.2.3}
+\contentsline {section}{\numberline {3}Thesis plan}{2}{section.3}

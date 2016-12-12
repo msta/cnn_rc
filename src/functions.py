@@ -75,3 +75,32 @@ def margin_loss(true, actual):
     return 1.0 + true_dist - incorrect_dist
 
 
+from keras import backend as K
+from keras.engine.topology import Layer
+from keras import initializations
+import tensorflow as tf
+import numpy as np
+
+class MultLayer(Layer):
+    def __init__(self, output_dim, **kwargs):
+        self.init = initializations.get('glorot_uniform')
+        self.output_dim = output_dim[1]
+        super(MultLayer, self).__init__(**kwargs)
+
+    def build(self, input_shape):
+        input_dim = input_shape[2]
+        initial_weight_value = np.random.random((input_dim, self.output_dim))
+        
+        self.W = self.init((input_dim, self.output_dim),
+                           name='{}_W'.format(self.name))
+
+        self.trainable_weights = [self.W]
+        super(MultLayer, self).build(input_shape)  # be sure you call this somewhere
+
+    def call(self, x, mask=None):
+        print "hej"
+        return K.dot(x, self.W)
+
+    def get_output_shape_for(self, input_shape):
+
+        return (input_shape[0], self.output_dim)

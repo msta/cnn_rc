@@ -8,7 +8,7 @@ from keras.layers import Dense, Activation, Embedding, Input, merge, Flatten, Re
 from keras.layers import Merge, Lambda
 from keras.layers import Convolution2D as Conv2D
 from keras.layers import Convolution1D as Conv1D
-from keras.layers.local import LocallyConnected1D
+from keras.layers.wrappers import TimeDistributed
 from keras.layers.core import Dropout
 from keras.layers.pooling import GlobalMaxPooling2D, GlobalMaxPooling1D
 from keras.regularizers import l2
@@ -145,8 +145,11 @@ def get_model(
 
     convolved = p_list[0]
     network = Reshape((window_size, n))(convolved)
+    
+    from functions import MultLayer
 
-
+    corr_matrix = MultLayer((window_size, NO_OF_CLASSES))(network)
+    corr_matrix = Activation('softmax')(corr_matrix)
     #convolved = conv_input
     #convolved = merge(p_list, mode="concat", concat_axis=1)
 
@@ -157,38 +160,27 @@ def get_model(
     #network = Lambda(lambda x: K.transpose(x))(network)
     
     #network = Dropout(DROPOUT_RATE)(network)
-    #import ipdb
-    #ipdb.sset_trace()
-    
-    corr_matrix = LocallyConnected1D(NO_OF_CLASSES,
-                                    1,
-                                    activation='softmax')(network)
-
-    # corr_matrix = Dense(window_size * NO_OF_CLASSES, 
-    #     activation='softmax', 
-    #     #W_constraint=maxnorm(L2_NORM_MAX))(network)
-    #     )(network)
 
     #corr_matrix = Reshape((window_size, NO_OF_CLASSES))(corr_matrix)
 
-
     def att_comp2(tensor_list):
+        from keras import backend as K
         import tensorflow as tf
-        return tf.batch_matmul(tensor_list[0],tensor_list[1]) 
-
-    #import ipdb
-    #ipdb.sset_trace()
-    network = merge([convolved, corr_matrix],
-                        mode=att_comp2,
-                        output_shape=(n, NO_OF_CLASSES))
-
-    network = GlobalMaxPooling1D()(network) 
+        return K.batch_dot(tensor_list[0],tensor_list[1]) 
 
 
-#    final_layer = Dense(NO_OF_CLASSES, activation='softmax')(network)
-        #,activation='softmax', 
-        #W_constraint=maxnorm(L2_NORM_MAX))(network)
-        
+    # network = merge([convolved, corr_matrix],
+    #                     mode=att_comp2,
+    #                     output_shape=(n, NO_OF_CLASSES))
+
+
+
+    network = GlobalMaxPooling1D()(convolved) 
+    import ipdb
+    ipdb.sset_trace()
+    
+
+
     input_arr = [sequence_input]
     
     if INCLUDE_POS_EMB:
