@@ -1,33 +1,108 @@
 \documentclass{article}
 \usepackage{fullpage}
 \usepackage{times}
+\usepackage{cite}
+\usepackage{hyperref}
+\usepackage{algorithmic}
+\usepackage{amssymb}
+\usepackage{algorithm}
+\usepackage{adjustbox}
+\usepackage{graphicx}
 
-
+\newcommand{\code}[1]{\texttt{#1}}
 \begin{document}
+
+\begin{center}
+    \vspace{2cm}
+    \huge { Thesis Preparation Report \\ }
+    \vspace{2cm}
+    \large {Magnus Stahl (msta@itu.dk)\\
+    IT-University of Copenhagen\\
+    Fall 2016}
+\end{center}
+
+
+\tableofcontents
+
 
 \section{Introduction}
  
-Hello
+This report details introductory thesis work as part of a spring 2017 thesis at the IT-University of Copenhagen. The report will describe the work undertaken so far, and a plan for how the thesis will be completed in the spring. \\
+
+The topic of the thesis can be formulated with the following research questions:
+\begin{itemize}
+    \item What are the current state-of-the-art systems for relation classification 
+    with neural networks?\\
+    \item Is it possible to simplify structures in state-of-the-art systems while maintaining (or increasing) the F1 metric?
+\end{itemize}
+
+
+The task of relation classification can be defined as:
+Given a sentence $S$ and two labeled entities \textless e1\textgreater  and \textless e2\textgreater , classify the relation between the entities and the (sometimes optionally) ordering of the relation. Here is an example:
+
+Given sentence $S$: \emph{``The train rolled onto the platform with a peculiar choo choo.''}
+and entities \textless e1 \textgreater \emph{train}, \textless e2 \textgreater \emph{platform} the relation is of the form Entity-Destination(e1,e2).
+
+Neural networks are a group of data structures and related algorithms that loosely models features of a biological brain.  
+
+
+\subsection{Motivation}
+
+This section motivates why the subject of the thesis is important and interesting.\\
+
+Relation classification is a hard task for computers. Correctly classifiying entities in language requires understanding the context of the entities as well as an abstract understanding
+of their relationship. Recent deep learning experiments have yielded excellent results compared to feature-based classifiers, which require feature engineering.   
+
+Neural networks are interesting in NLP because they allow features to be learned automatically
+from raw input data. 
+
+Simplification of state-of-the-art systems are necessary because the newest systems are
+often built on top of other state-of-the-art systems. These ``research iterations'' often
+lead to including substructures from previous systems which might not be relevant in the newer system. Additionally, hyperparameters are not always decided by search but rather by sticking to values which were chosen in a previous system. Hyperparameters might incur unnessecary memory or performance costs. Finally, it may be the case that simpler networks generalize better to new data, or even 
+to other related tasks. (INSERT REFERENCE).  
 
 
 \section{Work so far}
 
-\subsection{Motivation}
+This section details how I have been preparing for the thesis until now.
 
-Classification ... ``Actor dependent classification''
+I have before the start of the 2016 fall semester completed courses in mathematics (msc level), data mining
+and intelligent systems. I have written a bachelors thesis on the subject of classification and prediction.\\
 
-That includes sentence-level understanding of the text to recognize entities and classify their relation. This 
+In the thesis preparation course, I have learned more about deep learning and NLP. I have completed
+a small deep learning course on Udacity (https://www.udacity.com/course/deep-learning--ud730).
+To complement the general deep learning knowledge I have started to read an MIT newly released 
+grad level book about deep learning (INSERT REFERENCE http://www.deeplearningbook.org/contents/convnets.html)
 
-\subsection{Research done}
+
+
+
+
+Word embeddings have done such and such
+cite different papers here
+
+Convolutional neural networks have done stuff
+
+And other recurrent structures such as LSTM
+
+
 
 Papers read and problems along the way...?
 
 
 \subsection{Implementation and current baseline}
 
-...
+I'll wait with this until just before the hand-in I guess.
+
 
 \section{Thesis plan}
+
+\ref{att_cnn}
+\cite{att_cnn}
+
+\begin{center}
+  \makebox[\textwidth]{\includegraphics[width=\textwidth]{figs/graph.png}}
+\end{center}
 
 
 Gant diagram including,
@@ -47,6 +122,8 @@ sets (legal documents)
 Try cutting off 1 entity and then classifying the relation along with the other entity?
 
 
+\bibliographystyle{plain}
+\bibliography{Bibliography}
 
 
     

@@ -23,7 +23,7 @@ from sklearn.model_selection import KFold
 ### My own stuff ###
 from semeval import output_dict
 from functions import debug_print, fbetascore, clean_classes, process_train
-from functions import debug_print_dict
+from functions import debug_print_dict, margin_loss
 from prep import Preprocessor
 from model import get_model
 
@@ -55,8 +55,26 @@ parser.add_argument("--markup",
                     action="store_true")
 parser.add_argument("-o", "--optimizer",
                     type=str,
+                    default='ada',
                     choices=["sgd", "ada"])
+parser.add_argument("--windowsize",
+                    type=int,
+                    default=400)
+parser.add_argument("-loss",
+                    type=str,
+                    default="categorical_crossentropy")
+
+
+
+
 args = parser.parse_args()
+
+
+
+if args.loss == 'margin_loss':
+    loss = margin_loss
+else:
+    loss = args.loss
 
 
 loglevel = logging.DEBUG if args.debug else logging.INFO
@@ -91,6 +109,7 @@ def read_dataset(dataset, output_dict, merge_classes=False):
 
 ######## Experiment begin ##################
 
+WINDOW_SIZE = args.windowsize
 FOLDS = args.folds 
 EPOCHS = args.epochs
 DEBUG = args.debug
@@ -180,9 +199,12 @@ for train_idx, test_idx in kf.split(X_padded):
         INCLUDE_POS_EMB=INCLUDE_POS_EMB,
         INCLUDE_ATTENTION=INCLUDE_ATTENTION,
         DROPOUT_RATE=DROPOUT_RATE,
+        WINDOW_SIZE=WINDOW_SIZE,
         NO_OF_CLASSES=NO_OF_CLASSES,
-        optimizer=args.optimizer
+        optimizer=args.optimizer,
+        loss=loss
         )
+
 
     X_train = [X_padded[train_idx]]
     X_test = [X_padded[test_idx]]
@@ -202,23 +224,41 @@ for train_idx, test_idx in kf.split(X_padded):
 
 
     #X = [X_padded, X_nom_pos]
+    Y_train = Y[train_idx]
+    Y_test = Y[test_idx]
 
+    def transform_to_embedding(label, nb_classes, dimensions):
+        m = np.zeros((nb_classes, dimensions))
+        m[label,:] = 1
+        return m
+
+
+    if loss == 'squared_hinge':
+        embeddings = np.random.rand(NO_OF_CLASSES, WINDOW_SIZE)
+        Y_train = np.asarray([embeddings[y] for y in Y_train])
+        Y_test = np.asarray([embeddings[y] for y in Y_test])
+
+     
+
+
+    elif loss == 'categorical_crossentropy':
     
-    Y_train = to_categorical(Y[train_idx], nb_classes=NO_OF_CLASSES)
-    Y_test = to_categorical(Y[test_idx], nb_classes=NO_OF_CLASSES)
+        Y_train = to_categorical(Y_train, nb_classes=NO_OF_CLASSES)
+        Y_test = to_categorical(Y_test, nb_classes=NO_OF_CLASSES)
+    elif loss == margin_loss:
+        Y_train = [transform_to_embedding(label, NO_OF_CLASSES, WINDOW_SIZE) for label in Y_train]
+        Y_test = [transform_to_embedding(label, NO_OF_CLASSES, WINDOW_SIZE) for label in Y_test]
 
 
-    #Y_test = to_categorical(Y_test, nb_classes=NO_OF_CLASSES) 
 
     def train_model_kv(model):
             logging.info(model.summary())
-            #logging.info( model.get_config())
-            #logging.info( model.get_weights();)
-            model.fit(X_train, 
+            history = model.fit(X_train, 
                 Y_train, 
                 nb_epoch=EPOCHS, 
                 batch_size=50, 
                 shuffle=True)
+            
     train_model_kv(model)
 
     logging.info( "#" * 30)
@@ -238,16 +278,4 @@ logging.info( "FINAL F1 VALUE: " , final_f1)
 logging.info( "#" * 30 )
 
 
-# weights = model.get_weights()
-# logging.info( len(weights))
-# print "#" * 30
-# print model.get_weights()[10].shape
-# print model.get_weights()[10]
-# print "#" * 30
-# print model.get_weights()[9].shape
-# print model.get_weights()[9]
 
-
-
-
-1

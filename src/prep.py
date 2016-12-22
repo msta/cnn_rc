@@ -182,6 +182,7 @@ class Preprocessor():
         debug_print(att_list_1, "Attention pair list 1")
         debug_print(att_list_2, "Attention pair list 2")
 
+        
         return (padded_sequences, 
             nominal_positions1, nominal_positions2, 
             att_idx, att_list_1, att_list_2,
