@@ -1,0 +1,10 @@
+Metadata-Version: 1.0
+Name: word2vec
+Version: 0+unknown
+Summary: Wrapper for Google word2vec
+Home-page: https://github.com/danielfrg/word2vec
+Author: Daniel Rodriguez
+Author-email: df.rodriguez143@gmail.com
+License: Apache License Version 2.0, January 2004
+Description: UNKNOWN
+Platform: UNKNOWN

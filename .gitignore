@@ -5,5 +5,19 @@ __pycache__/
 
 /logs
 
+*.png
+
+
 *.bin
 word_embeddings.bin 
+
+*.aux
+*.fdb_latexmk
+*.fls
+*.log
+*.synctex.gz
+*.tpc
+*.out
+*.toc
+*.bbl
+*.blg

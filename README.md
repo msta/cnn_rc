@@ -10,12 +10,3 @@ Download word embeddings and rename as "word_embeddings.bin"
 
 GPU currently not enabled
 
-# Running 
-
-`` python main.py ``
-
-Arguments :
-
--p = Positional embeddings, default FALSE
--d = Debug info, default FALSE
--b = Bidirectional classes, default TRUE
