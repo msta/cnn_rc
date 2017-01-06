@@ -233,21 +233,20 @@ for train_idx, test_idx in kf.split(X_padded):
         return m
 
 
-    if loss == 'squared_hinge':
+    if loss in ['squared_hinge', 'cosine_proximity']:
         embeddings = np.random.rand(NO_OF_CLASSES, WINDOW_SIZE)
         Y_train = np.asarray([embeddings[y] for y in Y_train])
         Y_test = np.asarray([embeddings[y] for y in Y_test])
 
-     
+    
 
-
-    elif loss == 'categorical_crossentropy':
+    elif loss == 'categorical_crossentropy' or loss == margin_loss:
     
         Y_train = to_categorical(Y_train, nb_classes=NO_OF_CLASSES)
         Y_test = to_categorical(Y_test, nb_classes=NO_OF_CLASSES)
-    elif loss == margin_loss:
-        Y_train = [transform_to_embedding(label, NO_OF_CLASSES, WINDOW_SIZE) for label in Y_train]
-        Y_test = [transform_to_embedding(label, NO_OF_CLASSES, WINDOW_SIZE) for label in Y_test]
+    # elif loss == margin_loss:
+    #     Y_train = [transform_to_embedding(label, NO_OF_CLASSES, WINDOW_SIZE) for label in Y_train]
+    #     Y_test = [transform_to_embedding(label, NO_OF_CLASSES, WINDOW_SIZE) for label in Y_test]
 
 
 

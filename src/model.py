@@ -1,6 +1,9 @@
 
 import numpy as np
+import tensorflow as tf
+
 from functools import partial
+
 from keras.optimizers import Adadelta, SGD
 from keras.utils.np_utils import to_categorical
 from keras.models import Model
@@ -16,7 +19,7 @@ from keras.layers.pooling import MaxPooling2D, MaxPooling1D
 from keras.regularizers import l2
 from keras.constraints import maxnorm
 from keras import backend as K
-from functions import fbetascore, margin_loss, MultLayer
+from functions import fbetascore, margin_loss, MultLayer, accuracy2
 
 
 def get_model(
@@ -161,25 +164,30 @@ def get_model(
     #                     mode=att_comp2,
     #                     output_shape=(n, NO_OF_CLASSES))
 
+    #### Multiply RT with U and the EMBEDDING 
 
-#    umatrix = TimeDistributed(Dense(NO_OF_CLASSES, bias=False, name='U'), name='UM')(network)
-
-    final = MaxPooling1D(pool_length=WINDOW_SIZE/100)(network)
-
-    final = Flatten()(final)
-
-    final = Dropout(DROPOUT_RATE)(final)
-    final = Dense(NO_OF_CLASSES, activation='softmax')(final)
-    # class_embedding = Dense(WINDOW_SIZE, bias=False)
-    # wl = TimeDistributed(class_embedding)(umatrix)
-
-    # ap = Activation("softmax")(wl)
-
-    # rap = merge([convolved, ap], mode='dot', output_shape=(n,WINDOW_SIZE))
-
-    # final = GlobalMaxPooling1D()(rap)
+    ##### The learned class embedding ######
+    final = Dense(NO_OF_CLASSES, bias=False, name='U')(network)
+    class_embedding = Dense(WINDOW_SIZE, bias=False, name='WL')
 
 
+    final = class_embedding(final)
+
+
+    G = Activation('softmax')(final)
+
+
+
+    #final = MaxPooling1D(pool_length=WINDOW_SIZE/100)(final)
+
+    #final = Flatten()(final)
+    # final = Dropout(DROPOUT_RATE)(final)
+    #final = Dense(NO_OF_CLASSES, activation='softmax')(final)
+
+    rap = merge([convolved, G], mode='dot', output_shape=(n,WINDOW_SIZE))
+
+    ### This has dimensions window_size
+    final = GlobalMaxPooling1D()(rap)
 
     input_arr = [sequence_input]
     
@@ -191,8 +199,21 @@ def get_model(
         input_arr.append(attention_input_1)
         input_arr.append(attention_input_2)
 
+    #### Scoring crap, DOESNT WORK
+    # final_t = Reshape((1, WINDOW_SIZE))(final)
+    # weights_as_batch = K.cast(class_embedding.weights[0], K.floatx())
+    # weights_as_batch = tf.reshape(class_embedding.weights[0], [-1, NO_OF_CLASSES, WINDOW_SIZE])
+    # final = merge([final_t, weights_as_batch], mode='dot', dot_axes=(2,2))
+    # final = Flatten()(final)
+    ####
 
-    loss = partial(margin_loss, class_embedding.weights) if loss == margin_loss else loss
+
+    ###### We do a partial trick to include the class embeddings and calculate the accuracy
+
+    acc_partial = partial(accuracy2, class_embedding.weights[0])
+    acc_partial.__name__='accuracy'
+
+    loss = partial(margin_loss, class_embedding.weights[0]) if loss == margin_loss else loss
     model = Model(input=input_arr, output=[final])
     
     if optimizer == 'ada':
@@ -201,5 +222,5 @@ def get_model(
     elif optimizer == 'sgd':
         opt = SGD(lr=0.03)
 
-    model.compile(optimizer=opt, loss=loss, metrics=["accuracy", fbetascore])
+    model.compile(optimizer=opt, loss=loss, metrics=[acc_partial])
     return model

@@ -12,10 +12,24 @@ import numpy as np
 from keras import backend as K
 
 
+''' accuracy that chooses a class from the class embedding 
+and compares with the categorical cross-entropy '''
+def accuracy2(class_emb, y_true, y_pred):
+    
+    # y_pred_max = K.argmax(K.dot(y_pred, K.transpose(class_emb)), axis=-1)
+    y_pred_max = K.argmax(K.dot(K.transpose(y_pred), class_emb), axis=-1)
+
+
+    y_true_max = K.argmax(y_true, axis=-1)
+
+    acc = K.mean(K.equal(y_true_max, y_pred_max))
+
+    return acc
+    
+
+
 ''' courtesy of keras.io '''
 def fbetascore(y_true, y_pred, beta=1):
-    import ipdb
-    ipdb.sset_trace()
     if beta < 0:
         raise ValueError('The lowest choosable beta is zero (only precision).')
     # Count positive samples.
@@ -66,40 +80,69 @@ def process_train(line):
     return stripped[1:len(stripped)-2]
 
 ''' NOVEL DISTANCE FUNCTION EH? '''
-def new_dist(actual, weights):
+def new_dist(actual, embedding):
+
+    import ipdb
+    ipdb.sset_trace()
 
     actual_sum = tf.reduce_sum(actual, keep_dims=True)
-    unit_actual = actual / actual_sum
-    result = tf.sqrt(tf.reduce_sum(K.square(unit_actual - weights), 1, keep_dims=True))
+    actual_unit = actual / actual_sum
+
+    embedding_sum = tf.reduce_sum(embedding, keep_dims=True)
+    embedding_unit = embedding / embedding_sum
+
+
+    result = tf.sqrt(tf.reduce_sum(K.square(actual_unit - embedding_unit), 2, keep_dims=True))
     return result
 
 
-def att_comp2(tensor_list):
-    from keras import backend as K
-    import tensorflow as tf
-    return K.batch_dot(tensor_list[0],tensor_list[1]) 
+def new_dist3(pred, embedding):
+    import ipdb
+    ipdb.sset_trace()
 
+    pred_sum = tf.reduce_sum(pred, 1, keep_dims=True)
+    pred_unit = pred / pred_sum
 
+    embedding_sum = tf.reduce_sum(embedding)
+    embedding_unit = embedding / embedding_sum
+
+    internal_dist = pred_unit - embedding_unit  
+
+    squared = K.square(internal_dist)    
+
+    sum_for_dist = tf.reduce_sum(squared, 1, keep_dims=True)
+
+    result = tf.sqrt(sum_for_dist)
+    return result
 
 
 ### TODO test this shit!!!! :D ###
-def margin_loss(weights, label, actual):
-    weights = weights[0]
-    partial_dist = partial(new_dist, weights=weights)
+def margin_loss(weights, y_true, y_pred):
 
 
-    distances = tf.map_fn(partial_dist, actual, dtype=tf.float32)
+    nb_clz = weights.get_shape()[0]
 
-    
-    #correct = tf.gather(w, label)
-    # tf.cast(label, dtype=tf.int32)
-    correct_embeddings = tf.gather(weights, tf.cast(label, dtype=tf.int32))
+    import ipdb
+    ipdb.sset_trace()
 
+    distances = new_dist3(y_pred, weights)
+
+    # index_mask = tf.reshape(tf.one_hot(y_true, nb_clz), [-1,nb_clz])
+
+    true_pred = tf.reduce_sum(distances * index_mask,1)
+
+#    partial_dist = partial(new_dist, embedding=weights)
+ #   distances = tf.map_fn(partial_dist, y_pred, dtype=tf.float32)
+
+
+    #correct = tf.gather(w, y_true)
+    # tf.cast(y_true, dtype=tf.int32)
+    # correct_embeddings = tf.gather(weights, tf.cast(    y_true, dtype=tf.int32))
 
     best_incorrect_dist_idx = tf.argmax(distances,1)
     incorrect_dist = distances[1] 
 
-    true_dist = new_dist(correct,actual)
+    true_dist = new_dist(correct,y_pred)
 
 
     return 1.0 + true_dist - incorrect_dist
@@ -111,6 +154,30 @@ def new_dist2(weights):
     actual_sum = tf.reduce_sum(actual, 1, keep_dims=True)
     unit_actual = actual / actual_sum
     return tf.sqrt(tf.reduce_sum(K.square(unit_actual - weights), 1, keep_dims=True))
+
+
+
+
+
+
+
+
+def att_comp2(tensor_list):
+    from keras import backend as K
+    import tensorflow as tf
+    return K.batch_dot(tensor_list[0],tensor_list[1]) 
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 class MultLayer(Layer):

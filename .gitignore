@@ -17,3 +17,7 @@ word_embeddings.bin
 *.log
 *.synctex.gz
 *.tpc
+*.out
+*.toc
+*.bbl
+*.blg
