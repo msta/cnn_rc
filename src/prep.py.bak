@@ -3,7 +3,7 @@ import math
 
 import logging
 
-from .functions import debug_print, debug_print_dict
+from functions import debug_print, debug_print_dict
 from keras.preprocessing.text import Tokenizer
 from keras.preprocessing.sequence import pad_sequences
 
@@ -75,7 +75,7 @@ class Preprocessor():
         if self.markup:
             return self.tokenizer.word_index
         else:
-            return {k: v-2 for k, v in self.tokenizer.word_index.items()
+            return {k: v-2 for k, v in self.tokenizer.word_index.iteritems()
             if v != self.nom1_idx and v != self.nom2_idx  } 
 
 
@@ -118,7 +118,7 @@ class Preprocessor():
         return np.array(nominal_positions1), np.array(nominal_positions2)
 
     def reverse_sequence(self, seqs):
-        inv_map = {v: k for k, v in self.tokenizer.word_index.items()}
+        inv_map = {v: k for k, v in self.tokenizer.word_index.iteritems()}
         return [[inv_map[s] for s in xs if s != 0] for xs in seqs]        
 
     def clean_markups(self,seqs):
@@ -163,7 +163,7 @@ class Preprocessor():
         nominal_relations, nominal_heads, sequences_clip = self.nominal_positions_and_clip(sequences)
 
         self.find_n(nominal_relations)
-        logging.debug("Maximum nominal distance: " + str(self.n))
+        logging.info("Maximum nominal distance: " , self.n)
 
         if not self.markup:
             ## shift nominal relations to the left due to markups being removed
@@ -174,7 +174,7 @@ class Preprocessor():
         padded_sequences = self.pad_and_heads(sequences_clip, nominal_relations, nominal_heads)
         nominal_positions1, nominal_positions2 = self.nominal_positions(padded_sequences, nominal_heads)         
         
-        logging.debug("Attention dictionarys created with nominal HEADS only")
+        logging.info("Attention dictionarys created with nominal HEADS only")
 
         att_idx, att_list_1, att_list_2 = self.make_att_dict(padded_sequences, nominal_heads)
         

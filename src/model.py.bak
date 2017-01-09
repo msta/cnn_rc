@@ -43,7 +43,7 @@ def get_model(
 
     missed_words = 0
     embedding_matrix = np.zeros((len(word_index) + 1, WORD_EMBEDDING_DIM))
-    for word, i in list(word_index.items()):
+    for word, i in word_index.items():
         try:
             embedding_vector = word_embeddings[word]
         except KeyError:
@@ -55,7 +55,7 @@ def get_model(
 
     #### attention matrix initialization 
     attention_matrix = np.zeros((len(word_entity_dictionary) + 1, 1))
-    for (w,e),idx in word_entity_dictionary.items():
+    for (w,e),idx in word_entity_dictionary.iteritems():
         emb1 = embedding_matrix[w]
         emb2 = embedding_matrix[e]
         a_val = np.inner(emb1, emb2)
@@ -182,13 +182,12 @@ def get_model(
 
     #final = Flatten()(final)
     # final = Dropout(DROPOUT_RATE)(final)
-    
+    #final = Dense(NO_OF_CLASSES, activation='softmax')(final)
 
     rap = merge([convolved, G], mode='dot', output_shape=(n,WINDOW_SIZE))
 
     ### This has dimensions window_size
     final = GlobalMaxPooling1D()(rap)
-    final = Dense(NO_OF_CLASSES, activation='softmax')(final)
 
     input_arr = [sequence_input]
     
@@ -223,5 +222,5 @@ def get_model(
     elif optimizer == 'sgd':
         opt = SGD(lr=0.03)
 
-    model.compile(optimizer=opt, loss=loss, metrics=['accuracy'])
+    model.compile(optimizer=opt, loss=loss, metrics=[acc_partial])
     return model

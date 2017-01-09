@@ -52,7 +52,7 @@ def fbetascore(y_true, y_pred, beta=1):
 def debug_print_dict(input, msg):
     logging.debug("#" * 30)
     logging.debug(msg)
-    for k, v in input.items():
+    for k, v in input.iteritems():
         logging.debug(str(k) + " : " + str(v))
     logging.debug(msg + " length: ")
     logging.debug(len(input))

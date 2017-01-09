@@ -21,11 +21,11 @@ from keras.utils.np_utils import to_categorical
 from sklearn.model_selection import KFold
 
 ### My own stuff ###
-from semeval import output_dict
-from functions import debug_print, fbetascore, clean_classes, process_train
-from functions import debug_print_dict, margin_loss
-from prep import Preprocessor
-from model import get_model
+from .semeval import output_dict
+from .functions import debug_print, fbetascore, clean_classes, process_train
+from .functions import debug_print_dict, margin_loss
+from .prep import Preprocessor
+from .model import get_model
 
 
 
@@ -166,8 +166,8 @@ prep = Preprocessor(texts=X_full,
 ### Calculate avg nr of zeros for info
 
 zeros = [x for b in X_padded for x in b if x == 0]
-print "Total amt of zeros " , len(zeros)
-print "Avg zeros " , len(zeros) / len(X_padded)
+logging.debug("Total amt of zeros " + str(len(zeros)))
+logging.debug("Avg zeros " + str(len(zeros) / len(X_padded)))
 
 #####
 
