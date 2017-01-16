@@ -22,3 +22,6 @@ output_dict = {
     "Message-Topic(e2,e1)" : 17,
     "Other" : 18
 }
+
+reverse_dict = {v: k for k, v in output_dict.items()}
+

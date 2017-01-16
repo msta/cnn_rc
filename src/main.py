@@ -166,8 +166,8 @@ prep = Preprocessor(texts=X_full,
 ### Calculate avg nr of zeros for info
 
 zeros = [x for b in X_padded for x in b if x == 0]
-print "Total amt of zeros " , len(zeros)
-print "Avg zeros " , len(zeros) / len(X_padded)
+logging.debug("Total amt of zeros " , len(zeros))
+logging.debug("Avg zeros " , len(zeros) / len(X_padded))
 
 #####
 
