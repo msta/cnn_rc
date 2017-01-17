@@ -1,18 +1,15 @@
 import re
 import logging
-
 import numpy as np
 import tensorflow as tf
-
+from keras import backend as K
+from keras.engine.topology import Layer
+from keras import initializations
 from functools import partial
+import numpy as np
 
 
 from keras import backend as K
-from keras.utils.np_utils import to_categorical
-from keras.engine.topology import Layer
-from keras import initializations
-
-
 
 
 ''' accuracy that chooses a class from the class embedding 
@@ -55,7 +52,7 @@ def fbetascore(y_true, y_pred, beta=1):
 def debug_print_dict(input, msg):
     logging.debug("#" * 30)
     logging.debug(msg)
-    for k, v in input.items():
+    for k, v in input.iteritems():
         logging.debug(str(k) + " : " + str(v))
     logging.debug(msg + " length: ")
     logging.debug(len(input))
@@ -77,10 +74,10 @@ def clean_classes(dict):
         count += 1
     return o
 
-def transform_to_embedding(label, nb_classes, dimensions):
-    m = np.zeros((nb_classes, dimensions))
-    m[label,:] = 1
-    return m
+def process_train(line):
+    # split on quotes and get the raw text
+    stripped = re.sub("\d{0,4}", "", line, count=1).strip()
+    return stripped[1:len(stripped)-2]
 
 ''' NOVEL DISTANCE FUNCTION EH? '''
 def new_dist(actual, embedding):
@@ -173,54 +170,36 @@ def att_comp2(tensor_list):
 
 
 
-def build_input_arrays_folded(X_train, X_test, 
-                        INCLUDE_POS_EMB, INCLUDE_ATTENTION_ONE,
-                        X_nom_pos1, X_nom_pos2,
-                        att_list_1, att_list_2,
-                        train_idx, test_idx):
-
-    if INCLUDE_POS_EMB:
-        X_train.append(X_nom_pos1[train_idx])
-        X_train.append(X_nom_pos2[train_idx])
-        X_test.append(X_nom_pos1[test_idx])
-        X_test.append(X_nom_pos2[test_idx])
-
-    if INCLUDE_ATTENTION_ONE:
-        X_train.append(att_list_1[train_idx])
-        X_train.append(att_list_2[train_idx])
-
-        X_test.append(att_list_1[test_idx])
-        X_test.append(att_list_2[test_idx])
-
-
-def build_input_arrays_test(X, INCLUDE_POS_EMB, INCLUDE_ATTENTION_ONE, 
-                            att_list_1, att_list_2, 
-                            X_nom_pos1, X_nom_pos2):
-    if INCLUDE_POS_EMB:
-        X.append(X_nom_pos1)
-        X.append(X_nom_pos2)
-    if INCLUDE_ATTENTION_ONE:
-        X.append(att_list_1)
-        X.append(att_list_2)
 
 
 
-def build_label_representation(Y_train, Y_test=[], OBJECTIVE=None, NO_OF_CLASSES=19, WINDOW_SIZE=150):
-
-    if OBJECTIVE in ['squared_hinge', 'cosine_proximity']:
-        embeddings = np.random.rand(NO_OF_CLASSES, WINDOW_SIZE)
-        Y_train = np.asarray([embeddings[y] for y in Y_train])
-        Y_test = np.asarray([embeddings[y] for y in Y_test])
-
-    elif OBJECTIVE in ['categorical_crossentropy', 'margin_loss']:
-        Y_train = to_categorical(Y_train, nb_classes=NO_OF_CLASSES)
-        Y_test = to_categorical(Y_test, nb_classes=NO_OF_CLASSES)
-        # elif loss == margin_loss:
-        #     Y_train = [transform_to_embedding(label, NO_OF_CLASSES, WINDOW_SIZE) for label in Y_train]
-        #     Y_test = [transform_to_embedding(label, NO_OF_CLASSES, WINDOW_SIZE) for label in Y_test]
 
 
-    if len(Y_test) > 0:
-        return Y_train, Y_test
-    else:
-        return Y_train
+
+
+
+
+
+class MultLayer(Layer):
+    def __init__(self, output_dim, **kwargs):
+        self.init = initializations.get('glorot_uniform')
+        self.output_dim = output_dim[1]
+        super(MultLayer, self).__init__(**kwargs)
+
+    def build(self, input_shape):
+        input_dim = input_shape[2]
+        initial_weight_value = np.random.random((input_dim, self.output_dim))
+        
+        self.W = self.init((input_dim, self.output_dim),
+                           name='{}_W'.format(self.name))
+
+        self.trainable_weights = [self.W]
+        super(MultLayer, self).build(input_shape)  # be sure you call this somewhere
+
+    def call(self, x, mask=None):
+        return K.dot(x, self.W)
+
+    def get_output_shape_for(self, input_shape):
+        import ipdb
+        ipdb.sset_trace()
+        return (input_shape[0], self.output_dim)

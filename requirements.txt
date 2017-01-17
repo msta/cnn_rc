@@ -4,3 +4,6 @@ keras
 scikit-learn
 word2vec
 
+ipython
+ipdb
+
