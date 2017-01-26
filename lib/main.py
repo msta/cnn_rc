@@ -185,7 +185,7 @@ if FOLDS > 0:
 
 else:
     logging.info("Beginning test with official F1 scorer ...")
-    test_set = open("task8/SemEval2010_task8_testing_keys/TEST_FILE_CLEAN.TXT")
+    test_set = open("data/task8/SemEval2010_task8_testing_keys/TEST_FILE_CLEAN.TXT")
 
     data, ids = read_testset(test_set, output_dict)
 
@@ -248,7 +248,7 @@ else:
     lookup_labels = [reverse_dict[pred] for pred in preds]
 
 
-    with open("task8/test_pred.txt", "w+") as f:
+    with open("data/task8/test_pred.txt", "w+") as f:
         for idx, i in enumerate(id_test):
             f.write(i + "\t" + lookup_labels[idx] + "\n")
 
