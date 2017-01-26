@@ -30,6 +30,7 @@ def get_model(
     WORD_EMBEDDING_DIM=300,
     POS_EMBEDDING_DIM=50,
     L2_NORM_MAX=3,
+    L2_VALUE=0.001,
     INCLUDE_POS_EMB=True,
     INCLUDE_ATTENTION_ONE=False,
     INCLUDE_ATTENTION_TWO=False,
@@ -143,39 +144,34 @@ def get_model(
 
     p_list = []
 
-    # for w in windows:
-    #     conv = conv_input   
-    #     #conv = Reshape((1,n,CIP))(conv_input)
-    #     conv = Conv1D(WINDOW_SIZE, w, 
-    #         border_mode='same',
-    #         activation=g,
-    #         bias=True,
-    #         init='glorot_normal',
-    #         name='r_convolved')(conv)
-    #     #conv = GlobalMaxPooling2D()(conv)
-    #     p_list.append(conv)
+    for w in windows:
+        conv = conv_input   
+        #conv = Reshape((1,n,CIP))(conv_input)
+        conv = Conv1D(WINDOW_SIZE, w, 
+            border_mode='same',
+            activation=g,
+            W_regularizer=l2(L2_VALUE),
+            bias=True,
+            init='glorot_normal',
+            name='r_convolved')(conv)
+        #conv = GlobalMaxPooling2D()(conv)
+        p_list.append(conv)
 
-    # convolved = p_list[0]
+    convolved = p_list[0]
     
     
-    # if INCLUDE_ATTENTION_TWO:
-    #     final = build_attention_two(convolved,
-    #                                 NO_OF_CLASSES,
-    #                                 WINDOW_SIZE)
-    #     assert INCLUDE_ATTENTION_ONE
+    if INCLUDE_ATTENTION_TWO:
+        final = build_attention_two(convolved,
+                                    NO_OF_CLASSES,
+                                    WINDOW_SIZE)
+        assert INCLUDE_ATTENTION_ONE
 
-    # else:
-    #     final = build_nguyen_cnn(convolved,
-    #                              DROPOUT_RATE,
-    #                              L2_NORM_MAX,
-    #                              NO_OF_CLASSES)
-
-    conv_input = Flatten()(conv_input)
-    conv_input = Dense(64, activation=g,
-                        init='glorot_uniform')(conv_input)
-    final = Dense(NO_OF_CLASSES, 
-                  activation='softmax', 
-                  init='glorot_uniform')(conv_input)
+    else:
+        final = build_nguyen_cnn(convolved,
+                                 DROPOUT_RATE,
+                                 L2_NORM_MAX,
+                                 L2_VALUE,
+                                 NO_OF_CLASSES)
 
 
 
@@ -200,12 +196,14 @@ def get_model(
     return model
 
 
-def build_nguyen_cnn(convolved, DROPOUT_RATE, L2_NORM_MAX, NO_OF_CLASSES):
+def build_nguyen_cnn(convolved, DROPOUT_RATE, L2_NORM_MAX, 
+                     L2_VALUE, NO_OF_CLASSES):
 
     pooled = GlobalMaxPooling1D()(convolved)
     dropout = Dropout(DROPOUT_RATE)(pooled)
     output = Dense(NO_OF_CLASSES, 
                     init='glorot_uniform',
+                    W_regularizer=l2(L2_VALUE),
                     W_constraint=maxnorm(L2_NORM_MAX),
                     activation='softmax')(dropout)
     return output

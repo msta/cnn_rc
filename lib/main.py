@@ -49,6 +49,8 @@ WORD_EMBEDDING_DIMENSION = args.wordembeddingdim
 INCLUDE_ATTENTION_ONE = args.attention_one
 INCLUDE_ATTENTION_TWO = args.attention_two
 POS_EMBEDDING_DIM = args.posembeddingdim
+L2_VALUE = args.l2
+
 
 CLIPPING_VALUE = args.clipping
 OBJECTIVE = args.loss
@@ -82,11 +84,6 @@ logging.info("#" * 30)
 
 word_index = prep.word_idx()
 clipping_value = prep.clipping_value
-
-
-import ipdb
-ipdb.sset_trace()
-
 
 
 ########## Print optional debugging output ############################
@@ -126,6 +123,7 @@ if FOLDS > 0:
             n=clipping_value,
             word_entity_dictionary=att_idx, 
             POS_EMBEDDING_DIM=POS_EMBEDDING_DIM,
+            L2_VALUE=L2_VALUE,
             WORD_EMBEDDING_DIM=WORD_EMBEDDING_DIMENSION,
             INCLUDE_POS_EMB=INCLUDE_POS_EMB,
             INCLUDE_ATTENTION_ONE=INCLUDE_ATTENTION_ONE,
@@ -197,6 +195,7 @@ else:
             n=clipping_value,
             word_entity_dictionary=att_idx, 
             POS_EMBEDDING_DIM=POS_EMBEDDING_DIM,
+            L2_VALUE=L2_VALUE,
             WORD_EMBEDDING_DIM=WORD_EMBEDDING_DIMENSION,
             INCLUDE_POS_EMB=INCLUDE_POS_EMB,
             INCLUDE_ATTENTION_ONE=INCLUDE_ATTENTION_ONE,

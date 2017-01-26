@@ -45,9 +45,9 @@ class Preprocessor():
     def load_dataset(self, debug=False):
 
         if debug:
-            return open("task8/training/TRAIN_FILE_SMALL.txt", "r")
+            return open("data/semeval/training/TRAIN_FILE_SMALL.txt", "r")
         else:
-            return open("task8/training/TRAIN_FILE.txt", "r") 
+            return open("data/semeval/training/TRAIN_FILE.txt", "r") 
 
     def get_text(self, line):
         # split on quotes and get the raw text

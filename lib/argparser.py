@@ -13,6 +13,8 @@ def build_argparser():
     parser.add_argument("-d", "--dataset",
                         type=str,
                         choices=["semeval, ace2005"])
+    parser.add_argument("-l2",
+                        type=float)
     parser.add_argument("-a1", "--attention_one", 
                         action="store_true",
                         default=False)
