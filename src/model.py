@@ -21,6 +21,9 @@ from keras.regularizers import l2
 from keras.constraints import maxnorm
 from keras import backend as K
 from .functions import fbetascore, margin_loss, accuracy2
+    
+
+l2_regu = 0.0015
 
 def get_model(
     word_embeddings,
@@ -143,41 +146,37 @@ def get_model(
 
     p_list = []
 
-    # for w in windows:
-    #     conv = conv_input   
-    #     #conv = Reshape((1,n,CIP))(conv_input)
-    #     conv = Conv1D(WINDOW_SIZE, w, 
-    #         border_mode='same',
-    #         activation=g,
-    #         bias=True,
-    #         init='glorot_normal',
-    #         name='r_convolved')(conv)
-    #     #conv = GlobalMaxPooling2D()(conv)
-    #     p_list.append(conv)
+    for w in windows:
+        conv = conv_input   
+        #conv = Reshape((1,n,CIP))(conv_input)
+        conv = Conv1D(WINDOW_SIZE, w, 
+            border_mode='same',
+            activation=g,
+            W_regularizer=l2(l2_regu),
+            bias=True,
+            init='glorot_normal',
+            name='r_convolved')(conv)
+        #conv = GlobalMaxPooling2D()(conv)
+        p_list.append(conv)
 
-    # convolved = p_list[0]
+    convolved = p_list[0]
     
     
-    # if INCLUDE_ATTENTION_TWO:
-    #     final = build_attention_two(convolved,
-    #                                 NO_OF_CLASSES,
-    #                                 WINDOW_SIZE)
-    #     assert INCLUDE_ATTENTION_ONE
+    if INCLUDE_ATTENTION_TWO:
+        final = build_attention_two(convolved,
+                                    NO_OF_CLASSES,
+                                    WINDOW_SIZE)
+        assert INCLUDE_ATTENTION_ONE
 
-    # else:
-    #     final = build_nguyen_cnn(convolved,
-    #                              DROPOUT_RATE,
-    #                              L2_NORM_MAX,
-    #                              NO_OF_CLASSES)
+    else:
+        final = build_nguyen_cnn(convolved,
+                                 DROPOUT_RATE,
+                                 L2_NORM_MAX,
+                                 NO_OF_CLASSES)
 
-    conv_input = Flatten()(conv_input)
-    conv_input = Dense(64, activation=g,
-                        init='glorot_uniform')(conv_input)
-    final = Dense(NO_OF_CLASSES, 
-                  activation='softmax', 
-                  init='glorot_uniform')(conv_input)
-
-
+    # conv_input = Flatten()(conv_input)
+    # conv_input = Dense(64, activation=g,
+    #                     init='glorot_uniform')(conv_input)
 
     input_arr = [sequence_input]
     
@@ -207,7 +206,8 @@ def build_nguyen_cnn(convolved, DROPOUT_RATE, L2_NORM_MAX, NO_OF_CLASSES):
     output = Dense(NO_OF_CLASSES, 
                     init='glorot_uniform',
                     W_constraint=maxnorm(L2_NORM_MAX),
-                    activation='softmax')(dropout)
+                    activation='softmax',
+                    W_regularizer=l2(l2_regu))(dropout)
     return output
 
 
@@ -265,7 +265,7 @@ def train_model(model, X_train, Y_train, EPOCHS):
                 history = model.fit(X_train, 
                     Y_train, 
                     nb_epoch=EPOCHS, 
-                    batch_size=50, 
+                    batch_size=1000, 
                     shuffle=True)
 
 
