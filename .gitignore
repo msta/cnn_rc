@@ -7,6 +7,7 @@ __pycache__/
 
 *.png
 
+data_backup
 
 *.bin
 word_embeddings.bin 

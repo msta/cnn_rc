@@ -1,7 +1,0 @@
-include LICENSE.txt
-include requirements.txt
-recursive-include word2vec/c *.c
-include word2vec/*.pyx
-prune bin
-include versioneer.py
-include word2vec/_version.py
