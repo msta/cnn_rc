@@ -1,0 +1,2717 @@
+8001	<e1>audits</e1> <e2>waste</e2>
+8002	<e1>company</e1> fabricates <e2>chairs</e2>
+8003	<e1>master</e1> teaches lesson <e2>stick</e2>
+8004	<e1>body</e1> dumped <e2>reservoir</e2>
+8005	<e1>influenza</e1> disease birds caused strains <e2>virus</e2>
+8006	<e1>ear</e1> <e2>elephant</e2>
+8007	<e1>lie</e1> told <e2>parents</e2>
+8008	<e1>hookup</e1> <e2>users</e2>
+8009	<e1>room</e1> <e2>house</e2>
+8010	<e1>thesis</e1> defines <e2>clinical_characteristics</e2>
+8011	<e1>survivors</e1> moved <e2>houses</e2>
+8012	<e1>kimchi</e1> sauerkraut <e2>maker</e2>
+8013	<e1>names</e1> sends <e2>space</e2>
+8014	<e1>landscape</e1> <e2>company</e2>
+8015	<e1>gift</e1> arrived <e2>friend</e2>
+8016	<e1>young</e1> care left <e2>nest</e2>
+8017	<e1>actress</e1> arrived <e2>airport</e2>
+8018	<e1>filesharing</e1> <e2>internet</e2>
+8019	<e1>zoo</e1> <e2>beasts</e2>
+8020	<e1>song</e1> composed <e2>musician</e2>
+8021	<e1>outline</e1> focuses <e2>spirituality</e2>
+8022	<e1>bomb</e1> <e2>suitcase</e2>
+8023	<e1>software</e1> <e2>company</e2>
+8024	<e1>captain</e1> <e2>crew</e2>
+8025	<e1>sesame</e1> <e2>oil</e2>
+8026	<e1>housing</e1> <e2>developer</e2>
+8027	<e1>effect</e1> achieved <e2>way</e2>
+8028	<e1>dramas</e1> writing built <e2>real_events</e2>
+8029	<e1>drawings</e1> shown <e2>museums</e2>
+8030	<e1>cultures</e1> <e2>epochs</e2>
+8031	<e1>viruses</e1> influenza strains hundreds caused <e2>infections</e2>
+8032	<e1>pieces</e1> Many narrate mention <e2>stories</e2>
+8033	<e1>steps</e1> <e2>stairs</e2>
+8034	<e1>blisters</e1> caused type <e2>herpes_simplex_virus</e2>
+8035	<e1>luff</e1> <e2>sail</e2>
+8036	<e1>circuit</e1> comprises adder <e2>converter</e2>
+8037	<e1>camp</e1> <e2>champions</e2>
+8038	<e1>cartridge</e1> marked even <e2>ink</e2>
+8039	<e1>pod</e1> <e2>whales</e2>
+8040	<e1>Roundworms</e1> caused <e2>parasite</e2>
+8041	<e1>subject</e1> source <e2>implication</e2>
+8042	<e1>cat</e1> has problem <e2>paw</e2>
+8043	<e1>treaty</e1> establishes <e2>rule</e2>
+8044	<e1>oil</e1> spread <e2>ocean</e2>
+8045	<e1>talent</e1> wave emanated <e2>village</e2>
+8046	<e1>coins</e1> enclosed <e2>plastic_case</e2>
+8047	<e1>space</e1> <e2>drawer</e2>
+8048	<e1>bottle</e1> put <e2>container</e2>
+8049	<e1>News_programs</e1> commented <e2>violence</e2>
+8050	<e1>narrative</e1> comprises <e2>interplay</e2>
+8051	<e1>acid</e1> poured <e2>eyes</e2>
+8052	<e1>room</e1> filled <e2>canvases</e2>
+8053	<e1>gulp</e1> <e2>magpies</e2>
+8054	<e1>convocation</e1> <e2>scholars</e2>
+8055	<e1>murders</e1> result <e2>conviction</e2>
+8056	<e1>monkeys</e1> escaped <e2>enclosure</e2>
+8057	<e1>opinions</e1> post <e2>blog</e2>
+8058	<e1>vibrations</e1> caused <e2>movement</e2>
+8059	<e1>diamond</e1> <e2>colliers</e2>
+8060	<e1>door</e1> <e2>lock</e2>
+8061	<e1>Red_grape</e1> <e2>wine</e2>
+8062	<e1>transcript</e1> exists <e2>scribe</e2>
+8063	<e1>witch</e1> able change using <e2>magic</e2>
+8064	<e1>committee</e1> part <e2>organisation</e2>
+8065	<e1>clock</e1> inserted <e2>presentations</e2>
+8066	<e1>family</e1> constructed Frog supporting <e2>features</e2>
+8067	<e1>method</e1> is use <e2>combination</e2>
+8068	<e1>statue</e1> topped <e2>head</e2>
+8069	<e1>article</e1> explore <e2>use</e2>
+8070	<e1>comments</e1> provided <e2>readers</e2>
+8071	<e1>president</e1> <e2>university</e2>
+8072	<e1>wine</e1> made <e2>grapes</e2>
+8073	<e1>slide</e1> triggered <e2>crew</e2>
+8074	<e1>inspector</e1> left <e2>yard</e2>
+8075	<e1>regulations</e1> entered <e2>force</e2>
+8076	<e1>questions</e1> answered <e2>press</e2>
+8077	<e1>children</e1> gone <e2>exile</e2>
+8078	<e1>father</e1> killed <e2>bar</e2>
+8079	<e1>rebound</e1> put <e2>net</e2>
+8080	<e1>student</e1> spent creating <e2>application</e2>
+8081	<e1>bar</e1> <e2>seats</e2>
+8082	<e1>back</e1> <e2>chair</e2>
+8083	<e1>fatigue</e1> cause <e2>pain</e2>
+8084	<e1>claw</e1> <e2>hammer</e2>
+8085	<e1>magazine</e1> founded keep athletes serving soldiers informed <e2>sport</e2>
+8086	<e1>cartomancers</e1> use deck <e2>cards</e2>
+8087	<e1>films</e1> portrayed <e2>mental_illness</e2>
+8088	<e1>company</e1> addressed <e2>publication</e2>
+8089	<e1>papaya</e1> <e2>nectar</e2>
+8090	<e1>volume</e1> analyzes <e2>concepts</e2>
+8091	<e1>defendant</e1> released <e2>custody</e2>
+8092	<e1>plant</e1> builds four-cylinder Ecotec used <e2>vehicles</e2>
+8093	<e1>cheese</e1> used <e2>dish</e2>
+8094	<e1>castle</e1> <e2>museum</e2>
+8095	<e1>clubs</e1> falling <e2>ownership</e2>
+8096	<e1>man</e1> carried <e2>car</e2>
+8097	<e1>section</e1> aim <e2>interpretation</e2>
+8098	<e1>drawer</e1> <e2>coffeemaker</e2>
+8099	<e1>tube</e1> introduced <e2>container</e2>
+8100	<e1>views</e1> shared topics <e2>television</e2>
+8101	<e1>chapter</e1> points <e2>importance</e2>
+8102	<e1>station</e1> receives <e2>device</e2>
+8103	<e1>offenders</e1> absconded <e2>officers</e2>
+8104	<e1>book</e1> theme <e2>beauty</e2>
+8105	<e1>spills</e1> one caused <e2>hurricane</e2>
+8106	<e1>studies</e1> focused <e2>adults</e2>
+8107	<e1>diseases</e1> caused <e2>gene_mutations</e2>
+8108	<e1>response</e1> caused <e2>ripple</e2>
+8109	<e1>tree</e1> <e2>crown</e2>
+8110	<e1>mischief</e1> <e2>rats</e2>
+8111	<e1>cable_network</e1> dedicated offering <e2>science_fiction_TV_shows</e2>
+8112	<e1>cat</e1> found <e2>trap</e2>
+8113	<e1>stories</e1> narrated <e2>dance</e2>
+8114	<e1>foundry</e1> lines include <e2>frames</e2>
+8115	<e1>air</e1> filled <e2>smell</e2>
+8116	<e1>joy</e1> took <e2>laughing</e2>
+8117	<e1>lines</e1> pen <e2>author</e2>
+8118	<e1>receiver</e1> outputting <e2>tone</e2>
+8119	<e1>squad</e1> <e2>militants</e2>
+8120	<e1>telescope</e1> comprises <e2>lenses</e2>
+8121	<e1>pulp</e1> poured <e2>tupperware_tub</e2>
+8122	<e1>Carpenters</e1> build materials <e2>wood</e2>
+8123	<e1>samples</e1> obtained <e2>milking</e2>
+8124	<e1>blogger</e1> participant an going <e2>conversation</e2>
+8125	<e1>speech</e1> criticised <e2>idea</e2>
+8126	<e1>rice</e1> <e2>flour</e2>
+8127	<e1>body</e1> unleashes <e2>passenger</e2>
+8128	<e1>Asteroid</e1> threatened <e2>disaster</e2>
+8129	<e1>farm</e1> had <e2>acres</e2>
+8130	<e1>laptop</e1> <e2>plastic_bag</e2>
+8131	<e1>telephone</e1> <e2>operator</e2>
+8132	<e1>tales</e1> <e2>concerns</e2>
+8133	<e1>forebrain</e1> <e2>amphibians</e2>
+8134	<e1>company</e1> remodeled <e2>home</e2>
+8135	<e1>camera</e1> hidden <e2>leaflet_box</e2>
+8136	<e1>organizations</e1> manage <e2>resources</e2>
+8137	<e1>swim_bladder</e1> <e2>animals</e2>
+8138	<e1>coffle</e1> <e2>asses</e2>
+8139	<e1>coloring</e1> derived <e2>coat_of_arms</e2>
+8140	<e1>coalition</e1> <e2>interests</e2>
+8141	<e1>electrician</e1> <e2>tool</e2>
+8142	<e1>data</e1> <e2>epochs</e2>
+8143	<e1>city</e1> built <e2>rock_and_roll</e2>
+8144	<e1>parents</e1> went <e2>station</e2>
+8145	<e1>police</e1> <e2>chief</e2>
+8146	<e1>Hospitals</e1> use <e2>apparatus</e2>
+8147	<e1>boots</e1> <e2>box</e2>
+8148	<e1>attractions</e1> advertised <e2>billboards</e2>
+8149	<e1>guy</e1> convinced <e2>car</e2>
+8150	<e1>fetus</e1> makes <e2>insulin</e2>
+8151	<e1>design</e1> <e2>wife</e2>
+8152	<e1>circle</e1> <e2>hooligans</e2>
+8153	<e1>litter</e1> <e2>rabbits</e2>
+8154	<e1>texts</e1> relate <e2>anecdotes</e2>
+8155	<e1>documents</e1> point number <e2>strategies</e2>
+8156	<e1>punchcutter</e1> makes <e2>imprint</e2>
+8157	<e1>plug</e1> <e2>battery_box</e2>
+8158	<e1>visit</e1> part <e2>strategy</e2>
+8159	<e1>microbes</e1> germs cause <e2>sickness</e2>
+8160	<e1>implications</e1> indicated <e2>publication</e2>
+8161	<e1>document</e1> <e2>drugs</e2>
+8162	<e1>bazooka</e1> going away <e2>game</e2>
+8163	<e1>model</e1> derived <e2>example</e2>
+8164	<e1>Researchers</e1> synthesized <e2>ingredients</e2>
+8165	<e1>ale</e1> poured <e2>mug</e2>
+8166	<e1>motor</e1> built <e2>canister</e2>
+8167	<e1>corps</e1> <e2>cadets</e2>
+8168	<e1>wing</e1> <e2>aircrafts</e2>
+8169	<e1>name</e1> Tiergartenstrasse derived T-4 <e2>address</e2>
+8170	<e1>Analysts</e1> assess using <e2>frequency</e2>
+8171	<e1>man</e1> travelling <e2>countries</e2>
+8172	<e1>keeper</e1> <e2>team</e2>
+8173	<e1>high-wheelers</e1> descended type <e2>push-bike</e2>
+8174	<e1>line</e1> one terms <e2>geometry</e2>
+8175	<e1>pollution</e1> <e2>cars</e2>
+8176	<e1>posts</e1> ignore leaves <e2>writer</e2>
+8177	<e1>Molten_core</e1> dropped <e2>river</e2>
+8178	<e1>lithics</e1> origin <e2>mountain_ranges</e2>
+8179	<e1>analyzer</e1> core identifies paths using <e2>method</e2>
+8180	<e1>narrative</e1> telling <e2>history</e2>
+8181	<e1>attributes</e1> inherited <e2>children</e2>
+8182	<e1>pollen</e1> <e2>basket</e2>
+8183	<e1>nurse</e1> grabs <e2>arm</e2>
+8184	<e1>person</e1> created <e2>content</e2>
+8185	<e1>mushroom</e1> found <e2>mass</e2>
+8186	<e1>squad</e1> <e2>beaters</e2>
+8187	<e1>potatoes</e1> placed <e2>basket</e2>
+8188	<e1>the</e1> building engineer <e2>structural</e2>
+8189	<e1>thesis</e1> asserted <e2>book</e2>
+8190	<e1>crew</e1> assembles pieces <e2>breast</e2>
+8191	<e1>Rain</e1> caused <e2>cancellation</e2>
+8192	<e1>society</e1> <e2>trends</e2>
+8193	<e1>roundtables</e1> that organised <e2>keywords</e2>
+8194	<e1>website</e1> publishes <e2>articles</e2>
+8195	<e1>theory</e1> addressed fiction <e2>science_fiction</e2>
+8196	<e1>clustering</e1> resulted <e2>clusters</e2>
+8197	<e1>cherry</e1> <e2>wine</e2>
+8198	<e1>song</e1> entered <e2>contest</e2>
+8199	<e1>dollars</e1> invested <e2>trusts</e2>
+8200	<e1>floppies</e1> shipped pre-formatted <e2>factory</e2>
+8201	<e1>wall</e1> <e2>store</e2>
+8202	<e1>body</e1> <e2>bin</e2>
+8203	<e1>congressman</e1> ran <e2>party_ticket</e2>
+8204	<e1>sound</e1> made <e2>viper</e2>
+8205	<e1>containers</e1> fell <e2>dam</e2>
+8206	<e1>lobe</e1> <e2>pancreas</e2>
+8207	<e1>elephant</e1> catches <e2>toes</e2>
+8208	<e1>bottle</e1> have <e2>marbles</e2>
+8209	<e1>staff</e1> <e2>employees</e2>
+8210	<e1>order</e1> <e2>friars</e2>
+8211	<e1>nails</e1> <e2>hand</e2>
+8212	<e1>oil</e1> extracted abyssinica Belenzian <e2>seed</e2>
+8213	<e1>samples</e1> inserted <e2>beaker</e2>
+8214	<e1>brother</e1> show punching <e2>gloves</e2>
+8215	<e1>cane</e1> <e2>sugar</e2>
+8216	<e1>bottle</e1> <e2>soda</e2>
+8217	<e1>money</e1> <e2>jar</e2>
+8218	<e1>banner</e1> <e2>knights</e2>
+8219	<e1>crash</e1> caused <e2>attack</e2>
+8220	<e1>criticism</e1> directed <e2>media_coverage</e2>
+8221	<e1>wine</e1> <e2>jeroboam</e2>
+8222	<e1>work</e1> started <e2>end</e2>
+8223	<e1>Debate</e1> flourishes <e2>roles</e2>
+8224	<e1>Conditions</e1> criticised <e2>report</e2>
+8225	<e1>animals</e1> <e2>farm</e2>
+8226	<e1>sound</e1> captures <e2>combination</e2>
+8227	<e1>coin</e1> enclosed <e2>case</e2>
+8228	<e1>parade</e1> <e2>penguins</e2>
+8229	<e1>ethanol</e1> <e2>factories</e2>
+8230	<e1>drilling</e1> threatens public <e2>chemicals</e2>
+8231	<e1>information</e1> came <e2>press_release</e2>
+8232	<e1>chain</e1> <e2>islands</e2>
+8233	<e1>investigations</e1> provided <e2>evidence</e2>
+8234	<e1>damage</e1> caused <e2>misuse</e2>
+8235	<e1>fruit</e1> <e2>seeds</e2>
+8236	<e1>enjoyment</e1> get <e2>programming</e2>
+8237	<e1>technique</e1> used <e2>combination</e2>
+8238	<e1>bones</e1> <e2>foot</e2>
+8239	<e1>migrations</e1> cause <e2>deprivation</e2>
+8240	<e1>accident</e1> due <e2>impact</e2>
+8241	<e1>aria</e1> <e2>composer</e2>
+8242	<e1>contents</e1> dissolved <e2>carafe</e2>
+8243	<e1>stem</e1> house <e2>tree</e2>
+8244	<e1>time</e1> <e2>machine</e2>
+8245	<e1>production</e1> <e2>playwright</e2>
+8246	<e1>philosopher</e1> <e2>writings</e2>
+8247	<e1>tableau</e1> placed <e2>room</e2>
+8248	<e1>strings</e1> <e2>device</e2>
+8249	<e1>cases</e1> <e2>term</e2>
+8250	<e1>mix</e1> poured <e2>pans</e2>
+8251	<e1>lungs</e1> <e2>ferrets</e2>
+8252	<e1>gerbil</e1> runs <e2>threat</e2>
+8253	<e1>airstrike</e1> resulted <e2>explosions</e2>
+8254	<e1>keel</e1> acts backbone <e2>ship</e2>
+8255	<e1>Barrages</e1> make use <e2>energy</e2>
+8256	<e1>protocol</e1> <e2>implementation</e2>
+8257	<e1>conflict</e1> caused <e2>wastewater</e2>
+8258	<e1>report</e1> forecasts <e2>commission</e2>
+8259	<e1>car</e1> achieved using <e2>engine</e2>
+8260	<e1>driver</e1> <e2>keys</e2>
+8261	<e1>book</e1> takes <e2>phases</e2>
+8262	<e1>spam</e1> sent <e2>clients</e2>
+8263	<e1>plum</e1> <e2>syrup</e2>
+8264	<e1>news</e1> broke <e2>statement</e2>
+8265	<e1>damage</e1> caused <e2>tornado</e2>
+8266	<e1>friend</e1> ran <e2>surfer</e2>
+8267	<e1>song</e1> criticizes <e2>hypocrisy</e2>
+8268	<e1>horse</e1> <e2>hoof</e2>
+8269	<e1>downturn</e1> made frugal <e2>people</e2>
+8270	<e1>motives</e1> enter <e2>trial</e2>
+8271	<e1>compeers</e1> <e2>profession</e2>
+8272	<e1>citizen</e1> landed <e2>battles</e2>
+8273	<e1>topics</e1> related <e2>song</e2>
+8274	<e1>rookery</e1> <e2>seals</e2>
+8275	<e1>novel</e1> <e2>forces</e2>
+8276	<e1>car</e1> went <e2>river</e2>
+8277	<e1>news</e1> relay resolved <e2>rights_issues</e2>
+8278	<e1>team</e1> breaks open door <e2>ram</e2>
+8279	<e1>builder</e1> mausoleums <e2>cenotaphs</e2>
+8280	<e1>song</e1> became <e2>band</e2>
+8281	<e1>head</e1> <e2>political_party</e2>
+8282	<e1>leaves</e1> blew <e2>street</e2>
+8283	<e1>book</e1> <e2>catalogues</e2>
+8284	<e1>man</e1> cured <e2>water</e2>
+8285	<e1>story</e1> alleging <e2>existence</e2>
+8286	<e1>brain</e1> <e2>jar</e2>
+8287	<e1>stand</e1> <e2>flamingos</e2>
+8288	<e1>hair_loss</e1> causes caused <e2>stress</e2>
+8289	<e1>nation</e1> thrown <e2>mourning</e2>
+8290	<e1>film</e1> revolves <e2>cadaver</e2>
+8291	<e1>litter</e1> changed <e2>litter_box</e2>
+8292	<e1>news</e1> welcome reached <e2>agreement</e2>
+8293	<e1>stem</e1> <e2>plant</e2>
+8294	<e1>grandstand</e1> completes <e2>concourse</e2>
+8295	<e1>spreads</e1> <e2>book</e2>
+8296	<e1>heroes</e1> <e2>movies</e2>
+8297	<e1>petition</e1> delivered <e2>governor</e2>
+8298	<e1>team</e1> going <e2>jungle</e2>
+8299	<e1>staff</e1> approached <e2>people</e2>
+8300	<e1>grandfather</e1> reveals telling <e2>story</e2>
+8301	<e1>running</e1> <e2>shoes</e2>
+8302	<e1>pilot</e1> <e2>kit</e2>
+8303	<e1>church</e1> bottom parishioners <e2>steps</e2>
+8304	<e1>activation</e1> done <e2>source</e2>
+8305	<e1>labor</e1> put <e2>building</e2>
+8306	<e1>report</e1> read <e2>agreement</e2>
+8307	<e1>heart</e1> created <e2>artist</e2>
+8308	<e1>leather</e1> <e2>craftsman</e2>
+8309	<e1>article</e1> explains <e2>difficulties</e2>
+8310	<e1>writer</e1> created Me <e2>series</e2>
+8311	<e1>cartload</e1> <e2>firewood</e2>
+8312	<e1>colors</e1> caused <e2>dispersion</e2>
+8313	<e1>discussion</e1> focusing issues <e2>violence</e2>
+8314	<e1>handset</e1> <e2>manufacturer</e2>
+8315	<e1>position</e1> defined <e2>canon_law</e2>
+8316	<e1>clutch</e1> <e2>conferences</e2>
+8317	<e1>photo</e1> <e2>frame</e2>
+8318	<e1>finger</e1> found <e2>can</e2>
+8319	<e1>shipments</e1> arrived <e2>stock</e2>
+8320	<e1>doctor</e1> tells using <e2>sphygmomanometer</e2>
+8321	<e1>wheelchairs</e1> donated <e2>people</e2>
+8322	<e1>troupe</e1> <e2>dancers</e2>
+8323	<e1>citizen</e1> member <e2>corporation</e2>
+8324	<e1>hostname</e1> sent <e2>server</e2>
+8325	<e1>shell</e1> encloses <e2>rod</e2>
+8326	<e1>meeting</e1> started <e2>hour</e2>
+8327	<e1>love</e1> themes reflected <e2>sculpture</e2>
+8328	<e1>articles</e1> identified topic <e2>promotion</e2>
+8329	<e1>meeting</e1> subject <e2>trade</e2>
+8330	<e1>poem</e1> written <e2>worker</e2>
+8331	<e1>phalanx</e1> <e2>lawyers</e2>
+8332	<e1>drama_series</e1> <e2>team</e2>
+8333	<e1>liberties</e1> set <e2>laws</e2>
+8334	<e1>depression</e1> battling <e2>unemployment</e2>
+8335	<e1>huddle</e1> <e2>tents</e2>
+8336	<e1>Stone</e1> <e2>grinding</e2>
+8337	<e1>coffin</e1> carried <e2>funeral</e2>
+8338	<e1>controversy</e1> marred <e2>tickets</e2>
+8339	<e1>excursions</e1> Grotto sailed <e2>harbour</e2>
+8340	<e1>coffee</e1> size <e2>cup</e2>
+8341	<e1>document</e1> looks <e2>diversity</e2>
+8342	<e1>opening</e1> <e2>cask</e2>
+8343	<e1>family</e1> Bazaar took <e2>taxi</e2>
+8344	<e1>song</e1> moves <e2>MP_player</e2>
+8345	<e1>body</e1> found <e2>cart</e2>
+8346	<e1>toy</e1> filled <e2>trash</e2>
+8347	<e1>transport</e1> <e2>mechanism</e2>
+8348	<e1>souffle</e1> <e2>clouds</e2>
+8349	<e1>firm</e1> <e2>accountants</e2>
+8350	<e1>Bone</e1> built types <e2>cell</e2>
+8351	<e1>money</e1> stored <e2>envelopes</e2>
+8352	<e1>cluster</e1> <e2>computers</e2>
+8353	<e1>question</e1> raised <e2>announcement</e2>
+8354	<e1>Relationships</e1> depicted <e2>series</e2>
+8355	<e1>fuel</e1> delivered <e2>bunker</e2>
+8356	<e1>phagocytes</e1> targeted <e2>nanoparticles</e2>
+8357	<e1>collision</e1> resulted <e2>crashes</e2>
+8358	<e1>electricians</e1> use <e2>ohmmeters</e2>
+8359	<e1>horde</e1> <e2>men</e2>
+8360	<e1>earphones</e1> have <e2>cord</e2>
+8361	<e1>pain</e1> caused stresses <e2>strains</e2>
+8362	<e1>yeast</e1> ingredient making <e2>beer</e2>
+8363	<e1>boat</e1> sailed <e2>harbour</e2>
+8364	<e1>player</e1> shortens length <e2>string</e2>
+8365	<e1>anecdotes</e1> gathered <e2>workers</e2>
+8366	<e1>movie</e1> featured <e2>sheep</e2>
+8367	<e1>brains</e1> removed <e2>dish</e2>
+8368	<e1>storm</e1> moving <e2>town</e2>
+8369	<e1>stories</e1> featured <e2>book</e2>
+8370	<e1>committee</e1> assists <e2>commission</e2>
+8371	<e1>ribs</e1> reinforced tips sewn fabric <e2>umbrella</e2>
+8372	<e1>blazes</e1> denote <e2>trail</e2>
+8373	<e1>damage</e1> caused <e2>bullet</e2>
+8374	<e1>musician</e1> written <e2>album</e2>
+8375	<e1>files</e1> importing <e2>software</e2>
+8376	<e1>swans</e1> migrated <e2>regions</e2>
+8377	<e1>Neuralgia</e1> cause <e2>headache</e2>
+8378	<e1>writer</e1> pencilled <e2>storyboard</e2>
+8379	<e1>Bibliometrics</e1> tool <e2>research_evaluation</e2>
+8380	<e1>concerns</e1> are <e2>cases</e2>
+8381	<e1>brick</e1> <e2>mason</e2>
+8382	<e1>damage</e1> distribution caused <e2>earthquake</e2>
+8383	<e1>feet</e1> sunk <e2>floor</e2>
+8384	<e1>aunt</e1> put suffering <e2>care</e2>
+8385	<e1>turtles</e1> come <e2>shells</e2>
+8386	<e1>dishwasher</e1> has <e2>controls</e2>
+8387	<e1>student</e1> came <e2>solution</e2>
+8388	<e1>arm</e1> <e2>patient</e2>
+8389	<e1>first_part</e1> gives <e2>techniques</e2>
+8390	<e1>flower</e1> made spool knitted loom <e2>cord</e2>
+8391	<e1>evacuation</e1> return <e2>war</e2>
+8392	<e1>pencil</e1> <e2>point</e2>
+8393	<e1>cadets</e1> departed <e2>training</e2>
+8394	<e1>chunks</e1> fell <e2>airplane</e2>
+8395	<e1>strings</e1> <e2>cello</e2>
+8396	<e1>text</e1> handles all <e2>material</e2>
+8397	<e1>couple</e1> embraced next vehicles piled <e2>waters</e2>
+8398	<e1>Air</e1> blown <e2>mouthpiece</e2>
+8399	<e1>associations</e1> turning <e2>receiverships</e2>
+8400	<e1>crisis</e1> first <e2>boss</e2>
+8401	<e1>scholarship</e1> awarded <e2>student</e2>
+8402	<e1>misinterpretation</e1> caused <e2>word</e2>
+8403	<e1>damage</e1> caused <e2>bombing</e2>
+8404	<e1>death</e1> caused <e2>tsunami</e2>
+8405	<e1>satisfaction</e1> get <e2>playing</e2>
+8406	<e1>backpage</e1> <e2>news_paper</e2>
+8407	<e1>team</e1> assembled <e2>team</e2>
+8408	<e1>Potato</e1> <e2>starch</e2>
+8409	<e1>leakage</e1> caused <e2>person</e2>
+8410	<e1>investments</e1> takes <e2>century</e2>
+8411	<e1>particle</e1> <e2>bath</e2>
+8412	<e1>bottle</e1> <e2>water</e2>
+8413	<e1>lane</e1> ignore <e2>road</e2>
+8414	<e1>industries</e1> exported <e2>economies</e2>
+8415	<e1>congregation</e1> <e2>plovers</e2>
+8416	<e1>sensor</e1> has coil <e2>winding</e2>
+8417	<e1>microcracks</e1> cause fractures <e2>stress</e2>
+8418	<e1>body</e1> placed <e2>coffin</e2>
+8419	<e1>crock_pot</e1> had <e2>hams</e2>
+8420	<e1>paper</e1> narrated <e2>discovery</e2>
+8421	<e1>lane</e1> bus <e2>road</e2>
+8422	<e1>rouleau</e1> <e2>cells</e2>
+8423	<e1>mobile_phone</e1> dropped <e2>toilet</e2>
+8424	<e1>husband</e1> copes using <e2>leg</e2>
+8425	<e1>search</e1> started <e2>scales</e2>
+8426	<e1>book</e1> reviewed <e2>writer</e2>
+8427	<e1>handgrip</e1> <e2>micrometer</e2>
+8428	<e1>creations</e1> <e2>chef</e2>
+8429	<e1>cylinder</e1> <e2>engine</e2>
+8430	<e1>squirrel</e1> runs <e2>group</e2>
+8431	<e1>shoe</e1> <e2>laces</e2>
+8432	<e1>land</e1> uprises <e2>river</e2>
+8433	<e1>movement</e1> <e2>moles</e2>
+8434	<e1>basis</e1> consisting <e2>population</e2>
+8435	<e1>aunt</e1> fell <e2>health</e2>
+8436	<e1>hand</e1> formed rock paper <e2>gestures</e2>
+8437	<e1>plane_crash</e1> event <e2>novel</e2>
+8438	<e1>system</e1> built <e2>modules</e2>
+8439	<e1>fear</e1> caused <e2>stab</e2>
+8440	<e1>reforms</e1> majority had do <e2>changes</e2>
+8441	<e1>commentator</e1> <e2>obscenity</e2>
+8442	<e1>spindle</e1> <e2>areometer</e2>
+8443	<e1>chapel</e1> <e2>manor_house</e2>
+8444	<e1>oven</e1> has <e2>plug</e2>
+8445	<e1>bag</e1> contained <e2>secure_locker</e2>
+8446	<e1>porch</e1> drunkenness built Hatshepsut <e2>queen</e2>
+8447	<e1>topic</e1> came <e2>discussion</e2>
+8448	<e1>lychee</e1> stirs <e2>note</e2>
+8449	<e1>answer</e1> popped <e2>riddle</e2>
+8450	<e1>scum</e1> <e2>stripes</e2>
+8451	<e1>dance</e1> <e2>company</e2>
+8452	<e1>brotherhood</e1> followers forgotten <e2>kings</e2>
+8453	<e1>prisoner</e1> escaped <e2>detention</e2>
+8454	<e1>grasshoppers</e1> used force <e2>burrow</e2>
+8455	<e1>suffering</e1> caused <e2>embargo</e2>
+8456	<e1>medallion</e1> placed <e2>pouch</e2>
+8457	<e1>needles</e1> inserted <e2>packs</e2>
+8458	<e1>sculpture</e1> carved small made <e2>craftsmen</e2>
+8459	<e1>attacker</e1> killed <e2>instrument</e2>
+8460	<e1>Plants</e1> brought <e2>rooms</e2>
+8461	<e1>company</e1> mocked <e2>version</e2>
+8462	<e1>students</e1> decorated <e2>drawing</e2>
+8463	<e1>offers</e1> placed <e2>catalog</e2>
+8464	<e1>heart</e1> enclosed <e2>casket</e2>
+8465	<e1>body</e1> hidden <e2>bin</e2>
+8466	<e1>export</e1> <e2>company</e2>
+8467	<e1>hyperlink</e1> inserted <e2>field</e2>
+8468	<e1>aid</e1> flowing <e2>areas</e2>
+8469	<e1>criminal</e1> got out <e2>jail</e2>
+8470	<e1>arm</e1> <e2>government</e2>
+8471	<e1>nuclear_energy</e1> causes <e2>pollution</e2>
+8472	<e1>windshield</e1> <e2>cockpit</e2>
+8473	<e1>anger</e1> caused <e2>abuse</e2>
+8474	<e1>paper</e1> <e2>desk_drawer</e2>
+8475	<e1>entrance</e1> <e2>east</e2>
+8476	<e1>debt</e1> cause <e2>stress</e2>
+8477	<e1>hall</e1> has vineyard-style arrangement <e2>seating</e2>
+8478	<e1>terrorists</e1> 2007 broke <e2>jail</e2>
+8479	<e1>advertising</e1> use inform available customers <e2>selections</e2>
+8480	<e1>leaflet</e1> informing <e2>qualities</e2>
+8481	<e1>soldiers</e1> arrived <e2>camp</e2>
+8482	<e1>haul</e1> <e2>fish</e2>
+8483	<e1>quilts</e1> featured Pettway <e2>cousin</e2>
+8484	<e1>chivalry</e1> nobility <e2>warrior-knights</e2>
+8485	<e1>comment</e1> gained <e2>mayor</e2>
+8486	<e1>strike</e1> resulted <e2>death</e2>
+8487	<e1>rig</e1> <e2>drilling</e2>
+8488	<e1>album</e1> completed <e2>singer</e2>
+8489	<e1>fear</e1> caused <e2>power</e2>
+8490	<e1>money</e1> locked <e2>safe</e2>
+8491	<e1>Students</e1> planted <e2>crops</e2>
+8492	<e1>jam</e1> <e2>trucks</e2>
+8493	<e1>Tides</e1> caused <e2>gravitational_pull</e2>
+8494	<e1>streaks</e1> caused <e2>particles</e2>
+8495	<e1>Changes</e1> discussed <e2>sub-committee</e2>
+8496	<e1>Animations</e1> exported <e2>version</e2>
+8497	<e1>reflux</e1> <e2>mouth</e2>
+8498	<e1>dust</e1> set <e2>alarm</e2>
+8499	<e1>photoreceptors</e1> <e2>retina</e2>
+8500	<e1>bacteria</e1> killing ideal responsible sleeping <e2>sickness</e2>
+8501	<e1>types</e1> introduced <e2>sections</e2>
+8502	<e1>gun</e1> <e2>box</e2>
+8503	<e1>pain</e1> <e2>indigestion</e2>
+8504	<e1>word</e1> derived cause <e2>noun</e2>
+8505	<e1>remote</e1> <e2>desk</e2>
+8506	<e1>cells</e1> migrated <e2>tissues</e2>
+8507	<e1>drove</e1> <e2>hogs</e2>
+8508	<e1>Borrowers</e1> fall <e2>troubles</e2>
+8509	<e1>joy</e1> get <e2>eating</e2>
+8510	<e1>men</e1> spent afternoon <e2>store</e2>
+8511	<e1>farmer</e1> ploughed <e2>tractor</e2>
+8512	<e1>Stroke</e1> one causes <e2>death</e2>
+8513	<e1>praise</e1> <e2>classics</e2>
+8514	<e1>newsletter</e1> published keep families informed <e2>happenings</e2>
+8515	<e1>management</e1> <e2>firm</e2>
+8516	<e1>machine</e1> tells <e2>dictators</e2>
+8517	<e1>plant</e1> grows <e2>storage_unit</e2>
+8518	<e1>poppy</e1> source <e2>codeine</e2>
+8519	<e1>defendant</e1> swore <e2>affidavit</e2>
+8520	<e1>flicker</e1> <e2>candles</e2>
+8521	<e1>pain</e1> caused <e2>torment</e2>
+8522	<e1>director</e1> <e2>company</e2>
+8523	<e1>discomfort</e1> <e2>braces</e2>
+8524	<e1>playwright</e1> creates tension using <e2>directions</e2>
+8525	<e1>community</e1> eluded <e2>positions</e2>
+8526	<e1>flour</e1> poured <e2>sacks</e2>
+8527	<e1>locomotive</e1> <e2>train</e2>
+8528	<e1>body</e1> <e2>suitcase</e2>
+8529	<e1>boy</e1> took put <e2>cradle</e2>
+8530	<e1>factory</e1> product <e2>glass</e2>
+8531	<e1>ear</e1> <e2>canal</e2>
+8532	<e1>work</e1> shown <e2>galleries</e2>
+8533	<e1>property</e1> <e2>developer</e2>
+8534	<e1>distraction</e1> caused <e2>incident</e2>
+8535	<e1>light</e1> radiating <e2>friend</e2>
+8536	<e1>entrapments</e1> Four resulted <e2>suffocation</e2>
+8537	<e1>glut</e1> <e2>parrs</e2>
+8538	<e1>crush</e1> <e2>fans</e2>
+8539	<e1>members</e1> one <e2>gangs</e2>
+8540	<e1>signal</e1> departs <e2>sine</e2>
+8541	<e1>pie</e1> <e2>factory</e2>
+8542	<e1>Storms</e1> lead <e2>losses</e2>
+8543	<e1>app</e1> <e2>newspaper</e2>
+8544	<e1>laws</e1> applying <e2>war</e2>
+8545	<e1>drivers</e1> fixed hole <e2>toothpick</e2>
+8546	<e1>cross</e1> removed <e2>site</e2>
+8547	<e1>assembly</e1> attaches <e2>cover</e2>
+8548	<e1>plantation</e1> <e2>beans</e2>
+8549	<e1>seat</e1> widened tub <e2>cockpit</e2>
+8550	<e1>line</e1> starts <e2>aisle</e2>
+8551	<e1>lighting</e1> much rendering <e2>works</e2>
+8552	<e1>medicine</e1> added <e2>food</e2>
+8553	<e1>Discussion</e1> took <e2>function</e2>
+8554	<e1>bottle</e1> wine <e2>carton_box</e2>
+8555	<e1>fish</e1> <e2>oil</e2>
+8556	<e1>fume</e1> cause <e2>irritation</e2>
+8557	<e1>flame</e1> uprises <e2>pyre</e2>
+8558	<e1>treadmill</e1> installed <e2>space_station</e2>
+8559	<e1>ghostwriters</e1> write <e2>books</e2>
+8560	<e1>geometry</e1> generated input SMILES <e2>string</e2>
+8561	<e1>pistil</e1> made <e2>carpels</e2>
+8562	<e1>girl</e1> went <e2>boy</e2>
+8563	<e1>document</e1> sets <e2>facts</e2>
+8564	<e1>document</e1> established acceptable <e2>levels</e2>
+8565	<e1>concern</e1> voters <e2>economy</e2>
+8566	<e1>artist</e1> put milk filled <e2>can</e2>
+8567	<e1>guy</e1> hid <e2>map</e2>
+8568	<e1>seniors</e1> arrived <e2>leadership_positions</e2>
+8569	<e1>answer</e1> grows <e2>trend</e2>
+8570	<e1>volery</e1> <e2>birds</e2>
+8571	<e1>areas</e1> have do <e2>composition</e2>
+8572	<e1>kindle</e1> <e2>rabbits</e2>
+8573	<e1>investigation</e1> had do <e2>allegations</e2>
+8574	<e1>nose</e1> <e2>man</e2>
+8575	<e1>shuttles</e1> journeyed <e2>space</e2>
+8576	<e1>valuables</e1> Jewelry locked closet <e2>safe</e2>
+8577	<e1>Cadre</e1> <e2>groups</e2>
+8578	<e1>audience</e1> <e2>kids</e2>
+8579	<e1>programme</e1> consider subject <e2>happiness</e2>
+8580	<e1>memo</e1> gives details <e2>lineup</e2>
+8581	<e1>study</e1> break <e2>mechanisms</e2>
+8582	<e1>children</e1> participated <e2>competition</e2>
+8583	<e1>congress</e1> <e2>provinces</e2>
+8584	<e1>sword</e1> <e2>blade</e2>
+8585	<e1>range</e1> illustrated <e2>diagram</e2>
+8586	<e1>dashboard</e1> gauges number <e2>speedometer</e2>
+8587	<e1>text</e1> <e2>encyclopedia</e2>
+8588	<e1>information</e1> containing 100,000 <e2>employees</e2>
+8589	<e1>forum</e1> researchers specialized <e2>eighteenth_century</e2>
+8590	<e1>brotherhood</e1> <e2>bruisers</e2>
+8591	<e1>devastation</e1> caused <e2>waves</e2>
+8592	<e1>Noise_regulations</e1> come <e2>force</e2>
+8593	<e1>design</e1> <e2>architects</e2>
+8594	<e1>oil</e1> comes <e2>runoff</e2>
+8595	<e1>design</e1> mentioned <e2>student</e2>
+8596	<e1>Cancer</e1> growth cells causes <e2>illness</e2>
+8597	<e1>drama</e1> <e2>aftermath</e2>
+8598	<e1>server</e1> put <e2>cabinet</e2>
+8599	<e1>Jeans</e1> have <e2>topstitching</e2>
+8600	<e1>legion</e1> <e2>infantrymen</e2>
+8601	<e1>company</e1> established <e2>fireman</e2>
+8602	<e1>fire</e1> caught <e2>collision</e2>
+8603	<e1>joy</e1> get <e2>animals</e2>
+8604	<e1>essay</e1> surveying <e2>literature</e2>
+8605	<e1>mainmast</e1> <e2>bark</e2>
+8606	<e1>interview</e1> assigned <e2>next_show</e2>
+8607	<e1>skills</e1> developed <e2>surgery</e2>
+8608	<e1>satisfaction</e1> tons get <e2>watching</e2>
+8609	<e1>dryer</e1> has heater <e2>wall</e2>
+8610	<e1>immigrant</e1> arrives boat <e2>port</e2>
+8611	<e1>page</e1> explains <e2>terms</e2>
+8612	<e1>taxes</e1> owed <e2>years</e2>
+8613	<e1>bottle</e1> <e2>water</e2>
+8614	<e1>list</e1> prepared basis <e2>records</e2>
+8615	<e1>girl</e1> journeyed <e2>danger</e2>
+8616	<e1>handles</e1> <e2>hand_brake</e2>
+8617	<e1>drug</e1> leaves <e2>brain</e2>
+8618	<e1>phone</e1> moved <e2>prototype_stage</e2>
+8619	<e1>files</e1> going <e2>folder</e2>
+8620	<e1>gas_centrifuge</e1> born <e2>camp</e2>
+8621	<e1>pollution</e1> caused <e2>shipwreck</e2>
+8622	<e1>nose</e1> <e2>surfboard</e2>
+8623	<e1>Inhalation</e1> fumes produces <e2>irritation</e2>
+8624	<e1>corridors</e1> <e2>hospital</e2>
+8625	<e1>seminar</e1> gave account <e2>system</e2>
+8626	<e1>film</e1> departed <e2>fare</e2>
+8627	<e1>hailstorm</e1> <e2>bullets</e2>
+8628	<e1>symposium</e1> assembled <e2>physicians</e2>
+8629	<e1>regulation</e1> governing <e2>access</e2>
+8630	<e1>ingredients</e1> put <e2>mixing_ball</e2>
+8631	<e1>methane</e1> flammable foul-smelling deposits migrated <e2>wells</e2>
+8632	<e1>prostate</e1> composed <e2>glands</e2>
+8633	<e1>pollution</e1> causes problems <e2>smog</e2>
+8634	<e1>students</e1> encourages read <e2>texts</e2>
+8635	<e1>heroes</e1> replace <e2>literature</e2>
+8636	<e1>suitcase</e1> <e2>cannabis</e2>
+8637	<e1>batter</e1> used <e2>balls</e2>
+8638	<e1>bed</e1> <e2>oysters</e2>
+8639	<e1>topics</e1> placed <e2>categories</e2>
+8640	<e1>ice</e1> slab broke <e2>shore</e2>
+8641	<e1>noise</e1> caused <e2>powertrain</e2>
+8642	<e1>factory</e1> produced <e2>blouses</e2>
+8643	<e1>Lymphoeytes</e1> drained <e2>lymphatics</e2>
+8644	<e1>kitchen</e1> prepared <e2>meal</e2>
+8645	<e1>files</e1> linked <e2>bust</e2>
+8646	<e1>body</e1> comprised <e2>phrase</e2>
+8647	<e1>diamond</e1> <e2>necklace</e2>
+8648	<e1>pandemic</e1> caused spread <e2>infection</e2>
+8649	<e1>player</e1> <e2>orchestra</e2>
+8650	<e1>paper</e1> presents <e2>review</e2>
+8651	<e1>journal</e1> takes examining <e2>history</e2>
+8652	<e1>Heating</e1> <e2>wood</e2>
+8653	<e1>evidence</e1> arose <e2>results</e2>
+8654	<e1>data</e1> stored <e2>tables</e2>
+8655	<e1>Wind</e1> cause <e2>weathering</e2>
+8656	<e1>syndicate</e1> <e2>investors</e2>
+8657	<e1>motifs</e1> use evident <e2>ewer</e2>
+8658	<e1>display</e1> showing <e2>status</e2>
+8659	<e1>bacteria</e1> oil cause <e2>acne</e2>
+8660	<e1>chapter</e1> relates <e2>attempts</e2>
+8661	<e1>character</e1> devised <e2>producers</e2>
+8662	<e1>benchmarking</e1> range <e2>sources</e2>
+8663	<e1>hunter</e1> ran <e2>cave</e2>
+8664	<e1>barrels</e1> hand-made <e2>coopers</e2>
+8665	<e1>buzzard</e1> uses <e2>claws</e2>
+8666	<e1>car</e1> has <e2>clutch</e2>
+8667	<e1>strings</e1> <e2>guitar</e2>
+8668	<e1>fistful</e1> <e2>expectations</e2>
+8669	<e1>cache</e1> <e2>goods</e2>
+8670	<e1>hardwire</e1> put <e2>brain</e2>
+8671	<e1>machineguns</e1> drab <e2>box</e2>
+8672	<e1>fairy_tale</e1> describes <e2>giant</e2>
+8673	<e1>shops</e1> produced <e2>clocks</e2>
+8674	<e1>table</e1> serves example <e2>data</e2>
+8675	<e1>roof</e1> <e2>building</e2>
+8676	<e1>law</e1> covering <e2>registration</e2>
+8677	<e1>cheek</e1> <e2>bone</e2>
+8678	<e1>bar</e1> constructed <e2>steel</e2>
+8679	<e1>manor</e1> included <e2>smallholdings</e2>
+8680	<e1>index</e1> generated using <e2>package</e2>
+8681	<e1>fear</e1> working <e2>darkness</e2>
+8682	<e1>tract</e1> wrote <e2>liturgical_practices</e2>
+8683	<e1>camp</e1> <e2>outsiders</e2>
+8684	<e1>man</e1> <e2>thumb</e2>
+8685	<e1>data</e1> <e2>warehouse</e2>
+8686	<e1>ghost-ship</e1> <e2>fleet</e2>
+8687	<e1>growth</e1> percent <e2>area</e2>
+8688	<e1>name</e1> Sedna <e2>goddess</e2>
+8689	<e1>electronic_equipment</e1> <e2>cabinet</e2>
+8690	<e1>tsunami</e1> triggered spread <e2>earthquake</e2>
+8691	<e1>debate</e1> <e2>public_execution</e2>
+8692	<e1>switch</e1> <e2>light</e2>
+8693	<e1>tape_recorder</e1> <e2>cabinet</e2>
+8694	<e1>comedy_format</e1> showing <e2>sequences</e2>
+8695	<e1>pizza</e1> <e2>trash_bag</e2>
+8696	<e1>player</e1> <e2>orchestra</e2>
+8697	<e1>worker</e1> carrying <e2>plank</e2>
+8698	<e1>electrodes</e1> implanted <e2>brain</e2>
+8699	<e1>Mail</e1> delivered <e2>city</e2>
+8700	<e1>painter</e1> <e2>self-portrait</e2>
+8701	<e1>grove</e1> <e2>redwoods</e2>
+8702	<e1>hinge</e1> <e2>book</e2>
+8703	<e1>dowel</e1> <e2>groove</e2>
+8704	<e1>grain</e1> Cooking produced <e2>drink</e2>
+8705	<e1>agreements</e1> resulted <e2>diversion</e2>
+8706	<e1>atmospheric_chemistry</e1> addressed problems Examples include <e2>acid_rain</e2>
+8707	<e1>suitcase</e1> <e2>books</e2>
+8708	<e1>ulcer</e1> caused work <e2>stress</e2>
+8709	<e1>mother</e1> left <e2>land</e2>
+8710	<e1>studies</e1> migrating <e2>inquiry</e2>
+8711	<e1>notes</e1> make <e2>telephone_call</e2>
+8712	<e1>baboons</e1> formed <e2>parties</e2>
+8713	<e1>clutch</e1> <e2>mechanics</e2>
+8714	<e1>committee</e1> <e2>vultures</e2>
+8715	<e1>money</e1> <e2>chest</e2>
+8716	<e1>northeast</e1> source <e2>contention</e2>
+8717	<e1>bees</e1> produce <e2>honey</e2>
+8718	<e1>couple</e1> transferred <e2>accounts</e2>
+8719	<e1>recipe</e1> locked <e2>safe</e2>
+8720	<e1>Recessions</e1> caused <e2>excess_demand</e2>
+8721	<e1>contractors</e1> using <e2>entrance</e2>
+8722	<e1>guy</e1> thought <e2>story</e2>
+8723	<e1>Technicians</e1> prepared <e2>stage</e2>
+8724	<e1>boom</e1> front hinged mounting <e2>fitting</e2>
+8725	<e1>Questions</e1> <e2>aspects</e2>
+8726	<e1>tongue</e1> stuck <e2>canteen</e2>
+8727	<e1>male</e1> digs <e2>pit</e2>
+8728	<e1>milk</e1> carrying <e2>pail</e2>
+8729	<e1>audience</e1> <e2>readers</e2>
+8730	<e1>slot</e1> <e2>music_player</e2>
+8731	<e1>recession</e1> triggered <e2>collapse</e2>
+8732	<e1>punks</e1> chose <e2>objects</e2>
+8733	<e1>character</e1> Sinbad <e2>literature</e2>
+8734	<e1>bourbon</e1> removed <e2>barrel</e2>
+8735	<e1>heads</e1> <e2>ferrets</e2>
+8736	<e1>Lesions</e1> caused <e2>leg_weakness</e2>
+8737	<e1>researcher</e1> approached <e2>categories</e2>
+8738	<e1>money</e1> hidden <e2>bag</e2>
+8739	<e1>suffering</e1> caused <e2>bomb</e2>
+8740	<e1>death</e1> caused <e2>cancellation</e2>
+8741	<e1>muster</e1> <e2>peacocks</e2>
+8742	<e1>child</e1> threw <e2>outlet</e2>
+8743	<e1>powder</e1> poured <e2>canteen_cup</e2>
+8744	<e1>rapper</e1> completed <e2>song</e2>
+8745	<e1>problems</e1> ensued <e2>policy</e2>
+8746	<e1>arm</e1> <e2>cross</e2>
+8747	<e1>moisture</e1> runs the <e2>stack</e2>
+8748	<e1>bacteria</e1> cause <e2>pneumonia</e2>
+8749	<e1>show</e1> pulled <e2>slot</e2>
+8750	<e1>lures</e1> Wellness seniors data <e2>a</e2>
+8751	<e1>plague</e1> biting <e2>insects</e2>
+8752	<e1>incoming_water</e1> caused <e2>stain</e2>
+8753	<e1>side</e1> accommodated <e2>station</e2>
+8754	<e1>bleeding</e1> caused <e2>injury</e2>
+8755	<e1>team</e1> travelling <e2>territory</e2>
+8756	<e1>photos</e1> done <e2>friend</e2>
+8757	<e1>flour</e1> poured mixing <e2>bowl</e2>
+8758	<e1>specimens</e1> dump <e2>jar</e2>
+8759	<e1>companionship</e1> <e2>teammates</e2>
+8760	<e1>water</e1> flowing <e2>lakes</e2>
+8761	<e1>insulin</e1> release <e2>pancreas</e2>
+8762	<e1>insulin</e1> extracted <e2>pancreases</e2>
+8763	<e1>child</e1> leaves <e2>basket</e2>
+8764	<e1>caterpillars</e1> caused <e2>disease</e2>
+8765	<e1>glass-blower</e1> blown different <e2>vase</e2>
+8766	<e1>hole</e1> caused <e2>missile</e2>
+8767	<e1>proposals</e1> outlined <e2>speech</e2>
+8768	<e1>films</e1> reap soil imaginations <e2>filmmakers</e2>
+8769	<e1>vaccine</e1> <e2>maker</e2>
+8770	<e1>cassette_tape</e1> <e2>box</e2>
+8771	<e1>crack</e1> <e2>humidor</e2>
+8772	<e1>complexity</e1> added <e2>mix</e2>
+8773	<e1>extended</e1> family family consisting parents child <e2>married</e2>
+8774	<e1>effect</e1> dramatic <e2>light</e2>
+8775	<e1>perturbations</e1> caused Prometheus <e2>moon</e2>
+8776	<e1>editor</e1> uses spreadsheet <e2>interface</e2>
+8777	<e1>ice_cream</e1> <e2>cup</e2>
+8778	<e1>computer</e1> <e2>screen</e2>
+8779	<e1>Diatoms</e1> have <e2>skeleton</e2>
+8780	<e1>medal</e1> contained velvet lined <e2>box</e2>
+8781	<e1>crisis</e1> caused <e2>jobless_rate</e2>
+8782	<e1>staff</e1> completed using <e2>tools</e2>
+8783	<e1>workers</e1> build become <e2>port</e2>
+8784	<e1>maid</e1> fell yesterd <e2>balcony</e2>
+8785	<e1>binder</e1> goes <e2>trials</e2>
+8786	<e1>activities</e1> target <e2>development</e2>
+8787	<e1>orange</e1> futures <e2>juice</e2>
+8788	<e1>books</e1> charted <e2>transformation</e2>
+8789	<e1>story</e1> portrays <e2>boy</e2>
+8790	<e1>server</e1> identifies exam using <e2>identifier</e2>
+8791	<e1>concrete</e1> poured stepped <e2>piers</e2>
+8792	<e1>soldiers</e1> dragged <e2>battles</e2>
+8793	<e1>mast</e1> section mounted <e2>ship</e2>
+8794	<e1>human</e1> lies down <e2>box</e2>
+8795	<e1>pride</e1> <e2>lions</e2>
+8796	<e1>bevy</e1> <e2>deer</e2>
+8797	<e1>theory</e1> caused sprout imaginations <e2>journalists</e2>
+8798	<e1>wolfpack</e1> <e2>submarines</e2>
+8799	<e1>quote</e1> <e2>email</e2>
+8800	<e1>array</e1> sent <e2>responder</e2>
+8801	<e1>person</e1> assists <e2>employee</e2>
+8802	<e1>cat</e1> <e2>paw</e2>
+8803	<e1>bench</e1> <e2>aldermen</e2>
+8804	<e1>biographer</e1> constructs personality <e2>minutiae</e2>
+8805	<e1>chains</e1> given total <e2>bags</e2>
+8806	<e1>gun</e1> locked <e2>safe</e2>
+8807	<e1>helve</e1> <e2>hammer</e2>
+8808	<e1>nails</e1> <e2>hand</e2>
+8809	<e1>porch</e1> <e2>stoics</e2>
+8810	<e1>grain</e1> <e2>ale</e2>
+8811	<e1>profiles</e1> used <e2>teachers</e2>
+8812	<e1>corruption</e1> triggered determined <e2>utilities</e2>
+8813	<e1>launcher</e1> receives <e2>system</e2>
+8814	<e1>essays</e1> collected <e2>book</e2>
+8815	<e1>water</e1> put <e2>well</e2>
+8816	<e1>pig</e1> <e2>crate</e2>
+8817	<e1>number</e1> <e2>mathematicians</e2>
+8818	<e1>world</e1> employs reminiscent <e2>animation</e2>
+8819	<e1>battalion</e1> part <e2>cavalry</e2>
+8820	<e1>pin</e1> <e2>wheel</e2>
+8821	<e1>ombudsman</e1> <e2>report</e2>
+8822	<e1>body</e1> <e2>elders</e2>
+8823	<e1>therapist</e1> found <e2>way</e2>
+8824	<e1>crush</e1> <e2>applications</e2>
+8825	<e1>baby</e1> brought <e2>home</e2>
+8826	<e1>evening</e1> centered topic <e2>courage</e2>
+8827	<e1>species</e1> spreading <e2>areas</e2>
+8828	<e1>Twisters</e1> fill <e2>creations</e2>
+8829	<e1>creatures</e1> caused <e2>scare</e2>
+8830	<e1>film</e1> reveals <e2>economy</e2>
+8831	<e1>gunnel</e1> rail <e2>boat</e2>
+8832	<e1>word</e1> descended <e2>root</e2>
+8833	<e1>pork_butt</e1> cooked <e2>crock_pot</e2>
+8834	<e1>paper</e1> constructed portion <e2>thesis</e2>
+8835	<e1>photographers</e1> use <e2>cameras</e2>
+8836	<e1>train</e1> <e2>airport</e2>
+8837	<e1>shark</e1> <e2>teeth</e2>
+8838	<e1>girls</e1> drank <e2>bottles</e2>
+8839	<e1>coven</e1> <e2>warlocks</e2>
+8840	<e1>capuchins</e1> made <e2>knives</e2>
+8841	<e1>ban</e1> caused <e2>debate</e2>
+8842	<e1>cowardice</e1> <e2>curs</e2>
+8843	<e1>latte</e1> <e2>glass</e2>
+8844	<e1>chapter</e1> focus <e2>impact</e2>
+8845	<e1>music</e1> documented <e2>lives</e2>
+8846	<e1>wheat</e1> exported <e2>countries</e2>
+8847	<e1>box</e1> contained tape-making <e2>system</e2>
+8848	<e1>report</e1> published giving summary <e2>activities</e2>
+8849	<e1>guests</e1> arrived <e2>wedding</e2>
+8850	<e1>needs</e1> approaching <e2>society</e2>
+8851	<e1>expansion</e1> achieving <e2>development</e2>
+8852	<e1>sand</e1> <e2>hourglass</e2>
+8853	<e1>name</e1> Mirumo derived <e2>series</e2>
+8854	<e1>belt</e1> <e2>asteroids</e2>
+8855	<e1>experience</e1> <e2>blend</e2>
+8856	<e1>chabazite</e1> contained <e2>multiple_U-tube</e2>
+8857	<e1>spill</e1> caused Zainab <e2>tanker</e2>
+8858	<e1>sunlight</e1> cause strain <e2>fatigue</e2>
+8859	<e1>damage</e1> caused <e2>collision</e2>
+8860	<e1>general</e1> placed <e2>role</e2>
+8861	<e1>statutes</e1> declare <e2>policy</e2>
+8862	<e1>disposes</e1> <e2>area</e2>
+8863	<e1>dopamine</e1> causes <e2>depression</e2>
+8864	<e1>kingdom</e1> comprises topographical <e2>areas</e2>
+8865	<e1>railing</e1> <e2>bridge</e2>
+8866	<e1>referee</e1> responsible enforcing <e2>game</e2>
+8867	<e1>squatters</e1> moved <e2>building</e2>
+8868	<e1>farm</e1> has <e2>greenhouses</e2>
+8869	<e1>clauses</e1> invented <e2>framers</e2>
+8870	<e1>compound</e1> placed <e2>tube</e2>
+8871	<e1>coterie</e1> <e2>editors</e2>
+8872	<e1>construction</e1> benefits <e2>builder</e2>
+8873	<e1>muscles</e1> back <e2>leg</e2>
+8874	<e1>project</e1> regulate <e2>standard</e2>
+8875	<e1>turbines</e1> generate <e2>electricity</e2>
+8876	<e1>pit</e1> <e2>snakes</e2>
+8877	<e1>ewes</e1> mated <e2>flock</e2>
+8878	<e1>clip</e1> Sentinels battle <e2>series</e2>
+8879	<e1>suffering</e1> caused <e2>exploitation</e2>
+8880	<e1>formalism</e1> development maps <e2>literature</e2>
+8881	<e1>body</e1> found decomposed Her <e2>drum</e2>
+8882	<e1>maize</e1> <e2>spirits</e2>
+8883	<e1>neighbour</e1> erected <e2>fence</e2>
+8884	<e1>mechanism</e1> composed <e2>magnet</e2>
+8885	<e1>riots</e1> triggered bashing <e2>verdict</e2>
+8886	<e1>drug</e1> release accelerate <e2>tablet</e2>
+8887	<e1>results</e1> documented <e2>films</e2>
+8888	<e1>quarrel</e1> <e2>purchase</e2>
+8889	<e1>cold</e1> <e2>germs</e2>
+8890	<e1>neologisms</e1> come <e2>literature</e2>
+8891	<e1>body</e1> found <e2>suitcase</e2>
+8892	<e1>program</e1> developed research experiences <e2>author</e2>
+8893	<e1>helicopters</e1> <e2>rotors</e2>
+8894	<e1>Responses</e1> obtained provosts <e2>presidents</e2>
+8895	<e1>story</e1> created <e2>students</e2>
+8896	<e1>bark</e1> composed <e2>phloem</e2>
+8897	<e1>descent</e1> <e2>woodpeckers</e2>
+8898	<e1>setup</e1> put <e2>chimney</e2>
+8899	<e1>Strawberry</e1> <e2>jam</e2>
+8900	<e1>bulletin</e1> informed <e2>project</e2>
+8901	<e1>book</e1> introduces <e2>geographical_theory</e2>
+8902	<e1>league</e1> <e2>movements</e2>
+8903	<e1>poison</e1> leaked <e2>milk</e2>
+8904	<e1>managers</e1> using <e2>spreadsheets</e2>
+8905	<e1>journalist</e1> took <e2>office</e2>
+8906	<e1>society</e1> <e2>agents</e2>
+8907	<e1>valley</e1> producer <e2>wines</e2>
+8908	<e1>talks</e1> association Worthington <e2>contract</e2>
+8909	<e1>stories</e1> some based <e2>historical_truths</e2>
+8910	<e1>problems</e1> pointed course <e2>study</e2>
+8911	<e1>sergeant</e1> <e2>army</e2>
+8912	<e1>weather_report</e1> informed <e2>storm_conditions</e2>
+8913	<e1>soldier</e1> frank posted <e2>message</e2>
+8914	<e1>growth</e1> <e2>hormone</e2>
+8915	<e1>umbrella</e1> <e2>ribs</e2>
+8916	<e1>duo</e1> produced <e2>songs</e2>
+8917	<e1>terrorist</e1> <e2>organizations</e2>
+8918	<e1>electronic_engineer</e1> migrated <e2>embedded_software</e2>
+8919	<e1>discussion</e1> presented <e2>appendix</e2>
+8920	<e1>software</e1> <e2>company</e2>
+8921	<e1>blackberry</e1> <e2>syrup</e2>
+8922	<e1>film</e1> <e2>maker</e2>
+8923	<e1>pocket</e1> <e2>trousers</e2>
+8924	<e1>tablet</e1> stone made <e2>monk</e2>
+8925	<e1>president</e1> <e2>corporation</e2>
+8926	<e1>jaws</e1> mop mop <e2>handle</e2>
+8927	<e1>founder</e1> <e2>agency</e2>
+8928	<e1>foot</e1> <e2>nails</e2>
+8929	<e1>ferret</e1> lifts <e2>paw</e2>
+8930	<e1>amount</e1> placed <e2>cylinder</e2>
+8931	<e1>game</e1> playing <e2>television</e2>
+8932	<e1>plug</e1> <e2>valve</e2>
+8933	<e1>sister</e1> lying <e2>cradle</e2>
+8934	<e1>farrow</e1> <e2>piglets</e2>
+8935	<e1>department</e1> <e2>store</e2>
+8936	<e1>chain</e1> <e2>saws</e2>
+8937	<e1>election</e1> caused <e2>appointment</e2>
+8938	<e1>polonium</e1> contained <e2>tantalum_capsule</e2>
+8939	<e1>items</e1> arrived <e2>store</e2>
+8940	<e1>fever</e1> <e2>immunizations</e2>
+8941	<e1>propellor</e1> <e2>blade</e2>
+8942	<e1>busloads</e1> ran <e2>contention</e2>
+8943	<e1>mother</e1> knit <e2>sweater</e2>
+8944	<e1>remuda</e1> <e2>horses</e2>
+8945	<e1>plague</e1> <e2>locusts</e2>
+8946	<e1>exhibits</e1> entered <e2>fall_fair</e2>
+8947	<e1>taxation</e1> sees instrument <e2>government</e2>
+8948	<e1>literature</e1> asserted takes <e2>recognition</e2>
+8949	<e1>wind</e1> caused <e2>draft</e2>
+8950	<e1>honey</e1> <e2>bottle</e2>
+8951	<e1>Vehicles</e1> equipped <e2>bumpers</e2>
+8952	<e1>mischief</e1> <e2>mice</e2>
+8953	<e1>acidity</e1> caused buildup <e2>carbon_dioxide</e2>
+8954	<e1>expansion</e1> resulted <e2>movements</e2>
+8955	<e1>wax</e1> <e2>workers</e2>
+8956	<e1>author</e1> identifies Piper <e2>devil</e2>
+8957	<e1>faction</e1> <e2>leaders</e2>
+8958	<e1>law-maker</e1> escaped fleeing house <e2>horse</e2>
+8959	<e1>bar</e1> <e2>injector</e2>
+8960	<e1>troops</e1> arrived <e2>areas</e2>
+8961	<e1>Highways</e1> falling <e2>disrepair</e2>
+8962	<e1>door</e1> <e2>truck</e2>
+8963	<e1>tea</e1> <e2>mug</e2>
+8964	<e1>observations</e1> making microfossil microscope <e2>monitor</e2>
+8965	<e1>harras</e1> <e2>horses</e2>
+8966	<e1>raft</e1> <e2>ducks</e2>
+8967	<e1>people</e1> pushed <e2>hunger</e2>
+8968	<e1>clothing</e1> <e2>hamper</e2>
+8969	<e1>anecdote</e1> features <e2>band</e2>
+8970	<e1>writer</e1> has bottle ink <e2>of</e2>
+8971	<e1>city</e1> constructed facilities <e2>station</e2>
+8972	<e1>tail</e1> caused <e2>solar_wind</e2>
+8973	<e1>exploration</e1> moving <e2>waters</e2>
+8974	<e1>Infectious_diseases</e1> caused bacteria <e2>parasites</e2>
+8975	<e1>Proposals</e1> outlined <e2>conference</e2>
+8976	<e1>roof</e1> replaced Herland <e2>carpenter</e2>
+8977	<e1>student</e1> visited <e2>website</e2>
+8978	<e1>trials</e1> rescheduled <e2>day</e2>
+8979	<e1>lesson</e1> points role <e2>predominant</e2>
+8980	<e1>journalists</e1> become topic <e2>discussion</e2>
+8981	<e1>Women</e1> improve help <e2>sheep</e2>
+8982	<e1>definition</e1> made use number <e2>standards</e2>
+8983	<e1>posts</e1> imported <e2>installation</e2>
+8984	<e1>team</e1> <e2>army</e2>
+8985	<e1>report</e1> provides account <e2>societal_impacts</e2>
+8986	<e1>regiment</e1> <e2>swordsmen</e2>
+8987	<e1>interaction</e1> attributed coupled vibronically arose <e2>layers</e2>
+8988	<e1>chemical</e1> produced <e2>gland</e2>
+8989	<e1>crisis</e1> caused <e2>cost</e2>
+8990	<e1>narration</e1> inserted <e2>description</e2>
+8991	<e1>blood</e1> <e2>clot</e2>
+8992	<e1>injuries</e1> third caused obtained <e2>fireworks</e2>
+8993	<e1>painting</e1> depicting holy <e2>being</e2>
+8994	<e1>weather</e1> point <e2>front_pages</e2>
+8995	<e1>relationship</e1> thrown <e2>chaos</e2>
+8996	<e1>bottle</e1> <e2>formula</e2>
+8997	<e1>waiters</e1> one cleaned <e2>mop</e2>
+8998	<e1>desert</e1> <e2>lapwings</e2>
+8999	<e1>norms</e1> clear One governing <e2>issues</e2>
+9000	<e1>bomb</e1> hidden <e2>radio-cassette_player</e2>
+9001	<e1>key</e1> locked <e2>safe</e2>
+9002	<e1>philosopher</e1> <e2>breakdown</e2>
+9003	<e1>flapper</e1> <e2>amplifier</e2>
+9004	<e1>wine</e1> <e2>carafe</e2>
+9005	<e1>threat</e1> <e2>television</e2>
+9006	<e1>citations</e1> Access contained difficult <e2>book</e2>
+9007	<e1>spider</e1> contained <e2>glass_box</e2>
+9008	<e1>platoon</e1> <e2>marines</e2>
+9009	<e1>plantation</e1> <e2>crops</e2>
+9010	<e1>drive</e1> fits <e2>wallet</e2>
+9011	<e1>producer</e1> <e2>programs</e2>
+9012	<e1>Alcohol</e1> cause <e2>suicide</e2>
+9013	<e1>chamber</e1> <e2>oven</e2>
+9014	<e1>illness</e1> triggered attack <e2>chickenpox</e2>
+9015	<e1>wrinkles</e1> skin people plenty know <e2>sun</e2>
+9016	<e1>dependencies</e1> injects <e2>filters</e2>
+9017	<e1>ship</e1> departs <e2>port</e2>
+9018	<e1>disturbances</e1> lead <e2>erosion</e2>
+9019	<e1>think_tank</e1> <e2>issues</e2>
+9020	<e1>group</e1> distributes number <e2>scholarships</e2>
+9021	<e1>policeman</e1> served <e2>police_force</e2>
+9022	<e1>Science</e1> part <e2>lives</e2>
+9023	<e1>instrument</e1> sealed <e2>polyethylene_bag</e2>
+9024	<e1>camera</e1> <e2>suitcase</e2>
+9025	<e1>mosaicism</e1> derived <e2>mutation</e2>
+9026	<e1>citation</e1> <e2>books</e2>
+9027	<e1>ship</e1> departed <e2>harbour</e2>
+9028	<e1>Considerations</e1> concerned <e2>cases</e2>
+9029	<e1>birds</e1> <e2>eyes</e2>
+9030	<e1>systems</e1> investigated <e2>paper</e2>
+9031	<e1>scientists</e1> Patterson compiled <e2>map</e2>
+9032	<e1>wife</e1> member <e2>movement</e2>
+9033	<e1>man</e1> drew <e2>list</e2>
+9034	<e1>wheels</e1> revolutionized angle <e2>grinding</e2>
+9035	<e1>disguise</e1> seconds <e2>bin</e2>
+9036	<e1>cutter</e1> tool <e2>do-it-yourselfer</e2>
+9037	<e1>athlete</e1> ran <e2>hurdle</e2>
+9038	<e1>tape</e1> inserted <e2>handycam</e2>
+9039	<e1>organisms</e1> spreading <e2>areas</e2>
+9040	<e1>rule</e1> driven <e2>approach</e2>
+9041	<e1>gelatin</e1> derived <e2>animal</e2>
+9042	<e1>shop</e1> fixed <e2>method</e2>
+9043	<e1>drug</e1> <e2>bottle</e2>
+9044	<e1>bottle</e1> <e2>milk</e2>
+9045	<e1>suitcase</e1> lost <e2>money</e2>
+9046	<e1>Students</e1> worked create <e2>wiki</e2>
+9047	<e1>promises</e1> made <e2>leaders</e2>
+9048	<e1>dollars</e1> put <e2>economy</e2>
+9049	<e1>organization</e1> founded <e2>student</e2>
+9050	<e1>controversy</e1> centered <e2>intelligence</e2>
+9051	<e1>mushroom</e1> <e2>sauce</e2>
+9052	<e1>boy</e1> builds <e2>windmills</e2>
+9053	<e1>Seminars</e1> organised <e2>area</e2>
+9054	<e1>convention</e1> <e2>bills</e2>
+9055	<e1>deleveraging</e1> triggered <e2>crisis</e2>
+9056	<e1>shipyard</e1> slips <e2>vessel</e2>
+9057	<e1>dizziness</e1> Headaches pain caused <e2>injury</e2>
+9058	<e1>members</e1> drafted <e2>ordinance</e2>
+9059	<e1>news</e1> tracks relevant <e2>interplay</e2>
+9060	<e1>substance</e1> exported <e2>cytoplasm</e2>
+9061	<e1>water</e1> dl put <e2>tank</e2>
+9062	<e1>Fainting</e1> cause <e2>unconsciousness</e2>
+9063	<e1>way</e1> topic <e2>debate</e2>
+9064	<e1>treasure_trove</e1> <e2>concerts</e2>
+9065	<e1>woman</e1> taken <e2>family</e2>
+9066	<e1>bevy</e1> <e2>doves</e2>
+9067	<e1>pie</e1> descended <e2>sky</e2>
+9068	<e1>virus</e1> caused <e2>pandemic</e2>
+9069	<e1>clutch</e1> <e2>mechanics</e2>
+9070	<e1>spring</e1> inserts <e2>device</e2>
+9071	<e1>company</e1> constructed <e2>house</e2>
+9072	<e1>team</e1> prevailed flurry <e2>brilliance</e2>
+9073	<e1>burns</e1> caused steam <e2>liquids</e2>
+9074	<e1>dispute</e1> <e2>plot</e2>
+9075	<e1>confederation</e1> <e2>peoples</e2>
+9076	<e1>Nitrogen</e1> falling <e2>lakes</e2>
+9077	<e1>idiot</e1> pulls <e2>motion</e2>
+9078	<e1>spacecraft</e1> departed on-board <e2>outer-space</e2>
+9079	<e1>exaltation</e1> <e2>larks</e2>
+9080	<e1>camaraderie</e1> <e2>supporters</e2>
+9081	<e1>Methadone</e1> gives <e2>buzz</e2>
+9082	<e1>handgun</e1> locked <e2>safe</e2>
+9083	<e1>flooding</e1> caused <e2>cyclone</e2>
+9084	<e1>brigade</e1> <e2>followers</e2>
+9085	<e1>discourse</e1> bookended <e2>poet</e2>
+9086	<e1>jar</e1> <e2>lid</e2>
+9087	<e1>Fog</e1> caused <e2>delays</e2>
+9088	<e1>handful</e1> <e2>locations</e2>
+9089	<e1>administration</e1> established number posts <e2>centres</e2>
+9090	<e1>rotors</e1> <e2>turbines</e2>
+9091	<e1>bio-energetics</e1> put <e2>bio-magnification</e2>
+9092	<e1>hurts</e1> beginning <e2>memories</e2>
+9093	<e1>model</e1> developed include <e2>event</e2>
+9094	<e1>convention</e1> declare <e2>ownership</e2>
+9095	<e1>ideas</e1> find <e2>issue</e2>
+9096	<e1>man</e1> dug <e2>pit</e2>
+9097	<e1>officers</e1> took <e2>bus</e2>
+9098	<e1>mother</e1> seen built <e2>raft</e2>
+9099	<e1>astronauts</e1> rode <e2>capsule</e2>
+9100	<e1>laboratory</e1> part <e2>organisation</e2>
+9101	<e1>president</e1> <e2>corporation</e2>
+9102	<e1>legion</e1> <e2>archers</e2>
+9103	<e1>skeleton</e1> discovered <e2>tomb</e2>
+9104	<e1>squadron</e1> <e2>swans</e2>
+9105	<e1>lion</e1> came put <e2>paw</e2>
+9106	<e1>money</e1> poured <e2>artwork</e2>
+9107	<e1>request</e1> sent <e2>moderator</e2>
+9108	<e1>hypothesis</e1> asserting <e2>domination</e2>
+9109	<e1>volume</e1> synthesizes <e2>understanding</e2>
+9110	<e1>process</e1> caused <e2>stricture</e2>
+9111	<e1>scars</e1> <e2>burns</e2>
+9112	<e1>parcels</e1> contained <e2>food_items</e2>
+9113	<e1>lid</e1> <e2>bin</e2>
+9114	<e1>officials</e1> involved drawing <e2>dossier</e2>
+9115	<e1>phrase</e1> originated <e2>e-mail</e2>
+9116	<e1>gunman</e1> bought <e2>weapons</e2>
+9117	<e1>buns</e1> placed <e2>steamer</e2>
+9118	<e1>poems</e1> entered <e2>contests</e2>
+9119	<e1>Dehydration</e1> one lead causes <e2>death</e2>
+9120	<e1>software</e1> <e2>developer</e2>
+9121	<e1>statue</e1> carved <e2>sculptor</e2>
+9122	<e1>tissue</e1> <e2>capsule</e2>
+9123	<e1>book</e1> given <e2>friend</e2>
+9124	<e1>baby</e1> uses box <e2>wipes</e2>
+9125	<e1>ship</e1> sailed <e2>port</e2>
+9126	<e1>fling</e1> <e2>oxbirds</e2>
+9127	<e1>method</e1> quizzes arrives <e2>country</e2>
+9128	<e1>toxins</e1> cause sickness <e2>odor</e2>
+9129	<e1>reel</e1> <e2>can</e2>
+9130	<e1>staff</e1> <e2>hospital</e2>
+9131	<e1>Accident</e1> causes <e2>delays</e2>
+9132	<e1>Student</e1> support <e2>telephone</e2>
+9133	<e1>user</e1> activates device <e2>button</e2>
+9134	<e1>plate</e1> <e2>electroscope</e2>
+9135	<e1>artist</e1> creates sculptures using colouring <e2>crayons</e2>
+9136	<e1>fire</e1> caught <e2>earthquake</e2>
+9137	<e1>hostel</e1> comprises <e2>building</e2>
+9138	<e1>sword</e1> <e2>blade</e2>
+9139	<e1>suffering</e1> caused <e2>crisis</e2>
+9140	<e1>rags</e1> Greasy deposited <e2>receptacle</e2>
+9141	<e1>volume</e1> rest presents <e2>inscriptions</e2>
+9142	<e1>file</e1> moved <e2>folder</e2>
+9143	<e1>comradeship</e1> <e2>brothers</e2>
+9144	<e1>person</e1> prepares <e2>goods</e2>
+9145	<e1>note</e1> requires explain <e2>rating</e2>
+9146	<e1>infection</e1> esophagus caused <e2>fungus</e2>
+9147	<e1>Tonsillitis</e1> caused variety <e2>micro-organisms</e2>
+9148	<e1>Hiccups</e1> caused <e2>spasm</e2>
+9149	<e1>location</e1> indicated <e2>circle</e2>
+9150	<e1>electricity</e1> purchase tariffs produced <e2>biomass</e2>
+9151	<e1>metaphors</e1> used <e2>saint</e2>
+9152	<e1>gear</e1> mechanism consists <e2>collar</e2>
+9153	<e1>mummy</e1> placed <e2>coffins</e2>
+9154	<e1>aircraft</e1> making <e2>approach</e2>
+9155	<e1>moments</e1> array had <e2>year</e2>
+9156	<e1>memes</e1> spread <e2>copies</e2>
+9157	<e1>ossicone</e1> grows <e2>cartilage</e2>
+9158	<e1>Cocaine</e1> hidden <e2>pineapples</e2>
+9159	<e1>puppy</e1> <e2>garbage_bag</e2>
+9160	<e1>committee</e1> composed <e2>people</e2>
+9161	<e1>Landslides</e1> caused majority <e2>deaths</e2>
+9162	<e1>references</e1> added <e2>name_index</e2>
+9163	<e1>Rain</e1> cause <e2>power_outage</e2>
+9164	<e1>speech</e1> addresses <e2>critics</e2>
+9165	<e1>publication</e1> analyzes <e2>developments</e2>
+9166	<e1>machine</e1> has <e2>memory</e2>
+9167	<e1>irritation</e1> avoid <e2>chemicals</e2>
+9168	<e1>humiliation</e1> comes authorities <e2>people</e2>
+9169	<e1>exhibition</e1> examines <e2>contacts</e2>
+9170	<e1>initiations</e1> passed apprenticeship few <e2>years</e2>
+9171	<e1>visit</e1> caused <e2>sensation</e2>
+9172	<e1>voltage</e1> instigates <e2>reaction</e2>
+9173	<e1>guard</e1> leaves <e2>podium</e2>
+9174	<e1>sessions</e1> highlight <e2>abstracts</e2>
+9175	<e1>virus</e1> originated <e2>bird</e2>
+9176	<e1>funding</e1> pull <e2>newspaper</e2>
+9177	<e1>hands</e1> built <e2>tomb</e2>
+9178	<e1>atlas</e1> pulled <e2>cabinet</e2>
+9179	<e1>vapor</e1> Dust cause <e2>swelling</e2>
+9180	<e1>email</e1> arrived <e2>person</e2>
+9181	<e1>reproductive_toxicity</e1> caused <e2>nitrite</e2>
+9182	<e1>quotes</e1> <e2>movies</e2>
+9183	<e1>baby</e1> seat <e2>car</e2>
+9184	<e1>scuttle</e1> <e2>coal</e2>
+9185	<e1>surface</e1> divided <e2>plates</e2>
+9186	<e1>petition</e1> described <e2>oil</e2>
+9187	<e1>superfluity</e1> <e2>priests</e2>
+9188	<e1>wheat</e1> <e2>flour</e2>
+9189	<e1>cameras</e1> put <e2>booths</e2>
+9190	<e1>controversy</e1> arose <e2>assignment</e2>
+9191	<e1>speeches</e1> Most <e2>economy</e2>
+9192	<e1>ray_theory</e1> used study <e2>layer</e2>
+9193	<e1>dispute</e1> <e2>interpretation</e2>
+9194	<e1>chairman</e1> <e2>political_party</e2>
+9195	<e1>practices</e1> <e2>programmers</e2>
+9196	<e1>brew</e1> create <e2>cauldron</e2>
+9197	<e1>Dioxide</e1> released <e2>atmosphere</e2>
+9198	<e1>mutation</e1> <e2>thrushes</e2>
+9199	<e1>discussion</e1> provide <e2>issues</e2>
+9200	<e1>recovery</e1> postponed <e2>next_year</e2>
+9201	<e1>cattle</e1> breed originated <e2>middle_ages</e2>
+9202	<e1>book</e1> asserts <e2>relationship</e2>
+9203	<e1>button</e1> <e2>radio</e2>
+9204	<e1>guards</e1> left <e2>building</e2>
+9205	<e1>technician</e1> uses <e2>in-circuit_emulator</e2>
+9206	<e1>wheat</e1> <e2>starch</e2>
+9207	<e1>shank</e1> <e2>hook</e2>
+9208	<e1>Death</e1> <e2>vat</e2>
+9209	<e1>dataset</e1> extracted <e2>documents</e2>
+9210	<e1>carriages</e1> <e2>train</e2>
+9211	<e1>alliance</e1> <e2>brands</e2>
+9212	<e1>mouse</e1> found <e2>loaf</e2>
+9213	<e1>abuse</e1> resulted bruises <e2>swelling</e2>
+9214	<e1>bird</e1> touching <e2>wing</e2>
+9215	<e1>bootlegger</e1> bought <e2>staples</e2>
+9216	<e1>clump</e1> concealing <e2>reeds</e2>
+9217	<e1>stories</e1> spawned sequels <e2>prequels</e2>
+9218	<e1>code</e1> injected <e2>process</e2>
+9219	<e1>man</e1> relaxes levels <e2>testosterone</e2>
+9220	<e1>fire</e1> originated <e2>area</e2>
+9221	<e1>harm</e1> portraying woodcut Picture caused <e2>quake</e2>
+9222	<e1>tritium</e1> leaked <e2>water</e2>
+9223	<e1>comment</e1> made <e2>developer</e2>
+9224	<e1>infections</e1> <e2>malodor</e2>
+9225	<e1>gas</e1> producing <e2>algae</e2>
+9226	<e1>fungi</e1> bacteria set cause <e2>disease</e2>
+9227	<e1>Diabetes</e1> group <e2>disorders</e2>
+9228	<e1>clashes</e1> resulted <e2>deaths</e2>
+9229	<e1>fleet</e1> Shinbatsu <e2>ship</e2>
+9230	<e1>tool</e1> offers <e2>handles</e2>
+9231	<e1>butterfly</e1> flew <e2>patio</e2>
+9232	<e1>daughter</e1> fell <e2>coma</e2>
+9233	<e1>division</e1> <e2>soldiers</e2>
+9234	<e1>variations</e1> caused <e2>stratospheric_winds</e2>
+9235	<e1>laugh</e1> erected <e2>hairs</e2>
+9236	<e1>plum</e1> <e2>wine</e2>
+9237	<e1>introduction</e1> <e2>book</e2>
+9238	<e1>rock</e1> built <e2>strokes</e2>
+9239	<e1>creator</e1> <e2>worm</e2>
+9240	<e1>evidence</e1> came <e2>study</e2>
+9241	<e1>meal</e1> portion <e2>rice</e2>
+9242	<e1>stack</e1> <e2>objects</e2>
+9243	<e1>tank</e1> <e2>bunker</e2>
+9244	<e1>maps</e1> placed <e2>portfolio</e2>
+9245	<e1>balm</e1> poured <e2>soul</e2>
+9246	<e1>man</e1> took <e2>custody</e2>
+9247	<e1>tears</e1> flown <e2>river</e2>
+9248	<e1>reservoir</e1> put <e2>operation</e2>
+9249	<e1>handful</e1> <e2>tidbits</e2>
+9250	<e1>tree</e1> <e2>trunks</e2>
+9251	<e1>unit</e1> <e2>transportation</e2>
+9252	<e1>insight</e1> gaining <e2>problem</e2>
+9253	<e1>statement</e1> <e2>leadership</e2>
+9254	<e1>fish</e1> swim <e2>shoal</e2>
+9255	<e1>wine</e1> <e2>can</e2>
+9256	<e1>log</e1> <e2>jam</e2>
+9257	<e1>journal</e1> contains <e2>book_reviews</e2>
+9258	<e1>'</e1> talk His tackles challenges <e2>great</e2>
+9259	<e1>bloodshed</e1> Much caused <e2>growth</e2>
+9260	<e1>correspondence</e1> encloses <e2>cheque</e2>
+9261	<e1>class</e1> purpose was examine <e2>therapeutic_benefits</e2>
+9262	<e1>flink</e1> <e2>cows</e2>
+9263	<e1>ring</e1> <e2>partners</e2>
+9264	<e1>Tree</e1> <e2>bark</e2>
+9265	<e1>bolt</e1> rearward <e2>firearm</e2>
+9266	<e1>water</e1> evaporated <e2>evaporators</e2>
+9267	<e1>questionnaire</e1> comprises <e2>sections</e2>
+9268	<e1>disputation</e1> <e2>lawyers</e2>
+9269	<e1>benefits</e1> described <e2>sentence</e2>
+9270	<e1>witch</e1> stirs cauldron <e2>bone</e2>
+9271	<e1>biosurfactant</e1> produced <e2>oil</e2>
+9272	<e1>steps</e1> <e2>ladder</e2>
+9273	<e1>bottle</e1> carry <e2>isopropanol</e2>
+9274	<e1>letter</e1> sent <e2>group</e2>
+9275	<e1>stranger</e1> approached <e2>brother</e2>
+9276	<e1>rudders</e1> used <e2>towboats</e2>
+9277	<e1>tribes</e1> used build <e2>houses</e2>
+9278	<e1>rain</e1> Much evaporated <e2>forest_canopy</e2>
+9279	<e1>boat</e1> sails <e2>harbour</e2>
+9280	<e1>anxiety</e1> caused <e2>accident</e2>
+9281	<e1>company</e1> eluded totalizing <e2>obligations</e2>
+9282	<e1>community</e1> <e2>scholars</e2>
+9283	<e1>room</e1> moved <e2>corner</e2>
+9284	<e1>technique</e1> used <e2>websites</e2>
+9285	<e1>file_cabinet</e1> Washington <e2>IOU</e2>
+9286	<e1>policeman</e1> <e2>police_force</e2>
+9287	<e1>sunflower</e1> <e2>oil</e2>
+9288	<e1>stores</e1> have <e2>areas</e2>
+9289	<e1>energy</e1> going <e2>source</e2>
+9290	<e1>publications</e1> some commenting <e2>similarities</e2>
+9291	<e1>man</e1> attacked <e2>bat</e2>
+9292	<e1>remnants</e1> <e2>box</e2>
+9293	<e1>cerebrum</e1> made left <e2>hemispheres</e2>
+9294	<e1>clowder</e1> <e2>cats</e2>
+9295	<e1>powder</e1> packed <e2>casing</e2>
+9296	<e1>soul</e1> departs <e2>body</e2>
+9297	<e1>remote_control</e1> fell <e2>water</e2>
+9298	<e1>books</e1> dealing <e2>identification</e2>
+9299	<e1>energy</e1> release <e2>charge</e2>
+9300	<e1>nucleocapsids</e1> were efficiently transported <e2>nuclei</e2>
+9301	<e1>nest</e1> <e2>hornets</e2>
+9302	<e1>spindle</e1> <e2>pump</e2>
+9303	<e1>caravan</e1> <e2>camels</e2>
+9304	<e1>crimes</e1> investigated <e2>show</e2>
+9305	<e1>chocolate</e1> made <e2>butter</e2>
+9306	<e1>niece</e1> moved <e2>apartment</e2>
+9307	<e1>design</e1> <e2>architect</e2>
+9308	<e1>cook</e1> stirs <e2>coals</e2>
+9309	<e1>acne</e1> form caused <e2>cosmetics</e2>
+9310	<e1>moons</e1> discovered <e2>collaboration</e2>
+9311	<e1>light</e1> radiating <e2>face</e2>
+9312	<e1>receiver</e1> reacts coming <e2>catch</e2>
+9313	<e1>shirt</e1> <e2>sleeve</e2>
+9314	<e1>garden</e1> <e2>pail</e2>
+9315	<e1>document</e1> summary <e2>interrogation</e2>
+9316	<e1>nuts</e1> loosening one <e2>tires</e2>
+9317	<e1>man</e1> pulled gently <e2>knife</e2>
+9318	<e1>stone</e1> put <e2>cup</e2>
+9319	<e1>noise</e1> caused <e2>resistors</e2>
+9320	<e1>damage</e1> caused earthquake activities <e2>reconstruction</e2>
+9321	<e1>dialogue</e1> covered <e2>economic_impact</e2>
+9322	<e1>bank</e1> drawn <e2>plans</e2>
+9323	<e1>light</e1> <e2>turrets</e2>
+9324	<e1>stew</e1> <e2>cauldron</e2>
+9325	<e1>sedge</e1> <e2>bitterns</e2>
+9326	<e1>woman</e1> born <e2>village</e2>
+9327	<e1>questions</e1> topics have do <e2>cultural_differences</e2>
+9328	<e1>phosphorus</e1> protein cause <e2>calcium_loss</e2>
+9329	<e1>furnace</e1> <e2>thermostat</e2>
+9330	<e1>bureau</e1> established <e2>committee</e2>
+9331	<e1>mover</e1> eats <e2>hamburger</e2>
+9332	<e1>wallet</e1> <e2>locker</e2>
+9333	<e1>book</e1> <e2>chapters</e2>
+9334	<e1>display_case</e1> full <e2>desserts</e2>
+9335	<e1>chemicals</e1> dumped <e2>river</e2>
+9336	<e1>member</e1> <e2>team</e2>
+9337	<e1>script</e1> creates keys defined using <e2>index</e2>
+9338	<e1>preview</e1> leaked <e2>blog</e2>
+9339	<e1>radio</e1> keeps town informed <e2>development</e2>
+9340	<e1>convict</e1> protects <e2>claim</e2>
+9341	<e1>armor</e1> <e2>chest</e2>
+9342	<e1>dust</e1> produces <e2>irritation</e2>
+9343	<e1>flakeboard</e1> produced decommissioned posts <e2>guardrail</e2>
+9344	<e1>troop</e1> <e2>princesses</e2>
+9345	<e1>plastic_bag</e1> found <e2>marijuana</e2>
+9346	<e1>thermostat</e1> <e2>refrigerator</e2>
+9347	<e1>crisis</e1> originated <e2>sector</e2>
+9348	<e1>hormone</e1> produced <e2>gland</e2>
+9349	<e1>researcher</e1> started <e2>programme</e2>
+9350	<e1>mountain</e1> <e2>landscapes</e2>
+9351	<e1>boxes</e1> moved <e2>house</e2>
+9352	<e1>heat</e1> cause <e2>metamorphism</e2>
+9353	<e1>optimization</e1> viewed tool trade <e2>engineers</e2>
+9354	<e1>phalanx</e1> <e2>comrades</e2>
+9355	<e1>flange</e1> <e2>baboons</e2>
+9356	<e1>architect</e1> measures Sage strip <e2>flexible</e2>
+9357	<e1>fever</e1> develop <e2>stress</e2>
+9358	<e1>aircraft</e1> departed <e2>flight</e2>
+9359	<e1>recipe</e1> comes <e2>friends</e2>
+9360	<e1>mastiffs</e1> misplaced <e2>homes</e2>
+9361	<e1>pin</e1> <e2>potentiometer</e2>
+9362	<e1>nide</e1> <e2>pheasants</e2>
+9363	<e1>statement</e1> summary <e2>topics</e2>
+9364	<e1>article</e1> found claiming affects <e2>music</e2>
+9365	<e1>bottle</e1> <e2>gold_dust</e2>
+9366	<e1>weight</e1> caused <e2>collapse</e2>
+9367	<e1>committee</e1> made <e2>recommendations</e2>
+9368	<e1>circle</e1> <e2>mobsters</e2>
+9369	<e1>nose</e1> inside lined layer <e2>tissue</e2>
+9370	<e1>monsoons</e1> caused <e2>change</e2>
+9371	<e1>rules</e1> regulate <e2>behavior</e2>
+9372	<e1>explosion</e1> triggered <e2>blast</e2>
+9373	<e1>sadness</e1> leads <e2>fear</e2>
+9374	<e1>padding</e1> put <e2>helmets</e2>
+9375	<e1>letters</e1> sent <e2>addresses</e2>
+9376	<e1>kitchen</e1> has <e2>fridge</e2>
+9377	<e1>shop</e1> chose bakes paint <e2>booth</e2>
+9378	<e1>damage</e1> caused use <e2>hallucinogens</e2>
+9379	<e1>flu</e1> symptoms include throat <e2>chills</e2>
+9380	<e1>device</e1> inserted <e2>port</e2>
+9381	<e1>workshop</e1> introduced <e2>tools</e2>
+9382	<e1>joke</e1> driven <e2>comedy</e2>
+9383	<e1>grain</e1> <e2>whisky</e2>
+9384	<e1>quarterback</e1> wins game <e2>pass</e2>
+9385	<e1>cistern</e1> <e2>liquids</e2>
+9386	<e1>policy</e1> presented instrument <e2>prevention</e2>
+9387	<e1>catapult</e1> <e2>arm</e2>
+9388	<e1>company</e1> entered <e2>research</e2>
+9389	<e1>people</e1> migrated <e2>areas</e2>
+9390	<e1>decedent</e1> left <e2>yard</e2>
+9391	<e1>heart</e1> <e2>valves</e2>
+9392	<e1>author</e1> <e2>birth</e2>
+9393	<e1>page</e1> carries list some <e2>conventions</e2>
+9394	<e1>blaze</e1> paid amount triggered <e2>fault</e2>
+9395	<e1>bean</e1> <e2>flour</e2>
+9396	<e1>key</e1> <e2>member</e2>
+9397	<e1>merger</e1> running <e2>opposition</e2>
+9398	<e1>regulation</e1> using <e2>valve</e2>
+9399	<e1>bullet</e1> put <e2>head</e2>
+9400	<e1>computer</e1> kept <e2>area</e2>
+9401	<e1>details</e1> revealed <e2>interview</e2>
+9402	<e1>debris</e1> caused <e2>fire</e2>
+9403	<e1>flu</e1> colds illnesses cause overload increases <e2>stress</e2>
+9404	<e1>slot_machine</e1> has <e2>reels</e2>
+9405	<e1>rod</e1> <e2>cylinder</e2>
+9406	<e1>archive</e1> contains <e2>months</e2>
+9407	<e1>Jug</e1> <e2>wine</e2>
+9408	<e1>paddle</e1> fits <e2>canister</e2>
+9409	<e1>government</e1> <e2>science</e2>
+9410	<e1>pages</e1> takes explain <e2>significance</e2>
+9411	<e1>cockpit</e1> <e2>floor</e2>
+9412	<e1>team</e1> includes <e2>general_counsel</e2>
+9413	<e1>merchant</e1> shows basket <e2>duct-flutes</e2>
+9414	<e1>plurality</e1> <e2>features</e2>
+9415	<e1>accident</e1> resulted <e2>death</e2>
+9416	<e1>kidney</e1> donated <e2>father</e2>
+9417	<e1>technique</e1> consists heating <e2>laser</e2>
+9418	<e1>species</e1> <e2>forest</e2>
+9419	<e1>parts</e1> <e2>story</e2>
+9420	<e1>plant</e1> <e2>leaves</e2>
+9421	<e1>starch</e1> source <e2>sugars</e2>
+9422	<e1>employee</e1> posted <e2>comment</e2>
+9423	<e1>tree</e1> growing alive <e2>woods</e2>
+9424	<e1>council</e1> carved <e2>zones</e2>
+9425	<e1>theme</e1> centered <e2>street_vision</e2>
+9426	<e1>catheter</e1> inserted <e2>artery</e2>
+9427	<e1>fever</e1> <e2>vaccines</e2>
+9428	<e1>decision</e1> <e2>maker</e2>
+9429	<e1>bodies</e1> stuffed <e2>barrels</e2>
+9430	<e1>report</e1> supplying <e2>motives</e2>
+9431	<e1>baseball</e1> Roberts <e2>arbitrator</e2>
+9432	<e1>report</e1> assesses <e2>degree</e2>
+9433	<e1>tree</e1> growing <e2>woods</e2>
+9434	<e1>Acne</e1> caused <e2>oily_skin</e2>
+9435	<e1>meeting</e1> decided <e2>vote</e2>
+9436	<e1>movie</e1> <e2>box_set</e2>
+9437	<e1>magazines</e1> delivered <e2>subscribers</e2>
+9438	<e1>dirt</e1> oil cause <e2>acne</e2>
+9439	<e1>bottle</e1> converts <e2>canteen</e2>
+9440	<e1>sandalwood</e1> grows <e2>soil</e2>
+9441	<e1>coil</e1> <e2>galvanometer</e2>
+9442	<e1>sheets</e1> concerned <e2>aspects</e2>
+9443	<e1>project</e1> uses <e2>art</e2>
+9444	<e1>squads</e1> battered goaltender flurry <e2>shots</e2>
+9445	<e1>fuselage</e1> accommodated <e2>bay</e2>
+9446	<e1>rabble</e1> <e2>persons</e2>
+9447	<e1>pole</e1> resides <e2>receptacle</e2>
+9448	<e1>brain</e1> composed <e2>cerebellum</e2>
+9449	<e1>pillow</e1> <e2>foam</e2>
+9450	<e1>houses</e1> built <e2>government</e2>
+9451	<e1>pile</e1> <e2>books</e2>
+9452	<e1>rules</e1> establish <e2>criteria</e2>
+9453	<e1>remnant</e1> <e2>epochs</e2>
+9454	<e1>player</e1> starts playing <e2>keyframe</e2>
+9455	<e1>ship</e1> <e2>fleet</e2>
+9456	<e1>blogs</e1> Some concerned <e2>life</e2>
+9457	<e1>teacher</e1> guide writing drawing <e2>blackboard</e2>
+9458	<e1>work</e1> prepared officer <e2>employee</e2>
+9459	<e1>categories</e1> break <e2>tourism</e2>
+9460	<e1>water</e1> evaporated <e2>ocean</e2>
+9461	<e1>mother</e1> sank <e2>depression</e2>
+9462	<e1>troop</e1> <e2>fairies</e2>
+9463	<e1>syrup</e1> drew <e2>cask</e2>
+9464	<e1>rainbows</e1> caused <e2>refraction</e2>
+9465	<e1>chart</e1> produced <e2>study</e2>
+9466	<e1>candlestick</e1> <e2>maker</e2>
+9467	<e1>storm</e1> caused <e2>cancellation</e2>
+9468	<e1>parade</e1> <e2>athletes</e2>
+9469	<e1>harm</e1> caused <e2>flood</e2>
+9470	<e1>history</e1> set <e2>book</e2>
+9471	<e1>album</e1> stored <e2>jacket</e2>
+9472	<e1>aid</e1> delivered <e2>countries</e2>
+9473	<e1>mustard</e1> dog made <e2>mustard_seeds</e2>
+9474	<e1>mother</e1> member <e2>team</e2>
+9475	<e1>milk</e1> grew <e2>sack</e2>
+9476	<e1>work</e1> explored <e2>themes</e2>
+9477	<e1>bands</e1> Marking numbered enables <e2>researchers</e2>
+9478	<e1>regiment</e1> <e2>archers</e2>
+9479	<e1>skin</e1> <e2>face</e2>
+9480	<e1>formations</e1> units classifies <e2>year</e2>
+9481	<e1>cow</e1> diet produced <e2>milk</e2>
+9482	<e1>batteries</e1> provide <e2>power</e2>
+9483	<e1>bomb</e1> <e2>fruit</e2>
+9484	<e1>burner</e1> <e2>dryer</e2>
+9485	<e1>humpback</e1> gave nudge <e2>flipper</e2>
+9486	<e1>vessels</e1> defaced <e2>badge</e2>
+9487	<e1>bakers</e1> hold open <e2>handle</e2>
+9488	<e1>prince</e1> decorated <e2>frosting</e2>
+9489	<e1>contractions</e1> caused <e2>prostaglandins</e2>
+9490	<e1>pleasure</e1> deriving pain <e2>suffering</e2>
+9491	<e1>folks</e1> interested <e2>lens</e2>
+9492	<e1>people</e1> taken <e2>twilight_zone</e2>
+9493	<e1>chicken</e1> <e2>soup</e2>
+9494	<e1>cigarette</e1> set <e2>alarm</e2>
+9495	<e1>magazine</e1> covers economic sporting <e2>developments</e2>
+9496	<e1>casket</e1> placed <e2>casket</e2>
+9497	<e1>window</e1> <e2>train</e2>
+9498	<e1>drawing</e1> reconstruction shows <e2>man</e2>
+9499	<e1>chess_openings</e1> one discussed <e2>literature</e2>
+9500	<e1>powder</e1> discovered <e2>roll</e2>
+9501	<e1>body</e1> <e2>suitcase</e2>
+9502	<e1>sweeper</e1> starts <e2>end</e2>
+9503	<e1>abridger</e1> did <e2>eye</e2>
+9504	<e1>proclamation</e1> declares emergency <e2>flu</e2>
+9505	<e1>Rumors</e1> leaked <e2>public</e2>
+9506	<e1>book</e1> put <e2>cupboard</e2>
+9507	<e1>infant</e1> <e2>box</e2>
+9508	<e1>complications</e1> percent resulted <e2>deaths</e2>
+9509	<e1>brood</e1> <e2>chicks</e2>
+9510	<e1>trail</e1> extended <e2>village</e2>
+9511	<e1>pilots</e1> flown <e2>trouble</e2>
+9512	<e1>grower</e1> had Flip plow <e2>moldboard</e2>
+9513	<e1>maker</e1> <e2>handbags</e2>
+9514	<e1>recipe</e1> <e2>grandmother</e2>
+9515	<e1>steam</e1> using that produced <e2>combustion</e2>
+9516	<e1>timers</e1> started the booted <e2>event</e2>
+9517	<e1>clergy</e1> <e2>faiths</e2>
+9518	<e1>dule</e1> <e2>turkeys</e2>
+9519	<e1>shifts</e1> caused <e2>gas_flows</e2>
+9520	<e1>teacher</e1> completed <e2>book</e2>
+9521	<e1>declaration</e1> tackle <e2>climate_change</e2>
+9522	<e1>contents</e1> <e2>packet</e2>
+9523	<e1>flight</e1> <e2>stairs</e2>
+9524	<e1>Lesions</e1> caused <e2>hemiparesis</e2>
+9525	<e1>initiative</e1> aimed tackling <e2>obesity</e2>
+9526	<e1>book</e1> provides analysis <e2>role</e2>
+9527	<e1>frontpage</e1> <e2>news_paper</e2>
+9528	<e1>chip</e1> breastbone preserved <e2>reliquary</e2>
+9529	<e1>blank</e1> made <e2>carton</e2>
+9530	<e1>meinie</e1> <e2>sparrows</e2>
+9531	<e1>fluid</e1> spread <e2>body</e2>
+9532	<e1>princess</e1> born midst <e2>storm</e2>
+9533	<e1>olive_oil</e1> poured <e2>salad</e2>
+9534	<e1>acid</e1> <e2>bottle</e2>
+9535	<e1>transformer</e1> Optimizing driven <e2>shield</e2>
+9536	<e1>article</e1> explores <e2>impulsivity</e2>
+9537	<e1>cadre</e1> <e2>combinations</e2>
+9538	<e1>letter</e1> received discussing <e2>teaching_duties</e2>
+9539	<e1>projects</e1> landing <e2>markets</e2>
+9540	<e1>sleeve</e1> finished last <e2>blouse</e2>
+9541	<e1>issues</e1> related <e2>law</e2>
+9542	<e1>congestion</e1> caused <e2>delays</e2>
+9543	<e1>report</e1> released <e2>death</e2>
+9544	<e1>suspects</e1> handed <e2>police</e2>
+9545	<e1>Concerns</e1> <e2>data_protection</e2>
+9546	<e1>catch</e1> <e2>fish</e2>
+9547	<e1>program</e1> creates sound using <e2>notes</e2>
+9548	<e1>term</e1> derived <e2>metaphor</e2>
+9549	<e1>answer</e1> came <e2>paragraph</e2>
+9550	<e1>anthology</e1> <e2>novels</e2>
+9551	<e1>the</e1> officer battered ram <e2>steel</e2>
+9552	<e1>bastard</e1> blazing This peels <e2>velocity</e2>
+9553	<e1>verses</e1> written <e2>people</e2>
+9554	<e1>text</e1> dumped <e2>text_box</e2>
+9555	<e1>dentist</e1> <e2>drill</e2>
+9556	<e1>competition</e1> KHYL <e2>station</e2>
+9557	<e1>proverb</e1> consisting <e2>parts</e2>
+9558	<e1>picture</e1> representing <e2>file</e2>
+9559	<e1>plasma</e1> generated <e2>discharge</e2>
+9560	<e1>artwork</e1> arose <e2>evening</e2>
+9561	<e1>indicator</e1> <e2>bus</e2>
+9562	<e1>horn</e1> has <e2>end</e2>
+9563	<e1>copper</e1> poured <e2>molds</e2>
+9564	<e1>storylines</e1> narrated alternating <e2>chapters</e2>
+9565	<e1>padlock</e1> <e2>cage</e2>
+9566	<e1>book</e1> rich <e2>social_history</e2>
+9567	<e1>methods</e1> described <e2>paper</e2>
+9568	<e1>coffee</e1> poured <e2>pot</e2>
+9569	<e1>ensemble</e1> <e2>clothes</e2>
+9570	<e1>zoo</e1> <e2>monsters</e2>
+9571	<e1>dust</e1> collected operation <e2>caisson</e2>
+9572	<e1>guest</e1> open <e2>mallet</e2>
+9573	<e1>infections</e1> cause <e2>disease</e2>
+9574	<e1>treatment</e1> apparatus <e2>ultrasound</e2>
+9575	<e1>lathe</e1> made <e2>friend</e2>
+9576	<e1>jump</e1> cause <e2>deterioration</e2>
+9577	<e1>cocaine</e1> increased rate <e2>pressure</e2>
+9578	<e1>man</e1> taken <e2>building</e2>
+9579	<e1>file</e1> consists <e2>pages</e2>
+9580	<e1>locomotives</e1> included <e2>engines</e2>
+9581	<e1>dirt</e1> took <e2>canister</e2>
+9582	<e1>spike</e1> caused line caused <e2>glitch</e2>
+9583	<e1>complex</e1> includes <e2>restaurant</e2>
+9584	<e1>horde</e1> <e2>hackers</e2>
+9585	<e1>areas</e1> added <e2>spaces</e2>
+9586	<e1>recordings</e1> released <e2>public_domain</e2>
+9587	<e1>book</e1> Science fun forget <e2>author</e2>
+9588	<e1>brigade</e1> <e2>guns</e2>
+9589	<e1>Stimulation</e1> produced amount <e2>latency</e2>
+9590	<e1>artist</e1> moves <e2>pointer</e2>
+9591	<e1>oatmeal</e1> <e2>cookies</e2>
+9592	<e1>clamour</e1> <e2>rooks</e2>
+9593	<e1>grenade</e1> thrown <e2>crowd</e2>
+9594	<e1>intellect</e1> wields <e2>pen</e2>
+9595	<e1>tribe</e1> <e2>baboons</e2>
+9596	<e1>verses</e1> Most had reference <e2>freedom</e2>
+9597	<e1>coughing</e1> <e2>inhaling</e2>
+9598	<e1>data</e1> put <e2>section</e2>
+9599	<e1>character-compeers</e1> <e2>profligates</e2>
+9600	<e1>intestine</e1> <e2>cat</e2>
+9601	<e1>outbreak</e1> caused <e2>vaccine</e2>
+9602	<e1>communion</e1> <e2>churches</e2>
+9603	<e1>handle</e1> <e2>dishwasher</e2>
+9604	<e1>suitcase</e1> <e2>items</e2>
+9605	<e1>tests</e1> work using <e2>substance</e2>
+9606	<e1>price</e1> went unchanged ago <e2>weeks</e2>
+9607	<e1>facemasks</e1> use guidance <e2>reduction</e2>
+9608	<e1>ratpack</e1> <e2>folks</e2>
+9609	<e1>basket</e1> full orange-and-black <e2>faces</e2>
+9610	<e1>report</e1> fulfills <e2>requirements</e2>
+9611	<e1>collagen</e1> extracted <e2>shavings</e2>
+9612	<e1>keyboard</e1> produced <e2>keypad_keys</e2>
+9613	<e1>vest</e1> part <e2>uniform</e2>
+9614	<e1>chief</e1> <e2>police</e2>
+9615	<e1>ads</e1> packs labels inform implicitly <e2>dangers</e2>
+9616	<e1>afternoon</e1> <e2>drink</e2>
+9617	<e1>swim_bladder</e1> <e2>fish</e2>
+9618	<e1>impact</e1> caused <e2>slit</e2>
+9619	<e1>sailor</e1> shows staring <e2>cudgel</e2>
+9620	<e1>menage</e1> <e2>styles</e2>
+9621	<e1>effort</e1> lot gone <e2>development</e2>
+9622	<e1>series</e1> examined memorable <e2>crimes</e2>
+9623	<e1>officers</e1> placed <e2>leave</e2>
+9624	<e1>Stress</e1> <e2>panic_attacks</e2>
+9625	<e1>pads</e1> <e2>mice</e2>
+9626	<e1>peanut_butter</e1> <e2>cookies</e2>
+9627	<e1>graph</e1> stored <e2>format</e2>
+9628	<e1>Lumberjacks</e1> hold <e2>handle</e2>
+9629	<e1>works</e1> <e2>epistemology</e2>
+9630	<e1>baby</e1> hid <e2>cupboard_drawer</e2>
+9631	<e1>drift</e1> <e2>cattle_traffic</e2>
+9632	<e1>metro</e1> <e2>station</e2>
+9633	<e1>Victims</e1> transported <e2>room</e2>
+9634	<e1>blogs</e1> buzzing <e2>news</e2>
+9635	<e1>sand</e1> <e2>hourglass</e2>
+9636	<e1>valve</e1> <e2>heart</e2>
+9637	<e1>marines</e1> moving <e2>towns</e2>
+9638	<e1>plane</e1> went <e2>dive</e2>
+9639	<e1>president</e1> moved <e2>jobs</e2>
+9640	<e1>bomb</e1> <e2>bin</e2>
+9641	<e1>staff</e1> <e2>shop</e2>
+9642	<e1>recovery</e1> recovery <e2>storm</e2>
+9643	<e1>flame</e1> <e2>vessel</e2>
+9644	<e1>array</e1> developed <e2>group</e2>
+9645	<e1>head</e1> <e2>jar</e2>
+9646	<e1>chair</e1> <e2>corporation</e2>
+9647	<e1>drop</e1> caused <e2>recession</e2>
+9648	<e1>pandemic</e1> caused pestis <e2>virus</e2>
+9649	<e1>band</e1> used products <e2>Wi-Fi</e2>
+9650	<e1>processes</e1> set produced <e2>acids</e2>
+9651	<e1>ring</e1> <e2>associates</e2>
+9652	<e1>forces</e1> defeated help <e2>troops</e2>
+9653	<e1>existence</e1> revealed <e2>speech</e2>
+9654	<e1>switchboard</e1> <e2>operator</e2>
+9655	<e1>plant_material</e1> <e2>suburb</e2>
+9656	<e1>term</e1> originates same-edne <e2>expression</e2>
+9657	<e1>serum</e1> pressed <e2>cheeses</e2>
+9658	<e1>state</e1> <e2>report</e2>
+9659	<e1>Unemployment</e1> cause <e2>abuse</e2>
+9660	<e1>list</e1> <e2>colors</e2>
+9661	<e1>discussion</e1> shifts <e2>content</e2>
+9662	<e1>body</e1> abandoned placed <e2>laundry_bag</e2>
+9663	<e1>products</e1> governed <e2>agreement</e2>
+9664	<e1>battery</e1> <e2>questions</e2>
+9665	<e1>Goods</e1> transported <e2>countries</e2>
+9666	<e1>roof</e1> <e2>supermarket</e2>
+9667	<e1>contestant</e1> gave <e2>answer</e2>
+9668	<e1>button</e1> <e2>dash</e2>
+9669	<e1>gases</e1> analysis emanated <e2>sources</e2>
+9670	<e1>student</e1> fell <e2>window</e2>
+9671	<e1>Personality</e1> includes <e2>style</e2>
+9672	<e1>course</e1> comprises <e2>holes</e2>
+9673	<e1>Acne</e1> caused <e2>irritants</e2>
+9674	<e1>filename_extension</e1> denoting <e2>file</e2>
+9675	<e1>verbalizations</e1> focused <e2>questions</e2>
+9676	<e1>talks</e1> moving <e2>overtime</e2>
+9677	<e1>textile</e1> <e2>factories</e2>
+9678	<e1>library</e1> <e2>books</e2>
+9679	<e1>mouth</e1> <e2>cave</e2>
+9680	<e1>plains</e1> feet does Rising clothed <e2>mountain</e2>
+9681	<e1>anthology</e1> <e2>songs</e2>
+9682	<e1>Sadness</e1> leads <e2>dissatisfaction</e2>
+9683	<e1>certificate</e1> Grade awarded <e2>product</e2>
+9684	<e1>sounds</e1> made <e2>species</e2>
+9685	<e1>hinge</e1> <e2>oyster</e2>
+9686	<e1>baby</e1> locked <e2>cedar_chest</e2>
+9687	<e1>fitter</e1> measures foot <e2>gauge</e2>
+9688	<e1>system</e1> generating <e2>power</e2>
+9689	<e1>frustration</e1> appreciate programming <e2>debugging</e2>
+9690	<e1>screaming</e1> <e2>shooting</e2>
+9691	<e1>excerpt</e1> revolved <e2>theme</e2>
+9692	<e1>rhyme</e1> <e2>thing</e2>
+9693	<e1>Berry</e1> <e2>wine</e2>
+9694	<e1>body</e1> preserved <e2>cask</e2>
+9695	<e1>water</e1> Wind <e2>erosion</e2>
+9696	<e1>fan</e1> blasts CPU removes cooling <e2>air</e2>
+9697	<e1>glands</e1> hyperplasia <e2>ducks</e2>
+9698	<e1>papillomavirus</e1> one causes types <e2>warts</e2>
+9699	<e1>crash</e1> caused <e2>meteor</e2>
+9700	<e1>day</e1> thrown <e2>chaos</e2>
+9701	<e1>body</e1> built things <e2>muscle</e2>
+9702	<e1>plantation</e1> garden <e2>bananas</e2>
+9703	<e1>coughing</e1> <e2>suffocation</e2>
+9704	<e1>supreme_court</e1> applied protections <e2>amendment</e2>
+9705	<e1>paper</e1> describe <e2>derivation</e2>
+9706	<e1>closure</e1> <e2>pipe</e2>
+9707	<e1>dolphin</e1> <e2>tail</e2>
+9708	<e1>extinction</e1> brink verging hunting <e2>deforestation</e2>
+9709	<e1>leader</e1> <e2>organization</e2>
+9710	<e1>word</e1> <e2>language</e2>
+9711	<e1>students</e1> went <e2>assembly</e2>
+9712	<e1>researchers</e1> produced saved <e2>report</e2>
+9713	<e1>wings</e1> Flapping <e2>duckling</e2>
+9714	<e1>producers</e1> All <e2>produce</e2>
+9715	<e1>stethoscope</e1> features rubber <e2>head</e2>
+9716	<e1>band</e1> ace recorded <e2>album</e2>
+9717	<e1>congress</e1> <e2>baboons</e2>
+9718	<e1>patient</e1> placed drug induced <e2>coma</e2>
+9719	<e1>Swine_flu</e1> one causes <e2>disease</e2>
+9720	<e1>evacuation</e1> consequences <e2>accident</e2>
+9721	<e1>Lasers</e1> work using pulsing <e2>wavelengths</e2>
+9722	<e1>devastation</e1> caused <e2>flooding</e2>
+9723	<e1>sleeve</e1> coil encloses <e2>coil</e2>
+9724	<e1>fetus</e1> derived <e2>embryo</e2>
+9725	<e1>speech</e1> caused <e2>combustion</e2>
+9726	<e1>tension</e1> release <e2>muscles</e2>
+9727	<e1>ticks</e1> caused rashes <e2>discomfort</e2>
+9728	<e1>news</e1> discussed crashed <e2>plane</e2>
+9729	<e1>shovel</e1> activity enabled <e2>neighbor</e2>
+9730	<e1>letter</e1> contained <e2>dispute</e2>
+9731	<e1>raid</e1> resulted <e2>crisis</e2>
+9732	<e1>scheme</e1> establishing <e2>access</e2>
+9733	<e1>paint</e1> going <e2>aluminium</e2>
+9734	<e1>documents</e1> discussed <e2>meeting</e2>
+9735	<e1>speech</e1> subject <e2>child_labour</e2>
+9736	<e1>laptop</e1> includes processor <e2>Intel</e2>
+9737	<e1>artwork</e1> artifacts give <e2>exhibit</e2>
+9738	<e1>nature</e1> thrown <e2>disarray</e2>
+9739	<e1>tension</e1> caused <e2>fighting</e2>
+9740	<e1>stress</e1> caused <e2>battles</e2>
+9741	<e1>convicts</e1> picked <e2>guards</e2>
+9742	<e1>business</e1> <e2>letter</e2>
+9743	<e1>letter</e1> contains <e2>instructions</e2>
+9744	<e1>book</e1> topic <e2>debate</e2>
+9745	<e1>meet</e1> Hill <e2>hounds</e2>
+9746	<e1>copse</e1> <e2>trees</e2>
+9747	<e1>class</e1> became <e2>sociology</e2>
+9748	<e1>league</e1> <e2>exhibitions</e2>
+9749	<e1>paragraphs</e1> introduce <e2>ideas</e2>
+9750	<e1>photograph</e1> reminds Frederic <e2>memory</e2>
+9751	<e1>surgeon</e1> part <e2>team</e2>
+9752	<e1>bait</e1> got <e2>frig</e2>
+9753	<e1>cabal</e1> <e2>murderers</e2>
+9754	<e1>garden</e1> have way <e2>window_box</e2>
+9755	<e1>portion</e1> source <e2>spectrum</e2>
+9756	<e1>calendar</e1> <e2>saints</e2>
+9757	<e1>report</e1> released <e2>derailment</e2>
+9758	<e1>devastation</e1> caused <e2>fire</e2>
+9759	<e1>conference</e1> organised <e2>roundtables</e2>
+9760	<e1>cocaine</e1> <e2>suitcase</e2>
+9761	<e1>projects</e1> investigating <e2>aspects</e2>
+9762	<e1>cockatiel</e1> threw <e2>morning</e2>
+9763	<e1>apparatus</e1> produces using samples <e2>vessel</e2>
+9764	<e1>sketch</e1> wrote setting <e2>ideas</e2>
+9765	<e1>business</e1> <e2>ferrets</e2>
+9766	<e1>funds</e1> invested <e2>schemes</e2>
+9767	<e1>head</e1> popped <e2>clothing</e2>
+9768	<e1>court</e1> achieved flexibility using <e2>rule</e2>
+9769	<e1>storm</e1> generated <e2>cold_front</e2>
+9770	<e1>article</e1> extracted <e2>book</e2>
+9771	<e1>mechanism</e1> <e2>gun</e2>
+9772	<e1>test</e1> added <e2>exam</e2>
+9773	<e1>mother</e1> <e2>breast</e2>
+9774	<e1>order</e1> posted <e2>overseas_address</e2>
+9775	<e1>slices</e1> placed <e2>basket</e2>
+9776	<e1>matter</e1> <e2>black_hole</e2>
+9777	<e1>guide</e1> outlines <e2>issues</e2>
+9778	<e1>firm</e1> reeased tripled <e2>report</e2>
+9779	<e1>ubiquity</e1> <e2>sparrows</e2>
+9780	<e1>Joint_problems</e1> caused <e2>osteoarthitis</e2>
+9781	<e1>lactoferrin</e1> transported <e2>blood</e2>
+9782	<e1>examination</e1> started <e2>head</e2>
+9783	<e1>locomotive</e1> departs <e2>platform</e2>
+9784	<e1>archives</e1> publish <e2>studies</e2>
+9785	<e1>Scientists</e1> given <e2>warning</e2>
+9786	<e1>money</e1> locked <e2>safe</e2>
+9787	<e1>flame</e1> put <e2>turnip</e2>
+9788	<e1>tutorial</e1> Levine aims summarise <e2>musical_theory</e2>
+9789	<e1>necklace</e1> made plated <e2>chain</e2>
+9790	<e1>corps</e1> <e2>giraffes</e2>
+9791	<e1>lice</e1> <e2>infestation</e2>
+9792	<e1>photos</e1> leaked <e2>journal</e2>
+9793	<e1>stubborn</e1> undulation cliffs <e2>the</e2>
+9794	<e1>title</e1> <e2>book</e2>
+9795	<e1>mask</e1> <e2>protection</e2>
+9796	<e1>mechanism</e1> enclosed <e2>bath</e2>
+9797	<e1>destruction</e1> caused <e2>war</e2>
+9798	<e1>file</e1> added <e2>directory</e2>
+9799	<e1>facts</e1> pertinent <e2>legal_proceeding</e2>
+9800	<e1>files</e1> reveal <e2>plot</e2>
+9801	<e1>train</e1> using <e2>station</e2>
+9802	<e1>troops</e1> moves <e2>region</e2>
+9803	<e1>End-sequencing</e1> fragments 36-base <e2>reads</e2>
+9804	<e1>trip</e1> <e2>dotterel</e2>
+9805	<e1>stone</e1> put <e2>pot</e2>
+9806	<e1>cognac</e1> <e2>bottle</e2>
+9807	<e1>memories</e1> give <e2>days</e2>
+9808	<e1>project</e1> assess <e2>state</e2>
+9809	<e1>leader</e1> handed <e2>police</e2>
+9810	<e1>chickens</e1> <e2>box</e2>
+9811	<e1>clerk</e1> <e2>shop</e2>
+9812	<e1>accident</e1> caused <e2>snarl</e2>
+9813	<e1>pressure</e1> separations driven <e2>process</e2>
+9814	<e1>colony</e1> <e2>rabbits</e2>
+9815	<e1>oil_painting</e1> <e2>frame</e2>
+9816	<e1>man</e1> ran <e2>truck</e2>
+9817	<e1>statute</e1> declared <e2>trade</e2>
+9818	<e1>covey</e1> <e2>grouse</e2>
+9819	<e1>injury</e1> caused negligence <e2>person</e2>
+9820	<e1>train</e1> part <e2>tunnel</e2>
+9821	<e1>sculptor</e1> <e2>maker</e2>
+9822	<e1>words</e1> flowed imagination <e2>curate</e2>
+9823	<e1>blackcurrent</e1> <e2>syrup</e2>
+9824	<e1>shaman</e1> cured <e2>herbs</e2>
+9825	<e1>communion</e1> <e2>believers</e2>
+9826	<e1>singular</e1> <e2>boars</e2>
+9827	<e1>pod</e1> <e2>dolphins</e2>
+9828	<e1>song</e1> written <e2>group</e2>
+9829	<e1>interferon</e1> production one causes <e2>fever</e2>
+9830	<e1>word</e1> tact origin derived <e2>verb</e2>
+9831	<e1>Pressure</e1> shoes <e2>friction</e2>
+9832	<e1>rat</e1> going get <e2>cell</e2>
+9833	<e1>recovery</e1> <e2>tsunami</e2>
+9834	<e1>pocket</e1> <e2>robe</e2>
+9835	<e1>brain</e1> <e2>jar</e2>
+9836	<e1>poet</e1> oeuvre includes prose <e2>poems</e2>
+9837	<e1>veto</e1> tool has <e2>president</e2>
+9838	<e1>rabble</e1> <e2>appetites</e2>
+9839	<e1>countries</e1> related <e2>history</e2>
+9840	<e1>science_fiction</e1> tends deal <e2>roles</e2>
+9841	<e1>fraternity</e1> <e2>cultures</e2>
+9842	<e1>Cancellations</e1> notified <e2>mail</e2>
+9843	<e1>world</e1> created <e2>process</e2>
+9844	<e1>motet</e1> grows <e2>idea</e2>
+9845	<e1>method</e1> comprises <e2>step</e2>
+9846	<e1>creator</e1> the played <e2>game</e2>
+9847	<e1>cornucopia</e1> <e2>reviews</e2>
+9848	<e1>floods</e1> caused <e2>rains</e2>
+9849	<e1>umpire</e1> <e2>game</e2>
+9850	<e1>physicist</e1> came hole <e2>term</e2>
+9851	<e1>brigade</e1> <e2>guards</e2>
+9852	<e1>buses</e1> depart <e2>airport</e2>
+9853	<e1>predisposition</e1> inherited <e2>diseases</e2>
+9854	<e1>run</e1> <e2>poultry</e2>
+9855	<e1>sketch</e1> packed <e2>sleeve</e2>
+9856	<e1>water</e1> liter boiled <e2>flask</e2>
+9857	<e1>crystal</e1> composed <e2>molecules</e2>
+9858	<e1>software</e1> <e2>developer</e2>
+9859	<e1>bag</e1> full <e2>items</e2>
+9860	<e1>solute</e1> <e2>micelle</e2>
+9861	<e1>beam</e1> generated cathode <e2>emission</e2>
+9862	<e1>book</e1> got <e2>library</e2>
+9863	<e1>groups</e1> dug <e2>tunnel</e2>
+9864	<e1>party</e1> won <e2>pledge</e2>
+9865	<e1>orange_slices</e1> added <e2>meals</e2>
+9866	<e1>legion</e1> <e2>swordsmen</e2>
+9867	<e1>pressure</e1> <e2>caisson</e2>
+9868	<e1>fire</e1> killed injured <e2>quake</e2>
+9869	<e1>song</e1> featured performed <e2>character</e2>
+9870	<e1>book</e1> copy acquire do Environmentalist picks <e2>author</e2>
+9871	<e1>pilot</e1> crash-landed <e2>parking_lot</e2>
+9872	<e1>swarm</e1> <e2>earthquakes</e2>
+9873	<e1>viruses</e1> spreading <e2>people</e2>
+9874	<e1>income</e1> went <e2>administration</e2>
+9875	<e1>teacher</e1> part <e2>team</e2>
+9876	<e1>devastation</e1> caused waste includes <e2>waste</e2>
+9877	<e1>saint</e1> <e2>martyrdom</e2>
+9878	<e1>huddle</e1> <e2>hens</e2>
+9879	<e1>president</e1> running <e2>bankruptcy</e2>
+9880	<e1>cigars</e1> kept <e2>humidor</e2>
+9881	<e1>ring</e1> <e2>gossipers</e2>
+9882	<e1>Information</e1> gained <e2>test</e2>
+9883	<e1>wire</e1> ends placed <e2>beaker</e2>
+9884	<e1>monks</e1> scaled faces inserting <e2>pieces</e2>
+9885	<e1>talk</e1> related some <e2>tricks</e2>
+9886	<e1>horses</e1> keep <e2>stud</e2>
+9887	<e1>battalion</e1> <e2>pikemen</e2>
+9888	<e1>leader</e1> <e2>society</e2>
+9889	<e1>metrosexuals</e1> use <e2>moisturizers</e2>
+9890	<e1>legion</e1> <e2>grenadiers</e2>
+9891	<e1>staff</e1> <e2>chairman</e2>
+9892	<e1>blonde</e1> petit performs <e2>voice</e2>
+9893	<e1>system</e1> works using <e2>rig</e2>
+9894	<e1>meatballs</e1> dropped <e2>ground</e2>
+9895	<e1>producer</e1> <e2>machinery</e2>
+9896	<e1>instrument</e1> <e2>vacuum_chamber</e2>
+9897	<e1>pact</e1> come <e2>effect</e2>
+9898	<e1>metal</e1> poured <e2>chamber</e2>
+9899	<e1>of</e1> disappointment sense reported audience <e2>the</e2>
+9900	<e1>profit</e1> donated <e2>cancer_research_center</e2>
+9901	<e1>damage</e1> caused <e2>industry</e2>
+9902	<e1>pollution</e1> causes smog <e2>warming</e2>
+9903	<e1>treatment</e1> individuals <e2>disease</e2>
+9904	<e1>phrase</e1> originates <e2>argument</e2>
+9905	<e1>seawater</e1> things <e2>ions</e2>
+9906	<e1>tapir</e1> hit <e2>hoof</e2>
+9907	<e1>paper</e1> co-authored <e2>staff</e2>
+9908	<e1>holder</e1> appears float <e2>spiral</e2>
+9909	<e1>daughter</e1> came <e2>idea</e2>
+9910	<e1>recipe</e1> <e2>collection</e2>
+9911	<e1>medical_information</e1> book pertaining <e2>medical_procedures</e2>
+9912	<e1>server</e1> driven <e2>approach</e2>
+9913	<e1>bible</e1> <e2>desk_drawer</e2>
+9914	<e1>carafe</e1> <e2>clock</e2>
+9915	<e1>study</e1> findings report <e2>effects</e2>
+9916	<e1>Sets</e1> denoted <e2>letters</e2>
+9917	<e1>artist</e1> <e2>creations</e2>
+9918	<e1>federation</e1> <e2>associations</e2>
+9919	<e1>disorders</e1> caused <e2>drinking</e2>
+9920	<e1>musician</e1> maker makes <e2>dulcimers</e2>
+9921	<e1>pocket</e1> <e2>jeans</e2>
+9922	<e1>pineapple</e1> <e2>wine</e2>
+9923	<e1>swarm</e1> <e2>particles</e2>
+9924	<e1>release</e1> delaying <e2>surfaces</e2>
+9925	<e1>heel</e1> <e2>foot</e2>
+9926	<e1>Beavers</e1> build <e2>canals</e2>
+9927	<e1>valves</e1> job is make sure flows <e2>heart</e2>
+9928	<e1>offices</e1> placed middle <e2>building</e2>
+9929	<e1>information</e1> stored <e2>files</e2>
+9930	<e1>crypt</e1> dug preserves posteriori <e2>choir</e2>
+9931	<e1>ointment</e1> put <e2>eyelid</e2>
+9932	<e1>cocaine</e1> hidden <e2>cylinders</e2>
+9933	<e1>golfer</e1> said <e2>statement</e2>
+9934	<e1>veins</e1> <e2>leg</e2>
+9935	<e1>engineer</e1> designed <e2>machine</e2>
+9936	<e1>water</e1> poured <e2>crack</e2>
+9937	<e1>array</e1> <e2>topics</e2>
+9938	<e1>crash</e1> <e2>rhinoceroses</e2>
+9939	<e1>amount</e1> donated <e2>charities</e2>
+9940	<e1>bottle</e1> <e2>kerosene</e2>
+9941	<e1>forkful</e1> put <e2>mouth</e2>
+9942	<e1>suitcase</e1> <e2>clothes</e2>
+9943	<e1>room</e1> dug side <e2>hill</e2>
+9944	<e1>story</e1> tell <e2>conquest</e2>
+9945	<e1>conference</e1> started <e2>debate</e2>
+9946	<e1>measure</e1> <e2>discussion</e2>
+9947	<e1>for</e1> person came <e2>up</e2>
+9948	<e1>rain</e1> come <e2>downtown</e2>
+9949	<e1>oil</e1> pressed <e2>flour</e2>
+9950	<e1>Stone</e1> <e2>grinding</e2>
+9951	<e1>statement</e1> revealed based <e2>departure</e2>
+9952	<e1>Junk_mails</e1> put <e2>spam_folder</e2>
+9953	<e1>yeast</e1> packed <e2>tubes</e2>
+9954	<e1>Lactic_acid</e1> made <e2>dextrose</e2>
+9955	<e1>backpack</e1> contained <e2>laptop_computer</e2>
+9956	<e1>demolition</e1> <e2>company</e2>
+9957	<e1>cushion</e1> material stuffed <e2>feathers</e2>
+9958	<e1>girl</e1> escaped <e2>community</e2>
+9959	<e1>display</e1> receives <e2>cable</e2>
+9960	<e1>treasure_trove</e1> museums <e2>palaces</e2>
+9961	<e1>inventor</e1> Annie <e2>alternative</e2>
+9962	<e1>satellite</e1> manoeuvred <e2>orbit</e2>
+9963	<e1>nanotubes</e1> introduced <e2>cavity</e2>
+9964	<e1>award</e1> given <e2>scholar</e2>
+9965	<e1>measure</e1> gained series public <e2>lectures</e2>
+9966	<e1>hall</e1> fell <e2>disuse</e2>
+9967	<e1>closure</e1> caused <e2>backup</e2>
+9968	<e1>sculpture</e1> featured <e2>publications</e2>
+9969	<e1>awards</e1> bestowing honour <e2>projects</e2>
+9970	<e1>motor</e1> drives using <e2>belt</e2>
+9971	<e1>Sewer</e1> <e2>covers</e2>
+9972	<e1>hilt</e1> <e2>katana</e2>
+9973	<e1>play</e1> theme <e2>ambition</e2>
+9974	<e1>devastation</e1> caused <e2>tsunami</e2>
+9975	<e1>Scars</e1> <e2>burns</e2>
+9976	<e1>mess</e1> <e2>grits</e2>
+9977	<e1>factory</e1> began manufacture <e2>banduras</e2>
+9978	<e1>power_supply</e1> derived <e2>power-pack</e2>
+9979	<e1>coalition</e1> established <e2>activities</e2>
+9980	<e1>tail</e1> <e2>shark</e2>
+9981	<e1>skein</e1> <e2>geese</e2>
+9982	<e1>drug</e1> put <e2>tubes</e2>
+9983	<e1>manna</e1> hidden <e2>pot</e2>
+9984	<e1>battalion</e1> <e2>musketeers</e2>
+9985	<e1>crisis</e1> caused <e2>blockade</e2>
+9986	<e1>quarrel</e1> Austria allies <e2>administration</e2>
+9987	<e1>factory</e1> <e2>cells</e2>
+9988	<e1>box_cutter</e1> hidden the hollowed <e2>book</e2>
+9989	<e1>industry</e1> recycling materials <e2>backfill</e2>
+9990	<e1>candidate</e1> push <e2>race</e2>
+9991	<e1>modules</e1> contain spelling <e2>apostrophes</e2>
+9992	<e1>deck</e1> <e2>bus</e2>
+9993	<e1>messenger_bag</e1> sealed <e2>trash_bag</e2>
+9994	<e1>entrance</e1> close-up shows maintenance <e2>building</e2>
+9995	<e1>photograph</e1> added <e2>hand</e2>
+9996	<e1>speech</e1> set <e2>belief</e2>
+9997	<e1>tap</e1> <e2>shower</e2>
+9998	<e1>phonograph</e1> developed <e2>work</e2>
+9999	<e1>oil</e1> blew <e2>filter</e2>
+10000	<e1>Scientists</e1> turning <e2>music</e2>
+10001	<e1>mechanic</e1> tightens bolt <e2>spanner</e2>
+10002	<e1>artworks</e1> reveal <e2>view</e2>
+10003	<e1>blast</e1> caused the <e2>mishandling</e2>
+10004	<e1>guns</e1> carried <e2>bar</e2>
+10005	<e1>worker</e1> <e2>mask</e2>
+10006	<e1>committee</e1> <e2>creditors</e2>
+10007	<e1>photos</e1> <e2>weeks</e2>
+10008	<e1>candies</e1> gave <e2>child</e2>
+10009	<e1>shortages</e1> <e2>riots</e2>
+10010	<e1>ion</e1> derived <e2>acid</e2>
+10011	<e1>pace</e1> <e2>donkeys</e2>
+10012	<e1>noise</e1> heard boom triggered <e2>quake</e2>
+10013	<e1>collective</e1> <e2>organizations</e2>
+10014	<e1>settlers</e1> brought <e2>regions</e2>
+10015	<e1>Products</e1> fallen <e2>disuse</e2>
+10016	<e1>package</e1> contained <e2>belt_bag</e2>
+10017	<e1>installation</e1> rescheduled <e2>next_week</e2>
+10018	<e1>images</e1> <e2>program</e2>
+10019	<e1>personnel</e1> part <e2>organisation</e2>
+10020	<e1>text</e1> entered <e2>files</e2>
+10021	<e1>people</e1> taken <e2>bankruptcy</e2>
+10022	<e1>man</e1> hidden <e2>body</e2>
+10023	<e1>stories</e1> narrate <e2>life</e2>
+10024	<e1>lectures</e1> collection papers summarised <e2>thoughts</e2>
+10025	<e1>advantages</e1> <e2>fortress</e2>
+10026	<e1>generator</e1> creates using <e2>principle</e2>
+10027	<e1>driver</e1> turned <e2>street</e2>
+10028	<e1>talk</e1> about peacekeeping <e2>operations</e2>
+10029	<e1>sord</e1> <e2>mallards</e2>
+10030	<e1>stones</e1> used cereal <e2>grinding</e2>
+10031	<e1>brotherhood</e1> <e2>aristocrats</e2>
+10032	<e1>anthology</e1> <e2>poems</e2>
+10033	<e1>kitchen</e1> full <e2>smoke</e2>
+10034	<e1>pen</e1> <e2>desk_drawer</e2>
+10035	<e1>scaffold</e1> <e2>platform</e2>
+10036	<e1>media</e1> treated <e2>mixture</e2>
+10037	<e1>ties</e1> takes <e2>era</e2>
+10038	<e1>coughing</e1> <e2>smoking</e2>
+10039	<e1>oil</e1> leaked <e2>river</e2>
+10040	<e1>delays</e1> caused <e2>governments</e2>
+10041	<e1>illness</e1> Information caused <e2>bacteria</e2>
+10042	<e1>explanation</e1> set <e2>appendix</e2>
+10043	<e1>internal_auditors</e1> moved <e2>locations</e2>
+10044	<e1>workpackage</e1> comprise <e2>tasks</e2>
+10045	<e1>cat</e1> pats <e2>forepaw</e2>
+10046	<e1>pepper</e1> inserted <e2>toy</e2>
+10047	<e1>poverty</e1> cause War <e2>migration</e2>
+10048	<e1>artisan</e1> carves motifs <e2>burin</e2>
+10049	<e1>article</e1> narrates <e2>experiences</e2>
+10050	<e1>suitcase</e1> found <e2>money</e2>
+10051	<e1>broom</e1> <e2>stick</e2>
+10052	<e1>mews</e1> <e2>hawks</e2>
+10053	<e1>carp</e1> retained <e2>sack</e2>
+10054	<e1>frustration</e1> mention <e2>rejection</e2>
+10055	<e1>deposits</e1> put <e2>account</e2>
+10056	<e1>blood</e1> catching <e2>ewer</e2>
+10057	<e1>Parties</e1> appear <e2>telephone</e2>
+10058	<e1>workers</e1> play celebrating office <e2>party</e2>
+10059	<e1>force</e1> generated <e2>joystick</e2>
+10060	<e1>company</e1> migrating <e2>segments</e2>
+10061	<e1>Chimpanzees</e1> make do <e2>love</e2>
+10062	<e1>fuel</e1> <e2>teflon_bladder</e2>
+10063	<e1>system</e1> composed number <e2>glands</e2>
+10064	<e1>tsunami</e1> resulted deaths <e2>displacement</e2>
+10065	<e1>box</e1> <e2>box</e2>
+10066	<e1>sounds</e1> <e2>signals</e2>
+10067	<e1>egg</e1> came <e2>species</e2>
+10068	<e1>responsibilities</e1> handed <e2>care</e2>
+10069	<e1>formation</e1> <e2>parties</e2>
+10070	<e1>rooms</e1> <e2>cottage</e2>
+10071	<e1>invasion_force</e1> arrival shattered <e2>planet</e2>
+10072	<e1>letter</e1> contains encloses <e2>copy</e2>
+10073	<e1>ignorance</e1> <e2>news</e2>
+10074	<e1>nunt</e1> pastry originating <e2>cuisine</e2>
+10075	<e1>boat</e1> departs <e2>port</e2>
+10076	<e1>Horseshoes</e1> made <e2>blacksmiths</e2>
+10077	<e1>containers</e1> delivered <e2>retail_stores</e2>
+10078	<e1>item</e1> shipped <e2>customer</e2>
+10079	<e1>cooper</e1> makes <e2>barrels</e2>
+10080	<e1>Mothers</e1> group donate <e2>kidneys</e2>
+10081	<e1>pollution</e1> send <e2>stratosphere</e2>
+10082	<e1>example</e1> <e2>book</e2>
+10083	<e1>bowels</e1> <e2>castle</e2>
+10084	<e1>aircraft</e1> departed <e2>airport</e2>
+10085	<e1>fund</e1> invested <e2>business</e2>
+10086	<e1>cleaners</e1> cause rash <e2>burning_sensation</e2>
+10087	<e1>ship</e1> departed <e2>destination</e2>
+10088	<e1>user</e1> inputs information intuitively using <e2>gestures</e2>
+10089	<e1>potter</e1> makes <e2>pot</e2>
+10090	<e1>dust</e1> nose cause <e2>nosebleeds</e2>
+10091	<e1>redcurrent</e1> <e2>syrup</e2>
+10092	<e1>train</e1> left <e2>station</e2>
+10093	<e1>husband</e1> returned <e2>sweater</e2>
+10094	<e1>brew</e1> <e2>bottle</e2>
+10095	<e1>water</e1> put <e2>kettle</e2>
+10096	<e1>finger</e1> <e2>nails</e2>
+10097	<e1>glue</e1> <e2>place</e2>
+10098	<e1>guide</e1> <e2>work</e2>
+10099	<e1>conditions</e1> spreading <e2>areas</e2>
+10100	<e1>cement</e1> poured <e2>forms</e2>
+10101	<e1>palm</e1> <e2>oil</e2>
+10102	<e1>Depression</e1> causes <e2>suicide</e2>
+10103	<e1>speech</e1> addressing <e2>practices</e2>
+10104	<e1>cadre</e1> <e2>musicians</e2>
+10105	<e1>battalion</e1> <e2>swordsmen</e2>
+10106	<e1>fortress</e1> has <e2>towers</e2>
+10107	<e1>pages</e1> autograph found wadded <e2>tankard</e2>
+10108	<e1>figure</e1> illustrates <e2>results</e2>
+10109	<e1>wall</e1> part <e2>experience</e2>
+10110	<e1>notes</e1> give details <e2>changes</e2>
+10111	<e1>appellant</e1> killed <e2>malice</e2>
+10112	<e1>variety</e1> grown <e2>peasants</e2>
+10113	<e1>manager</e1> drawn <e2>list</e2>
+10114	<e1>theme</e1> covered <e2>science_fiction</e2>
+10115	<e1>film</e1> asserts <e2>tenacity</e2>
+10116	<e1>cane</e1> version <e2>sugar</e2>
+10117	<e1>violinist</e1> constructed <e2>body</e2>
+10118	<e1>shot</e1> caused <e2>wound</e2>
+10119	<e1>pace</e1> <e2>asses</e2>
+10120	<e1>method</e1> comprises <e2>steps</e2>
+10121	<e1>bug</e1> flew <e2>garage</e2>
+10122	<e1>family</e1> went <e2>village</e2>
+10123	<e1>exhibition</e1> studies <e2>qualities</e2>
+10124	<e1>infestation</e1> <e2>fleas</e2>
+10125	<e1>theory</e1> governed <e2>exchange</e2>
+10126	<e1>mob</e1> <e2>workers</e2>
+10127	<e1>staff</e1> <e2>hospital</e2>
+10128	<e1>brush</e1> tools associated <e2>painter</e2>
+10129	<e1>company</e1> landed <e2>trouble</e2>
+10130	<e1>man</e1> completed <e2>lap</e2>
+10131	<e1>novel</e1> drew <e2>governor-general</e2>
+10132	<e1>flash_drive</e1> loaded <e2>ROMs</e2>
+10133	<e1>scientists</e1> treated <e2>antiboitics</e2>
+10134	<e1>Acne</e1> caused <e2>hormonal_imbalance</e2>
+10135	<e1>pump</e1> employs <e2>coupling</e2>
+10136	<e1>flights</e1> departing <e2>airspace</e2>
+10137	<e1>discussion</e1> made clear <e2>concept</e2>
+10138	<e1>probe</e1> generated <e2>fragment</e2>
+10139	<e1>restaurant</e1> fallen <e2>list</e2>
+10140	<e1>government</e1> established <e2>agency</e2>
+10141	<e1>furniture</e1> <e2>legs</e2>
+10142	<e1>passenger</e1> LA flight Halfway took bounced <e2>photograph</e2>
+10143	<e1>mystery</e1> source <e2>energy</e2>
+10144	<e1>teacher</e1> explores using <e2>literature</e2>
+10145	<e1>ligature</e1> assists <e2>performer</e2>
+10146	<e1>design</e1> driven <e2>studio</e2>
+10147	<e1>Tree</e1> <e2>roots</e2>
+10148	<e1>mason</e1> put <e2>walls</e2>
+10149	<e1>company</e1> able determine using <e2>benchmarking</e2>
+10150	<e1>cadre</e1> <e2>banks</e2>
+10151	<e1>composer</e1> instrumental <e2>works</e2>
+10152	<e1>shovel</e1> favourite <e2>gardeners</e2>
+10153	<e1>man</e1> built <e2>submersible</e2>
+10154	<e1>family</e1> <e2>inpatients</e2>
+10155	<e1>certificate</e1> declaring <e2>exemption</e2>
+10156	<e1>inflammation</e1> causes <e2>pain</e2>
+10157	<e1>title</e1> <e2>book</e2>
+10158	<e1>items</e1> shipped <e2>customer</e2>
+10159	<e1>teaching_experience</e1> Much involves telling <e2>anecdotes</e2>
+10160	<e1>association</e1> assembled <e2>kits</e2>
+10161	<e1>skin</e1> <e2>orange</e2>
+10162	<e1>student</e1> fell <e2>balcony</e2>
+10163	<e1>property</e1> source <e2>expression</e2>
+10164	<e1>news</e1> <e2>article</e2>
+10165	<e1>films</e1> delivered <e2>viewers</e2>
+10166	<e1>forebrain</e1> part <e2>brain</e2>
+10167	<e1>plane</e1> lifted <e2>runway</e2>
+10168	<e1>bomb</e1> found put <e2>freezer</e2>
+10169	<e1>paddling</e1> <e2>ducks</e2>
+10170	<e1>kids</e1> ran <e2>place</e2>
+10171	<e1>freighter</e1> full <e2>dope</e2>
+10172	<e1>impact</e1> investigated <e2>work</e2>
+10173	<e1>constitutes</e1> <e2>plant</e2>
+10174	<e1>froggery</e1> <e2>frogs</e2>
+10175	<e1>water</e1> poured <e2>river</e2>
+10176	<e1>evangelist</e1> blasts patrons <e2>news</e2>
+10177	<e1>disorders</e1> caused <e2>mutation</e2>
+10178	<e1>baby</e1> placed <e2>bag</e2>
+10179	<e1>wall</e1> stacked <e2>youths</e2>
+10180	<e1>teacher</e1> finds help <e2>umbrella</e2>
+10181	<e1>book</e1> involves reader <e2>process</e2>
+10182	<e1>Power</e1> generated <e2>reaction</e2>
+10183	<e1>motions</e1> <e2>discipline</e2>
+10184	<e1>hero</e1> enters <e2>building</e2>
+10185	<e1>money</e1> coming <e2>pocket</e2>
+10186	<e1>dynamite</e1> used <e2>blasting</e2>
+10187	<e1>fish</e1> pushed <e2>sea</e2>
+10188	<e1>player</e1> moved <e2>next_round</e2>
+10189	<e1>series_of_poems</e1> relating <e2>story</e2>
+10190	<e1>license</e1> issued <e2>state</e2>
+10191	<e1>radio_wave</e1> travelling <e2>outer_space</e2>
+10192	<e1>author</e1> <e2>blog</e2>
+10193	<e1>valves</e1> <e2>trumpet</e2>
+10194	<e1>list</e1> generated <e2>call</e2>
+10195	<e1>Doctor</e1> saves <e2>drill</e2>
+10196	<e1>sensor</e1> moves <e2>circle</e2>
+10197	<e1>film</e1> <e2>industry</e2>
+10198	<e1>equipment</e1> built <e2>country</e2>
+10199	<e1>hairstyles</e1> <e2>days</e2>
+10200	<e1>eruption</e1> commencement mark <e2>craters</e2>
+10201	<e1>girl</e1> finds help <e2>companion</e2>
+10202	<e1>soldiers</e1> moved <e2>post</e2>
+10203	<e1>ancestors</e1> reached using <e2>rafts</e2>
+10204	<e1>journal</e1> dedicated <e2>veterinary_imaging</e2>
+10205	<e1>program</e1> called <e2>Bigi</e2>
+10206	<e1>foundry</e1> business manufacture <e2>bells</e2>
+10207	<e1>weapons</e1> took <e2>space</e2>
+10208	<e1>seat</e1> <e2>truck</e2>
+10209	<e1>storm</e1> generated <e2>upwelling</e2>
+10210	<e1>film</e1> uses <e2>flashbacks</e2>
+10211	<e1>documents</e1> survey <e2>literature</e2>
+10212	<e1>eye</e1> <e2>bull</e2>
+10213	<e1>Shampoos</e1> work using <e2>acid</e2>
+10214	<e1>base</e1> <e2>clock</e2>
+10215	<e1>word</e1> originates race <e2>ancient</e2>
+10216	<e1>magazine</e1> dedicated <e2>music</e2>
+10217	<e1>socialist</e1> <e2>party</e2>
+10218	<e1>barley</e1> <e2>wine</e2>
+10219	<e1>world</e1> enclosed <e2>egg</e2>
+10220	<e1>article</e1> pointed <e2>problems</e2>
+10221	<e1>elements</e1> included <e2>literature</e2>
+10222	<e1>title</e1> derived <e2>quip</e2>
+10223	<e1>riffraff</e1> <e2>savages</e2>
+10224	<e1>poet</e1> wrote <e2>sequel</e2>
+10225	<e1>league</e1> <e2>codes</e2>
+10226	<e1>religion</e1> spread period <e2>empire</e2>
+10227	<e1>woofers</e1> <e2>box</e2>
+10228	<e1>flood</e1> extent shows rivers <e2>sea</e2>
+10229	<e1>students</e1> assigned <e2>groups</e2>
+10230	<e1>disaster</e1> caused <e2>hurricane</e2>
+10231	<e1>products</e1> shipped <e2>areas</e2>
+10232	<e1>poison</e1> <e2>bottle</e2>
+10233	<e1>men</e1> <e2>fort</e2>
+10234	<e1>company</e1> assembled <e2>portfolio</e2>
+10235	<e1>avenger</e1> killed <e2>rifle</e2>
+10236	<e1>manuscript</e1> introduced <e2>justice</e2>
+10237	<e1>Members</e1> went build <e2>computers</e2>
+10238	<e1>crush</e1> <e2>passengers</e2>
+10239	<e1>horde</e1> <e2>believers</e2>
+10240	<e1>bomb</e1> Hundreds dropped <e2>region</e2>
+10241	<e1>astronomer</e1> observed <e2>telescope</e2>
+10242	<e1>methods</e1> described <e2>publication</e2>
+10243	<e1>man</e1> <e2>shovel</e2>
+10244	<e1>dignity</e1> <e2>canons</e2>
+10245	<e1>pilots</e1> took <e2>history</e2>
+10246	<e1>energy</e1> impression reason caused <e2>posters</e2>
+10247	<e1>course</e1> <e2>interaction</e2>
+10248	<e1>car</e1> full <e2>snakes</e2>
+10249	<e1>chef</e1> spoke <e2>knife</e2>
+10250	<e1>treatise</e1> servant <e2>theorist</e2>
+10251	<e1>communion</e1> <e2>saints</e2>
+10252	<e1>creditor</e1> reached <e2>process</e2>
+10253	<e1>journal</e1> looking <e2>use</e2>
+10254	<e1>laughter</e1> commented <e2>joke</e2>
+10255	<e1>efforts</e1> invested <e2>objective</e2>
+10256	<e1>bottle</e1> <e2>blood</e2>
+10257	<e1>explosion</e1> caused <e2>crater</e2>
+10258	<e1>damage</e1> caused <e2>aircraft</e2>
+10259	<e1>episode</e1> documented <e2>video</e2>
+10260	<e1>sound</e1> came <e2>structure</e2>
+10261	<e1>building</e1> edge crawled was fragment <e2>wall</e2>
+10262	<e1>generations</e1> departed <e2>future_survival</e2>
+10263	<e1>ornaments</e1> blown <e2>molds</e2>
+10264	<e1>saw</e1> <e2>blades</e2>
+10265	<e1>notes</e1> detailing <e2>ideas</e2>
+10266	<e1>prisoner</e1> he dug <e2>tunnel</e2>
+10267	<e1>accident</e1> cause <e2>power_outage</e2>
+10268	<e1>bench</e1> <e2>magistrates</e2>
+10269	<e1>debate</e1> respect <e2>ethical_issues</e2>
+10270	<e1>eyewitness</e1> <e2>account</e2>
+10271	<e1>letter</e1> arrived <e2>headquarters</e2>
+10272	<e1>chain</e1> <e2>saw</e2>
+10273	<e1>applicant</e1> graduated <e2>school</e2>
+10274	<e1>garden</e1> comprises <e2>patches</e2>
+10275	<e1>flu</e1> Colds cause <e2>fevers</e2>
+10276	<e1>father</e1> going <e2>college</e2>
+10277	<e1>indicator</e1> flashes <e2>headset</e2>
+10278	<e1>hydrants</e1> pressure tested <e2>facility</e2>
+10279	<e1>influenza</e1> caused <e2>virus</e2>
+10280	<e1>soap</e1> moved <e2>prime_time</e2>
+10281	<e1>Wrinkles</e1> <e2>laughing</e2>
+10282	<e1>varieties</e1> growing vineyards owned supervision <e2>church</e2>
+10283	<e1>grain</e1> <e2>spirits</e2>
+10284	<e1>crisis</e1> spreading <e2>economy</e2>
+10285	<e1>damage</e1> caused <e2>virus</e2>
+10286	<e1>map</e1> locked <e2>safe</e2>
+10287	<e1>pants</e1> <e2>box</e2>
+10288	<e1>mechanism</e1> consists <e2>bridge</e2>
+10289	<e1>dray</e1> <e2>squirrels</e2>
+10290	<e1>reagent</e1> <e2>bottle</e2>
+10291	<e1>illusion</e1> examined number <e2>experiments</e2>
+10292	<e1>criticism</e1> commented <e2>weaknesses</e2>
+10293	<e1>singer</e1> arrived <e2>outdoor_stage</e2>
+10294	<e1>screwdriver</e1> stomach stabbed <e2>men</e2>
+10295	<e1>life</e1> related Boxer <e2>movie</e2>
+10296	<e1>fear</e1> has <e2>robbers</e2>
+10297	<e1>ship</e1> dissapeared <e2>harbour</e2>
+10298	<e1>state</e1> source <e2>capital</e2>
+10299	<e1>asphalt</e1> derived <e2>term</e2>
+10300	<e1>lord</e1> continues demonstrate generous <e2>giving</e2>
+10301	<e1>flock</e1> <e2>ducks</e2>
+10302	<e1>debate</e1> creates kiosks Alert <e2>'</e2>
+10303	<e1>award</e1> bestowed <e2>organization</e2>
+10304	<e1>officer</e1> reached using <e2>apparatus</e2>
+10305	<e1>roof</e1> <e2>building</e2>
+10306	<e1>cow</e1> touched <e2>nuzzle</e2>
+10307	<e1>bus</e1> <e2>computer</e2>
+10308	<e1>plan</e1> result analysis <e2>crime</e2>
+10309	<e1>guide</e1> <e2>world</e2>
+10310	<e1>book</e1> themes One <e2>influence</e2>
+10311	<e1>picture</e1> front played <e2>holes</e2>
+10312	<e1>bottle</e1> <e2>water</e2>
+10313	<e1>addition</e1> <e2>scribe</e2>
+10314	<e1>blocks</e1> <e2>caisson</e2>
+10315	<e1>key</e1> <e2>keyboard</e2>
+10316	<e1>methamphetamine</e1> <e2>container</e2>
+10317	<e1>belief</e1> departure <e2>determinism</e2>
+10318	<e1>bungalow</e1> built <e2>barn</e2>
+10319	<e1>zoo</e1> <e2>creeps</e2>
+10320	<e1>complex</e1> treated <e2>poison</e2>
+10321	<e1>astronauts</e1> sending <e2>asteroid</e2>
+10322	<e1>bolt</e1> <e2>door</e2>
+10323	<e1>team</e1> moved <e2>fifth_place</e2>
+10324	<e1>exhibition</e1> displayed <e2>view</e2>
+10325	<e1>object</e1> <e2>nylon_bag</e2>
+10326	<e1>tools</e1> sped <e2>process</e2>
+10327	<e1>pieces</e1> <e2>hutch</e2>
+10328	<e1>constitution</e1> prepared <e2>leaders</e2>
+10329	<e1>musician</e1> treated <e2>preparation</e2>
+10330	<e1>agarose</e1> pouring <e2>tray</e2>
+10331	<e1>team</e1> sequenced DNA <e2>chemistry</e2>
+10332	<e1>gun</e1> hidden <e2>drawer</e2>
+10333	<e1>president</e1> <e2>university</e2>
+10334	<e1>students</e1> enforced <e2>violence</e2>
+10335	<e1>damage</e1> caused Nisqually <e2>earthquakes</e2>
+10336	<e1>train</e1> going <e2>photographer</e2>
+10337	<e1>fluids</e1> enclosed <e2>cylinder</e2>
+10338	<e1>ship</e1> sails <e2>port</e2>
+10339	<e1>worker</e1> locked <e2>boxcar</e2>
+10340	<e1>tempeh</e1> made <e2>soybeans</e2>
+10341	<e1>whirl</e1> <e2>insects</e2>
+10342	<e1>tessellate</e1> added <e2>songs</e2>
+10343	<e1>respondents</e1> using variety <e2>programs</e2>
+10344	<e1>abscess</e1> caused <e2>infection</e2>
+10345	<e1>study</e1> assessed regimes using <e2>evaluations</e2>
+10346	<e1>act</e1> promotes <e2>limitation</e2>
+10347	<e1>bottle</e1> holds <e2>testimony</e2>
+10348	<e1>flour</e1> poured <e2>mixture</e2>
+10349	<e1>body</e1> <e2>workers</e2>
+10350	<e1>fat</e1> cause <e2>disease</e2>
+10351	<e1>barium</e1> released <e2>sulphate</e2>
+10352	<e1>fees</e1> became point <e2>discussion</e2>
+10353	<e1>country</e1> resumed manufacturing <e2>machines</e2>
+10354	<e1>preforms</e1> blown <e2>bottles</e2>
+10355	<e1>plant</e1> sealed <e2>flask</e2>
+10356	<e1>acetoin</e1> distilled <e2>filtrate</e2>
+10357	<e1>metal</e1> <e2>ground</e2>
+10358	<e1>pillars</e1> <e2>ruins</e2>
+10359	<e1>change</e1> making <e2>console</e2>
+10360	<e1>fable</e1> illustrates <e2>progress</e2>
+10361	<e1>resources</e1> <e2>programmers</e2>
+10362	<e1>technocrats</e1> brought <e2>government</e2>
+10363	<e1>basin</e1> sunk <e2>depression</e2>
+10364	<e1>designer</e1> made <e2>sets</e2>
+10365	<e1>notification</e1> declares <e2>names</e2>
+10366	<e1>zoo</e1> <e2>misfits</e2>
+10367	<e1>researcher</e1> started <e2>question</e2>
+10368	<e1>student</e1> relaxes <e2>book</e2>
+10369	<e1>guy</e1> <e2>knob</e2>
+10370	<e1>fox</e1> tore <e2>fury</e2>
+10371	<e1>work</e1> <e2>man</e2>
+10372	<e1>poem</e1> personifies <e2>poet</e2>
+10373	<e1>electrical_short</e1> caused <e2>fire</e2>
+10374	<e1>batch</e1> <e2>suitcase</e2>
+10375	<e1>wriggle</e1> <e2>worms</e2>
+10376	<e1>species</e1> imported <e2>country</e2>
+10377	<e1>message</e1> gist was crisis <e2>social_structure</e2>
+10378	<e1>raspberry</e1> <e2>jelly</e2>
+10379	<e1>events</e1> caused <e2>dissolution</e2>
+10380	<e1>bat</e1> moves <e2>wings</e2>
+10381	<e1>exhibition</e1> looks <e2>dynamic_connections</e2>
+10382	<e1>contamination</e1> caused <e2>residues</e2>
+10383	<e1>Asthma</e1> disease system causes swelling <e2>narrowing</e2>
+10384	<e1>request</e1> arrived <e2>firm</e2>
+10385	<e1>invertebrate</e1> armor <e2>halves</e2>
+10386	<e1>exhibit</e1> features <e2>designs</e2>
+10387	<e1>hand</e1> palm starts base ring <e2>fingers</e2>
+10388	<e1>memo</e1> <e2>chairman</e2>
+10389	<e1>arm</e1> <e2>chair</e2>
+10390	<e1>ride</e1> starts <e2>sign</e2>
+10391	<e1>farmer</e1> shows <e2>hoe</e2>
+10392	<e1>meeting</e1> co-sponsored <e2>influenza</e2>
+10393	<e1>air</e1> pressed <e2>lungs</e2>
+10394	<e1>press</e1> continues digest <e2>results</e2>
+10395	<e1>lyrics</e1> point <e2>sexual_politics</e2>
+10396	<e1>incident</e1> caused <e2>entry</e2>
+10397	<e1>name</e1> originated <e2>times</e2>
+10398	<e1>imbalance</e1> caused <e2>torque</e2>
+10399	<e1>bombs</e1> thrown two parked <e2>cars</e2>
+10400	<e1>timer</e1> <e2>clock</e2>
+10401	<e1>rain</e1> <e2>offers</e2>
+10402	<e1>officer</e1> <e2>college</e2>
+10403	<e1>robbers</e1> ran <e2>scene</e2>
+10404	<e1>body</e1> <e2>traders</e2>
+10405	<e1>prisoner</e1> threw <e2>cell</e2>
+10406	<e1>studies</e1> directed examining green-up <e2>vegetation</e2>
+10407	<e1>fish</e1> spawned <e2>eggs</e2>
+10408	<e1>clique</e1> <e2>acquaintances</e2>
+10409	<e1>statement</e1> issued <e2>president</e2>
+10410	<e1>world</e1> <e2>factory</e2>
+10411	<e1>union</e1> defined <e2>senses</e2>
+10412	<e1>engineers</e1> devised <e2>method</e2>
+10413	<e1>oil</e1> leaked <e2>radiator</e2>
+10414	<e1>parameters</e1> described <e2>text</e2>
+10415	<e1>medicine</e1> given <e2>patient</e2>
+10416	<e1>rookery</e1> <e2>glossy_ibis</e2>
+10417	<e1>fear</e1> triggered <e2>death</e2>
+10418	<e1>data</e1> moved <e2>text_box</e2>
+10419	<e1>view</e1> rooted <e2>perspective</e2>
+10420	<e1>singer</e1> demonstrates <e2>song</e2>
+10421	<e1>vehicles</e1> brought <e2>city</e2>
+10422	<e1>discussion</e1> Most <e2>words</e2>
+10423	<e1>design</e1> evolved <e2>work</e2>
+10424	<e1>county</e1> replaces mailbox <e2>mailbox</e2>
+10425	<e1>devastation</e1> survey first <e2>earthquake</e2>
+10426	<e1>rash</e1> groin anus caused <e2>fungal_imbalance</e2>
+10427	<e1>fans</e1> gone <e2>hiding</e2>
+10428	<e1>chapters</e1> included core <e2>book</e2>
+10429	<e1>patents</e1> covering <e2>algorithms</e2>
+10430	<e1>patch</e1> <e2>flowers</e2>
+10431	<e1>statue</e1> <e2>box</e2>
+10432	<e1>box</e1> placed <e2>cornerstone</e2>
+10433	<e1>teeth</e1> Many have <e2>roots</e2>
+10434	<e1>neuron</e1> unleashes <e2>jolt</e2>
+10435	<e1>cells</e1> <e2>table</e2>
+10436	<e1>balls</e1> thrown <e2>basket</e2>
+10437	<e1>rule</e1> governs <e2>use</e2>
+10438	<e1>united</e1> proletariat nationalities <e2>various</e2>
+10439	<e1>boys</e1> dragged <e2>fighting</e2>
+10440	<e1>album</e1> <e2>band</e2>
+10441	<e1>dean</e1> <e2>faculty</e2>
+10442	<e1>animal</e1> stuffing <e2>bong</e2>
+10443	<e1>skirt</e1> <e2>trunk</e2>
+10444	<e1>Electricians</e1> start reading <e2>maps</e2>
+10445	<e1>grenade</e1> hidden <e2>canister</e2>
+10446	<e1>yachts</e1> arrived <e2>harbor</e2>
+10447	<e1>ham</e1> slab part <e2>sandwich</e2>
+10448	<e1>arrangements</e1> <e2>demonstrator</e2>
+10449	<e1>Cavalry</e1> consisted <e2>cuirassiers</e2>
+10450	<e1>hookup</e1> <e2>products</e2>
+10451	<e1>sewer</e1> <e2>cover</e2>
+10452	<e1>escape</e1> <e2>bottle</e2>
+10453	<e1>emails</e1> arrive <e2>mail_box</e2>
+10454	<e1>series</e1> investigating <e2>rites</e2>
+10455	<e1>wares</e1> those made To-shiro <e2>potter</e2>
+10456	<e1>water</e1> poured <e2>straw-bales</e2>
+10457	<e1>show</e1> offers <e2>discussion</e2>
+10458	<e1>research</e1> concerned <e2>environmental_issues</e2>
+10459	<e1>farmer</e1> pushed <e2>poverty</e2>
+10460	<e1>crocodile</e1> has lump <e2>snout</e2>
+10461	<e1>author</e1> finished <e2>book</e2>
+10462	<e1>cough_syrup</e1> <e2>bottle</e2>
+10463	<e1>cartridges</e1> inserted <e2>printer</e2>
+10464	<e1>museum</e1> dug <e2>pit</e2>
+10465	<e1>laws</e1> limit <e2>size</e2>
+10466	<e1>Tsunamis</e1> caused <e2>displacement</e2>
+10467	<e1>material</e1> transported <e2>outer_disc_regions</e2>
+10468	<e1>irritants</e1> pollution cause <e2>coughing</e2>
+10469	<e1>office</e1> <e2>floor</e2>
+10470	<e1>wine</e1> <e2>carton</e2>
+10471	<e1>ammonia</e1> most produced <e2>plant</e2>
+10472	<e1>speech</e1> summary <e2>problems</e2>
+10473	<e1>blisters</e1> caused <e2>antibodies</e2>
+10474	<e1>timestamp</e1> creating formatted <e2>date</e2>
+10475	<e1>division</e1> <e2>pikemen</e2>
+10476	<e1>book</e1> enclosed <e2>slipcase</e2>
+10477	<e1>spacecraft</e1> placed <e2>container</e2>
+10478	<e1>photographer</e1> journeyed <e2>heartland</e2>
+10479	<e1>water</e1> fetched <e2>ewer</e2>
+10480	<e1>pipeline</e1> leaked <e2>gas</e2>
+10481	<e1>decline</e1> caused <e2>collapse</e2>
+10482	<e1>block</e1> put <e2>fishermen</e2>
+10483	<e1>fly</e1> <e2>jeans</e2>
+10484	<e1>knob</e1> <e2>bat</e2>
+10485	<e1>athlete</e1> starts <e2>stance</e2>
+10486	<e1>resource</e1> documenting Pennsylvania <e2>results</e2>
+10487	<e1>maternity_wards</e1> sinking <e2>chaos</e2>
+10488	<e1>gold</e1> ounce sealed <e2>quartz_tube</e2>
+10489	<e1>system</e1> contains is <e2>antennas</e2>
+10490	<e1>cranberry</e1> <e2>jelly</e2>
+10491	<e1>man</e1> struck <e2>stone</e2>
+10492	<e1>world</e1> rooted <e2>life</e2>
+10493	<e1>Chocolates</e1> cause <e2>acne</e2>
+10494	<e1>gunshot</e1> <e2>forearm</e2>
+10495	<e1>pan</e1> filled <e2>spaghetti</e2>
+10496	<e1>emperor</e1> issued <e2>decree</e2>
+10497	<e1>machine</e1> contains <e2>reservoir</e2>
+10498	<e1>box</e1> filled <e2>braces</e2>
+10499	<e1>moment</e1> arrives <e2>minutes</e2>
+10500	<e1>coughing</e1> <e2>allergies</e2>
+10501	<e1>disturbance</e1> distressed <e2>overpopulation</e2>
+10502	<e1>industry</e1> constitutes sectors <e2>economy</e2>
+10503	<e1>pillar</e1> <e2>bridge</e2>
+10504	<e1>announcement</e1> caused <e2>stir</e2>
+10505	<e1>protein</e1> causes <e2>cancer</e2>
+10506	<e1>blacksmith</e1> glow <e2>forge</e2>
+10507	<e1>wheat</e1> <e2>whisky</e2>
+10508	<e1>cell</e1> egg queen prepared <e2>bees</e2>
+10509	<e1>images</e1> put <e2>web_page</e2>
+10510	<e1>stern</e1> <e2>boat</e2>
+10511	<e1>firm</e1> co-founded <e2>head</e2>
+10512	<e1>lines</e1> operate bus located <e2>terminal</e2>
+10513	<e1>guard</e1> pushes <e2>chuckle</e2>
+10514	<e1>electrode</e1> pressed <e2>top</e2>
+10515	<e1>confederacy</e1> <e2>clans</e2>
+10516	<e1>communists</e1> threw <e2>wall</e2>
+10517	<e1>Danger</e1> part <e2>routine</e2>
+10518	<e1>criticism</e1> related subject <e2>religion</e2>
+10519	<e1>tube</e1> placed <e2>beaker</e2>
+10520	<e1>formation</e1> <e2>dragoons</e2>
+10521	<e1>tomatoes</e1> grown <e2>pail</e2>
+10522	<e1>guard</e1> did <e2>look</e2>
+10523	<e1>deformation</e1> computing method caused <e2>filling</e2>
+10524	<e1>recurring</e1> headaches fatigue <e2>and</e2>
+10525	<e1>constable</e1> <e2>ravens</e2>
+10526	<e1>pin</e1> <e2>grenade</e2>
+10527	<e1>nursery</e1> spawned <e2>stars</e2>
+10528	<e1>breakdown</e1> caused <e2>war</e2>
+10529	<e1>wizard</e1> driven <e2>interface</e2>
+10530	<e1>body</e1> <e2>trunk</e2>
+10531	<e1>technical_terms</e1> defined <e2>glossary_section</e2>
+10532	<e1>remark</e1> came <e2>person</e2>
+10533	<e1>bill</e1> regulating <e2>commerce</e2>
+10534	<e1>artery</e1> exit lay <e2>arch</e2>
+10535	<e1>magazine</e1> concerned <e2>life</e2>
+10536	<e1>walls</e1> <e2>fortress</e2>
+10537	<e1>craftsperson</e1> creates <e2>representation</e2>
+10538	<e1>drug</e1> release <e2>matrix</e2>
+10539	<e1>text</e1> generating <e2>grammars</e2>
+10540	<e1>queen</e1> put <e2>cage</e2>
+10541	<e1>claim</e1> issued <e2>quarters</e2>
+10542	<e1>bolt</e1> <e2>handle</e2>
+10543	<e1>press_release</e1> <e2>studio</e2>
+10544	<e1>hunger</e1> cause violence <e2>unrest</e2>
+10545	<e1>ulcers</e1> caused pylori named <e2>infectious_agent</e2>
+10546	<e1>political_science</e1> discipline revolves <e2>government</e2>
+10547	<e1>states</e1> divided <e2>counties</e2>
+10548	<e1>hide</e1> <e2>tigers</e2>
+10549	<e1>products</e1> grown <e2>defendant</e2>
+10550	<e1>fisherman</e1> bought <e2>boat</e2>
+10551	<e1>inconvenience</e1> caused <e2>fence</e2>
+10552	<e1>waves</e1> cause disorientation <e2>nausea</e2>
+10553	<e1>sweetcorn</e1> produced box earwig filled <e2>cobs</e2>
+10554	<e1>person</e1> creates <e2>couverture</e2>
+10555	<e1>images</e1> found <e2>reliquary</e2>
+10556	<e1>house</e1> has <e2>garage</e2>
+10557	<e1>water</e1> poured <e2>hole</e2>
+10558	<e1>speech</e1> <e2>conversation</e2>
+10559	<e1>product</e1> posted <e2>house</e2>
+10560	<e1>deck</e1> <e2>cards</e2>
+10561	<e1>fire</e1> escape <e2>accident</e2>
+10562	<e1>profits</e1> some protecting <e2>inflation</e2>
+10563	<e1>team</e1> <e2>insulation</e2>
+10564	<e1>snow</e1> blew <e2>snowdrifts</e2>
+10565	<e1>furniture</e1> program <e2>maker</e2>
+10566	<e1>sparrows</e1> flown <e2>wall</e2>
+10567	<e1>stand</e1> <e2>gang_violence</e2>
+10568	<e1>commissioner</e1> assisted number <e2>officers</e2>
+10569	<e1>wool</e1> <e2>industry</e2>
+10570	<e1>orders</e1> <e2>legislation</e2>
+10571	<e1>theory</e1> wrote <e2>napkin</e2>
+10572	<e1>researchers</e1> found gene responsible turning <e2>fat</e2>
+10573	<e1>help</e1> arrived <e2>quarter</e2>
+10574	<e1>area</e1> accommodated <e2>pen</e2>
+10575	<e1>guns</e1> locked <e2>safe</e2>
+10576	<e1>author</e1> <e2>book</e2>
+10577	<e1>clot</e1> caused <e2>seizure</e2>
+10578	<e1>radiation</e1> <e2>microwaves</e2>
+10579	<e1>brew</e1> <e2>tank</e2>
+10580	<e1>orchard</e1> <e2>cherries</e2>
+10581	<e1>lions</e1> turtles use <e2>flippers</e2>
+10582	<e1>leash</e1> <e2>deer</e2>
+10583	<e1>child</e1> killed <e2>nail</e2>
+10584	<e1>boredom</e1> ignorance cause <e2>violence</e2>
+10585	<e1>robots</e1> make <e2>components</e2>
+10586	<e1>steps</e1> <e2>ladder</e2>
+10587	<e1>wheat</e1> <e2>beer</e2>
+10588	<e1>couple</e1> <e2>clowns</e2>
+10589	<e1>wainwright</e1> worked whittling lathing <e2>shapes</e2>
+10590	<e1>children</e1> handed <e2>relatives</e2>
+10591	<e1>pendant</e1> the measure <e2>bail</e2>
+10592	<e1>mainspring</e1> automatic winding <e2>watch</e2>
+10593	<e1>population</e1> fell <e2>peak</e2>
+10594	<e1>data</e1> derived <e2>study</e2>
+10595	<e1>ring</e1> unleashes <e2>power</e2>
+10596	<e1>verses</e1> reflecting <e2>nature</e2>
+10597	<e1>struggle</e1> caused <e2>disturbance</e2>
+10598	<e1>computer_company</e1> running <e2>problems</e2>
+10599	<e1>evacuation</e1> resulting <e2>explosion</e2>
+10600	<e1>message</e1> found <e2>friend</e2>
+10601	<e1>trio</e1> lit <e2>blaze</e2>
+10602	<e1>information</e1> releasing <e2>public_domain</e2>
+10603	<e1>alcohol</e1> <e2>drink</e2>
+10604	<e1>Fish</e1> have production <e2>liver</e2>
+10605	<e1>incidents</e1> resulted <e2>injuries</e2>
+10606	<e1>wind</e1> caused catch <e2>fire</e2>
+10607	<e1>patient</e1> has <e2>nostrils</e2>
+10608	<e1>visitor</e1> arrival envisions <e2>stars</e2>
+10609	<e1>Politicians</e1> discovering <e2>teachings</e2>
+10610	<e1>name</e1> leaked <e2>article</e2>
+10611	<e1>bubbles</e1> blowing <e2>air</e2>
+10612	<e1>thugs</e1> <e2>behaviour</e2>
+10613	<e1>gifts</e1> posted <e2>base</e2>
+10614	<e1>complication</e1> arose <e2>irradiation</e2>
+10615	<e1>body</e1> <e2>knowledge</e2>
+10616	<e1>news</e1> provides way <e2>tradition</e2>
+10617	<e1>drippings</e1> drained <e2>sauerkraut</e2>
+10618	<e1>women</e1> developed <e2>style</e2>
+10619	<e1>word</e1> derived <e2>term</e2>
+10620	<e1>operation</e1> raising produce <e2>grain</e2>
+10621	<e1>Hiring</e1> economy help <e2>beers</e2>
+10622	<e1>bombing</e1> resulted <e2>deaths</e2>
+10623	<e1>candidate</e1> graduated <e2>program</e2>
+10624	<e1>larvae</e1> maximum placed <e2>vial</e2>
+10625	<e1>dule</e1> <e2>doves</e2>
+10626	<e1>machine</e1> filters <e2>filters</e2>
+10627	<e1>error</e1> caused <e2>tags</e2>
+10628	<e1>novels</e1> tackle <e2>questions</e2>
+10629	<e1>steroids</e1> cause diabetes <e2>hypertension</e2>
+10630	<e1>name</e1> leaked <e2>chatrooms</e2>
+10631	<e1>skull</e1> <e2>cauldron</e2>
+10632	<e1>Anti-crime_rap</e1> sent <e2>mobiles</e2>
+10633	<e1>games</e1> added <e2>chatting</e2>
+10634	<e1>universe</e1> <e2>heroes</e2>
+10635	<e1>figurine</e1> hidden <e2>cake</e2>
+10636	<e1>coolant</e1> contained <e2>bottle</e2>
+10637	<e1>sorrow</e1> conquered <e2>loss</e2>
+10638	<e1>investigations</e1> conducts <e2>violations</e2>
+10639	<e1>winds</e1> caused <e2>moisture</e2>
+10640	<e1>sleeve</e1> <e2>sweater</e2>
+10641	<e1>drag</e1> caused <e2>atmosphere</e2>
+10642	<e1>Endometriosis</e1> cause <e2>infertility</e2>
+10643	<e1>flooding</e1> Most caused the <e2>clogging</e2>
+10644	<e1>food</e1> product origin <e2>animal</e2>
+10645	<e1>dips</e1> caused diffuse <e2>y-rays</e2>
+10646	<e1>vacancy</e1> created <e2>retirement</e2>
+10647	<e1>beginning</e1> explored <e2>documents</e2>
+10648	<e1>garment</e1> <e2>factory</e2>
+10649	<e1>fragment</e1> generated <e2>gene</e2>
+10650	<e1>performance</e1> production <e2>company</e2>
+10651	<e1>game</e1> <e2>conies</e2>
+10652	<e1>firefighters</e1> described <e2>horror</e2>
+10653	<e1>sections</e1> book pertaining <e2>quantitative_methods</e2>
+10654	<e1>chairman</e1> <e2>college</e2>
+10655	<e1>Cutlery</e1> <e2>wallet</e2>
+10656	<e1>dresses</e1> ago <e2>years</e2>
+10657	<e1>tip</e1> <e2>brush</e2>
+10658	<e1>book_chapter</e1> provides <e2>doctrine</e2>
+10659	<e1>leader</e1> <e2>organization</e2>
+10660	<e1>text</e1> top article indicating <e2>nature</e2>
+10661	<e1>brewer</e1> distinguished <e2>ales</e2>
+10662	<e1>suitcase</e1> <e2>suitcase</e2>
+10663	<e1>rabbits</e1> unhappy left <e2>hutch</e2>
+10664	<e1>trio</e1> performs range <e2>artists</e2>
+10665	<e1>cabinet</e1> encloses woofer <e2>,</e2>
+10666	<e1>polynucleotide</e1> derived <e2>species</e2>
+10667	<e1>compilation</e1> governed <e2>considerations</e2>
+10668	<e1>couple</e1> <e2>weeks</e2>
+10669	<e1>observations</e1> determine <e2>kinematics</e2>
+10670	<e1>pens</e1> <e2>tankard</e2>
+10671	<e1>book</e1> made <e2>study</e2>
+10672	<e1>discussion</e1> <e2>husband</e2>
+10673	<e1>method</e1> discovered <e2>scholar</e2>
+10674	<e1>References</e1> denoted <e2>numbers</e2>
+10675	<e1>Skydivers</e1> dropped <e2>island</e2>
+10676	<e1>rouleau</e1> <e2>sovereigns</e2>
+10677	<e1>events</e1> documented <e2>blogs</e2>
+10678	<e1>time</e1> day <e2>painters</e2>
+10679	<e1>egg</e1> cell laid <e2>female</e2>
+10680	<e1>cook</e1> bakes batter <e2>pan</e2>
+10681	<e1>uniforms</e1> donated <e2>students</e2>
+10682	<e1>teacher</e1> feel Include part transition <e2>school</e2>
+10683	<e1>products</e1> deliver <e2>overseas</e2>
+10684	<e1>Brandy</e1> distilled <e2>juices</e2>
+10685	<e1>director</e1> shot <e2>footage</e2>
+10686	<e1>site</e1> part <e2>network</e2>
+10687	<e1>Demerol</e1> group <e2>drugs</e2>
+10688	<e1>module</e1> imported <e2>browser</e2>
+10689	<e1>metro_line</e1> begins <e2>station</e2>
+10690	<e1>boat</e1> leaves <e2>port</e2>
+10691	<e1>wine</e1> day plunged pressed <e2>skins</e2>
+10692	<e1>incidents</e1> Two resulted <e2>poisonings</e2>
+10693	<e1>substance</e1> found <e2>letter</e2>
+10694	<e1>money</e1> handed <e2>custody</e2>
+10695	<e1>issues</e1> addressed <e2>myth</e2>
+10696	<e1>manufacturer</e1> assembles order using <e2>parts</e2>
+10697	<e1>conference</e1> themes <e2>pluralism</e2>
+10698	<e1>lioness</e1> drank out <e2>grief</e2>
+10699	<e1>caveats</e1> outlined <e2>e-mail</e2>
+10700	<e1>wolfpack</e1> <e2>U-boats</e2>
+10701	<e1>woman</e1> placed <e2>house</e2>
+10702	<e1>group</e1> dug <e2>shovels</e2>
+10703	<e1>sadness</e1> leads <e2>murder</e2>
+10704	<e1>light</e1> emanated <e2>table-lamp</e2>
+10705	<e1>players</e1> sent <e2>stadium</e2>
+10706	<e1>sample</e1> pressed <e2>powder</e2>
+10707	<e1>maze</e1> <e2>catacombs</e2>
+10708	<e1>weapons</e1> More delivered <e2>navy</e2>
+10709	<e1>slope</e1> <e2>line</e2>
+10710	<e1>bloat</e1> <e2>hippopotamuses</e2>
+10711	<e1>squirrel</e1> popped out <e2>shirt</e2>
+10712	<e1>remnants</e1> left <e2>storm</e2>
+10713	<e1>king</e1> sweeps chariot <e2>broom</e2>
+10714	<e1>materials</e1> production attributed <e2>industries</e2>
+10715	<e1>umbrella</e1> <e2>frame</e2>
+10716	<e1>film</e1> made Warren <e2>salesman</e2>
+10717	<e1>casket</e1> thrown <e2>ring</e2>
