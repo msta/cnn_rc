@@ -40,27 +40,31 @@ class Preprocessor():
         self.nom2_idx = self.tokenizer.word_index['e2']
         self.oov_val = len(self.tokenizer.word_index)
         
-
     
-    def load_dataset(self, debug=False):
+    def load_dataset(self, TRAIN_FILE):
 
-        if debug:
-            return open("data/semeval/training/TRAIN_FILE_SMALL.txt", "r")
-        else:
-            return open("data/semeval/training/TRAIN_FILE.txt", "r") 
+        train_path = "data/semeval/training/" + TRAIN_FILE 
+        return open(train_path, "r") 
+
+    def rreplace(self, s, old, new, occurrence):
+        li = s.rsplit(old, occurrence)
+        return new.join(li)
 
     def get_text(self, line):
         # split on quotes and get the raw text
         stripped = re.sub("\d{0,5}", "", line, count=1).strip()
-        return stripped[1:len(stripped)-2]
+        stripped = re.sub("\"", "", stripped, count=1).strip()
+        stripped = self.rreplace(stripped, "\"", "", 1)
+        
+        return stripped
 
     def get_id(self, line):
         return re.findall("\d{0,5}", line)[0]
 
 
-    def read_dataset(self, debug=False):
+    def read_dataset(self, TRAIN_FILE, debug=False):
 
-        dataset = self.load_dataset(debug)
+        dataset = self.load_dataset(TRAIN_FILE)
 
         X_raw = []
         Y = []
@@ -75,7 +79,11 @@ class Preprocessor():
             i += 1
             if i % 4 == 0:
                 i = 0
-        return np.asarray(X_raw), np.asarray(Y)
+        if debug:
+            return np.asarray(X_raw)[:5], np.asarray(Y)[:5]
+        else:
+            return np.asarray(X_raw), np.asarray(Y)
+
 
     def gen_dataset(self, dataset, 
                      output_dict, 
@@ -101,9 +109,10 @@ class Preprocessor():
                     output_dict):
         data = []
         ids = []
+
         for line in dataset:
-            data.append(get_text(line))
-            ids.append(get_id(line))    
+            data.append(self.get_text(line))
+            ids.append(self.get_id(line))    
         return data, ids
 
     def glue_entities(self,texts):
@@ -120,6 +129,14 @@ class Preprocessor():
             e2_new = add_underscore(e2_org)
             rep1 = text.replace(e1_org, e1_new)
             return rep1.replace(e2_org, e2_new)
+
+        for t in texts:
+            try:
+                replace_ents(t)
+            except:
+                import ipdb
+                ipdb.sset_trace()
+                print(t)
 
         return [replace_ents(t) for t in texts]
         

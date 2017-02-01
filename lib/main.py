@@ -19,9 +19,8 @@ from keras.utils.np_utils import to_categorical
 from sklearn.model_selection import KFold
 
 
-from .dataset import load_dataset, read_dataset, read_testset
 from .functions import *
-from .semeval_prep import Preprocessor, output_dict, reverse_dict
+from .semeval_prep import *
 from .model import get_model, train_model
 from .argparser import build_argparser
 
@@ -39,10 +38,13 @@ logging.basicConfig(
     format="[%(asctime)s] %(levelname)s:%(message)s")
 
 
-WINDOW_SIZE = args.windowsize
+WINDOW_SIZE = args.filter_size
+WINDOW_HEIGHT = args.window_sizes
+
 FOLDS = args.folds 
 EPOCHS = args.epochs
 DEBUG = args.debug
+TEST_FILE = args.test_file
 DROPOUT_RATE = args.dropoutrate
 INCLUDE_POS_EMB = not args.no_pos
 WORD_EMBEDDING_DIMENSION = args.wordembeddingdim
@@ -50,7 +52,7 @@ INCLUDE_ATTENTION_ONE = args.attention_one
 INCLUDE_ATTENTION_TWO = args.attention_two
 POS_EMBEDDING_DIM = args.posembeddingdim
 L2_VALUE = args.l2
-
+TRAIN_FILE = args.train_file
 
 CLIPPING_VALUE = args.clipping
 OBJECTIVE = args.loss
@@ -63,19 +65,27 @@ NO_OF_CLASSES = len(output_dict)
 
 if not args.rand:
     word_embeddings = word2vec.load("word_embeddings.bin", encoding='ISO-8859-1')
+    # word_embeddings = {}
+    # f = open("deps.words")
+    # for line in f:
+    #     values = line.split()
+    #     word = values[0]
+    #     coefs = np.asarray(values[1:], dtype='float32')
+    #     word_embeddings[word] = coefs
+    # f.close()
 else:
     word_embeddings = {}
 
 prep = Preprocessor(clipping_value=CLIPPING_VALUE,
                     markup=args.markup)
 
-dataset_full, labels_full = prep.read_dataset(DEBUG)
+dataset_full, labels_full = prep.read_dataset(TRAIN_FILE, debug=DEBUG)
+
+
 
 logging.info("#" * 30)
 logging.info("DATA SPLIT AND LOADED")
 logging.info("#" * 30)
-
-
 
 
 (word_input, nom_pos_1, nom_pos_2, 
@@ -115,8 +125,11 @@ if FOLDS > 0:
     all_results = []
     kf = KFold(n_splits=FOLDS)
 
-    for train_idx, test_idx in kf.split(word_input):
+    fold = 0
 
+    for train_idx, test_idx in kf.split(word_input):
+        logging.info("Beginning fold: " +  str(fold))
+        fold += 1
         model = get_model( 
             word_embeddings=word_embeddings,
             word_index=word_index, 
@@ -125,6 +138,7 @@ if FOLDS > 0:
             POS_EMBEDDING_DIM=POS_EMBEDDING_DIM,
             L2_VALUE=L2_VALUE,
             WORD_EMBEDDING_DIM=WORD_EMBEDDING_DIMENSION,
+            WINDOW_HEIGHT=WINDOW_HEIGHT,
             INCLUDE_POS_EMB=INCLUDE_POS_EMB,
             INCLUDE_ATTENTION_ONE=INCLUDE_ATTENTION_ONE,
             INCLUDE_ATTENTION_TWO=INCLUDE_ATTENTION_TWO,
@@ -171,7 +185,9 @@ if FOLDS > 0:
         logging.info("EVALUATING DONE")
         logging.info("#" * 30)
 
-    final_f1 = sum([x[2] for x in all_results if not np.isnan(x[2]) ]) / FOLDS
+
+    ### Random bug with the final fold ? ### 
+    final_f1 = sum([x[2] for x in all_results[:-1] if not np.isnan(x[2]) ]) / (FOLDS-1)
 
     logging.info( "#" * 30)
     logging.info( "FINAL F1 VALUE: " + str(final_f1))
@@ -185,9 +201,14 @@ if FOLDS > 0:
 
 else:
     logging.info("Beginning test with official F1 scorer ...")
-    test_set = open("data/semeval/SemEval2010_task8_testing_keys/TEST_FILE_CLEAN.TXT")
 
-    data, ids = read_testset(test_set, output_dict)
+
+    test_path = "data/semeval/testing/" + TEST_FILE
+
+    test_set = open(test_path)
+
+    data, ids = prep.read_testset(test_set, output_dict)
+
 
     model = get_model( 
             word_embeddings=word_embeddings,
@@ -198,6 +219,7 @@ else:
             L2_VALUE=L2_VALUE,
             WORD_EMBEDDING_DIM=WORD_EMBEDDING_DIMENSION,
             INCLUDE_POS_EMB=INCLUDE_POS_EMB,
+            WINDOW_HEIGHT=WINDOW_HEIGHT,
             INCLUDE_ATTENTION_ONE=INCLUDE_ATTENTION_ONE,
             INCLUDE_ATTENTION_TWO=INCLUDE_ATTENTION_TWO,
             DROPOUT_RATE=DROPOUT_RATE,
@@ -223,6 +245,7 @@ else:
 ########## Prepare test data                  #########################
 #######################################################################
 
+    
 
     (X_test, X_test_nom_pos1, X_test_nom_pos2, 
     att_test_list_1, att_test_list_2, id_test) = prep.transform(data, ids)

@@ -31,8 +31,9 @@ def get_model(
     WORD_EMBEDDING_DIM=300,
     POS_EMBEDDING_DIM=50,
     L2_NORM_MAX=3,
-    L2_VALUE=0.001,
+    L2_VALUE=0.0,
     INCLUDE_POS_EMB=True,
+    WINDOW_HEIGHT=3,
     INCLUDE_ATTENTION_ONE=False,
     INCLUDE_ATTENTION_TWO=False,
     ACTIVATION_FUNCTION="tanh",
@@ -51,10 +52,10 @@ def get_model(
 
     for word, i in list(word_index.items()):
         try:
-            if word in ['e1', 'e2']:
-                embedding_vector = markup_vector
-            else:
-                embedding_vector = word_embeddings[word]
+            #if word in ['e1', 'e2']:
+            #    embedding_vector = markup_vector
+            #else:
+            embedding_vector = word_embeddings[word]
         except KeyError:
             missed_words += 1
             #embedding_vector = oov_vector
@@ -97,6 +98,10 @@ def get_model(
     sequence_input = Input(shape=(n,), dtype="int32", name='seq_input')
     position_input_1 = Input(shape=(n,), dtype="int32", name='pos_input1')
     position_input_2 = Input(shape=(n,), dtype="int32", name='pos_input2')
+
+    # sequence_input_paths = Input(shape=(n,), dtype="int32", name='seq_input1')
+    # position_input_paths_1 = Input(shape=(n,), dtype="int32", name='pos_input11')
+    # position_input_paths_2 = Input(shape=(n,), dtype="int32", name='pos_input22')
 
     word_embeddings = embedding_layer(sequence_input)
     position_embeddings_1 = position_embedding(position_input_1)
@@ -141,7 +146,7 @@ def get_model(
     g = ACTIVATION_FUNCTION
 
     #windows = [2,3,4,5]
-    windows = [3]
+    windows = WINDOW_HEIGHT
 
     p_list = []
 
@@ -154,11 +159,16 @@ def get_model(
             W_regularizer=l2(L2_VALUE),
             bias=True,
             init='glorot_normal',
-            name='r_convolved')(conv)
-        #conv = GlobalMaxPooling2D()(conv)
+            name='r_convolved' + str(w))(conv)
+        #conv = GlobalMaxPooling1D()(conv)
         p_list.append(conv)
 
-    convolved = p_list[0]
+    if len(windows) > 1:
+        convolved = merge(p_list, mode='concat', concat_axis=2)
+    else:
+        convolved = p_list[0]
+
+
     
     
     if INCLUDE_ATTENTION_TWO:
@@ -259,11 +269,11 @@ def att_comp(tensor_list):
 
 
 def train_model(model, X_train, Y_train, EPOCHS):
-                logging.info(model.summary())
+                #logging.debug(model.summary())
                 history = model.fit(X_train, 
                     Y_train, 
                     nb_epoch=EPOCHS, 
-                    batch_size=1000, 
+                    batch_size=50, 
                     shuffle=True)
 
 

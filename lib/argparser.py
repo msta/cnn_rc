@@ -7,14 +7,24 @@ def build_argparser():
     parser.add_argument("--no_pos",  
                         action="store_true",
                         default=False)
+    parser.add_argument("-t", "--train_file",
+                        type=str)
+    parser.add_argument("--test_file",
+                        type=str,
+                        default="TEST_FILE_CLEAN.TXT")
     parser.add_argument("-f", "--folds", 
                         type=int,
                         default=10)
+    parser.add_argument("-wh", "--window_sizes",
+                        type=int,
+                        nargs="+",
+                        default=[3])
     parser.add_argument("-d", "--dataset",
                         type=str,
                         choices=["semeval, ace2005"])
     parser.add_argument("-l2",
-                        type=float)
+                        type=float,
+                        default=0.0)
     parser.add_argument("-a1", "--attention_one", 
                         action="store_true",
                         default=False)
@@ -35,7 +45,7 @@ def build_argparser():
                         type=str,
                         default='ada',
                         choices=["sgd", "ada"])
-    parser.add_argument("--windowsize",
+    parser.add_argument("--filter_size",
                         type=int,
                         default=400)
     parser.add_argument("--wordembeddingdim",
