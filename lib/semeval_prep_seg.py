@@ -7,7 +7,7 @@ import logging
 from .functions import debug_print, debug_print_dict
 from .tokenizer import Tokenizer
 from keras.preprocessing.sequence import pad_sequences
-
+from keras.preprocessing.text import text_to_word_sequence
 
 class Preprocessor():
 
@@ -27,18 +27,33 @@ class Preprocessor():
         self.n_values = []
         self.clipping_value = clipping_value
         self.oov_val = -1
+        self.word_idx = {}
+
+    def get_nom_pos(text_split):
+        pos1 = pos2 = -1
+        for idx, token in enumerate(text_split):
+            if '<e1>' in token:
+                pos1 = idx
+            elif '<e2>' in token:
+                pos2 = idx
+        return pos1, pos2
+
+
+    def fit_transform(self, texts, labels):
+
+        texts_split = text_to_word_sequence(texts)
+
+        texts_clip = [text for text in texts_split if len(text) <= self.clipping_value]
+
+        nom_pos 
 
     '''
     oov_val shows the number of words in the tokenizer
     with the first fitting
     '''
     def fit_tokenizer(self):
-        self.tokenizer = Tokenizer(filters='')
+        self.tokenizer = Tokenizer()
         self.tokenizer.fit_on_texts(self.texts)
-
-        import ipdb
-        ipdb.sset_trace()
-
 
         self.nom1_idx = self.tokenizer.word_index['e1']
         self.nom2_idx = self.tokenizer.word_index['e2']
@@ -148,7 +163,8 @@ class Preprocessor():
         return [replace_ents(t) for t in texts]
         
 
-                            
+
+                          
     
     def transform(self, texts, labels):
 
@@ -194,7 +210,6 @@ class Preprocessor():
         self.texts = texts
         self.fit_tokenizer()
         self.Y = np.asarray(labels)
-
         sequences = self.tokenizer.texts_to_sequences(texts)
 
         nominal_heads, sequences = self.nominal_positions(sequences)

@@ -7,6 +7,9 @@ def build_argparser():
     parser.add_argument("--no_pos",  
                         action="store_true",
                         default=False)
+    parser.add_argument("--exclude_other",  
+                        action="store_true",
+                        default=False)
     parser.add_argument("-t", "--train_file",
                         type=str)
     parser.add_argument("--test_file",

@@ -14,7 +14,6 @@ from keras import initializations
 
 
 
-
 ''' accuracy that chooses a class from the class embedding 
 and compares with the categorical cross-entropy '''
 def accuracy2(class_emb, y_true, y_pred):

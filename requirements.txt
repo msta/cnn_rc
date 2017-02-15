@@ -1,9 +1,0 @@
-numpy
-Cython
-keras
-scikit-learn
-word2vec
-beautifulsoup4
-ipython
-ipdb
-

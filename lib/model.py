@@ -33,10 +33,10 @@ def get_model(
     L2_NORM_MAX=3,
     L2_VALUE=0.0,
     INCLUDE_POS_EMB=True,
-    WINDOW_HEIGHT=3,
+    WINDOW_HEIGHT=[3],
     INCLUDE_ATTENTION_ONE=False,
     INCLUDE_ATTENTION_TWO=False,
-    ACTIVATION_FUNCTION="tanh",
+    ACTIVATION_FUNCTION="relu",
     WINDOW_SIZE=1000,
     optimizer='ada',
     loss=margin_loss,
@@ -154,9 +154,10 @@ def get_model(
         conv = conv_input   
         #conv = Reshape((1,n,CIP))(conv_input)
         conv = Conv1D(WINDOW_SIZE, w, 
-            border_mode='same',
+            border_mode='valid',
             activation=g,
             W_regularizer=l2(L2_VALUE),
+            W_constraint=maxnorm(L2_NORM_MAX),
             bias=True,
             init='glorot_normal',
             name='r_convolved' + str(w))(conv)
@@ -164,7 +165,7 @@ def get_model(
         p_list.append(conv)
 
     if len(windows) > 1:
-        convolved = merge(p_list, mode='concat', concat_axis=2)
+        convolved = merge(p_list, mode='concat', concat_axis=1)
     else:
         convolved = p_list[0]
 
@@ -208,7 +209,7 @@ def get_model(
 
 def build_nguyen_cnn(convolved, DROPOUT_RATE, L2_NORM_MAX, 
                      L2_VALUE, NO_OF_CLASSES):
-
+    
     pooled = GlobalMaxPooling1D()(convolved)
     dropout = Dropout(DROPOUT_RATE)(pooled)
     output = Dense(NO_OF_CLASSES, 
@@ -222,7 +223,7 @@ def build_nguyen_cnn(convolved, DROPOUT_RATE, L2_NORM_MAX,
 def build_loss(loss, INCLUDE_ATTENTION_TWO):
     if loss == 'margin_loss':
         assert INCLUDE_ATTENTION_TWO
-        loss = partial(margin_loss, class_embedding.weights[0])     
+        loss = partial(margin_loss, class_embedding.weights[0])
     return loss
 
 def build_metrics(with_attention_two=False):

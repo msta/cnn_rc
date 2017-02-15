@@ -53,11 +53,14 @@ INCLUDE_ATTENTION_TWO = args.attention_two
 POS_EMBEDDING_DIM = args.posembeddingdim
 L2_VALUE = args.l2
 TRAIN_FILE = args.train_file
+EXCLUDE_OTHER = args.exclude_other
 
 CLIPPING_VALUE = args.clipping
 OBJECTIVE = args.loss
 
-NO_OF_CLASSES = len(output_dict)
+no_of_clz = len(output_dict)
+
+NO_OF_CLASSES = no_of_clz - 1 if args.exclude_other else no_of_clz
 
 ########## Load embeddings, dataset and prep input ####################
 #######################################################################
@@ -79,7 +82,8 @@ else:
 prep = Preprocessor(clipping_value=CLIPPING_VALUE,
                     markup=args.markup)
 
-dataset_full, labels_full = prep.read_dataset(TRAIN_FILE, debug=DEBUG)
+dataset_full, labels_full = prep.read_dataset(TRAIN_FILE, debug=DEBUG,
+                                              EXCLUDE_OTHER=EXCLUDE_OTHER)
 
 
 
@@ -104,6 +108,7 @@ logging.debug("Total amt of zeros " + str(len(zeros)))
 logging.debug("Avg zeros " + str(len(zeros) / len(word_input)))
 
 #####
+
 
 
 
@@ -200,83 +205,96 @@ if FOLDS > 0:
 
 
 else:
-    logging.info("Beginning test with official F1 scorer ...")
+    import keras.backend.tensorflow_backend as K
+    with K.tf.device('/gpu:0'):
+        logging.info("Beginning test with official F1 scorer ...")
+
+        test_path = "data/semeval/testing/" + TEST_FILE
+
+        test_set = open(test_path)
+
+        data, ids = prep.read_testset(test_set, output_dict)
 
 
-    test_path = "data/semeval/testing/" + TEST_FILE
+        model = get_model( 
+                word_embeddings=word_embeddings,
+                word_index=word_index, 
+                n=clipping_value,
+                word_entity_dictionary=att_idx, 
+                POS_EMBEDDING_DIM=POS_EMBEDDING_DIM,
+                L2_VALUE=L2_VALUE,
+                WORD_EMBEDDING_DIM=WORD_EMBEDDING_DIMENSION,
+                INCLUDE_POS_EMB=INCLUDE_POS_EMB,
+                WINDOW_HEIGHT=WINDOW_HEIGHT,
+                INCLUDE_ATTENTION_ONE=INCLUDE_ATTENTION_ONE,
+                INCLUDE_ATTENTION_TWO=INCLUDE_ATTENTION_TWO,
+                DROPOUT_RATE=DROPOUT_RATE,
+                WINDOW_SIZE=WINDOW_SIZE,
+                NO_OF_CLASSES=NO_OF_CLASSES,
+                optimizer=args.optimizer,
+                loss=OBJECTIVE
+                )
 
-    test_set = open(test_path)
-
-    data, ids = prep.read_testset(test_set, output_dict)
-
-
-    model = get_model( 
-            word_embeddings=word_embeddings,
-            word_index=word_index, 
-            n=clipping_value,
-            word_entity_dictionary=att_idx, 
-            POS_EMBEDDING_DIM=POS_EMBEDDING_DIM,
-            L2_VALUE=L2_VALUE,
-            WORD_EMBEDDING_DIM=WORD_EMBEDDING_DIMENSION,
-            INCLUDE_POS_EMB=INCLUDE_POS_EMB,
-            WINDOW_HEIGHT=WINDOW_HEIGHT,
-            INCLUDE_ATTENTION_ONE=INCLUDE_ATTENTION_ONE,
-            INCLUDE_ATTENTION_TWO=INCLUDE_ATTENTION_TWO,
-            DROPOUT_RATE=DROPOUT_RATE,
-            WINDOW_SIZE=WINDOW_SIZE,
-            NO_OF_CLASSES=NO_OF_CLASSES,
-            optimizer=args.optimizer,
-            loss=OBJECTIVE
-            )
-
-    X_train = [word_input]
-
-    build_input_arrays_test(X_train, INCLUDE_POS_EMB, INCLUDE_ATTENTION_ONE,
-                            att_list_1, att_list_2,
-                            nom_pos_1, nom_pos_2)
-
-    Y_train = build_label_representation(Y, OBJECTIVE=OBJECTIVE,
-                                NO_OF_CLASSES=NO_OF_CLASSES,
-                                WINDOW_SIZE=WINDOW_SIZE)
-
-    train_model(model, X_train, Y_train, EPOCHS)
-    logging.info("Done training...")
-
-########## Prepare test data                  #########################
-#######################################################################
-
-    
-
-    (X_test, X_test_nom_pos1, X_test_nom_pos2, 
-    att_test_list_1, att_test_list_2, id_test) = prep.transform(data, ids)
-
-    word_idx = prep.word_idx()
+        logging.info(model.summary())
 
 
-    X = [X_test]
+        X_train = [word_input]
 
+        build_input_arrays_test(X_train, INCLUDE_POS_EMB, INCLUDE_ATTENTION_ONE,
+                                att_list_1, att_list_2,
+                                nom_pos_1, nom_pos_2)
 
-    build_input_arrays_test(X, INCLUDE_POS_EMB, INCLUDE_ATTENTION_ONE,
-                            att_test_list_1, att_test_list_2,
-                            X_test_nom_pos1, X_test_nom_pos2)
+        Y_train = build_label_representation(Y, OBJECTIVE=OBJECTIVE,
+                                    NO_OF_CLASSES=NO_OF_CLASSES,
+                                    WINDOW_SIZE=WINDOW_SIZE)
 
-    failures = [x for x in ids if x not in id_test]
+        train_model(model, X_train, Y_train, EPOCHS)
+        logging.info("Done training...")
 
-    logging.info("Predicting for X...")    
-    preds = model.predict(X)
+    ########## Prepare test data                  #########################
+    #######################################################################
 
         
-    preds = [np.argmax(pred) for pred in preds]
 
-    lookup_labels = [reverse_dict[pred] for pred in preds]
+        (X_test, X_test_nom_pos1, X_test_nom_pos2, 
+        att_test_list_1, att_test_list_2, id_test) = prep.transform(data, ids)
+
+        word_idx = prep.word_idx()
 
 
-    with open("data/semeval/test_pred.txt", "w+") as f:
-        for idx, i in enumerate(id_test):
-            f.write(i + "\t" + lookup_labels[idx] + "\n")
+        X = [X_test]
 
-        for i in failures:
-            f.write(i + "\t" + "Other" + "\n")
 
+        build_input_arrays_test(X, INCLUDE_POS_EMB, INCLUDE_ATTENTION_ONE,
+                                att_test_list_1, att_test_list_2,
+                                X_test_nom_pos1, X_test_nom_pos2)
+
+        failures = [x for x in ids if x not in id_test]
+
+        logging.info("Predicting for X...")    
+        preds = model.predict(X)
+            
+
+        #exclude_ratios = [0.20, 0.30, 0.4, 0.5, 0.55, 0.6, 0.7, 0.75, 0.8, 0.85, 0.9, 0.95$]
+
+        #for e_r in exclude_ratios:
+            
+        #if args.exclude_other:
+         #   def check_other(pred):
+        #        return np.argmax(pred) if np.max(pred) > e_r else NO_OF_CLASSES
+
+          #  preds_final = [check_other(pred) for pred in preds]
+        #else:
+        preds_final = [np.argmax(pred) for pred in preds]
+
+        lookup_labels = [reverse_dict[pred] for pred in preds_final]
+
+
+        with open("data/semeval/test_pred.txt", "w+") as f:
+            for idx, i in enumerate(id_test):
+                f.write(i + "\t" + lookup_labels[idx] + "\n")
+
+            for i in failures:
+                f.write(i + "\t" + "Other" + "\n")
 
 logging.info("Experiment done!")
