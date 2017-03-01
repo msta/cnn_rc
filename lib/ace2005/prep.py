@@ -22,7 +22,7 @@ class AcePrep(Preprocessor):
         all_data = open("data/ace2005/training/ace2.csv").read().split("\n")
         self.word_dict = pickle.load(open("data/ace2005/training/vocab.pkl", "rb"))
         if debug:
-            return all_data[:10]
+            return all_data[:10000]
         return all_data
 
     def read_dataset(self, train_file, debug=False):
@@ -38,7 +38,7 @@ class AcePrep(Preprocessor):
                 label_text = splits[-1]
                 label = self.label_dict[label_text]
             except KeyError:
-                self.label_dict[label_text] = len(self.label_dict) + 1
+                self.label_dict[label_text] = len(self.label_dict)
                 label = self.label_dict[label_text]
             head_1 = int(splits[1])
             head_2 = int(splits[2])
@@ -65,15 +65,8 @@ class AcePrep(Preprocessor):
         nom_arr_1 = self.fit_to_window(nom_arr_1, self.nom_heads)
         nom_arr_2 = self.fit_to_window(nom_arr_2, self.nom_heads)
 
-        import ipdb
-        ipdb.sset_trace()
-
         nom_arr_1 = self.normalize_nom_arr(nom_arr_1)
         nom_arr_2 = self.normalize_nom_arr(nom_arr_2)
-
-        import ipdb
-        ipdb.sset_trace()
-
         return (np.asarray(padded_data), 
             np.asarray(nom_arr_1), np.asarray(nom_arr_2), 
             {}, np.asarray([]), np.asarray([]), np.asarray(labels))
