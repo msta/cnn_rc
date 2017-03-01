@@ -4,6 +4,13 @@ def build_argparser():
     parser = argparse.ArgumentParser(description='CNN')
     parser.add_argument("--debug", 
                         action="store_true")
+    parser.add_argument("--wordnet",
+                        action="store_true",
+                        default=False)
+    parser.add_argument("--embedding",
+                        type=str,
+                        choices=["word2vec", "glove", "rand"],
+                        default="word2vec")
     parser.add_argument("--no_pos",  
                         action="store_true",
                         default=False)
@@ -24,7 +31,7 @@ def build_argparser():
                         default=[3])
     parser.add_argument("-d", "--dataset",
                         type=str,
-                        choices=["semeval, ace2005"])
+                        choices=["semeval", "ace2005"])
     parser.add_argument("-l2",
                         type=float,
                         default=0.0)
@@ -40,8 +47,6 @@ def build_argparser():
     parser.add_argument("--clipping",
                         type=int,
                         default=18)
-    parser.add_argument("-r", "--rand",  
-                        action="store_true")
     parser.add_argument("--markup",  
                         action="store_true")
     parser.add_argument("-o", "--optimizer",
@@ -57,10 +62,10 @@ def build_argparser():
     parser.add_argument("--posembeddingdim",
                         type=int,
                         default=50)
-    parser.add_argument("-loss",
+    parser.add_argument("--loss",
                         type=str,
                         default="categorical_crossentropy")
-    parser.add_argument("-dropoutrate",
+    parser.add_argument("--dropoutrate",
                         type=float,
                         default=0.5)
     return parser

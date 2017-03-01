@@ -23,3 +23,5 @@ deps.words
 *.toc
 *.bbl
 *.blg
+glove300b.pkl
+glove.840B.300d.zip

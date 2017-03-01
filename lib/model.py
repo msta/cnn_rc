@@ -5,6 +5,7 @@ import logging
 
 from functools import partial
 
+from keras.layers.normalization import BatchNormalization
 from keras.optimizers import Adadelta, SGD
 from keras.utils.np_utils import to_categorical
 from keras.models import Model
@@ -33,10 +34,12 @@ def get_model(
     L2_NORM_MAX=3,
     L2_VALUE=0.0,
     INCLUDE_POS_EMB=True,
+    WORDNET=False,
+    WORDNET_LEN=0,
     WINDOW_HEIGHT=[3],
     INCLUDE_ATTENTION_ONE=False,
     INCLUDE_ATTENTION_TWO=False,
-    ACTIVATION_FUNCTION="relu",
+    ACTIVATION_FUNCTION="tanh",
     WINDOW_SIZE=1000,
     optimizer='ada',
     loss=margin_loss,
@@ -45,7 +48,7 @@ def get_model(
     # NOTE TO SELF - Don't let the vector be all-zeroes when the word is not present
 
 
-    missed_words = 0
+    missed_words = []
     embedding_matrix = np.zeros((len(word_index) + 1, WORD_EMBEDDING_DIM))
 
     markup_vector = np.random.uniform(-0.25, 0.25, WORD_EMBEDDING_DIM)
@@ -57,11 +60,12 @@ def get_model(
             #else:
             embedding_vector = word_embeddings[word]
         except KeyError:
-            missed_words += 1
+            missed_words.append(word)
             #embedding_vector = oov_vector
             embedding_vector = np.random.uniform(-0.25, 0.25, WORD_EMBEDDING_DIM)
         finally:
             embedding_matrix[i] = embedding_vector
+    logging.info("Missed words" + str(len(missed_words)))
 
     #### attention matrix initialization 
 
@@ -80,9 +84,10 @@ def get_model(
                                 name="word_embedding",
                                 trainable=True)
 
-    position_embedding = Embedding(2 * n - 1,
+    ## Removed -1 to keep a special token, 0, for padding.
+    position_embedding = Embedding(2 * n,
                                    POS_EMBEDDING_DIM,
-                                   init='glorot_uniform',
+                                   W_constraint=maxnorm(L2_NORM_MAX),
                                    input_length=n,
                                    name='pos_embedding',
                                    trainable=True)
@@ -95,9 +100,17 @@ def get_model(
                                 name='A_word_pairs',
                                 trainable=True)
 
+    wordnet_emb = Embedding(WORDNET_LEN,
+                            POS_EMBEDDING_DIM,
+                            input_length=n,
+                            init='glorot_uniform',
+                            name='wordnet_emb',
+                            trainable=True)
+
     sequence_input = Input(shape=(n,), dtype="int32", name='seq_input')
     position_input_1 = Input(shape=(n,), dtype="int32", name='pos_input1')
     position_input_2 = Input(shape=(n,), dtype="int32", name='pos_input2')
+    wordnet_input = Input(shape=(n,), dtype="int32", name='wordnet_input')
 
     # sequence_input_paths = Input(shape=(n,), dtype="int32", name='seq_input1')
     # position_input_paths_1 = Input(shape=(n,), dtype="int32", name='pos_input11')
@@ -106,7 +119,8 @@ def get_model(
     word_embeddings = embedding_layer(sequence_input)
     position_embeddings_1 = position_embedding(position_input_1)
     position_embeddings_2 = position_embedding(position_input_2)
-    
+    wordnet_embedding = wordnet_emb(wordnet_input)
+
     if INCLUDE_ATTENTION_ONE:
         attention_input_1 = Input(shape=(n,), dtype="int32", name='att_input1')
         attention_input_2 = Input(shape=(n,), dtype="int32", name='att_input2')
@@ -117,18 +131,27 @@ def get_model(
                                                   
         attention_score_2 = Activation('softmax', name='att_softmax2')(attention_score_2)
                                                   
+    CIP = WORD_EMBEDDING_DIM
+    embedding_list = [word_embeddings]
 
     if INCLUDE_POS_EMB:
-        CIP = WORD_EMBEDDING_DIM + POS_EMBEDDING_DIM * 2
-        conv_input = merge([word_embeddings, 
-            position_embeddings_1, 
-            position_embeddings_2], 
-            mode='concat', 
-            concat_axis=2,
-            name='word+pos_concat')
+        CIP += (POS_EMBEDDING_DIM * 2)
+        embedding_list.append(position_embeddings_1)
+        embedding_list.append(position_embeddings_2)
+        
+    if WORDNET:
+        CIP += POS_EMBEDDING_DIM
+        embedding_list.append(wordnet_embedding)
+        
+
+    if len(embedding_list) > 1:
+        conv_input = merge(embedding_list, 
+                mode='concat', 
+                concat_axis=2,
+                name='embedding_merge_1')
     else:
-        CIP = WORD_EMBEDDING_DIM
-        conv_input = word_embeddings
+        conv_input = embedding_list[0]
+
 
     if INCLUDE_ATTENTION_ONE:
         ## composition layer
@@ -156,12 +179,11 @@ def get_model(
         conv = Conv1D(WINDOW_SIZE, w, 
             border_mode='valid',
             activation=g,
-            W_regularizer=l2(L2_VALUE),
-            W_constraint=maxnorm(L2_NORM_MAX),
             bias=True,
             init='glorot_normal',
+            W_constraint=maxnorm(L2_NORM_MAX),
             name='r_convolved' + str(w))(conv)
-        #conv = GlobalMaxPooling1D()(conv)
+        conv = GlobalMaxPooling1D()(conv)
         p_list.append(conv)
 
     if len(windows) > 1:
@@ -169,8 +191,6 @@ def get_model(
     else:
         convolved = p_list[0]
 
-
-    
     
     if INCLUDE_ATTENTION_TWO:
         final = build_attention_two(convolved,
@@ -192,9 +212,13 @@ def get_model(
         input_arr.append(position_input_1)
         input_arr.append(position_input_2)
 
+    if WORDNET:
+        input_arr.append(wordnet_input)
+
     if INCLUDE_ATTENTION_ONE:
         input_arr.append(attention_input_1)
         input_arr.append(attention_input_2)
+
 
 
     loss = build_loss(loss, INCLUDE_ATTENTION_TWO)
@@ -210,13 +234,14 @@ def get_model(
 def build_nguyen_cnn(convolved, DROPOUT_RATE, L2_NORM_MAX, 
                      L2_VALUE, NO_OF_CLASSES):
     
-    pooled = GlobalMaxPooling1D()(convolved)
-    dropout = Dropout(DROPOUT_RATE)(pooled)
+    #convolved = GlobalMaxPooling1D()(convolved)
+    #dropout = pooled
+    convolved = Dropout(DROPOUT_RATE)(convolved)
     output = Dense(NO_OF_CLASSES, 
                     init='glorot_uniform',
                     W_regularizer=l2(L2_VALUE),
                     W_constraint=maxnorm(L2_NORM_MAX),
-                    activation='softmax')(dropout)
+                    activation='softmax')(convolved)
     return output
 
 
@@ -241,7 +266,7 @@ def build_optimizer(optimizer):
     if optimizer == 'ada':
         opt = Adadelta(epsilon=1e-06)
     elif optimizer == 'sgd':
-        opt = SGD(lr=0.03)
+        opt = SGD(lr=0.05, decay=0.00)
     return opt
 
 def build_attention_two(convolved,

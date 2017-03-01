@@ -13,6 +13,20 @@ from keras.engine.topology import Layer
 from keras import initializations
 
 
+def ranking_loss(y_true, y_pred):
+
+    y = 2   
+    m_plus = 2.5
+    m_minus = 0.5
+
+    correct_matrix = (y_true * y_pred)
+
+    correct_score = tf.reduce_max(correct_matrix,1)
+    incorrect_score = tf.reduce_max(y_pred - correct_matrix, 1)
+
+    return tf.log(1 + tf.exp(y*(m_plus - correct_score))) +  tf.log(1 + tf.exp(y*(m_minus + incorrect_score)))
+
+
 
 ''' accuracy that chooses a class from the class embedding 
 and compares with the categorical cross-entropy '''
@@ -165,17 +179,16 @@ def new_dist2(weights):
 
 
 def att_comp2(tensor_list):
-    from keras import backend as K
-    import tensorflow as tf
     return K.batch_dot(tensor_list[0],tensor_list[1]) 
 
 
 
 
 def build_input_arrays_folded(X_train, X_test, 
-                        INCLUDE_POS_EMB, INCLUDE_ATTENTION_ONE,
+                        INCLUDE_POS_EMB, INCLUDE_ATTENTION_ONE, INCLUDE_WORDNET,
                         X_nom_pos1, X_nom_pos2,
                         att_list_1, att_list_2,
+                        wordnet_sequences,
                         train_idx, test_idx):
 
     if INCLUDE_POS_EMB:
@@ -183,6 +196,10 @@ def build_input_arrays_folded(X_train, X_test,
         X_train.append(X_nom_pos2[train_idx])
         X_test.append(X_nom_pos1[test_idx])
         X_test.append(X_nom_pos2[test_idx])
+
+    if INCLUDE_WORDNET:
+        X_train.append(wordnet_sequences[train_idx])
+        X_test.append(wordnet_sequences[test_idx])
 
     if INCLUDE_ATTENTION_ONE:
         X_train.append(att_list_1[train_idx])
@@ -192,12 +209,16 @@ def build_input_arrays_folded(X_train, X_test,
         X_test.append(att_list_2[test_idx])
 
 
-def build_input_arrays_test(X, INCLUDE_POS_EMB, INCLUDE_ATTENTION_ONE, 
+def build_input_arrays_test(X, INCLUDE_POS_EMB, INCLUDE_ATTENTION_ONE, INCLUDE_WORDNET,
                             att_list_1, att_list_2, 
-                            X_nom_pos1, X_nom_pos2):
+                            X_nom_pos1, X_nom_pos2,
+                            wordnet_sequences):
     if INCLUDE_POS_EMB:
         X.append(X_nom_pos1)
         X.append(X_nom_pos2)
+    if INCLUDE_WORDNET:
+        X.append(wordnet_sequences)
+
     if INCLUDE_ATTENTION_ONE:
         X.append(att_list_1)
         X.append(att_list_2)
@@ -211,7 +232,7 @@ def build_label_representation(Y_train, Y_test=[], OBJECTIVE=None, NO_OF_CLASSES
         Y_train = np.asarray([embeddings[y] for y in Y_train])
         Y_test = np.asarray([embeddings[y] for y in Y_test])
 
-    elif OBJECTIVE in ['categorical_crossentropy', 'margin_loss']:
+    elif OBJECTIVE in ['categorical_crossentropy', 'margin_loss', ranking_loss]:
         Y_train = to_categorical(Y_train, nb_classes=NO_OF_CLASSES)
         Y_test = to_categorical(Y_test, nb_classes=NO_OF_CLASSES)
         # elif loss == margin_loss:
