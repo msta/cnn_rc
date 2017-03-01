@@ -21,7 +21,6 @@ from sklearn.model_selection import KFold
 
 from .supersense import SupersenseLookup
 from .functions import *
-from .semeval_prep import *
 from .model import get_model, train_model
 from .argparser import build_argparser
 
@@ -58,39 +57,41 @@ EXCLUDE_OTHER = args.exclude_other
 INCLUDE_WORDNET = args.wordnet
 EMBEDDING = args.embedding
 CLIPPING_VALUE = args.clipping
+DATASET = args.dataset
 
 objectives = { "ranking_loss" : ranking_loss,
                 "categorical_crossentropy" : "categorical_crossentropy"  }
 OBJECTIVE = objectives[args.loss]
 
 
-no_of_clz = len(output_dict)
 
-NO_OF_CLASSES = no_of_clz - 1 if args.exclude_other else no_of_clz
 
 ########## Load embeddings, dataset and prep input ####################
 #######################################################################
-
-
 if EMBEDDING == 'word2vec':
     word_embeddings = word2vec.load("word_embeddings.bin", encoding='ISO-8859-1')
 elif EMBEDDING == 'glove':
     word_embeddings = pickle.load(open("glove300b.pkl", "rb"))
-    # word_embeddings = {}
-    # f = open("deps.words")
-    # for line in f:
-    #     values = line.split()
-    #     word = values[0]
-    #     coefs = np.asarray(values[1:], dtype='float32')
-    #     word_embeddings[word] = coefs
-    # f.close()
 elif EMBEDDING == 'rand':
     word_embeddings = {}
 
-prep = Preprocessor(clipping_value=CLIPPING_VALUE)
-
-dataset_full, labels_full = prep.read_dataset(TRAIN_FILE, debug=DEBUG,
+if DATASET == 'semeval':
+    from .semeval.prep import *
+    prep = Preprocessor(clipping_value=CLIPPING_VALUE)
+    dataset_full, labels_full = prep.read_dataset(TRAIN_FILE, debug=DEBUG,
                                               EXCLUDE_OTHER=EXCLUDE_OTHER)
+elif DATASET == 'ace2005':
+    from .ace2005.prep import *
+    prep = AcePrep(clipping_value=CLIPPING_VALUE)
+    dataset_full, labels_full = prep.read_dataset(TRAIN_FILE, debug=DEBUG)
+    output_dict = [0,1,2,3,4,5,6]
+
+
+#### Compute number of output classes #################################
+
+no_of_clz = len(output_dict)
+
+NO_OF_CLASSES = no_of_clz - 1 if args.exclude_other else no_of_clz
 
 
 logging.info("#" * 30)
@@ -116,25 +117,6 @@ if INCLUDE_WORDNET:
 word_index = prep.word_idx()
 clipping_value = prep.clipping_value
 
-
-########## Print optional debugging output ############################
-#######################################################################
-
-zeros = [x for b in word_input for x in b if x == 0]
-logging.debug("Total amt of zeros " + str(len(zeros)))
-logging.debug("Avg zeros " + str(len(zeros) / len(word_input)))
-
-#####
-
-
-
-
-debug_print(dataset_full, "Training samples")
-debug_print(word_input, "Embedding Input")
-debug_print(nom_pos_1, "Nominal positions1: ")
-debug_print(nom_pos_2, "Nominal positions2: ")
-debug_print(prep.reverse_sequence(word_input), "Reverse")
-debug_print_dict(word_index, "Word index")
 
 ########## Begin K-Fold validation experiment #########################
 #######################################################################

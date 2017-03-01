@@ -4,8 +4,11 @@ import re
 from collections import defaultdict
 import logging
 
+from ..functions import debug_print, debug_print_dict
+
+
+from .classes import *
 from .tokenizer import SemevalTokenizer
-from .functions import debug_print, debug_print_dict
 from keras.preprocessing.sequence import pad_sequences
 
 class Preprocessor():
@@ -126,7 +129,7 @@ class Preprocessor():
     def in_range(self, nom_1, nom_2):
         return abs(nom_1 - nom_2) < self.clipping_value
 
-    def fit_to_window(self, sequences, nom_heads):
+    def find_sent_outside_window(self, sequences, nom_heads):
         seq_to_keep = []
         for idx, seq in enumerate(sequences):
             nom_1, nom_2 = nom_heads[idx]
@@ -143,25 +146,21 @@ class Preprocessor():
         if fit:
             self.fit_tokenizer()
         
-
         self.Y = np.asarray(labels)
 
         sequences, nominal_heads = zip(*self.tokenizer.sequence(texts))
 
-        sequences_clip = self.fit_to_window(sequences, nominal_heads)
-        self.Y = self.fit_to_window(self.Y, nominal_heads)
+        sequences_clip = self.find_sent_outside_window(sequences, nominal_heads)
+        self.Y = self.find_sent_outside_window(self.Y, nominal_heads)
         nominal_heads_clip = [nom for nom in nominal_heads if self.in_range(nom[0], nom[1])]
 
         nominal_positions1, nominal_positions2 = (self.create_nom_arrays(sequences_clip, 
                                                     nominal_heads_clip))
         # Select sentence and fit to window so entities are in
-        padded_sequences = self.fit_to_window2(sequences_clip, nominal_heads_clip)
+        padded_sequences = self.fit_to_window(sequences_clip, nominal_heads_clip)
 
-   
-
-
-        nominal_positions1 = self.fit_to_window2(nominal_positions1, nominal_heads_clip)
-        nominal_positions2 = self.fit_to_window2(nominal_positions2, nominal_heads_clip)
+        nominal_positions1 = self.fit_to_window(nominal_positions1, nominal_heads_clip)
+        nominal_positions2 = self.fit_to_window(nominal_positions2, nominal_heads_clip)
 
         nominal_positions1 = self.normalize_nom_arr(nominal_positions1)
         nominal_positions2 = self.normalize_nom_arr(nominal_positions2)
@@ -214,7 +213,7 @@ class Preprocessor():
         return self.tokenizer.word_index
 
     ''' adjusts sequences so to include tokens up to clipping value '''
-    def fit_to_window2(self, sequences, nominal_heads):
+    def fit_to_window(self, sequences, nominal_heads):
         padded_sequence = []
         for seq_idx, seq in enumerate(sequences):
             head, tail = nominal_heads[seq_idx]
@@ -237,15 +236,6 @@ class Preprocessor():
     def reverse_sequence(self, seqs):
         inv_map = self.reverse_word_idx()
         return [[inv_map[s] for s in xs] for xs in seqs]        
-
-    def clean_markups(self,seqs):
-        rev_seq = self.reverse_sequence(seqs)
-        new_idx = self.word_idx()
-        cleaned_seq = []
-        for seq in rev_seq:
-            cleaned_seq.append([new_idx[tok] for tok in seq if 
-                tok != 'e1' and tok != 'e2'])
-        return cleaned_seq
 
     '''
     makes the attention_one dictionary combination inputs
@@ -281,63 +271,5 @@ class Preprocessor():
 
         return self.attentions_idx, np.asarray(att_list_1), np.asarray(att_list_2)
 
-    def adjust_nominal_positions(self, X_pad, X_nom_heads):
-        nominal_positions1 = []
-        nominal_positions2 = []
-        for seq_idx, seq in enumerate(X_pad):
-            tmp_nom_pos1 = []
-            tmp_nom_pos2 = []
-            for token_idx, token in enumerate(seq):
-                head1, head2 = X_nom_heads[seq_idx]
-                nom_pos1 = (head1 - token_idx) + self.clipping_value - 1 
-                nom_pos2 = (head2 - token_idx) + self.clipping_value - 1
-                tmp_nom_pos1.append(nom_pos1)
-                tmp_nom_pos2.append(nom_pos2)
-            nominal_positions1.append(tmp_nom_pos1)
-            nominal_positions2.append(tmp_nom_pos2)
-        return np.array(nominal_positions1), np.array(nominal_positions2)
-
-
-    ''' cut sentences above a maximum nominal head distance '''
-    def clip_sentences(self, 
-                       nominal_heads, 
-                       sequences):
-
-        logging.debug("Removing sentences outside max length..")
-
-        self.idx_to_keep = []
-        for seq_idx, seq in enumerate(nominal_heads):
-            if (seq[1] - seq[0]) + 2 < self.clipping_value:
-                self.idx_to_keep.append(seq_idx)                
-
-        self.Y = np.asarray(self.Y)[self.idx_to_keep]
-
-        return (np.asarray(nominal_heads)[self.idx_to_keep],
-               np.asarray(sequences)[self.idx_to_keep])
-
-# classes in the problem
-output_dict = {
-    "Cause-Effect(e1,e2)" : 0,
-    "Cause-Effect(e2,e1)" : 1,
-    "Instrument-Agency(e1,e2)" : 2,
-    "Instrument-Agency(e2,e1)" : 3,
-    "Product-Producer(e1,e2)" : 4,
-    "Product-Producer(e2,e1)" : 5,
-    "Content-Container(e1,e2)" : 6,
-    "Content-Container(e2,e1)" : 7,
-    "Entity-Origin(e1,e2)" : 8,
-    "Entity-Origin(e2,e1)" : 9,
-    "Entity-Destination(e1,e2)" : 10,
-    "Entity-Destination(e2,e1)" : 11,
-    "Component-Whole(e1,e2)" : 12,
-    "Component-Whole(e2,e1)" : 13,
-    "Member-Collection(e1,e2)" : 14,
-    "Member-Collection(e2,e1)" : 15,
-    "Message-Topic(e1,e2)" : 16,
-    "Message-Topic(e2,e1)" : 17,
-    "Other" : 18
-}
-
-reverse_dict = {v: k for k, v in output_dict.items()}
 
 
