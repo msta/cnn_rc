@@ -119,6 +119,9 @@ def main(args):
         word_index = prep.word_idx()
         clipping_value = prep.clipping_value
 
+        import ipdb
+        ipdb.sset_trace()
+        
 
         ###### Beginning official test #########
         
@@ -147,109 +150,107 @@ def main(args):
                                     WINDOW_SIZE=WINDOW_SIZE)
         Y_backup = Y_train
 
-        for cut in [0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9]:
-            
-
-            logging.info("Training with cut : " + str(cut))
-            X_train = [x[:int(len(Y_backup)*cut)] for x in X_backup]
-            Y_train = Y_backup[:int(len(Y_backup)*cut)]
-
-            model = get_model( 
-                word_embeddings=word_embeddings,
-                word_index=word_index, 
-                n=clipping_value,
-                word_entity_dictionary=att_idx, 
-                POS_EMBEDDING_DIM=POS_EMBEDDING_DIM,
-                L2_VALUE=L2_VALUE,
-                WORD_EMBEDDING_DIM=WORD_EMBEDDING_DIMENSION,
-                WINDOW_HEIGHT=WINDOW_HEIGHT,
-                WORDNET=INCLUDE_WORDNET,
-                WORDNET_LEN=len(ss_lookup.supersense_id),
-                INCLUDE_ATTENTION_ONE=INCLUDE_ATTENTION_ONE,
-                INCLUDE_ATTENTION_TWO=INCLUDE_ATTENTION_TWO,
-                DROPOUT_RATE=DROPOUT_RATE,
-                WINDOW_SIZE=WINDOW_SIZE,
-                NO_OF_CLASSES=NO_OF_CLASSES,
-                optimizer=args.optimizer,
-                loss=OBJECTIVE
-                )
+        model = get_model( 
+            word_embeddings=word_embeddings,
+            word_index=word_index, 
+            n=clipping_value,
+            word_entity_dictionary=att_idx, 
+            POS_EMBEDDING_DIM=POS_EMBEDDING_DIM,
+            L2_VALUE=L2_VALUE,
+            WORD_EMBEDDING_DIM=WORD_EMBEDDING_DIMENSION,
+            WINDOW_HEIGHT=WINDOW_HEIGHT,
+            WORDNET=INCLUDE_WORDNET,
+            WORDNET_LEN=len(ss_lookup.supersense_id),
+            INCLUDE_ATTENTION_ONE=INCLUDE_ATTENTION_ONE,
+            INCLUDE_ATTENTION_TWO=INCLUDE_ATTENTION_TWO,
+            DROPOUT_RATE=DROPOUT_RATE,
+            WINDOW_SIZE=WINDOW_SIZE,
+            NO_OF_CLASSES=NO_OF_CLASSES,
+            optimizer=args.optimizer,
+            loss=OBJECTIVE
+            )
 
 
-            logging.info(model.summary())
+        logging.info(model.summary())
 
-            result = train_model(model, X_train, Y_train, EPOCHS, early_stopping=True)
+        result = train_model(model, X_train, Y_train, EPOCHS, early_stopping=True)
 
 
-            model = get_model( 
-                word_embeddings=word_embeddings,
-                word_index=word_index, 
-                n=clipping_value,
-                word_entity_dictionary=att_idx, 
-                POS_EMBEDDING_DIM=POS_EMBEDDING_DIM,
-                L2_VALUE=L2_VALUE,
-                WORD_EMBEDDING_DIM=WORD_EMBEDDING_DIMENSION,
-                WINDOW_HEIGHT=WINDOW_HEIGHT,
-                WORDNET=INCLUDE_WORDNET,
-                WORDNET_LEN=len(ss_lookup.supersense_id),
-                INCLUDE_ATTENTION_ONE=INCLUDE_ATTENTION_ONE,
-                INCLUDE_ATTENTION_TWO=INCLUDE_ATTENTION_TWO,
-                DROPOUT_RATE=DROPOUT_RATE,
-                WINDOW_SIZE=WINDOW_SIZE,
-                NO_OF_CLASSES=NO_OF_CLASSES,
-                optimizer=args.optimizer,
-                loss=OBJECTIVE
-                )
+        model = get_model( 
+            word_embeddings=word_embeddings,
+            word_index=word_index, 
+            n=clipping_value,
+            word_entity_dictionary=att_idx, 
+            POS_EMBEDDING_DIM=POS_EMBEDDING_DIM,
+            L2_VALUE=L2_VALUE,
+            WORD_EMBEDDING_DIM=WORD_EMBEDDING_DIMENSION,
+            WINDOW_HEIGHT=WINDOW_HEIGHT,
+            WORDNET=INCLUDE_WORDNET,
+            WORDNET_LEN=len(ss_lookup.supersense_id),
+            INCLUDE_ATTENTION_ONE=INCLUDE_ATTENTION_ONE,
+            INCLUDE_ATTENTION_TWO=INCLUDE_ATTENTION_TWO,
+            DROPOUT_RATE=DROPOUT_RATE,
+            WINDOW_SIZE=WINDOW_SIZE,
+            NO_OF_CLASSES=NO_OF_CLASSES,
+            optimizer=args.optimizer,
+            loss=OBJECTIVE
+            )
 
-            logging.info("Training with " + str(len(result.epoch)) + " epochs by early stopping")
-            result = train_model(model, X_train, Y_train, len(result.epoch), early_stopping=False)
+        logging.info("Training with " + str(len(result.epoch)) + " epochs by early stopping")
+        result = train_model(model, X_train, Y_train, len(result.epoch), early_stopping=False)
+
+        import ipdb
+        ipdb.sset_trace()
 
 
 
-            logging.info("Done training...")
+        logging.info("Done training...")
 
         ########## Prepare test data                  #########################
         #######################################################################
 
 
-            (X_test, X_test_nom_pos1, X_test_nom_pos2, 
-            att_idx, att_test_list_1, att_test_list_2, kept_ids) = prep.transform(data,ids)
+        (X_test, X_test_nom_pos1, X_test_nom_pos2, 
+        att_idx, att_test_list_1, att_test_list_2, kept_ids) = prep.transform(data,ids)
 
-            word_idx = prep.word_idx()
+        word_idx = prep.word_idx()
 
-            if INCLUDE_WORDNET:
-                tags = open("data/semeval/testing/" + TEST_FILE + ".tags").read()
-                ss_lookup.fit(tags)
-                wordnet_sequences = ss_lookup.transform(prep.reverse_sequence(X_test))
-
-
-            X = [X_test]
-
-            att_test_list_1 = []
-            att_test_list_2 = []
+        if INCLUDE_WORDNET:
+            tags = open("data/semeval/testing/" + TEST_FILE + ".tags").read()
+            ss_lookup.fit(tags)
+            wordnet_sequences = ss_lookup.transform(prep.reverse_sequence(X_test))
 
 
-            build_input_arrays_test(X,
-                                    att_test_list_1, att_test_list_2,
-                                    X_test_nom_pos1, X_test_nom_pos2,
-                                    wordnet_sequences)
+        X = [X_test]
 
-            failures = [x for x in ids if x not in kept_ids]
+        att_test_list_1 = []
+        att_test_list_2 = []
 
-            logging.info("Predicting for X...")    
-            preds = model.predict(X)
 
-            preds_final = [np.argmax(pred) for pred in preds]
+        build_input_arrays_test(X,
+                                att_test_list_1, att_test_list_2,
+                                X_test_nom_pos1, X_test_nom_pos2,
+                                wordnet_sequences)
 
-            lookup_labels = [reverse_dict[pred] for pred in preds_final]
+        failures = [x for x in ids if x not in kept_ids]
 
-            with open("data/semeval/" + str(cut) + "test_pred.txt", "w+") as f:
-                for idx, i in enumerate(kept_ids):
-                    f.write(i + "\t" + lookup_labels[idx] + "\n")
+        logging.info("Predicting for X...")    
+        preds = model.predict(X)
 
-                for i in failures:
-                    f.write(i + "\t" + "Other" + "\n")
+        preds_final = [np.argmax(pred) for pred in preds]
 
-            logging.info("Experiment done!")
+        lookup_labels = [reverse_dict[pred] for pred in preds_final]
+
+        with open("data/semeval/test_pred.txt", "w+") as f:
+            for idx, i in enumerate(kept_ids):
+                f.write(i + "\t" + lookup_labels[idx] + "\n")
+
+            for i in failures:
+                f.write(i + "\t" + "Other" + "\n")
+
+
+
+        logging.info("Experiment done!")
 
 if __name__ == '__main__':
     parser = build_argparser()
