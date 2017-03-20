@@ -1,3 +1,6 @@
+from collections import defaultdict
+import re
+
 
 class SemevalTokenizer():
 

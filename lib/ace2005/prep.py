@@ -23,7 +23,7 @@ class AcePrep(Preprocessor):
         self.word_dict = pickle.load(open("data/ace2005/training/vocab.pkl", "rb"))
         if debug:
             return all_data[:10000]
-        return all_data
+        return all_data[:-1]
 
     def read_dataset(self, train_file, debug=False):
         data = self.load_dataset(train_file, debug)
@@ -46,10 +46,12 @@ class AcePrep(Preprocessor):
             if head_2 - head_1 + 1 > self.clipping_value:
                 continue 
             labels.append(label)
+            #labels.append(1)
             input_tokens.append(splits[0])
             self.nom_heads.append((head_1, head_2))
 
         return input_tokens, labels
+
 
 
     def fit_transform(self, data, labels):
@@ -65,8 +67,11 @@ class AcePrep(Preprocessor):
         nom_arr_1 = self.fit_to_window(nom_arr_1, self.nom_heads)
         nom_arr_2 = self.fit_to_window(nom_arr_2, self.nom_heads)
 
+
+
         nom_arr_1 = self.normalize_nom_arr(nom_arr_1)
         nom_arr_2 = self.normalize_nom_arr(nom_arr_2)
+
         return (np.asarray(padded_data), 
             np.asarray(nom_arr_1), np.asarray(nom_arr_2), 
             {}, np.asarray([]), np.asarray([]), np.asarray(labels))

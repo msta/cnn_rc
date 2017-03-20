@@ -17,12 +17,13 @@ from keras.layers.wrappers import TimeDistributed
 from keras.layers.core import Dropout
 from keras.layers.pooling import GlobalMaxPooling2D, GlobalMaxPooling1D
 from keras.layers.pooling import MaxPooling2D, MaxPooling1D
+from keras.callbacks import EarlyStopping
+
 
 from keras.regularizers import l2
 from keras.constraints import maxnorm
 from keras import backend as K
-from .functions import fbetascore, margin_loss, accuracy2
-    
+from .metrics import f1_macro
 
 def get_model(
     word_embeddings,
@@ -33,7 +34,6 @@ def get_model(
     POS_EMBEDDING_DIM=50,
     L2_NORM_MAX=3,
     L2_VALUE=0.0,
-    INCLUDE_POS_EMB=True,
     WORDNET=False,
     WORDNET_LEN=0,
     WINDOW_HEIGHT=[3],
@@ -42,11 +42,12 @@ def get_model(
     ACTIVATION_FUNCTION="tanh",
     WINDOW_SIZE=1000,
     optimizer='ada',
-    loss=margin_loss,
+    loss='categorical_crossentropy',
     DROPOUT_RATE=0.5, 
     NO_OF_CLASSES=19):
     # NOTE TO SELF - Don't let the vector be all-zeroes when the word is not present
 
+    INCLUDE_POS_EMB = True if POS_EMBEDDING_DIM > 0 else False
 
     missed_words = []
     embedding_matrix = np.zeros((len(word_index) + 1, WORD_EMBEDDING_DIM))
@@ -60,9 +61,12 @@ def get_model(
             #else:
             embedding_vector = word_embeddings[word]
         except KeyError:
-            missed_words.append(word)
-            #embedding_vector = oov_vector
-            embedding_vector = np.random.uniform(-0.25, 0.25, WORD_EMBEDDING_DIM)
+            try:
+                embedding_vector = word_embeddings[word.lower()]
+            except KeyError:
+                missed_words.append(word)
+                #embedding_vector = oov_vector
+                embedding_vector = np.random.uniform(-0.25, 0.25, WORD_EMBEDDING_DIM)
         finally:
             embedding_matrix[i] = embedding_vector
     logging.info("Missed words" + str(len(missed_words)))
@@ -258,7 +262,7 @@ def build_metrics(with_attention_two=False):
         acc_partial.__name__='accuracy'
         metrics.append(acc_partial)
     else:
-        metrics.extend(['accuracy', 'fmeasure'])
+        metrics.extend(['fmeasure', 'accuracy'])
     return metrics
 
 
@@ -294,13 +298,23 @@ def att_comp(tensor_list):
     return tf.mul(tensor_list[0],tensor_list[1]) 
 
 
-def train_model(model, X_train, Y_train, EPOCHS):
+def train_model(model, X_train, Y_train, EPOCHS, early_stopping=False):
                 #logging.debug(model.summary())
-                history = model.fit(X_train, 
+                if early_stopping:
+                    history = model.fit(X_train,
+                        Y_train, 
+                        validation_split=0.1,
+                        callbacks=[EarlyStopping(patience=1)],
+                        nb_epoch=EPOCHS, 
+                        batch_size=50, 
+                        shuffle=True)
+                else:
+                    history = model.fit(X_train,
                     Y_train, 
                     nb_epoch=EPOCHS, 
                     batch_size=50, 
                     shuffle=True)
+                return history
 
 
 

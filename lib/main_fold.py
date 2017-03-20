@@ -19,8 +19,7 @@ from keras import backend as K
 from keras.optimizers import Adadelta
 from keras.utils.np_utils import to_categorical
 
-from sklearn.model_selection import KFold
-
+from sklearn.model_selection import KFold, train_test_split
 from .supersense import SupersenseLookup
 from .functions import *
 from .model import get_model, train_model
@@ -31,7 +30,6 @@ def main(args):
     ########## Parse arguments and setup logging ####################
     #################################################################
     with K.tf.device('/gpu:0'):
-
 
         loglevel = logging.DEBUG if args.debug else logging.INFO
 
@@ -61,7 +59,8 @@ def main(args):
         CLIPPING_VALUE = args.clipping
         DATASET = args.dataset
 
-        objectives = { "categorical_crossentropy" : "categorical_crossentropy"  }
+        objectives = {
+                        "categorical_crossentropy" : "categorical_crossentropy"  }
         OBJECTIVE = objectives[args.loss]
 
 
@@ -77,7 +76,7 @@ def main(args):
             word_embeddings = {}
 
         if DATASET == 'semeval':
-            from .semeval.prep import Preprocessor, output_dict, reverse_dict   
+            from .semeval.prep import Preprocessor, output_dict
             prep = Preprocessor(clipping_value=CLIPPING_VALUE)
             dataset_full, labels_full = prep.read_dataset(TRAIN_FILE, debug=DEBUG,
                                                       EXCLUDE_OTHER=EXCLUDE_OTHER)
@@ -104,9 +103,6 @@ def main(args):
             att_idx, att_list_1, att_list_2,
             Y) = prep.fit_transform(dataset_full, labels_full)
 
-        att_list_1 = []
-        att_list_2 = []
-
         wordnet_sequences = []
         ss_lookup = SupersenseLookup()
 
@@ -115,141 +111,115 @@ def main(args):
             ss_lookup.fit(tags)
             wordnet_sequences = ss_lookup.transform(prep.reverse_sequence(word_input))
 
-
         word_index = prep.word_idx()
         clipping_value = prep.clipping_value
 
+        X = [word_input]
 
-        ###### Beginning official test #########
-        
-        logging.info("Beginning test with official F1 scorer ...")
-
-        test_path = "data/semeval/testing/" + TEST_FILE + ".txt"
-
-        test_set = open(test_path)
-
-        data, ids = prep.read_testset(test_set, output_dict)
-
-     
-        X_train = [word_input]
-        X_backup = X_train
-
-        
-
-        build_input_arrays_test(X_train,
-                                att_list_1, att_list_2,
-                                nom_pos_1, nom_pos_2,
-                                wordnet_sequences)
+        build_input_arrays_folded(X,
+                                  INCLUDE_POS_EMB, 
+                                  INCLUDE_ATTENTION_ONE,
+                                  INCLUDE_WORDNET,
+                                  nom_pos_1,
+                                  nom_pos_2,
+                                  att_list_1,
+                                  att_list_2,
+                                  wordnet_sequences)
 
 
-        Y_train = build_label_representation(Y, OBJECTIVE=OBJECTIVE,
-                                    NO_OF_CLASSES=NO_OF_CLASSES,
-                                    WINDOW_SIZE=WINDOW_SIZE)
-        Y_backup = Y_train
+        Y = build_label_representation(Y_train=Y,
+                                                OBJECTIVE=OBJECTIVE,
+                                                NO_OF_CLASSES=NO_OF_CLASSES,
+                                                WINDOW_SIZE=WINDOW_SIZE)
 
-        for cut in [0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9]:
-            
+        x_idx = np.asarray(list(range(0, len(X[0]))))
 
-            logging.info("Training with cut : " + str(cut))
-            X_train = [x[:int(len(Y_backup)*cut)] for x in X_backup]
-            Y_train = Y_backup[:int(len(Y_backup)*cut)]
+        # training_idx, val_idx = train_test_split(x_idx, test_size=0.1)
 
-            model = get_model( 
-                word_embeddings=word_embeddings,
-                word_index=word_index, 
-                n=clipping_value,
-                word_entity_dictionary=att_idx, 
-                POS_EMBEDDING_DIM=POS_EMBEDDING_DIM,
-                L2_VALUE=L2_VALUE,
-                WORD_EMBEDDING_DIM=WORD_EMBEDDING_DIMENSION,
-                WINDOW_HEIGHT=WINDOW_HEIGHT,
-                WORDNET=INCLUDE_WORDNET,
-                WORDNET_LEN=len(ss_lookup.supersense_id),
-                INCLUDE_ATTENTION_ONE=INCLUDE_ATTENTION_ONE,
-                INCLUDE_ATTENTION_TWO=INCLUDE_ATTENTION_TWO,
-                DROPOUT_RATE=DROPOUT_RATE,
-                WINDOW_SIZE=WINDOW_SIZE,
-                NO_OF_CLASSES=NO_OF_CLASSES,
-                optimizer=args.optimizer,
-                loss=OBJECTIVE
-                )
+        # X_train = [xx[training_idx] for xx in X]
+        # X_val = [xx[val_idx] for xx in X]
 
+        # Y_train = Y[training_idx]
+        # Y_val = Y[val_idx]
+        X_train = X
+        Y_train = Y
 
-            logging.info(model.summary())
-
-            result = train_model(model, X_train, Y_train, EPOCHS, early_stopping=True)
-
-
-            model = get_model( 
-                word_embeddings=word_embeddings,
-                word_index=word_index, 
-                n=clipping_value,
-                word_entity_dictionary=att_idx, 
-                POS_EMBEDDING_DIM=POS_EMBEDDING_DIM,
-                L2_VALUE=L2_VALUE,
-                WORD_EMBEDDING_DIM=WORD_EMBEDDING_DIMENSION,
-                WINDOW_HEIGHT=WINDOW_HEIGHT,
-                WORDNET=INCLUDE_WORDNET,
-                WORDNET_LEN=len(ss_lookup.supersense_id),
-                INCLUDE_ATTENTION_ONE=INCLUDE_ATTENTION_ONE,
-                INCLUDE_ATTENTION_TWO=INCLUDE_ATTENTION_TWO,
-                DROPOUT_RATE=DROPOUT_RATE,
-                WINDOW_SIZE=WINDOW_SIZE,
-                NO_OF_CLASSES=NO_OF_CLASSES,
-                optimizer=args.optimizer,
-                loss=OBJECTIVE
-                )
-
-            logging.info("Training with " + str(len(result.epoch)) + " epochs by early stopping")
-            result = train_model(model, X_train, Y_train, len(result.epoch), early_stopping=False)
-
-
-
-            logging.info("Done training...")
-
-        ########## Prepare test data                  #########################
+        ########## Begin K-Fold validation experiment #########################
         #######################################################################
 
+        logging.info("Ready for K-Fold Validation...")
+        logging.info(str(FOLDS) + " folds...")
 
-            (X_test, X_test_nom_pos1, X_test_nom_pos2, 
-            att_idx, att_test_list_1, att_test_list_2, kept_ids) = prep.transform(data,ids)
+        all_results = []
+        kf = KFold(n_splits=FOLDS, shuffle=True)
 
-            word_idx = prep.word_idx()
+        fold = 0
 
-            if INCLUDE_WORDNET:
-                tags = open("data/semeval/testing/" + TEST_FILE + ".tags").read()
-                ss_lookup.fit(tags)
-                wordnet_sequences = ss_lookup.transform(prep.reverse_sequence(X_test))
+        for train_idx, test_idx in kf.split(X_train[0]):
+            logging.info("Beginning fold: " +  str(fold))
+            fold += 1
+
+            model = get_model( 
+                word_embeddings=word_embeddings,
+                word_index=word_index, 
+                n=clipping_value,
+                word_entity_dictionary=att_idx, 
+                POS_EMBEDDING_DIM=POS_EMBEDDING_DIM,
+                L2_VALUE=L2_VALUE,
+                WORD_EMBEDDING_DIM=WORD_EMBEDDING_DIMENSION,
+                WINDOW_HEIGHT=WINDOW_HEIGHT,
+                WORDNET=INCLUDE_WORDNET,
+                WORDNET_LEN=len(ss_lookup.supersense_id),
+                INCLUDE_ATTENTION_ONE=INCLUDE_ATTENTION_ONE,
+                INCLUDE_ATTENTION_TWO=INCLUDE_ATTENTION_TWO,
+                DROPOUT_RATE=DROPOUT_RATE,
+                WINDOW_SIZE=WINDOW_SIZE,
+                NO_OF_CLASSES=NO_OF_CLASSES,
+                optimizer=args.optimizer,
+                loss=OBJECTIVE
+                )
+
+            #logging.info(model.summary())
+
+            X_fold = [xx[train_idx] for xx in X_train]
+            X_test = [xx[test_idx] for xx in X_train]
+            
+            #X_fold = [xx[:int(split*len(xx))] for xx in X_fold]
+
+            Y_fold = Y_train[train_idx]
+
+            #Y_fold = Y_fold[:int(split*len(Y_fold))]
+            Y_test = Y_train[test_idx]
 
 
-            X = [X_test]
+            train_model(model, X_fold, Y_fold, EPOCHS, validation_split=0.2)
 
-            att_test_list_1 = []
-            att_test_list_2 = []
+            logging.info("#" * 30)
+            logging.info("EVALUATING MODEL")
 
 
-            build_input_arrays_test(X,
-                                    att_test_list_1, att_test_list_2,
-                                    X_test_nom_pos1, X_test_nom_pos2,
-                                    wordnet_sequences)
+            result = model.evaluate(X_test, Y_test)
+            # from sklearn.metrics import f1_score
 
-            failures = [x for x in ids if x not in kept_ids]
+            # Y_pred = model.predict(X_test)
 
-            logging.info("Predicting for X...")    
-            preds = model.predict(X)
+            #result = f1_score([np.argmax(x) for x in Y_pred],[np.argmax(y) for y in Y_test], average='macro')
 
-            preds_final = [np.argmax(pred) for pred in preds]
+            all_results.append(result)
+            logging.info(result)
+            logging.info("EVALUATING DONE")
+            logging.info("#" * 30)
 
-            lookup_labels = [reverse_dict[pred] for pred in preds_final]
 
-            with open("data/semeval/" + str(cut) + "test_pred.txt", "w+") as f:
-                for idx, i in enumerate(kept_ids):
-                    f.write(i + "\t" + lookup_labels[idx] + "\n")
+        ### Random bug with the final fold ? ### 
+        final_f1 = sum([x[1] for x in all_results  ]) / (FOLDS)
+        final_loss = sum([x[0] for x in all_results  ]) / (FOLDS)
+        logging.info( "#" * 30)
+        logging.info( "FINAL F1 VALUE: " + str(final_f1))
+        logging.info( "#" * 30 )
+        logging.info("AVERAGE LOSS :" + str(final_loss))
 
-                for i in failures:
-                    f.write(i + "\t" + "Other" + "\n")
-
-            logging.info("Experiment done!")
+    logging.info("Experiment done!")
 
 if __name__ == '__main__':
     parser = build_argparser()
