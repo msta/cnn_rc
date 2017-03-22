@@ -24,6 +24,8 @@ from sklearn.model_selection import KFold
 from .supersense import SupersenseLookup
 from .functions import *
 from .model import get_model, train_model
+from .pretrained_model import get_pretrained_model
+
 from .argparser import build_argparser
 
 
@@ -71,19 +73,28 @@ def main(args):
         #######################################################################
         if EMBEDDING == 'word2vec':
             word_embeddings = word2vec.load("word_embeddings.bin", encoding='ISO-8859-1')
+            fit_str = ""
+            for word in word_embeddings.vocab[:100]:
+                fit_str += word + " "
         elif EMBEDDING == 'glove':
             word_embeddings = pickle.load(open("glove300b.pkl", "rb"))
+            
+
         elif EMBEDDING == 'rand':
             word_embeddings = {}
 
         if DATASET == 'semeval':
             from .semeval.prep import Preprocessor, output_dict, reverse_dict   
             prep = Preprocessor(clipping_value=CLIPPING_VALUE)
+
             dataset_full, labels_full = prep.read_dataset(TRAIN_FILE, debug=DEBUG,
                                                       EXCLUDE_OTHER=EXCLUDE_OTHER)
         elif DATASET == 'ace2005':
             from .ace2005.prep import AcePrep
             prep = AcePrep(clipping_value=CLIPPING_VALUE)
+
+
+
             dataset_full, labels_full = prep.read_dataset(TRAIN_FILE, debug=DEBUG)
             output_dict = [0,1,2,3,4,5,6]
 
@@ -119,9 +130,9 @@ def main(args):
         word_index = prep.word_idx()
         clipping_value = prep.clipping_value
 
-        import ipdb
-        ipdb.sset_trace()
-        
+        #clipping_value = len(max(word_input, key=len))
+
+
 
         ###### Beginning official test #########
         
@@ -170,6 +181,8 @@ def main(args):
             loss=OBJECTIVE
             )
 
+      
+
 
         logging.info(model.summary())
 
@@ -197,11 +210,11 @@ def main(args):
             )
 
         logging.info("Training with " + str(len(result.epoch)) + " epochs by early stopping")
+        
         result = train_model(model, X_train, Y_train, len(result.epoch), early_stopping=False)
 
-        import ipdb
-        ipdb.sset_trace()
 
+        
 
 
         logging.info("Done training...")
@@ -209,11 +222,41 @@ def main(args):
         ########## Prepare test data                  #########################
         #######################################################################
 
-
-        (X_test, X_test_nom_pos1, X_test_nom_pos2, 
-        att_idx, att_test_list_1, att_test_list_2, kept_ids) = prep.transform(data,ids)
+        #aux_texts = [fit_str]
+        aux_texts = None
+        (X_test, X_test_nom_pos1, X_test_nom_pos2, att_idx, 
+            att_test_list_1, att_test_list_2, kept_ids) = prep.transform(data,ids, aux_texts=aux_texts)
 
         word_idx = prep.word_idx()
+
+        # all_weights = model.get_weights()
+
+        # embedding_weights = all_weights[0]
+
+        # pretrained_emb_index = embedding_weights.shape[0]
+
+        # new_embedding_list = []
+
+        # for word, idx in list(word_index.items()):
+        #     if idx < pretrained_emb_index:
+        #         continue
+        #     try:
+        #         embedding_vector = word_embeddings[word]
+        #     except:
+        #         embedding_vector = np.random.uniform(-0.25, 0.25, 300)
+        #     finally:
+        #         new_embedding_list.append(embedding_vector)
+
+        # new_embedding = np.append(embedding_weights, np.asarray(new_embedding_list), axis = 0)
+
+        # all_weights[0] = new_embedding
+
+        # model = get_pretrained_model({},clipping_value, WORD_EMBEDDING_DIM=300,
+        #     POS_EMBEDDING_DIM=50, L2_VALUE=L2_VALUE, WINDOW_HEIGHT=WINDOW_HEIGHT,
+        #     WINDOW_SIZE=WINDOW_SIZE, DROPOUT_RATE=DROPOUT_RATE,
+        #     all_weights=all_weights
+        #     )
+
 
         if INCLUDE_WORDNET:
             tags = open("data/semeval/testing/" + TEST_FILE + ".tags").read()

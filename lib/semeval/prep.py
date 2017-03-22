@@ -121,10 +121,7 @@ class Preprocessor():
             ids.append(self.get_id(line))    
         return data, ids
 
-    ## used for testing only, with ids
-    def transform(self, texts, ids):
-
-        return self.fit_transform(texts, ids, fit=False)
+  
 
     def in_range(self, nom_1, nom_2):
         return abs(nom_1 - nom_2) < self.clipping_value
@@ -137,14 +134,20 @@ class Preprocessor():
                 seq_to_keep.append(seq)
 
         return seq_to_keep
+    ## used for testing only, with ids
+    def transform(self, texts, ids, aux_texts=None):
 
+        return self.fit_transform(texts, ids, fit=False, aux_texts=aux_texts)
 
-    def fit_transform(self, texts, labels, fit=True):
+    def fit_transform(self, texts, labels, fit=True, aux_texts=None):
 
         self.texts = texts
         
         if fit:
             self.fit_tokenizer()
+
+        if aux_texts:
+            self.tokenizer.fit_on_texts(aux_texts)
         
         self.Y = np.asarray(labels)
 
