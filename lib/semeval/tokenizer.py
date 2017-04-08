@@ -6,7 +6,7 @@ class SemevalTokenizer():
 
     def __init__(self, vocab=None):
         self.e_reg = "(<e1>|</e1>|<e2>|</e2>)*"
-        
+        self.filters='!"#$%&()*+,-.:;=?@[\\]^_`{|}~\t\n'
         self.word_index = defaultdict(int)
 
         self.vocab = vocab
@@ -17,14 +17,18 @@ class SemevalTokenizer():
         for text in texts:
             self._fit(text)
 
+    def _split(self, text):
+
+        text = text.translate(str.maketrans(self.filters, " " * len(self.filters)))
+        return [d.strip() for d in text.split(" ") if d.strip()]
+
     def _fit(self, text):
-        for token in text.split(" "):
+        for token in self._split(text):
             n_token = re.sub(self.e_reg, "", token)
             
             # try:
             #     word_idx = self.vocab.index(n_token)
                 
-
             if n_token not in self.word_index:
                 n_length = len(self.word_index) + 1
                 self.word_index[n_token] = n_length
@@ -34,9 +38,10 @@ class SemevalTokenizer():
         return [self._sequence(text) for text in texts]
 
     def _sequence(self, text):
+
         nom_1 = nom_2 = -1
         seq_arr = []
-        for idx, token in enumerate(text.split(" ")):
+        for idx, token in enumerate(self._split(text)):
             if 'e1' in token:
                 nom_1 = idx
             elif 'e2' in token:

@@ -55,7 +55,7 @@ def build_argparser():
                         choices=["sgd", "ada"])
     parser.add_argument("--filter_size",
                         type=int,
-                        default=400)
+                        default=200)
     parser.add_argument("--wordembeddingdim",
                         type=int,
                         default=300)

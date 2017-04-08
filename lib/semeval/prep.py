@@ -17,7 +17,7 @@ class Preprocessor():
         clipping_value=18):
 
         self.n = clipping_value
-        self.tokenizer = None
+        self.tokenizer = SemevalTokenizer()
         self.texts = None
         self.attentions_idx = {}
         self.Y = []
@@ -29,7 +29,7 @@ class Preprocessor():
     with the first fitting
     '''
     def fit_tokenizer(self):
-        self.tokenizer = SemevalTokenizer()
+        #self.tokenizer = SemevalTokenizer()
         self.tokenizer.fit_on_texts(self.texts)
 
         self.oov_val = len(self.tokenizer.word_index)
@@ -91,6 +91,54 @@ class Preprocessor():
             return np.asarray(X_raw), np.asarray(Y)
 
 
+    def read_semiset(self, aug_file, debug=False, EXCLUDE_OTHER=False):
+
+        dataset = self.load_dataset(aug_file)
+
+        X_raw = []
+        Y = []
+        i = 0
+        revers_ent = False
+        flip_clz = []
+
+        for line in dataset:
+            if i == 0:
+                text = self.get_text(line)
+                e1_pos = text.find("e1")
+                e2_pos = text.find("e2")
+                if e2_pos < e1_pos:
+                    revers_ent = True
+                    text = text.replace("e1", "tmp").replace("e2", "e1").replace("tmp", "e2") 
+                X_raw.append(text)
+            if i == 1:
+                if EXCLUDE_OTHER and line.strip() == 'Other':
+                    X_raw = X_raw[:-1]
+                else:
+                    stripped = line.strip().split("\t")
+                    to_app = [output_dict[x] for x in stripped]
+                    if revers_ent:
+                       [x-1 for x in to_app]
+                    Y.append(to_app)
+            if i == 2 or i == 3 or i == 4:
+                pass
+            i += 1
+            if i % 5 == 0:
+                i = 0
+                flip_clz.append(revers_ent)
+                revers_ent = False
+        if len(X_raw) % 1000 == 0:
+            print ("growing" + str(len(X_raw)))
+        
+
+        if debug:
+            return np.asarray(X_raw)[:5], np.asarray(Y)[:5]
+        else:
+            return X_raw, np.asarray(Y), np.asarray(flip_clz)
+
+
+
+
+
     def gen_dataset(self, dataset, 
                      output_dict, 
                      merge_classes=False):
@@ -134,10 +182,11 @@ class Preprocessor():
                 seq_to_keep.append(seq)
 
         return seq_to_keep
+    
     ## used for testing only, with ids
     def transform(self, texts, ids, aux_texts=None):
-
         return self.fit_transform(texts, ids, fit=False, aux_texts=aux_texts)
+
 
     def fit_transform(self, texts, labels, fit=True, aux_texts=None):
 
@@ -153,6 +202,10 @@ class Preprocessor():
 
         sequences, nominal_heads = zip(*self.tokenizer.sequence(texts))
 
+        e_pairs = self.get_e_pairs(sequences, nominal_heads)
+
+        texts = np.asarray(texts)
+        texts_to_return = self.find_sent_outside_window(texts, nominal_heads) 
         sequences_clip = self.find_sent_outside_window(sequences, nominal_heads)
         self.Y = self.find_sent_outside_window(self.Y, nominal_heads)
         nominal_heads_clip = [nom for nom in nominal_heads if self.in_range(nom[0], nom[1])]
@@ -168,13 +221,14 @@ class Preprocessor():
         nominal_positions1 = self.normalize_nom_arr(nominal_positions1)
         nominal_positions2 = self.normalize_nom_arr(nominal_positions2)
 
-
-        att_idx, att_list_1, att_list_2 = self.make_att_dict(padded_sequences, nominal_heads)
         return (padded_sequences, 
             np.asarray(nominal_positions1), np.asarray(nominal_positions2), 
-            att_idx, att_list_1, att_list_2,
+            e_pairs, texts_to_return, None,
             self.Y)
 
+    def get_e_pairs(self, sequences, nominal_heads):
+        reverse_seqs = self.reverse_sequence(sequences)
+        return np.asarray([set([reverse_seqs[idx][one], reverse_seqs[idx][two]]) for idx, (one, two) in enumerate(nominal_heads)])
 
     def create_nom_arrays(self, sequences, nom_arrs):
         
@@ -239,40 +293,6 @@ class Preprocessor():
     def reverse_sequence(self, seqs):
         inv_map = self.reverse_word_idx()
         return [[inv_map[s] for s in xs] for xs in seqs]        
-
-    '''
-    makes the attention_one dictionary combination inputs
-    '''
-    def make_att_dict(self, seqs, nominals, fit=True):
-        att_list_1 = []
-        att_list_2 = []
-
-        def add_to_dict_and_list(pair, att_list, fit=True):
-            if fit and pair not in self.attentions_idx: 
-                self.attentions_idx[pair] = len(self.attentions_idx) + 1 
-            
-            try:
-                att_list.append(self.attentions_idx[pair])
-            except KeyError:
-                att_list.append(self.attentions_idx[(0,0)])
-        ## Add OOV * OOV, or padding*padding for possible test combinations
-        add_to_dict_and_list((0,0), [])
-
-
-        for seq_idx, seq in enumerate(seqs):
-            att_sub_list_1 = []
-            att_sub_list_2 = []
-            for tok_idx, tok in enumerate(seq):
-                nominal_idx_1, nominal_idx_2 = nominals[seq_idx]
-                pair_1 = min(tok, nominal_idx_1), max(tok, nominal_idx_1)
-                pair_2 = min(tok, nominal_idx_2), max(tok, nominal_idx_2)
-
-                add_to_dict_and_list(pair_1, att_sub_list_1, fit)
-                add_to_dict_and_list(pair_2, att_sub_list_2, fit)
-            att_list_1.append(att_sub_list_1)
-            att_list_2.append(att_sub_list_2)
-
-        return self.attentions_idx, np.asarray(att_list_1), np.asarray(att_list_2)
 
 
 

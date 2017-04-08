@@ -49,9 +49,6 @@ def get_pretrained_model(
     weight_count = 0
 
 
-    import ipdb
-    ipdb.sset_trace()
-
     embedding_layer = Embedding(all_weights[weight_count].shape[0],
                                 WORD_EMBEDDING_DIM,
                                 weights=[all_weights[weight_count]],
@@ -113,8 +110,6 @@ def get_pretrained_model(
     for w in windows:
         conv = conv_input   
         #conv = Reshape((1,n,CIP))(conv_input)
-        import ipdb
-        ipdb.sset_trace()
         conv_weights = [all_weights[weight_count], all_weights[weight_count + 1]]
         weight_count += 2         
 

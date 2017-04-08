@@ -1,5 +1,4 @@
     # coding: utf-8
-    
 import numpy as np
 import re
 import math
@@ -69,9 +68,9 @@ def main(args):
     #######################################################################
     if EMBEDDING == 'word2vec':
         word_embeddings = word2vec.load("word_embeddings.bin", encoding='ISO-8859-1')
-        # fit_str = ""
-        # for word in word_embeddings.vocab:
-            # fit_str += word + " "
+        fit_str = ""
+        for word in word_embeddings.vocab:
+            fit_str += word + " "
     elif EMBEDDING == 'glove':
         word_embeddings = pickle.load(open("glove300b.pkl", "rb"))
         
@@ -80,13 +79,11 @@ def main(args):
         word_embeddings = {}
 
     if DATASET == 'semeval':
-        from .semeval.prep import Preprocessor, output_dict, reverse_dict
+        from .semeval.prep import Preprocessor, output_dict, reverse_dict   
         prep = Preprocessor(clipping_value=CLIPPING_VALUE)
-        dataset_full, labels_full = prep.read_dataset(TRAIN_FILE, debug=DEBUG,
-                                                      EXCLUDE_OTHER=EXCLUDE_OTHER)
 
-        dataset_aug, labels_aug = prep.read_dataset("wiki_examples_done95", debug=DEBUG,
-                                                        EXCLUDE_OTHER=EXCLUDE_OTHER)
+        dataset_full, labels_full = prep.read_dataset(TRAIN_FILE, debug=DEBUG,
+                                                  EXCLUDE_OTHER=EXCLUDE_OTHER)
     elif DATASET == 'ace2005':
         from .ace2005.prep import AcePrep
         prep = AcePrep(clipping_value=CLIPPING_VALUE)
@@ -113,12 +110,8 @@ def main(args):
         _, att_list_1, att_list_2,
         Y) = prep.fit_transform(dataset_full, labels_full)
 
-    (word_input_aug, nom_pos_aug_1, nom_pos_aug_2, 
-        _, _, _,
-        Y_aug) = prep.fit_transform(dataset_aug, labels_aug)
-
-
-
+    att_list_1 = []
+    att_list_2 = []
 
     word_index = prep.word_idx()
     clipping_value = prep.clipping_value
@@ -133,21 +126,20 @@ def main(args):
 
     test_set = open(test_path)
 
-    data, ids = prep.read_testset(test_set, output_dict)
 
-#    X_train = [word_input]
-    X_train = [np.append(word_input, word_input_aug, axis=0)]
-    nom_pos_1 = np.append(nom_pos_1, nom_pos_aug_1, axis=0)
-    nom_pos_2 = np.append(nom_pos_2, nom_pos_aug_2, axis=0)
+    data, clzz, flip_clz = prep.read_semiset(test_set, EXCLUDE_OTHER=EXCLUDE_OTHER)
 
-    
+    ids = [i for i in range(0, len(data))]
+ 
+    X_train = [word_input]
+    X_backup = X_train
+
+    wordnet_sequences = []
 
     build_input_arrays_test(X_train,
                             att_list_1, att_list_2,
                             nom_pos_1, nom_pos_2,
-                            [])
-
-    Y = np.append(Y, Y_aug, axis=0)
+                            wordnet_sequences)
 
 
     Y_train = build_label_representation(Y, OBJECTIVE=OBJECTIVE,
@@ -163,6 +155,8 @@ def main(args):
         L2_VALUE=L2_VALUE,
         WORD_EMBEDDING_DIM=WORD_EMBEDDING_DIMENSION,
         WINDOW_HEIGHT=WINDOW_HEIGHT,
+        WORDNET=INCLUDE_WORDNET,
+        WORDNET_LEN=0,
         DROPOUT_RATE=DROPOUT_RATE,
         WINDOW_SIZE=WINDOW_SIZE,
         NO_OF_CLASSES=NO_OF_CLASSES,
@@ -181,8 +175,11 @@ def main(args):
         word_index=word_index, 
         n=clipping_value,
         POS_EMBEDDING_DIM=POS_EMBEDDING_DIM,
+        L2_VALUE=L2_VALUE,
         WORD_EMBEDDING_DIM=WORD_EMBEDDING_DIMENSION,
         WINDOW_HEIGHT=WINDOW_HEIGHT,
+        WORDNET=INCLUDE_WORDNET,
+        WORDNET_LEN=0,
         DROPOUT_RATE=DROPOUT_RATE,
         WINDOW_SIZE=WINDOW_SIZE,
         NO_OF_CLASSES=NO_OF_CLASSES,
@@ -190,15 +187,12 @@ def main(args):
         loss=OBJECTIVE
         )
 
-
-    best_epoch = np.argmin(np.asarray(result.history['val_loss'])) + 1
+    best_epoch = np.argmin(np.asarray(result.history['val_loss']))
 
     logging.info("Training with " + str(best_epoch) + " epochs by early stopping")
     
     result = train_model(model, X_train, Y_train, best_epoch, early_stopping=False)
 
-    
-    
 
 
     logging.info("Done training...")
@@ -207,7 +201,7 @@ def main(args):
     #######################################################################
 
 
-    # aux_texts = [fit_str]
+    #aux_texts = [fit_str]
     aux_texts = None
     (X_test, X_test_nom_pos1, X_test_nom_pos2, _, 
         att_test_list_1, att_test_list_2, kept_ids) = prep.transform(data,ids, aux_texts=aux_texts)
@@ -239,7 +233,7 @@ def main(args):
     #     old_model = model 
 
 
-    # all_weights[0] = new_embedding
+    #     all_weights[0] = new_embedding
 
     # model = get_pretrained_model({},clipping_value, WORD_EMBEDDING_DIM=300,
     #     POS_EMBEDDING_DIM=50, L2_VALUE=L2_VALUE, WINDOW_HEIGHT=WINDOW_HEIGHT,
@@ -247,41 +241,60 @@ def main(args):
     #     all_weights=all_weights
     #     )
 
-    #import ipdb
+    # import ipdb
     # ipdb.sset_trace()
 
-
-
-    #model.save("newest.model")
+    # model.save("newest.model")
     # import pickle
-    #pickle.dump(prep, open("prepper.pkl", 'wb'))
+    # pickle.dump(prep, open("prepper.pkl", 'wb'))
 
     X = [X_test]
 
+    att_test_list_1 = []
+    att_test_list_2 = []
+
 
     build_input_arrays_test(X,
-                            [], [],
+                            att_test_list_1, att_test_list_2,
                             X_test_nom_pos1, X_test_nom_pos2,
-                            [])
+                            wordnet_sequences)
 
-    failures = [x for x in ids if x not in kept_ids]
+    #failures = [x for x in ids if x not in kept_ids]
 
     logging.info("Predicting for X...")    
     
-    preds = model.predict(X)
+    preds = []
+    fails = []
+
+    for i in range(0, len(X_test)):
+        try:
+            preds.append(model.predict([X_test[i:i+1], X_test_nom_pos1[i:i+1], X_test_nom_pos2[i:i+1]]))
+        except:
+            fails.append(i)
 
 
 
-    preds_final = [np.argmax(pred) for pred in preds]
+    import pickle
 
-    lookup_labels = [reverse_dict[pred] for pred in preds_final]
+    all_data = [data, clzz, flip_clz, kept_ids, fails, preds] 
 
-    with open("data/semeval/test_pred.txt", "w+") as f:
-        for idx, i in enumerate(kept_ids):
-            f.write(i + "\t" + lookup_labels[idx] + "\n")
+    pickle.dump(all_data, open("all_data.pkl", "wb"))
 
-        for i in failures:
-            f.write(i + "\t" + "Other" + "\n")
+
+    # import ipdb
+    # ipdb.sset_trace()
+
+
+    # preds_final = [np.argmax(pred) for pred in preds]
+
+    # lookup_labels = [reverse_dict[pred] for pred in preds_final]
+
+    # with open("data/semeval/test_pred.txt", "w+") as f:
+    #     for idx, i in enumerate(kept_ids):
+    #         f.write(i + "\t" + lookup_labels[idx] + "\n")
+
+    #     for i in failures:
+    #         f.write(i + "\t" + "Other" + "\n")
 
 
 

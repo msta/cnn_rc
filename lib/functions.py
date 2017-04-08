@@ -10,7 +10,6 @@ from functools import partial
 from keras import backend as K
 from keras.utils.np_utils import to_categorical
 from keras.engine.topology import Layer
-from keras import initializations
 
     
 
@@ -49,23 +48,12 @@ def att_comp2(tensor_list):
     return K.batch_dot(tensor_list[0],tensor_list[1]) 
 
 
-
-def build_input_arrays_folded(X, 
-                        INCLUDE_POS_EMB, INCLUDE_ATTENTION_ONE, INCLUDE_WORDNET,
-                        X_nom_pos1, X_nom_pos2,
-                        att_list_1, att_list_2,
-                        wordnet_sequences):
-
-    if INCLUDE_POS_EMB:
+def build_input_arrays_test(X, 
+                            X_nom_pos1, X_nom_pos2):
+    if X_nom_pos1.any():
         X.append(X_nom_pos1)
         X.append(X_nom_pos2)
 
-    if INCLUDE_WORDNET:
-        X.append(wordnet_sequences)
-
-    if INCLUDE_ATTENTION_ONE:
-        X.append(att_list_1)
-        X.append(att_list_2)
 
 
 def build_input_arrays_test(X,
@@ -87,7 +75,7 @@ def build_input_arrays_test(X,
 def build_label_representation(Y_train, OBJECTIVE=None, NO_OF_CLASSES=19, WINDOW_SIZE=150):
 
     if OBJECTIVE in ['categorical_crossentropy', 'margin_loss']:
-        Y_train = to_categorical(Y_train, nb_classes=NO_OF_CLASSES)
+        Y_train = to_categorical(Y_train, num_classes=NO_OF_CLASSES)
         # elif loss == margin_loss:
         #     Y_train = [transform_to_embedding(label, NO_OF_CLASSES, WINDOW_SIZE) for label in Y_train]
         #     Y_test = [transform_to_embedding(label, NO_OF_CLASSES, WINDOW_SIZE) for label in Y_test]

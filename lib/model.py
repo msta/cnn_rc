@@ -9,7 +9,7 @@ from keras.layers.normalization import BatchNormalization
 from keras.optimizers import Adadelta, SGD
 from keras.utils.np_utils import to_categorical
 from keras.models import Model
-from keras.layers import Dense, Activation, Embedding, Input, merge, Flatten, Reshape
+from keras.layers import Dense, Activation, Embedding, Input, Flatten, Reshape
 from keras.layers import Merge, Lambda
 from keras.layers import Convolution2D as Conv2D
 from keras.layers import Convolution1D as Conv1D
@@ -17,6 +17,7 @@ from keras.layers.wrappers import TimeDistributed
 from keras.layers.core import Dropout
 from keras.layers.pooling import GlobalMaxPooling2D, GlobalMaxPooling1D
 from keras.layers.pooling import MaxPooling2D, MaxPooling1D
+from keras.layers.merge import Dot, Concatenate, Average
 from keras.callbacks import EarlyStopping
 
 
@@ -39,8 +40,8 @@ def get_model(
     WINDOW_HEIGHT=[3],
     INCLUDE_ATTENTION_ONE=False,
     INCLUDE_ATTENTION_TWO=False,
-    ACTIVATION_FUNCTION="tanh",
-    WINDOW_SIZE=1000,
+    ACTIVATION_FUNCTION="relu",
+    WINDOW_SIZE=150,
     optimizer='ada',
     loss='categorical_crossentropy',
     DROPOUT_RATE=0.5, 
@@ -54,7 +55,9 @@ def get_model(
 
     markup_vector = np.random.uniform(-0.25, 0.25, WORD_EMBEDDING_DIM)
 
-    for word, i in list(word_index.items()):
+    word_index_list = list(word_index.items())
+
+    for word, i in word_index_list:
         try:
             #if word in ['e1', 'e2']:
             #    embedding_vector = markup_vector
@@ -86,12 +89,13 @@ def get_model(
                                 weights=[embedding_matrix],
                                 input_length=n,
                                 name="word_embedding",
-                                trainable=False)
+                                trainable=True)
 
     ## Removed -1 to keep a special token, 0, for padding.
     position_embedding = Embedding(2 * n,
                                    POS_EMBEDDING_DIM,
-                                   W_constraint=maxnorm(L2_NORM_MAX),
+                                   embeddings_constraint=maxnorm(L2_NORM_MAX),
+                                   embeddings_initializer='glorot_uniform',
                                    input_length=n,
                                    name='pos_embedding',
                                    trainable=True)
@@ -107,7 +111,7 @@ def get_model(
     wordnet_emb = Embedding(WORDNET_LEN,
                             POS_EMBEDDING_DIM,
                             input_length=n,
-                            init='glorot_uniform',
+                            embeddings_initializer='glorot_uniform',
                             name='wordnet_emb',
                             trainable=True)
 
@@ -149,24 +153,22 @@ def get_model(
         
 
     if len(embedding_list) > 1:
-        conv_input = merge(embedding_list, 
-                mode='concat', 
-                concat_axis=2,
-                name='embedding_merge_1')
+        conv_input = Concatenate(name='embedding_merge_1', axis=2)(embedding_list)
     else:
         conv_input = embedding_list[0]
 
 
     if INCLUDE_ATTENTION_ONE:
         ## composition layer
-        att_merged = merge([attention_score_1, attention_score_2], 
-                            mode="ave", name='attention_mean')
+        pass
+        # att_merged = merge([attention_score_1, attention_score_2], 
+        #                     mode="ave", name='attention_mean')
         
 
-        conv_input = merge([att_merged, conv_input], 
-                            mode=att_comp,
-                            output_shape=(n, CIP),
-                            name='att_composition')
+        # conv_input = merge([att_merged, conv_input], 
+        #                     mode=att_comp,
+        #                     output_shape=(n, CIP),
+        #                     name='att_composition')
 
 
     ## activation function according to paper
@@ -181,17 +183,16 @@ def get_model(
         conv = conv_input   
         #conv = Reshape((1,n,CIP))(conv_input)
         conv = Conv1D(WINDOW_SIZE, w, 
-            border_mode='valid',
+            padding='valid',
             activation=g,
-            bias=True,
-            init='glorot_normal',
-            W_constraint=maxnorm(L2_NORM_MAX),
+            use_bias=True,
+            kernel_constraint=maxnorm(L2_NORM_MAX),
             name='r_convolved' + str(w))(conv)
         conv = GlobalMaxPooling1D()(conv)
         p_list.append(conv)
 
     if len(windows) > 1:
-        convolved = merge(p_list, mode='concat', concat_axis=1)
+        convolved = Concatenate(axis=1)(p_list)
     else:
         convolved = p_list[0]
 
@@ -230,7 +231,7 @@ def get_model(
     metrics = build_metrics(INCLUDE_ATTENTION_TWO)
 
 
-    model = Model(input=input_arr, output=[final])
+    model = Model(inputs=input_arr, outputs=[final])
     model.compile(optimizer=optimizer, loss=loss, metrics=metrics)
     return model
 
@@ -242,9 +243,7 @@ def build_nguyen_cnn(convolved, DROPOUT_RATE, L2_NORM_MAX,
     #dropout = pooled
     convolved = Dropout(DROPOUT_RATE)(convolved)
     output = Dense(NO_OF_CLASSES, 
-                    init='glorot_uniform',
-                    W_regularizer=l2(L2_VALUE),
-                    W_constraint=maxnorm(L2_NORM_MAX),
+                    kernel_constraint=maxnorm(L2_NORM_MAX),
                     activation='softmax')(convolved)
     return output
 
@@ -262,7 +261,7 @@ def build_metrics(with_attention_two=False):
         acc_partial.__name__='accuracy'
         metrics.append(acc_partial)
     else:
-        metrics.extend(['fmeasure', 'accuracy'])
+        metrics.extend(['accuracy'])
     return metrics
 
 
@@ -288,8 +287,8 @@ def build_attention_two(convolved,
     AP = Activation('softmax')(final)
 
     # Multiply RT with AP to get highlight phrase-level components 
-    rap = merge([convolved, AP], mode='dot', output_shape=(n,WINDOW_SIZE))
-
+    #rap = merge([convolved, AP], mode='dot', output_shape=(n,WINDOW_SIZE))
+    rap = None
     ### Obtain wO which approximates a column in WL
     final = GlobalMaxPooling1D()(rap)
     return final
@@ -298,20 +297,21 @@ def att_comp(tensor_list):
     return tf.mul(tensor_list[0],tensor_list[1]) 
 
 
-def train_model(model, X_train, Y_train, EPOCHS, early_stopping=False):
+def train_model(model, X_train, Y_train, EPOCHS, early_stopping=False, val_data=None):
                 #logging.debug(model.summary())
                 if early_stopping:
+                    assert val_data
                     history = model.fit(X_train,
                         Y_train, 
-                        validation_split=0.1,
+                        validation_data=val_data,
                         callbacks=[EarlyStopping(patience=1)],
-                        nb_epoch=EPOCHS, 
+                        epochs=EPOCHS, 
                         batch_size=50, 
                         shuffle=True)
                 else:
                     history = model.fit(X_train,
                     Y_train, 
-                    nb_epoch=EPOCHS, 
+                    epochs=EPOCHS, 
                     batch_size=50, 
                     shuffle=True)
                 return history

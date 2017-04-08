@@ -1,8 +1,22 @@
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
 *$py.class
 
+data/semeval/training/wiki*
+data/semeval/training/web*
+
+
+
+*web_examples
+
+*.model
+
+examples_web.txt
+examples_wiki.txt
+
+*.pkl
 kerasmodel
 
 extra*
