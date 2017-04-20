@@ -1,0 +1,98 @@
+
+\section{Supervised Approaches}
+
+Using labeled data to learn a classifier in a supervised manner is the dominant approach to RC and RE tasks. Since the labeled data is usually raw text (and included in RC, marked entities) some transformed representation must be used in the classifier.    
+
+Work on RC and RE are often divided into feature-based and \emph{kernel-based systems} \cite{re_cnn} \cite{zeng2014}. This division can be confusing since \emph{Support Vector Machine} (SVM) are often used in both types. In common software libraries SVMs always uses a kernel even when treating the input as a linearly separable problem.\footnote{Here are two major frameworks which do just that - LIBSVM (\url{https://www.csie.ntu.edu.tw/~cjlin/libsvm/}) and SKLearn (\url{http://scikit-learn.org/stable/modules/svm.html\#svm-kernels})}. For the sake of clarity, I will define kernel-based systems to only include SVMs which uses non-linear kernels and by doing so does not explicitly compute the feature space.
+
+\subsection{Feature-based systems}
+
+The quintessential model of feature engineered systems in RC is the NLP, %TODO insert reference
+which have been extensively used for RE and RC. For these tasks, the input sentence is represented by a series 
+of linguistic features in a vector. The goal of the SVM is to maximize the margin between these training vectors in the dimensionality defined by the vectors. 
+
+For the SemEval training set, an extensively cited SVM had the highest accuracy for the 2010 SemEval conference \cite{semevalSVM}. The SVM uses a total of 45 feature types - which amounts to many more actual features when applied to the input. Here is a description of a few selected:
+
+\begin{enumerate}
+
+\item \emph{Wordnet Hypernyms}, which are generic classes, or hypernyms, for groups of words, defined by a Princeton research group\footnote{\url{https://wordnet.princeton.edu/}}.
+
+\item \emph{Part-Of-Speech Tags}, which describe how each word relates to different parts of speech and grammatical properties.
+
+\item \emph{Dependencies}, which describe how each word are related to the syntactic structure of the tree. Dependencies are analyzed by using a dependency parser on the sentence.
+\end{enumerate} 
+
+Each individual feature is represented as a boolean value and the feature space is treated as linearly separable. 
+
+\subsection{Kernel-based systems}
+
+Because the dimensionality of the feature vectors can be very high, kernel-based systems use the \emph{kernel trick} to implicitly compute the distance in space between the vectors. \cite{collins2001} is a seminal paper on using kernels in NLP. Notice that the input to a kernel may be raw text accompanied by some extracted features, which then forms a new representation. The full feature space is usually an exponential combination of the representation, and it is this space that the kernel avoids. The most commonly kernel-based classifiers are SVMs and the \emph{Voted Perceptron}\cite{freund1999}.   
+Essential for all kernels described in the following sections is that they exploit the structural nature of text by either creating parse-trees or sub-sequences that can be analyzed. 
+
+\subsubsection{Subsequence Kernels}
+
+Kernels that exploits the sequential nature of text are called \emph{(sub)sequence kernels}. \cite{subsequence_kernel} defines a general subsequence kernel and uses it for the RE task to extract protein interactions from a biomedical corpus and on the ACE 2005 dataset. The used kernel has specific measures for penalizing longer subsequences between relation heads, entity words which are important for RE and RC. 
+
+Sequence kernels can also be applied to raw text alone to but is often used in tasks where more text are availaible such as document classification \cite{lodhi2002}.  
+
+\subsubsection{Tree Kernels}
+
+Parsed texts are represented as tree structures which define the relations between words in a sentence. Kernels can be designed that use these structures to compute the vector product. \cite{zelenko2003}, \cite{zhou2007} and \cite{qian2008} all use different variants of parse trees in their kernels. The tree-kernel encapsulates a wide array of linguistic analysis techniques such as constituent parsing, shortest path dependencies, shallow parsing, POS-tagging and many more. Additionally, each kernel is highly specific to the RC task. 
+
+http://www.aclweb.org/anthology/P14-2011
+A Feature-Enriched Tree Kernel for Relation Extraction
+
+
+http://www.aclweb.org/anthology/S10-1057 <-- Current SVM record holder
+
+\subsection{Representation-based system}
+
+Work on neural networks can be roughly divided into work that utilizes recurrent networks and work that uses convolutional networks as the core component of the system. However, hybrid variants of these two also exist.
+
+
+\subsubsection{Word Embeddings}
+https://papers.nips.cc/paper/5021-distributed-representations-of-words-and-phrases-and-their-compositionality.pdf
+Mikolov et al., 2013b
+
+This paper is important for building neural networks in NLP as they introduce good representations of words as vectors.
+
+
+\subsubsection{Convolutional Neural Networks}
+
+Keywords: 
+Domain adaptations
+Factor-based compositional embedding
+models
+
+
+\paragraph{My convnet}
+Relation Extraction:
+Perspective from Convolutional Neural Networks
+Nguyen and Grishman, 2015
+
+This conv net is almost exclusively end-to-end, and only uses word vector and positional 
+embeddings which requires no serious feature engineering.
+Its basically an n-gram selector
+
+\paragraph{The santos net}
+Classifying Relations by Ranking with Convolutional Neural Networks
+Santos et al.
+This net is almost like my net but uses a custom trained word vector and 
+
+
+\subsubsection{Hybrid systems}
+
+\emph{Improved Relation Classification by Deep Recurrent Neural Networks
+with Data Augmentation}
+https://arxiv.org/pdf/1601.03651.pdf \\
+
+\emph{Classifying Relations via Long Short Term Memory Networks
+along Shortest Dependency Paths}
+https://pdfs.semanticscholar.org/0f44/366c1e1446cfd51258c68bd1da14fe9c7f10.pdf \\
+
+This paper uses LSTMs and feature engineering as input and builds upon 
+
+\emph{Improved re- lation classification by deep recurrent neural net- works with data augmentation}
+https://arxiv.org/pdf/1601.03651.pdf \\
+
+This paper builds on the above paper and introduces deep RNN's. They are, among other things, using WordNet hypernyms.

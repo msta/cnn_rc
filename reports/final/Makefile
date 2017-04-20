@@ -1,0 +1,11 @@
+rm *.aux; \
+rm *.out; \
+rm *.bbl; \
+pdflatex report; \
+pdflatex report; \
+pdflatex report; \
+bibtex report; \
+bibtex report.figbib \
+pdflatex report; \
+pdflatex report; \
+pdflatex report; \

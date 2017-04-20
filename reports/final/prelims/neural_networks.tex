@@ -1,0 +1,60 @@
+\section{Neural Networks}
+
+There are many different algorithms to choose from when trying to learn a relation classifier. A widely used datastructure is the \emph{neural network}, which have been used extensively in recent years and have yielded significant results. The recent work on neural networks in NLP and specifically RC will be covered in \autoref{related_works}. This section presents the definition of a neural network and how it is trained to approximate $\mathcal{H}$ through derivatives. Then convolutional neural networks are presented since they are relevant for the RC task and other NLP problems.    
+
+\subsection{Definition}
+
+A neural network is a datastructure which can be used to learn a function $\mathcal{H} : \mathcal(X) \mapsto \mathcal{Y}$ from a set of training data $D_{train}$. Usually, the term neural network also encompasses the algorithms which are used to build the datastructure and adjust it to the learned function. A common way to describe neural networks is to describe each word:
+
+The word `network' is used because the datastructure represents a series of functions which are chained together to form a network. This layering of functions forms a directed graph $f(0) \mapsto f(1) \ldots f(n-1) \mapsto {f-n}$ which begins with the input space $\mathcal{X}$ and ends with the output $\mathcal{Y}$.  
+Each layer in the network $f(i)$ receives input from the previous layer $f(i-1)$. The first layer $f(0)$ is called the \emph{input layer}, while the final layer is called the \emph{output layer}. Layers in between are called \emph{hidden layers}. The layers are called hidden because they are not defined by the training data, but must be learned by the individual network\citep[chapter 6]{dl_book}. The number of hidden layers are called the \emph{depth} of the network, while the number of neurons in the individual layer is called the \emph{width}. \\
+
+The word `neural' is used to describe these structures because they take inspiration from models of biological brains. As an example, consider a network where the input is a vector $v$. We can apply an entire vector-to-vector function $f(v)$ which outputs a new vector, the input for the next layer. We can also deconstruct $f(v)$ to its individual components:
+
+$$ f(v) =  [f_{v}^{0};f_{v}^{1}\ldots;f_{v}^{n}]^T $$ 
+
+where $f_v^{i}$ act in parallel on the input vector. These components are now vector-to-scalar functions. The output of such a subfunction is inspired by a \emph{neuron} or a \emph{unit} in the brain. The strength of the connection between an input and a neuron is called a \emph{weight}. All weights for a particular neuron are summed to form the \emph{activation} of the neuron. The activation is then a linear combination of the inputs determined by the weights. Finally, the activation is passed through an \emph{activation function} which is also inspired by how neurons ``fire'' in the brain. 
+
+\subsubsection{Activation Function}
+
+The activation function, which is inspired by neuron activation, is applied on the above mentioned activation to introduce non-linearities to the network. The functions usually squeeze the input in a certain interval which is analogous to neurons ``firing'' in the brain when they have received enough signal. As I will show in \autoref{nn_optimization} the derivative of the activation function is an important factor in choosing which activation function to use.
+
+The traditional activation function is the \emph{logistic sigmoid} function, which is a smooth ``S''-shaped function which centers around zero. The derivative is simple and easy to compute. However, the sigmoid suffers not being centered around zero, which is a problem for gradient-based optimization.\citep[p. 66]{dlbook}. To compensate for this problem, the \emph{hyperbolic tangent} function is used, which is centered around zero. Both functions suffer from \emph{saturation} which is also a problem for optimization \cite{activations}. A third option is then the \emph{rectified linear unit} (ReLU), which does not saturate. All three and their derivatives are shown below:
+
+\begin{center}
+\fbEpsfig{activation_functions}{\textwidth}{htbp}
+\end{center}
+
+% sigmoid $\frac{ds}{dx} = S(x) * (1 - S(x))$
+
+\subsubsection{Bias parameter}
+
+
+
+
+%Notice that the function $\mathcal{H} : \mathcal{X} \mapsto \mathcal{Y}$ will be equal to () 
+
+\subsection{Deep Feedforward Neural Network}
+
+The \emph{deep feedforward network} is the central structure of the neural network topology. Like in the above definition, explaining the structure is usually easiest by breaking down the name.\\
+
+A feedforward network is called \emph{deep} because it has multiple hidden layers which increases the capacity of the model. While it is true that a single layer hidden network can approximate any function, it has been shown that increasing the depth greatly reduces the number of neurons needed in the network compared to a single layer network (INSERT REFERENCE).
+
+A neural network is \emph{feedforward} if it has no connections that leads back to an earlier node. The information flows in one direction through the network when it is being activated. A network that has information from the output flowing back into the network is called a \emph{recurrent neural net}. 
+
+
+\subsection{Optimization}
+\label{nn_optimization}
+
+
+\subsection{Regularization}
+
+
+
+\subsubsection{L2 Constraints}
+
+\subsubsection{Early Stopping}
+
+
+
+\input{conv_nets.tex}

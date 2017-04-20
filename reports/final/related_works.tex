@@ -1,95 +1,15 @@
 
-\section{Related Works}
+\chapter{Related Works}
+\label{related_works}
 
-This section describes recent related work in the area of relation extraction and classification. The focus of the section is the recent shift in tendency from feature-based systems to neural systems which require less (but arguably still some) feature engineering and domain knowledge.  
+Applications of deep neural networks to NLP have been a very active area of research in the past two decades. In relation classification, an abundance of work have gone into improving results on common datasets such as SemEval 2010 and the ACE 2005. 
 
+This chapter presents related work in the area of relation extraction and classification. The focus of the chapter is the shift in tendency from heavily hand-crafted feature-based systems to neural networks with unsupervised pre-training which require considerably less task-specific feature-engineering. Additionally, the chapter also covers approaches that uses supervised learning and approaches which try to use additional unlabeled data during or after the training process.  
 
-conferences:
-acl
-https://nips.cc/
-icml
-aistats
-
-\subsection{Feature Engineered Systems}
-
-http://www.aclweb.org/anthology/P14-2011
-Tree kernels: 
-
-With features such as:
-
-Entity arguments types concatenated
-Mention type concatenated
-
-Sub entity type concatenated
-
-N-grams
-
-Phrase chunking 
-
-Syntactico-semantic structure such as: premodifiers, possesive, preposition, formulaic and verbal
-
-Relative positions
-
-Contextual information
-
-Lexical semantics
-
-Treebank aka parse trees 
-
-\subsection{Neural Networks}
-
-WORD EMBEDDINGS
-Mikolov et al., 2013b
+It is important to notice that the definition \emph{feature-based system} is kind of a misnomer - what it usually specifically means is that the features which are used in the learning system are crafted with linguistic knowledge. Such features might measure the shape of the word, the words around other words, which specific word group a word belongs to, which part of the sentence the word belong to etc. Neural networks also use features. These features may not be hand-crafted, or they may be called a representation instead, but they are still features. Word vectors, which are the common input structure used for neural networks in NLP, is both a representation and a set of features for each word which is learnt from an unsupervised task. The systems also overlap; for example, \cite{zeng2014} combines a word-vector with manually extracted features as input for a CNN.
 
 
-Recursive Neural Networks:
-
-kinda like parse trees for encoding structure between long sentences
-
-Data augmentations and deeper RNN's
-Also uses FEATURES as ``channels'':
-POS tags
-Grammatical relations
-WordNet hypernbyms
+\input{related_works/supervised} 
+\input{related_works/semisupervised.tex}
 
 
-CONVOLUTIONS:
-
-Attention mechanisms
-Word-pair features ? 
-
-N-grams as convolutions:
-Nguyen & Grishman
-vector-cnn
-
-learned outputs
-CR-CNN, dos Santos et al.
-
-
-Domain adaptations
-
-
-Factor-based compositional embedding
-models
-
-Classifying Relations via Long Short Term Memory Networks
-along Shortest Dependency Paths
-https://pdfs.semanticscholar.org/0f44/366c1e1446cfd51258c68bd1da14fe9c7f10.pdf
-
-
-
-Improved re- lation classification by deep recurrent neural net- works with data augmentation
-https://arxiv.org/pdf/1601.03651.pdf
-
-
-\subsection{Supervised vs. Semi-supervised}
-
-Semi-supervised with clustering:
-
-https://www.cs.nyu.edu/~asun/pub/ACL11-FinalVersion.pdf
-
-
-Main points. 
-
-
-    

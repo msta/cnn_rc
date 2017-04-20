@@ -1,0 +1,48 @@
+
+
+
+
+
+
+
+
+
+This section describes the experimental results from using the described networks on different datasets.
+
+The section is structured as follows. The hyperparameters in the CNN is tuned with a 5-fold validation on the SemEval dataset. Then, a series of studies show the effect of changing components in the CNN such as: excluding the positional embeddings, changing the word embeddings,  
+
+\subsection{Hyperparameter tuning}
+
+Shown below is the selected parameters which have been used in the baseline experiment:
+
+\begin{table}[]
+\centering
+\caption{My caption}
+\label{my-label}
+\begin{tabular}{lllll}
+$m\_e$ & Word Embedding Dimension     & 300              &  &  \\
+$m\_d$ & Position Embedding Dimension & 50               &  &  \\
+$m\_c$ & Convolutional units          & 200              &  &  \\
+m
+$f\_d$ & Window configuration         & \{ 2, 3, 4, 5 \} &  &  \\
+
+\end{tabular}
+\end{table}
+
+\section{SemEval 2010 dataset}
+Most of the recent work on relation classification have been applied to the SemEval-2010 task 8 dataset. The dataset contains 10,717 annotated sentences with marked entities. Of these sentences, 8,000 of these are used for training and the final 2,717 is used for testing. The dataset contains 9 classes, including an Other category which is a catch-all class for relation between entities that are hard to categorize, or does not have a real relation.. Each class except other accounts for directionality, and therefore the total number of classes is 19. The SemEval dataset is specifically targeted relation classification due to the distribution of actual relations and ``other'' relations. The distribution is shown below:
+
+%% INSERT DISTRIBUTION
+
+\section{Convolutions}
+
+\section{Embeddings}
+main points: pre-trained vectors such as glove, deps.words and word2vec. also randomly initialized vectors
+
+\section{Regularization}
+
+
+
+
+
+\section{ACE 2005}

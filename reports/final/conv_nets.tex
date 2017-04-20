@@ -1,0 +1,145 @@
+
+
+\subsection{Convolutional Networks}
+
+This section presents the relevant theory on convolutional networks as they are applied to the task of relation classification. I begin by describing the core theory of convolutions and then move on to how they are applied in NLP. 
+
+Convolutional Neural Networks (CNN's) are a relatively novel neural network structure (LECUN REFERENCE) that can be used to process grid-like input such as fixed-length sentences, images, signals or bounded time-series. The central operation in a CNN is the convolution, and then almost always following the convolution is the pooling operation, both of which will be described below. Notice that there is an important difference between the concepts of convolution and a CNN. The term CNN is used to describe any network that contains a convolution operation, while a convolution is a specific linear transformation. 
+
+\subsubsection{Definitions}
+
+I now describe the central operators of convolutional networks, the \emph{convolution}, the \emph{non-linear transformation} and the \emph{pooling} operation. 
+
+
+\paragraph{Convolution operator}
+
+The first operator in a convolutional network is called a convolution. The convolution is a general mathematical operation defined on two functions $f$ (also called the input function) and $g$ (also called the kernel function) which produces a third function:
+$$
+(f * g) (x) = \int_{-\infty}^{\infty} f(X)w(x-X)dX
+$$ 
+
+Since this thesis is about machine learning with neural networks, I will restrict the convolution to be defined on discrete input. This means that we don't need to compute the area under the function of the kernel, but rather can sum the individual values:
+
+$$
+(f * g) (x) = \sum_{-\infty}^{\infty} f(X)w(x-X)
+$$
+
+The output of the function $(f * g)$ is called a feature map, or filter map. Correspondingly, when the output is multi-dimensional, a single dimension will be called a feature or a filter.\\
+
+The above form of the convolution is still not quite relatable to machine learning applications. Usually the input and output of neural network layers are vectors or matrices of real-valued numbers. Text representations can be vectors of words in a sequence, which produces a matrix. To use the convolution in a neural network, I simply define $f$ and $g$ to be functions of the input layer $x$ which produces the input value and the kernel value, respectively. The functions are defined to be zero at any position where the input layer is not defined. 
+If the input of $f$ and $g$ produces real numbers, the input of a network layer will be a vector. The convolution is now defined as a finite summation over the elements of the layer. And finally, I will introduce an intercept term $b$ which can shift the linear transformation away from the origin: 
+$$
+S*(x) = (f*g)(x) = \sum_X f(X) * g(x-X) + b
+$$
+
+I use the naming $S*$ for the convolution because of its application to NLP in the thesis - usually the convolution is over a sentence $S$.
+This definition of a convolution will be used in my convolutional networks in the rest of the thesis.
+
+\paragraph{Non-linear transformation}
+
+Since the convolution is a linear transformation, it is necessary to apply a non-linear transformation in order to be able to approximate non-linear functions in the network\cite{any_function}. Commonly used functions are the sigmoid, tangent or rectified linear unit (ReLU). The non-linear transformation in CNNs is also called the \emph{detector stage}. The non-linearity can be written conveniently on top of the convolution:
+
+$$
+S*(x) = (f*g)(x) = g(\sum_X f(X) * g(x-X) + b)
+$$
+
+where $g$ is the activation function. 
+
+
+\paragraph{Pooling operation}
+
+The last standard operation in a typical layer of a CNN is called the pooling operation. The goal of the pooling operation is to make the output of the convolution \emph{translationally invariant} to small changes in the input. In the context of convolutions as feature detectors, the pooling operation can be thought of as a summarizer of a region of outputs for a certain feature. The operator ``pools'' over a spatial region of output and summarizes their responses. There are many functions that can be used, including:
+
+\begin{itemize}
+
+\item Max-pooling, which simply selects the output from the pooling region with the highest score.
+\item Average-pooling, which averages all the outputs from the pooling region.
+\item Weighted average, which weighs the average operation with a metric, usually the distance from the central unit in the pooling region.
+\item Using the L2 norm of the entire pooling region
+
+\end{itemize} 
+
+When the 
+This rate of reduction is called \emph{downsampling} and can improve the efficiency of the network, since the next layer in the network can have fewer inputs while still detecting important features. Below is shown two examples of 
+max pooling operations:
+
+
+
+
+
+The first figure shows a layer of convolved outputs where there is no downsampling, and a pooling region of 2. Here, the max pooling have the effect of ``overriding'' lesser important features with the most important. The second figure shows a global max pooling on the same convolution. Here the intended effect is to select the most important feature of the entire filter. Downsampling and pooling region is set to the entire dimension of the filter. This operation is most useful for single-label classification because it will only select the most important feature. 
+
+
+
+
+\subsection{Motivation}
+
+The motivation for convolutional neural networks comes from both biologically inspired theory as well as practical problems with deep feedforward networks.\\ 
+
+While it may be the case that the actual design and implementation of a human brain is poorly understood, the idea of applying convolutions in neural networks are undoubtedly inspired from biological principles \cite[p.~353]{dlbook}. Since the development of CNNs has been a lengthy process, I will only provide a few examples of features of CNNs that are inspired by neuroscience. \\
+
+\begin{enumerate}
+
+\item CNNs are inspired by areas of the brain such as the primary visual cortex (V1). The V1 is arranged as a topological map, which mirrors the input of the eye as it is captured in the retina. One output in convolution can be interpreted as an output from a locally connected neuron in such a map. The neurons on the left and right shares parameters with this neuron. A layer of these neurons forms a kernel in the convolution. By using a CNN to model the V1, it is possible to achieve state-of-the-art predictions on how the V1 responds to visual input\cite{cnn_sensory_coding}. \\
+
+\item The concept of early layers in the model representing simple features or hidden classes of later units in the model is also directly inspired from the concept of simple cells in the human brain \cite{cnn_taxonomy}. Generally, a CNN models simple cells as detector units (the affine transformation). As an example, simple cells are analogous to edge detectors in image object recognition tasks.\\
+
+\item Similarly, complex cells represent feature detectors that are invariant to small changes in the input. If CNNs are used for recognizing relations or objects in the input, it is advantageous to use a structure that is designed to recognize if some feature is present rather than specifically where. Generally, a CNN models complex cells as the pooling operation which is applied after the detectors. As an example, specific neurons are believed to associate to high-level concepts such as famous individuals \cite{visual_rep_brain}\\
+ 
+\end{enumerate}
+
+These biologically inspired features provide some clear practical advantages over regular feedforward networks in many practical applications. 
+Traditional feedforward networks are usually fully-connected on each layer. This is problematic when the input grows as the amount of parameters which must be learnt by the network grows linearly. Secondly, when the task of the network is to detect specific features in the input, sharing parameters across the inputs is a way to reduce the number of parameters while still preserving the ability to detect such features. This means that the same entire kernel will be used on all the inputs. 
+As an example, a RGB image object recognition network with 1 hidden layer, prediction of 50 different objects and input image sizes $200 \times 200$ will have $200 * 200 * 50 * 3 = 6,000,000$ weights.    
+With CNNs we can design the kernel to be much smaller than the input which greatly reduces parameters while still detecting meaningful features in a practical application. A typical first kernel of a CNN can be as small as $5x5x3$, where 3 is the number of channels in the input image\footnote{\url{http://cs231n.github.io/convolutional-networks/}}. With parameter sharing, the network will have $5*5*3*50 = 3750$ weights, which is an immense reduction. 
+
+
+
+
+\subsection{CNNs in NLP}
+
+I now turn to discuss how CNNs can be applied to text processing and specifically sentence-level problems, which include relation classification. It is useful to consider that a common feature of NLP systems are $n$-grams, which is a tool to capture semantic information between combinations of words that are next to each other. The convolution described below can be seen as a neural network based analogy for learning important n-gram features that are then used for classification at a later stage in the network. 
+
+In section INSERT WORD VECTOR SECTION I described how words can be represented as dense vectors which represent semantic information about the words. This semantic information can be transferred from other learned tasks or they may be specific to relation classification (such as positional distance to the entities in the sentence).
+Assume that we use a vector representation $s$ of size $m \in \mathbb{Z}$ for each word.
+A sentence $S_n$ consisting of $n$ words $s_1, s_2 \ldots s_n$ is then expressed as matrix $M \in \mathbb{R}^{n \times m}$. This matrix can be the target of a convolution. The following considerations and design choices must be taken into account when designing the convolutional kernel for NLP:
+
+\begin{itemize}
+\item The kernel should have height $m$ so the convolution is over entire words.
+
+\item The width of the kernel represent a specific n-gram and is also called the \emph{window size}.
+
+\item The depth (also called number of filters) of the kernel determines the number of hidden classes or features that can be detected. 
+
+\item Differently from convolutions of images, the stride is usually only one. If the stride increases, some n-gram which is important for the classification step may be omitted. In CNNs used for image processing this is alleviated by the pooling strategy.
+
+\item Since the kernel convolves over entire word vectors an appropriate pooling strategy must be chosen. Max-pooling can be used and represents selecting the most important n-gram for each filter used in the convolution. 
+
+\item Finally a padding must be selected for convolution. Choosing a valid padding reduces the number of n-grams which are built only on padding tokens and is therefore considered noisy. A drawback of valid padding is that it reduces the number of convolutions which can be stacked in a deep network. However, convolutions in NLP are usually done in a single layer and so this is not important. A valid padding is usually chosen.
+
+\end{itemize}   
+
+Recent work on relation classification with CNN's follows the above guidelines \cite{att_cn}\cite{re_cnn}\cite{cnn_rank}. Usually, the network is not deep in the number of convolutions, but it can have several convolutions at the same level to detect different sizes of n-grams. Following the above guidelines and using $k$ filters for each window size $w$, the output matrix of such a convolution is $S* \in \mathbb{R}^{n-w+1 \times k}$. Since the convolution is almost always followed by a non-linear transformation, I write that transformation directly in $S*$ so that:
+
+$$
+S*_{i,j} = g( \sum_{x=0}^{w-1} f_{x+1,j}^{T} f_{x+i,j}^{T} + b_j)
+$$
+
+Where $b$ is an applied bias $\in \mathbb{R}$ and $g$ is a non-linear function such as the ReLU, tangent or the sigmoid function. 
+To clarify further, $j$ indexes into the specific filter and $i$ indexes a specific n-gram. Consequently each filter has a vector $s_j = [S*_{1,j}, S*_{2,j} \ldots S*_{n-w+1,j}]$ which represents detecting a specific hidden class from all the n-grams in the sentence. The entire kernel is learnt by the CNN with training. 
+Finally the pooling step is applied to $S*$ to achieve translational invariance and select the most important n-grams for each hidden class. The pooling operation is a global max pooling and produces a vector:
+
+$$
+P_{S*} = [max\{S*_{1}\} ; max\{S*_{2}\} \ldots max\{S*_k\}]
+$$
+
+where $S*_{i}$ is the $i$'th filter of the convolution.
+
+
+
+
+
+
+
+
+

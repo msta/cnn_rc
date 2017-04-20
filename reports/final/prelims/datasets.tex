@@ -1,0 +1,53 @@
+\section{Datasets}
+
+One major problem with the RC task is the lack of quality datasets that can be used in academia to measure the performance and robustness of freshly developed classifiers. Relations are both hard to define and classify, and the diversity of language usually requires that a large amount of samples are labeled before the dataset is useful. The types of relations which the model should classify also varies greatly. Relations are not easy to define generically and are sometimes even defined only for a specific research paper\cite{culotta_re}\cite{med_re}. Finally, to use the dataset on the relation classification task, the dataset should be
+
+\begin{itemize}
+
+\item \emph{Open}: The dataset should be publicly available so the research community can use it without too many restrictions, and claimed results on the dataset can be validated
+
+\item \emph{Well-defined}: The format of the dataset should be well-defined to avoid large amounts of preprocessing which can have significant effect on the subsequent classification. It can also be useful if some official metric is defined for measuring the performance on the dataset. While the goal of a classification model may vary on the dataset, having an official tool helps the research community compare the results of their models. 
+
+\item \emph{Clean}: This requirement is specific to the relation classification task. The relation extraction task should cover gathering the input for the classification. As such, noisy and missing input misses the goal of the RC task. 
+
+\item \emph{Used}: Finally, the dataset is most useful if it has some traction in the research community, which creates a well-defined benchmark for the task. 
+
+\end{itemize}
+
+\subsection{SemEval 2010 Task 8}
+
+One dataset which shows the characteristics listed above is the dataset created for the 2010 SemEval task 10\cite{semeval2010}. The task defines a sentence classification task with relation labels which are semantically exclusive. Furthermore, the task is canonical for relation classification as the distribution of labels are fairly equal, which can be interpreted as the relation to be classified is already detected. 
+
+\begin{table}
+\parbox{.45\linewidth}{
+\centering
+\caption{My caption}
+\label{my-label}
+\begin{tabular}{ll}
+Samples &       \\
+Train   & 8000  \\
+Test    & 2717  \\
+Total   & 10717
+\end{tabular}
+}
+\hfill
+\parbox{.45\linewidth}{
+\centering
+\caption{My caption}
+\label{my-label}
+\begin{tabular}{ll}
+Relation           & Distribution \\
+Cause-Effect       & 12.4\%       \\
+Component-Whole    & 11.7\%       \\
+Entity-Destination & 10.6\%       \\
+Entity-Origin      & 9.1\%        \\
+Product-Producer   & 8.8\%        \\
+Member-Collection  & 8.6\%        \\
+Message-Topic      & 8.4\%        \\
+Content-Container  & 6.8\%        \\
+Instrument-Agency  & 6.2\%        \\
+Other              & 17.4\%      
+\end{tabular}
+}
+\end{table}
+

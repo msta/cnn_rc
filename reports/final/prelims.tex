@@ -1,0 +1,124 @@
+
+\chapter{Preliminaries}
+
+This chapter provides the background information necessary understand the relation classification task and how the task can be solved with machine learning. 
+
+\section{Task Definitions}
+
+Natural Language Processing (NLP) is a research area which combines linguistics and computer science with the 
+goal of understanding human - or natural - language in various forms such as written text or audio recordings. We might separate the field further in smaller challenges like Natural Language Understanding (NLU) or Natural Language Generation (NLG), but for the rest of this report I will present all related tasks under the definition NLP.\\
+
+Understanding human language in a computer usually involves building a structured model over the input language which the computer can understand and interpret. These structures can model low-level syntactic information about the structure of the language. An example of such as model is a \emph{Part-Of-Speech (POS) tagger}, which labels each word token with a distinct category related to the definition of the word and its context. The output of a POS-tagger can be used as input in another task. An example of such a task is the \emph{semantic classification task}, which captures higher-level semantic information. I will cover both definitions.
+
+\subsection{POS-tagging}
+\label{pos-tagging}
+TBD
+Given a sequence of written text as input we can label each word 
+
+\begin{center}
+`` She soon had a stable of her own rescued hounds ''
+\end{center}
+
+
+\subsection{Semantic Relation Classification}
+\label{define_rc}
+With the output of the task defined in \ref{pos-tagging} we can now look for pairs of certain entities in sentences and extract their relation. Specifically, we can look for pairs of common nominals and identify a potential semantic relation between them. Common nominals are word(s) which act as a noun in a sentence. Identifying and categorizing these relations is called \emph{semantic relation classification}. The difference between general relation classification and semantic relation classification is subtle and not well defined. The word `semantic' is used because of the possible classes the relation classification task can output\cite{semeval2007}\cite{semeval2010}. For the rest of the thesis, I will denote semantic relation classification as simply relation classification (RC). \\
+The goal of the task is to output an ordered tuple which conveys meaning about the relationship between the marked nominals.
+Consider the example used above where the common nouns have been marked:
+
+\begin{center}
+`` She soon had a stable$_{e1}$of her own rescued hounds$_{e2}$''
+\end{center}
+
+A correct output in this example is the tuple Member-Collection(e2,e1). The label is intended to capture subtle semantic information about the nominals. A "stable" can mean a physical building which houses animals, but it can also mean a set of animals which are grouped together by human means. The Member-Collection tuple defines the word "stable" to have a specific meaning due to the relation to the other nominal.\\
+
+The task can be more formally defined:
+Given an input sentence $S$ and entities $W_{e1}$ and $W_{e2}$ which are taken from $S$, we define an input space $\mathcal{X}$ which is the set of all triples $(S,W_{e1},W_{e2})$. %(THAT CAN BE GENERATED?)  
+We also define a set of labels $\mathcal{Y}$. These labels are probably different from dataset from dataset, but they define the space of the relations we are looking for. The relation classification task is to find a mapping $\mathcal{H} : \mathcal{X} \mapsto \mathcal{Y}$. The correct mapping $\mathcal{H}^*$ is not well-defined. Generally the requirement for $\mathcal{H}$ is that some human evaluator must agree with the semantic relation which is given by $\mathcal{H}$. When solving the task for a specific dataset, a test set can be provided with a given (sentence,label) set. The goal of RC is then to output the same labels as the human annotators.
+
+A closely related task to RC is \emph{relation extraction} (RE) . The actual difference between the two tasks are ill-defined and often confused because 1) they are both classification problems and 2) they both have the same inputs. For the sake of clarity in this thesis, I will define the RE task to include first the binary classification of whether an actual relation exists between inputs. This means that the RE tasks usually use unbalanced datasets, where the majority of the samples have no relation such as the ACE 2005 dataset\cite{ace2005}. 
+
+Finally, RC assumes that the common nouns have always been correctly identified. This assumption, of course, does not hold if POS-tagging is done by a statistical algorithm. Incorrect labels in the output might lead to error propagation.
+A way to deal with this assumption is to include the marking of the common nominals in the RC task. This approach is called \emph{end-to-end relation classification}, or \emph{relation detection}. This approach lies beyond the scope of this thesis\\
+
+
+
+\input{prelims/datasets.tex}
+
+In summary, solving the RC task requires us to find a general function which can label sentences by only knowing the entities and the sentence itself. To find this function we turn to a branch of computer science called \emph{machine learning}.
+
+
+
+\section{Machine Learning}
+
+Modern solutions to the RC problem is almost always based on machine learning techniques. These techniques allow computers to solve problems by learning rules and patterns from data. An alternative to machine learning is hand-written rule-based systems - but these are hard to engineer and error-prone since language varies greatly and words have different meaning based on their context. In this section I will describe different learning problems and relate it to the RC problem.  
+
+
+\subsection{Supervised and unsupervised learning}
+A common goal in machine learning is a generalized version of the goal defined in RC: we want to learn a mapping $\mathcal{H} : \mathcal{X} \mapsto \mathcal{Y}$ from a set of datapoints $D_{train}$. The nature of $D_{train}$ and the range of $\mathcal{Y}$ defines the associated machine learning task\cite{semisupervised_book}. $D_{train}$ can be points $(x_i, y_i)$ where $y_i$ is the given label for $x_i$, usually annotated by a human, or it can be unlabeled points $(x_i)$ where no label is given. An algorithm that uses labels $(x_i, y_i)$ to learn $\mathcal{H}$ places itself in the class of \emph{supervised learning algorithms}, while algorithms that only use unlabeled data $(x_i)$ are called \emph{unsupervised learning algorithms}. 
+
+\subsection{Learning problems}
+
+We can define a set of four problems by combining the input $D_{train}$ with the range of $\mathcal{Y}$. If $\mathcal{Y}$ is discrete-valued and the input uses labeled data, we call $\mathcal{H}$ a \emph{classification function}. If $\mathcal{Y}$ is continuous, the task is called \emph{regression}. If we have no labels from the input but Y is still discrete, we call the problem \emph{clustering} as the algorithm usually must make its discrete values. And finally, if no labeled data is available and $\mathcal{Y}$ is continuous, $\mathcal{H}$ can be called a \emph{density estimation function}, since we can interpret $\mathcal{Y}$ as being proportional to a probability distribution over $\mathcal{X}$.
+
+\subsection{Semi-supervised classification}
+
+We can look at the amount of data in $D_{train}$ which have labels to define a broader category of algorithms that contains both supervised and unsupervised algorithms. With this perspective, supervised learning are algorithms that assume all data is labeled, while unsupervised assumes none. If we have \emph{some} data which is labeled,    
+
+
+\subsection{Self-Training}
+
+\subsubsection{Parameters and Techniques}
+
+\subsection{Metrics}
+
+To evaluate the performance of a RC function $\mathcal{H}$, we can apply the function on a previously unseen set of data $D_{test} = [(S_1, W_{1,e1}, W_{2,e2} \ldots (S_n, W_{n,e1}, W_{n,e2}]$ in which the labels $\mathcal{H}^*(D_{test}) = [y_1 \ldots y_n]$ are known. Since the labels of the relations are discrete, a sample triple $(S_i,W_{i,e1},W_{i,e2})$ is correct if $\mathcal{H}(S_i,W_{i,e1},W_{i,e2}) = y_i$. 
+It is also useful to measure what label is predicted instead of the correct label when the classifier is wrong.
+By observing the prediction of each label we can construct a \emph{confusion matrix} which shows predictions on one axis and the actual labels on the other. Below is shown an example of a confusion matrix for a 10-way classification problem:
+
+\begin{center}
+\fbEpsfig{confusion_matrix}{\textwidth}{htbp}
+\end{center}
+
+From the positions in the confusion matrix predictions for each class $Y_i$ are measured and put into four categories: 
+
+\begin{itemize}
+\item A \emph{true positive} (tp) are a sample $D_i \in D_{test}$ where $\mathcal{H}^*(D_i) = Y_i$ and $\mathcal{H}(D_i) = Y_i$. 
+\item If $\mathcal{H}^*(D_i) \neq Y_i$ and $\mathcal{H}(D_i) = Y_i$, $D_i$ is a \emph{false positive} (fp). 
+\item Conversely, if $\mathcal{H}^*(D_i) \neq Y_i$ and $\mathcal{H}(D_i) \neq Y_i$, $D_i$ is a \emph{true negative} (tn).
+\item Finally, if $\mathcal{H}^*(D_i) = Y_i$ and $\mathcal{H}(D_i) \neq Y_i$ $D_i$ is a \emph{false negative} (fn).\\ 
+\end{itemize}
+
+\subsubsection{F1 Measure}
+The accuracy for a multi-class problem is defined with these terms over the number of classes $m$ as $\frac{\sum_{i}^{m} tp(Y_i)}{n} $, but it is not very useful since it does not take the distribution of classes into account. In the relation extraction task, for example, the number of samples which have no relation will greatly outweigh the relevant samples. A classifier may be encouraged to simply label all samples as having no relation, which will yield a high accuracy. Instead, two measures which shows performance for each can be used. \emph{Precision} (p) is defined as $\frac{tp} {tp+fp}$ and indicates how certain a classifier is that predictions for a class actually belong to that class. \emph{Recall} (r) is defined as $\frac{tp}{tp+fn}$ and indicates how sensitive a classifier is to samples belonging to a certain class. Precision and recall are ends of a spectrum - a classifier can achieve maximum precision for a class by never predicting that class, but at the cost of recall. Likewise recall can be trivially obtained by cutting precision. To output a single number for a class which balances these two, the harmonic mean of precision and recall is defined as the \emph{F1 score} $\frac{2 * p * r}{p + r}$. An example of the measures are shown below, drawn from the confusion matrix:
+
+\begin{center}
+\fbEpsfig{f1_values}{\textwidth}{htbp}
+\end{center}
+
+And finally an averaging strategy for the individual F1 scores must be chosen to output a single score. By averaging each final f1 score we obtain the \emph{macro} F1: 
+
+$$ 
+F1_{macro} \frac{\sum_{i}^{m} \frac{2 * p_{Y_i} * r_{Y_i}}{p_{Y_i} + r_{Y_i}}}{m}. 
+$$
+
+Alternatively we can sum individual precision and recall values which will value larger classes higher and obtain the micro:
+
+$$
+p_{micro} = \frac{\sum_{i}^{m} tp_{Y_i} } {\sum_{i}^{m} tp_{Y_i}+\sum_{i}^{m} fp_{Y_i}} \\
+r_{micro} = \frac{\sum_{i}^{m} tp_{Y_i} } {\sum_{i}^{m} tp_{Y_i}+\sum_{i}^{m} fn_{Y_i}} \\
+F1_{micro} = \frac{2 * p_{micro} * r_{micro}}{p_{micro} + r_{micro}} \\
+$$
+For NLP tasks, the macro is often chosen as classes with low frequency are important. 
+
+\subsection{Validation}
+
+Before choosing how to approach the task of finding a solution to the RC task, we have to investigate the effects of choosing a mapping $\mathcal{H}:\mathcal{X}\mapsto\mathcal{Y}$ by learning from $D_{train}$. 
+
+
+\input{prelims/neural_networks.tex}
+
+
+\input{data_augmentation.tex}
+
+
