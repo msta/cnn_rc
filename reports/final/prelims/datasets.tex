@@ -16,12 +16,12 @@ One major problem with the RC task is the lack of quality datasets that can be u
 
 \subsection{SemEval 2010 Task 8}
 
-One dataset which shows the characteristics listed above is the dataset created for the 2010 SemEval task 10\cite{semeval2010}. The task defines a sentence classification task with relation labels which are semantically exclusive. Furthermore, the task is canonical for relation classification as the distribution of labels are fairly equal, which can be interpreted as the relation to be classified is already detected. 
+One dataset which shows the characteristics listed above is the dataset created for the 2010 SemEval task 10\cite{semeval2010}. This dataset defines a sentence classification task with relation labels which are semantically exclusive. The task is canonical for relation classification as the distribution of labels are fairly equal, which means that the entity detection step is assumed. Otherwise, there would a significant amount of samples in the dataset with no relation. Notice that the ``Other'' relation is distinct from a no-relation class. The Other class consists of samples where the type of the relation could not be determined though they still represent some relation.   
 
 \begin{table}
 \parbox{.45\linewidth}{
 \centering
-\caption{My caption}
+\caption{Train-test distribution for SemEval 2010 task 8}
 \label{my-label}
 \begin{tabular}{ll}
 Samples &       \\
@@ -33,7 +33,7 @@ Total   & 10717
 \hfill
 \parbox{.45\linewidth}{
 \centering
-\caption{My caption}
+\caption{Label distribution for SemEval 2010 task 8}
 \label{my-label}
 \begin{tabular}{ll}
 Relation           & Distribution \\

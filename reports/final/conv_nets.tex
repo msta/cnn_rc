@@ -94,13 +94,11 @@ As an example, a RGB image object recognition network with 1 hidden layer, predi
 With CNNs we can design the kernel to be much smaller than the input which greatly reduces parameters while still detecting meaningful features in a practical application. A typical first kernel of a CNN can be as small as $5x5x3$, where 3 is the number of channels in the input image\footnote{\url{http://cs231n.github.io/convolutional-networks/}}. With parameter sharing, the network will have $5*5*3*50 = 3750$ weights, which is an immense reduction. 
 
 
-
-
-\subsection{CNNs in NLP}
+\subsection{Convolutional Neural Networks in Natural Language Processing}
 
 I now turn to discuss how CNNs can be applied to text processing and specifically sentence-level problems, which include relation classification. It is useful to consider that a common feature of NLP systems are $n$-grams, which is a tool to capture semantic information between combinations of words that are next to each other. The convolution described below can be seen as a neural network based analogy for learning important n-gram features that are then used for classification at a later stage in the network. 
 
-In section INSERT WORD VECTOR SECTION I described how words can be represented as dense vectors which represent semantic information about the words. This semantic information can be transferred from other learned tasks or they may be specific to relation classification (such as positional distance to the entities in the sentence).
+In \autoref{sec:word_embeddings} I described how words can be represented as dense vectors which represent semantic information about the words. This semantic information can be transferred from other learned tasks or they may be specific to relation classification (such as positional distance to the entities in the sentence).
 Assume that we use a vector representation $s$ of size $m \in \mathbb{Z}$ for each word.
 A sentence $S_n$ consisting of $n$ words $s_1, s_2 \ldots s_n$ is then expressed as matrix $M \in \mathbb{R}^{n \times m}$. This matrix can be the target of a convolution. The following considerations and design choices must be taken into account when designing the convolutional kernel for NLP:
 

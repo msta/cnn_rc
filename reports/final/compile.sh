@@ -3,6 +3,9 @@ rm *.out; \
 rm *.bbl; \
 rm *.toc; \ 
 rm *.figbib; \ 
+rm *.figbib.blg; \ 
+rm *.blg; \ 
+rm *.log; \ 
 
 pdflatex report; \
 bibtex report; \

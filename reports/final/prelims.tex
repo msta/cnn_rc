@@ -34,7 +34,7 @@ A correct output in this example is the tuple Member-Collection(e2,e1). The labe
 
 The task can be more formally defined:
 Given an input sentence $S$ and entities $W_{e1}$ and $W_{e2}$ which are taken from $S$, we define an input space $\mathcal{X}$ which is the set of all triples $(S,W_{e1},W_{e2})$. %(THAT CAN BE GENERATED?)  
-We also define a set of labels $\mathcal{Y}$. These labels are probably different from dataset from dataset, but they define the space of the relations we are looking for. The relation classification task is to find a mapping $\mathcal{H} : \mathcal{X} \mapsto \mathcal{Y}$. The correct mapping $\mathcal{H}^*$ is not well-defined. Generally the requirement for $\mathcal{H}$ is that some human evaluator must agree with the semantic relation which is given by $\mathcal{H}$. When solving the task for a specific dataset, a test set can be provided with a given (sentence,label) set. The goal of RC is then to output the same labels as the human annotators.
+We also define a set of labels $\mathcal{Y}$. These labels are probably different from dataset from dataset, but they define the space of the relations we are looking for. The relation classification task is to find a mapping $h:\mathcal{X} \mapsto \mathcal{Y}$. The correct mapping $h^*$ is not well-defined. Generally the requirement for $h$ is that some human evaluator must agree with the semantic relation which is given by $h$. When solving the task for a specific dataset, a test set can be provided with a given (sentence,label) set. The goal of RC is then to output the same labels as the human annotators.
 
 A closely related task to RC is \emph{relation extraction} (RE) . The actual difference between the two tasks are ill-defined and often confused because 1) they are both classification problems and 2) they both have the same inputs. For the sake of clarity in this thesis, I will define the RE task to include first the binary classification of whether an actual relation exists between inputs. This means that the RE tasks usually use unbalanced datasets, where the majority of the samples have no relation such as the ACE 2005 dataset\cite{ace2005}. 
 
@@ -55,11 +55,11 @@ Modern solutions to the RC problem is almost always based on machine learning te
 
 
 \subsection{Supervised and unsupervised learning}
-A common goal in machine learning is a generalized version of the goal defined in RC: we want to learn a mapping $\mathcal{H} : \mathcal{X} \mapsto \mathcal{Y}$ from a set of datapoints $D_{train}$. The nature of $D_{train}$ and the range of $\mathcal{Y}$ defines the associated machine learning task\cite{semisupervised_book}. $D_{train}$ can be points $(x_i, y_i)$ where $y_i$ is the given label for $x_i$, usually annotated by a human, or it can be unlabeled points $(x_i)$ where no label is given. An algorithm that uses labels $(x_i, y_i)$ to learn $\mathcal{H}$ places itself in the class of \emph{supervised learning algorithms}, while algorithms that only use unlabeled data $(x_i)$ are called \emph{unsupervised learning algorithms}. 
+A common task in machine learning is a generalized version of the RC task: we want to learn a mapping $h : \mathcal{X} \mapsto \mathcal{Y}$ from a set of datapoints $D_{train}$. The nature of $D_{train}$ and the range of $\mathcal{Y}$ defines the associated machine learning task\cite{semisupervised_book}. $D_{train}$ can be points $(x_i, y_i)$ where $y_i$ is the given label for $x_i$, usually annotated by a human, or it can be unlabeled points $(x_i)$ where no label is given. An algorithm that uses labels $(x_i, y_i)$ to learn $h$ places itself in the class of \emph{supervised learning algorithms}, while algorithms that only use unlabeled data $(x_i)$ are called \emph{unsupervised learning algorithms}. 
 
 \subsection{Learning problems}
 
-We can define a set of four problems by combining the input $D_{train}$ with the range of $\mathcal{Y}$. If $\mathcal{Y}$ is discrete-valued and the input uses labeled data, we call $\mathcal{H}$ a \emph{classification function}. If $\mathcal{Y}$ is continuous, the task is called \emph{regression}. If we have no labels from the input but Y is still discrete, we call the problem \emph{clustering} as the algorithm usually must make its discrete values. And finally, if no labeled data is available and $\mathcal{Y}$ is continuous, $\mathcal{H}$ can be called a \emph{density estimation function}, since we can interpret $\mathcal{Y}$ as being proportional to a probability distribution over $\mathcal{X}$.
+We can define a set of four problems by combining the input $D_{train}$ with the range of $\mathcal{Y}$. If $\mathcal{Y}$ is discrete-valued and the input uses labeled data, we call $h$ a \emph{classification function}. If $\mathcal{Y}$ is continuous, the task is called \emph{regression}. If we have no labels from the input but Y is still discrete, we call the problem \emph{clustering} as the algorithm usually must make its discrete values. And finally, if no labeled data is available and $\mathcal{Y}$ is continuous, $h$ can be called a \emph{density estimation function}, since we can interpret $\mathcal{Y}$ as being proportional to a probability distribution over $\mathcal{X}$.
 
 \subsection{Semi-supervised classification}
 
@@ -72,7 +72,7 @@ We can look at the amount of data in $D_{train}$ which have labels to define a b
 
 \subsection{Metrics}
 
-To evaluate the performance of a RC function $\mathcal{H}$, we can apply the function on a previously unseen set of data $D_{test} = [(S_1, W_{1,e1}, W_{2,e2} \ldots (S_n, W_{n,e1}, W_{n,e2}]$ in which the labels $\mathcal{H}^*(D_{test}) = [y_1 \ldots y_n]$ are known. Since the labels of the relations are discrete, a sample triple $(S_i,W_{i,e1},W_{i,e2})$ is correct if $\mathcal{H}(S_i,W_{i,e1},W_{i,e2}) = y_i$. 
+To evaluate the performance of a RC function $h$, we can apply the function on a previously unseen set of data $D_{test} = [(S_1, W_{1,e1}, W_{2,e2} \ldots (S_n, W_{n,e1}, W_{n,e2}]$ in which the labels $h^*(D_{test}) = [y_1 \ldots y_n]$ are known. Since the labels of the relations are discrete, a sample triple $(S_i,W_{i,e1},W_{i,e2})$ is correct if $h(S_i,W_{i,e1},W_{i,e2}) = y_i$. 
 It is also useful to measure what label is predicted instead of the correct label when the classifier is wrong.
 By observing the prediction of each label we can construct a \emph{confusion matrix} which shows predictions on one axis and the actual labels on the other. Below is shown an example of a confusion matrix for a 10-way classification problem:
 
@@ -83,10 +83,10 @@ By observing the prediction of each label we can construct a \emph{confusion mat
 From the positions in the confusion matrix predictions for each class $Y_i$ are measured and put into four categories: 
 
 \begin{itemize}
-\item A \emph{true positive} (tp) are a sample $D_i \in D_{test}$ where $\mathcal{H}^*(D_i) = Y_i$ and $\mathcal{H}(D_i) = Y_i$. 
-\item If $\mathcal{H}^*(D_i) \neq Y_i$ and $\mathcal{H}(D_i) = Y_i$, $D_i$ is a \emph{false positive} (fp). 
-\item Conversely, if $\mathcal{H}^*(D_i) \neq Y_i$ and $\mathcal{H}(D_i) \neq Y_i$, $D_i$ is a \emph{true negative} (tn).
-\item Finally, if $\mathcal{H}^*(D_i) = Y_i$ and $\mathcal{H}(D_i) \neq Y_i$ $D_i$ is a \emph{false negative} (fn).\\ 
+\item A \emph{true positive} (tp) are a sample $D_i \in D_{test}$ where $h^*(D_i) = Y_i$ and $h(D_i) = Y_i$. 
+\item If $h^*(D_i) \neq Y_i$ and $h(D_i) = Y_i$, $D_i$ is a \emph{false positive} (fp). 
+\item Conversely, if $h^*(D_i) \neq Y_i$ and $h(D_i) \neq Y_i$, $D_i$ is a \emph{true negative} (tn).
+\item Finally, if $h^*(D_i) = Y_i$ and $h(D_i) \neq Y_i$ $D_i$ is a \emph{false negative} (fn).\\ 
 \end{itemize}
 
 \subsubsection{F1 Measure}
@@ -113,7 +113,7 @@ For NLP tasks, the macro is often chosen as classes with low frequency are impor
 
 \subsection{Validation}
 
-Before choosing how to approach the task of finding a solution to the RC task, we have to investigate the effects of choosing a mapping $\mathcal{H}:\mathcal{X}\mapsto\mathcal{Y}$ by learning from $D_{train}$. 
+Before choosing how to approach the task of finding a solution to the RC task, we have to investigate the effects of choosing a mapping $h:\mathcal{X}\mapsto\mathcal{Y}$ by learning from $D_{train}$. 
 
 
 \input{prelims/neural_networks.tex}

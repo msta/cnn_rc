@@ -3,7 +3,7 @@
 
 Using labeled data to learn a classifier in a supervised manner is the dominant approach to RC and RE tasks. Since the labeled data is usually raw text (and included in RC, marked entities) some transformed representation must be used in the classifier.    
 
-Work on RC and RE are often divided into feature-based and \emph{kernel-based systems} \cite{re_cnn} \cite{zeng2014}. This division can be confusing since \emph{Support Vector Machines} (SVMs) are often used in both types. In common software libraries SVMs always uses a kernel even when treating the input as a linearly separable problem.\footnote{Here are two major frameworks who do just that - LIBSVM (\url{https://www.csie.ntu.edu.tw/~cjlin/libsvm/}) and SKLearn (\url{http://scikit-learn.org/stable/modules/svm.html\#svm-kernels})}. For the sake of clarity, I will define kernel-based systems to only include SVMs which uses non-linear kernels and by doing so does not explicitly compute the feature space.
+Work on RC and RE are often divided into feature-based and \emph{kernel-based systems} \cite{re_cnn} \cite{zeng2014}. This division can be confusing since \emph{Support Vector Machines} (SVMs) are often used in both types of systems. In common software libraries SVMs always uses a kernel even when treating the input as a linearly separable problem.\footnote{Here are two major frameworks who do just that - LIBSVM (\url{https://www.csie.ntu.edu.tw/~cjlin/libsvm/}) and SKLearn (\url{http://scikit-learn.org/stable/modules/svm.html\#svm-kernels})}. For the sake of clarity, I will define kernel-based systems to only include SVMs which uses non-linear kernels and by doing so does not explicitly compute the feature space.
 
 \subsection{Feature-based systems}
 
@@ -50,7 +50,7 @@ Several systems have augmented the tree-kernel with extensive linguistic feature
 \item \emph{Context Information features}, which annotates each node with information relative to the parse tree such as path to the marked to the entities or the context path from a sub-tree root to the annotated node \cite{zhou2007a}
 \end{itemize}
  
-\cite{sun2011} defines a \emph{feature-enriched tree kernel} for relation extraction which uses all the above defined enhancements to the kernel and achieves (at the time) state-of-the-art performance on the ACE2004 dataset, which is closely related to ACE2005. 
+\cite{sun2014} defines a \emph{feature-enriched tree kernel} for relation extraction which uses all the above defined enhancements to the kernel and achieves (at the time) state-of-the-art performance on the ACE2004 dataset, which is closely related to ACE2005. 
 
 \subsection{Feature-learning systems}
 
@@ -58,10 +58,10 @@ Recently, work on the RC and RE task have moved from the above mentioned systems
 
 \subsubsection{Word Embeddings}
 
-An extremely important innovation for neural networks is the word embeddings described in \autoref{sec:word_embeddings}. The seminal papers \cite{bengio2001} and \cite{mikolov2013} define the usage for neural networks as a probabilistic language model and the popular word2vec implementation, respectively. Every single modern neural network used for NLP which are covered in this chapter use a distributed vector representation as one of the first layers of the network \cite{att_cnn} \cite{cnn_rank} \cite{re_lstm} \cite{re_cnn}. \\ % maybe remove
+An extremely important innovation for neural networks is the word embeddings described in \autoref{sec:word_embeddings}. The seminal papers \cite{bengio2003} and \cite{mikolov2013} define the usage for neural networks as a probabilistic language model and the popular word2vec implementation, respectively. Every single modern neural network used for NLP which are covered in this chapter use a distributed vector representation as one of the first layers of the network \cite{att_cnn} \cite{cnn_rank} \cite{re_lstm} \cite{re_cnn}. \\ % maybe remove
 
 
-Recent work on neural networks can be roughly divided into networks that utilizes recurrent structures and work that uses convolutional kernels as their core component. Finally hybrid variants exist which use recurrent structures to model sentences of varying length to a fixed length representation which can then be input to a CNN. 
+Recent work on neural networks can be roughly divided into networks that utilizes recurrent structures and work that uses convolutional kernels as their core component. 
 
 \subsubsection{Convolutional Neural Networks}
 
@@ -76,11 +76,16 @@ CNNs have been applied to a wide range of sentence classification and modelling 
 \end{enumerate}
 
 This structure modeled the convolution as a linear operation. \cite{kalchbrenner2014} introduced the non-linearity to the convolution stage and introduced variable-sized downsampling, but is otherwise built directly on top of the previous network. 
-Building on top of recently published CNNs is a noticeable trend in recent years. Specifically for the SemEval 2010 dataset the last five years have been a series of increasing state-of-the-art performances by CNNs (among other networks). \cite{zeng2014}, \cite{re_cnn}, \cite{cnn_rank}, \cite{xu2015} and \cite{att_cnn} have all expanded on the core idea described above and pushed the accuracy on the dataset:
+Building on top of recently published CNNs is a noticeable trend in recent years. Specifically for the SemEval 2010 dataset the last five years have been a series of increasing state-of-the-art performances by CNNs (among other networks). \cite{zeng2014}, \cite{re_cnn}, \cite{cnn_rank}, \cite{xu2015} and \cite{att_cnn} have all expanded on the core idea described above and pushed the accuracy on the dataset. I will briefly describe how each work expands on previous ideas:
 
 \begin{itemize}
-\item Hello
-% stuff 
+
+\item   
+
+\item
+
+\item
+
 
 \end{itemize}
 
@@ -104,21 +109,16 @@ Classifying Relations by Ranking with Convolutional Neural Networks
 Santos et al.
 This net is almost like my net but uses a custom trained word vector and 
 
-\subsubsection{Recurrent Neural Networks}
+\subsubsection{Recursive Neural Networks}
 
-\subsubsection{Hybrid systems}
+The other class of networks which have been used extensively in the past years for NLP and RC is the \emph{recursive neural network} \cite{pollack1990}. Recursive networks are a generalization of \emph{recurrent networks} \cite{elman1990} which can operate on tree-structures. The idea of a RNN is to learn a function $h$ which for a temporal sequence, of input outputs a state vector and an output for each step. The RNN is a very abstract model for recursive computations, and choosing a suitable $h$ is essential for implementing an effective learning model. The most commonly used model is the \emph{long short term memory network} (LSTM), which computes the state for each timestep by learning a series of memory gates. These gates are learned by the network and serves as controllers that filters input, filters output and updates the state \cite{schmidhuber2003}. The described networks in this section all use a LSTM or a variant of the original algorithm.
 
-\emph{Improved Relation Classification by Deep Recurrent Neural Networks
-with Data Augmentation}
-https://arxiv.org/pdf/1601.03651.pdf \\
+In NLP, a sentence can be seen as a temporal sequence where individual words are timesteps. For RC specifically, sentences are usually parsed and a RNN is applied to the tree to produce an output. \cite{socher2012} did exactly this with the goal of learning composite vectors for phrases and sentences. This work focuses mostly on this representation, which involves creating matrices for every word and learning functions which can combine them. However, the representation were then applied to different end tasks, including the SemEval 2010 task 8, and reported state-of-the-art performance. 
+The above mentioned strategy of using a parse tree as input is key to several recent results for the RC task. Additionally, most of these networks also use other NLP tools such as POS-tagging or WordNet hypernyms. \cite{xu2015a} and \cite{ebrahimi2015} both uses a \emph{dependency tree} to find the most relevant path of words between entities in a sentence. These paths are then input to a RNN along with linguistic features about each word. 
 
-\emph{Classifying Relations via Long Short Term Memory Networks
-along Shortest Dependency Paths}
-https://pdfs.semanticscholar.org/0f44/366c1e1446cfd51258c68bd1da14fe9c7f10.pdf \\
+While a sentence is usually read once from left to right in a CNN or a simple RNN, RNNs such as the LSTM can also be modified to read the sentence backwards. A \emph{bidirectional LSTM} (BI-LSTM) records the state at each output as a concatenation of the states achieved by reading the sentence in both directions. \cite{re_lstm} uses a BI-LSTM to both extract entities and classify them, and achieves state-of-the-art results on the ACE 2005 dataset. Their model uses as input both a sequence for the entity detecting and a parse tree for the relation classification.
 
-This paper uses LSTMs and feature engineering as input and builds upon 
+Finally, RNNs can be stacked to achieve depth in the model. While it is not theoretically well understood why stacked RNNs can perform better than single RNNs, they have shown promising results. \cite{goldberg2015} mentions several areas of NLP that have shown increases in performance with stacked RNNs. On the SemEval 2010 dataset, \cite{xu2016} uses a deep RNN which achieves state-of-the-art performance albeit with a heavy training cost. 
 
-\emph{Improved re- lation classification by deep recurrent neural net- works with data augmentation}
-https://arxiv.org/pdf/1601.03651.pdf \\
+When comparing the RNNs to CNNs, it is important to notice that all of the recent results on RNNs use auxillary input such as parse trees, POS-taggers and WordNet Hypernyms. When these features are excluded, the RNNs in general do not perform significantly better or worse on the SemEval 2010 and the ACE 2005 dataset.   
 
-This paper builds on the above paper and introduces deep RNN's. They are, among other things, using WordNet hypernyms.
