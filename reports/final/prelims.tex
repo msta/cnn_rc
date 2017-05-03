@@ -65,14 +65,14 @@ We can define a set of four problems by combining the input $D_{train}$ with the
 
 We can look at the amount of data in $D_{train}$ which have labels to define a broader category of algorithms that contains both supervised and unsupervised algorithms. With this perspective, supervised learning are algorithms that assume all data is labeled, while unsupervised assumes none. If we have \emph{some} data which is labeled,    
 
-
 \subsection{Self-Training}
 
 \subsubsection{Parameters and Techniques}
 
 \subsection{Metrics}
+\label{sec:metrics}
 
-To evaluate the performance of a RC function $h$, we can apply the function on a previously unseen set of data $D_{test} = [(S_1, W_{1,e1}, W_{2,e2} \ldots (S_n, W_{n,e1}, W_{n,e2}]$ in which the labels $h^*(D_{test}) = [y_1 \ldots y_n]$ are known. Since the labels of the relations are discrete, a sample triple $(S_i,W_{i,e1},W_{i,e2})$ is correct if $h(S_i,W_{i,e1},W_{i,e2}) = y_i$. 
+To evaluate the performance of a RC function $h$, we can apply the function on a set of data $D_{test} = [(S_1, W_{1,e1}, W_{2,e2} \ldots (S_n, W_{n,e1}, W_{n,e2}]$ in which the labels $h^*(D_{test}) = [y_1 \ldots y_n]$ are known. Since the labels of the relations are discrete, a sample triple $(S_i,W_{i,e1},W_{i,e2})$ is correct if $h(S_i,W_{i,e1},W_{i,e2}) = y_i$. 
 It is also useful to measure what label is predicted instead of the correct label when the classifier is wrong.
 By observing the prediction of each label we can construct a \emph{confusion matrix} which shows predictions on one axis and the actual labels on the other. Below is shown an example of a confusion matrix for a 10-way classification problem:
 
@@ -90,6 +90,7 @@ From the positions in the confusion matrix predictions for each class $Y_i$ are 
 \end{itemize}
 
 \subsubsection{F1 Measure}
+\label{sec:f1measure}
 The accuracy for a multi-class problem is defined with these terms over the number of classes $m$ as $\frac{\sum_{i}^{m} tp(Y_i)}{n} $, but it is not very useful since it does not take the distribution of classes into account. In the relation extraction task, for example, the number of samples which have no relation will greatly outweigh the relevant samples. A classifier may be encouraged to simply label all samples as having no relation, which will yield a high accuracy. Instead, two measures which shows performance for each can be used. \emph{Precision} (p) is defined as $\frac{tp} {tp+fp}$ and indicates how certain a classifier is that predictions for a class actually belong to that class. \emph{Recall} (r) is defined as $\frac{tp}{tp+fn}$ and indicates how sensitive a classifier is to samples belonging to a certain class. Precision and recall are ends of a spectrum - a classifier can achieve maximum precision for a class by never predicting that class, but at the cost of recall. Likewise recall can be trivially obtained by cutting precision. To output a single number for a class which balances these two, the harmonic mean of precision and recall is defined as the \emph{F1 score} $\frac{2 * p * r}{p + r}$. An example of the measures are shown below, drawn from the confusion matrix:
 
 \begin{center}
@@ -109,11 +110,29 @@ p_{micro} = \frac{\sum_{i}^{m} tp_{Y_i} } {\sum_{i}^{m} tp_{Y_i}+\sum_{i}^{m} fp
 r_{micro} = \frac{\sum_{i}^{m} tp_{Y_i} } {\sum_{i}^{m} tp_{Y_i}+\sum_{i}^{m} fn_{Y_i}} \\
 F1_{micro} = \frac{2 * p_{micro} * r_{micro}}{p_{micro} + r_{micro}} \\
 $$
-For NLP tasks, the macro is often chosen as classes with low frequency are important. 
+For NLP tasks, the macro is often chosen as classes with low frequency usually are important. For example, if the RC task is extended to also include the detection of relations in natural text, the relations occur with low frequency and are important to classify correctly.
 
 \subsection{Validation}
+\label{sec:validation}
 
-Before choosing how to approach the task of finding a solution to the RC task, we have to investigate the effects of choosing a mapping $h:\mathcal{X}\mapsto\mathcal{Y}$ by learning from $D_{train}$. 
+In the sections above I briefly described that the F1 is applied to a dataset $D_{test}$. Choosing $D_{test}$ correctly is important for getting a good estimate of how well $h$ will perform on unseen data. This is because measuring how well $h$ is doing on $D_{train}$ does not guarantee that it will do well on unseen data. Learned models are subject to \emph{overfitting}. 
+\subsubsection{Overfitting}
+Overfitting occurs when the chosen $h$ has a high accuracy on the data on which it was trained, but low accuracy on unseen data. Why does overfitting occur? The main reasons for overfitting is:
+
+\begin{itemize}
+
+\item \emph{Noisy data}: Real data has noise which can either be \emph{deterministic} or \emph{stochastic}. Deterministic noise is part of the data which cannot be modeled by $h$. When deterministic noise happens in the training data, $h$ might see this as a pattern on which it can generalize when it is fact part of a different function than $h$. Stochastic noise happens because the process that generates the data might be error-prone. Relations which are classified by a human annotator might be wrong, or encoding errors might obscure some text from the system. \citep{abu_book}
+
+\item \emph{Target complexity}: The function $h$ is learned only from the data. Due to noise, however, the training data can mislead the model which find $h$ to think a more complex function is needed that better fits the data. When \emph{capacity} of a model that finds $h$ is high, the risk of overfitting increases because the model have more ways of choosing incorrectly. \citep[p. 107]{dl_book}. For neural networks detailed in \autoref{sec:neural_networks}, the capacity is usually huge because the network have many layers and parameters.         
+
+\end{itemize}  
+
+\subsubsection{Validation Set}
+Because of overfitting, it is necessary to measure $h$ on a dataset which is not used to find $h$. First we create a test set $D_test$ which must not be used \emph{at all} to select $h$ or the space from which $h$ can be chosen. For the SemEval data, the test set is already designated. Next, to measure the effectiveness of $h$ during the learning process, we split the remaining data $D$ into $D_{train}$ and $D_{val}$. $D_{val}$ should be a size which makes it a reliable estimate of how $h$ will perform on $D_{test}$. A common size is 10\% of $D$. 
+
+We can now use our metrics on $D_{val}$ to estimate how well $h$ will perform on $D_{test}$ without actually touching $D_{test}$. Another way to prevent overfitting is to reduce the capacity of the model used to find $h$. This technique is called \emph{regularization}. Regularization for neural networks is detailed in \autoref{sec:regularization}  
+
+
 
 
 \input{prelims/neural_networks.tex}

@@ -3,7 +3,7 @@
 
 Using labeled data to learn a classifier in a supervised manner is the dominant approach to RC and RE tasks. Since the labeled data is usually raw text (and included in RC, marked entities) some transformed representation must be used in the classifier.    
 
-Work on RC and RE are often divided into feature-based and \emph{kernel-based systems} \cite{re_cnn} \cite{zeng2014}. This division can be confusing since \emph{Support Vector Machines} (SVMs) are often used in both types of systems. In common software libraries SVMs always uses a kernel even when treating the input as a linearly separable problem.\footnote{Here are two major frameworks who do just that - LIBSVM (\url{https://www.csie.ntu.edu.tw/~cjlin/libsvm/}) and SKLearn (\url{http://scikit-learn.org/stable/modules/svm.html\#svm-kernels})}. For the sake of clarity, I will define kernel-based systems to only include SVMs which uses non-linear kernels and by doing so does not explicitly compute the feature space.
+Work on RC and RE are often divided into feature-based and \emph{kernel-based systems} \citep{re_cnn} \citep{zeng2014}. This division can be confusing since \emph{Support Vector Machines} (SVMs) are often used in both types of systems. In common software libraries SVMs always uses a kernel even when treating the input as a linearly separable problem.\footnote{Here are two major frameworks who do just that - LIBSVM (\url{https://www.csie.ntu.edu.tw/~cjlin/libsvm/}) and SKLearn (\url{http://scikit-learn.org/stable/modules/svm.html\#svm-kernels})}. For the sake of clarity, I will define kernel-based systems to only include SVMs which uses non-linear kernels and by doing so does not explicitly compute the feature space.
 
 \subsection{Feature-based systems}
 
@@ -11,7 +11,7 @@ The quintessential model of feature engineered systems in RC is the NLP, %TODO i
 which have been extensively used for RE and RC. For these tasks, the input sentence is represented by a series 
 of linguistic features in a vector. The goal of the SVM is to maximize the margin between these training vectors in the dimensionality defined by the vectors. 
 
-For the SemEval training set, an extensively cited SVM had the highest accuracy for the 2010 SemEval conference \cite{semevalSVM}. The SVM uses a total of 45 feature types - which amounts to many more actual features when applied to the input. Here is a description of a few selected:
+For the SemEval training set, an extensively cited SVM had the highest accuracy for the 2010 SemEval conference \citep{semevalSVM}. The SVM uses a total of 45 feature types - which amounts to many more actual features when applied to the input. Here is a description of a few selected:
 
 \begin{enumerate}
 
@@ -26,18 +26,18 @@ Each individual feature is represented as a boolean value and the feature space 
 
 \subsection{Kernel-based systems}
 
-Because the dimensionality of the feature vectors can be very high, kernel-based systems use the \emph{kernel trick} to implicitly compute the distance in space between the vectors. \cite{collins2001} is a seminal paper on using kernels in NLP. Notice that the input to a kernel may be raw text accompanied by some extracted features, which then forms a new representation. The full feature space is usually an exponential combination of the representation, and it is this space that the kernel avoids. The most commonly kernel-based classifiers are SVMs and the \emph{Voted Perceptron}\cite{freund1999}.   
+Because the dimensionality of the feature vectors can be very high, kernel-based systems use the \emph{kernel trick} to implicitly compute the distance in space between the vectors. \citep{collins2001} is a seminal paper on using kernels in NLP. Notice that the input to a kernel may be raw text accompanied by some extracted features, which then forms a new representation. The full feature space is usually an exponential combination of the representation, and it is this space that the kernel avoids. The most commonly kernel-based classifiers are SVMs and the \emph{Voted Perceptron}\citep{freund1999}.   
 Essential for all kernels described in the following sections is that they exploit the structural nature of text by either creating parse-trees or sub-sequences that can be analyzed. 
 
 \subsubsection{Subsequence Kernels}
 
-Kernels that exploits the sequential nature of text are called \emph{(sub)sequence kernels}. \cite{subsequence_kernel} defines a general subsequence kernel and uses it for the RE task to extract protein interactions from a biomedical corpus and on the ACE 2005 dataset. The used kernel has specific measures for penalizing longer subsequences between relation heads, entity words which are important for RE and RC. 
+Kernels that exploits the sequential nature of text are called \emph{(sub)sequence kernels}. \citep{subsequence_kernel} defines a general subsequence kernel and uses it for the RE task to extract protein interactions from a biomedical corpus and on the ACE 2005 dataset. The used kernel has specific measures for penalizing longer subsequences between relation heads, entity words which are important for RE and RC. 
 
-Sequence kernels can also be applied to raw text alone to but is often used in tasks where more text are availaible such as document classification \cite{lodhi2002}.  
+Sequence kernels can also be applied to raw text alone to but is often used in tasks where more text are availaible such as document classification \citep{lodhi2002}.  
 
 \subsubsection{Tree Kernels}
 
-Parsed texts are represented as tree structures which define the relations between words in a sentence. Kernels can be designed that use these structures to compute the vector product. \cite{zelenko2003}, \cite{bunescu2005}, \cite{qian2008} and \cite{plank2013} all use different variants of parse trees in their kernels. The tree-kernel encapsulates a wide array of parsing techniques such as constituent parsing, shortest path dependencies and shallow parsing. Additionally, each kernel is highly specific to the RC task. The kernels are used either in a voted perceptron or a SVM.  
+Parsed texts are represented as tree structures which define the relations between words in a sentence. Kernels can be designed that use these structures to compute the vector product. \citep{zelenko2003}, \citep{bunescu2005}, \citep{qian2008} and \citep{plank2013} all use different variants of parse trees in their kernels. The tree-kernel encapsulates a wide array of parsing techniques such as constituent parsing, shortest path dependencies and shallow parsing. Additionally, each kernel is highly specific to the RC task. The kernels are used either in a voted perceptron or a SVM.  
 
 
 \subsubsection{Feature-Kernel Hybrids}
@@ -45,12 +45,12 @@ Parsed texts are represented as tree structures which define the relations betwe
 Several systems have augmented the tree-kernel with extensive linguistic features. Such system creates a parse-tree from the input and subsequently annotates each node with a variety of features. Some features which can be added to the tree are:
 
 \begin{itemize}
-\item \emph{Instance features}, which are added to the root node of the parse-tree. These features can specify information about the marked entities such as their syntactico-semantic structure \cite{chan2011} or their common word type.
-\item \emph{Phrase features}, which annotates each phrase node with lexical and contextual information\cite{zhou2007b}.
-\item \emph{Context Information features}, which annotates each node with information relative to the parse tree such as path to the marked to the entities or the context path from a sub-tree root to the annotated node \cite{zhou2007a}
+\item \emph{Instance features}, which are added to the root node of the parse-tree. These features can specify information about the marked entities such as their syntactico-semantic structure \citep{chan2011} or their common word type.
+\item \emph{Phrase features}, which annotates each phrase node with lexical and contextual information\citep{zhou2007b}.
+\item \emph{Context Information features}, which annotates each node with information relative to the parse tree such as path to the marked to the entities or the context path from a sub-tree root to the annotated node \citep{zhou2007a}
 \end{itemize}
  
-\cite{sun2014} defines a \emph{feature-enriched tree kernel} for relation extraction which uses all the above defined enhancements to the kernel and achieves (at the time) state-of-the-art performance on the ACE2004 dataset, which is closely related to ACE2005. 
+\citep{sun2014} defines a \emph{feature-enriched tree kernel} for relation extraction which uses all the above defined enhancements to the kernel and achieves (at the time) state-of-the-art performance on the ACE2004 dataset, which is closely related to ACE2005. 
 
 \subsection{Feature-learning systems}
 
@@ -58,14 +58,13 @@ Recently, work on the RC and RE task have moved from the above mentioned systems
 
 \subsubsection{Word Embeddings}
 
-An extremely important innovation for neural networks is the word embeddings described in \autoref{sec:word_embeddings}. The seminal papers \cite{bengio2003} and \cite{mikolov2013} define the usage for neural networks as a probabilistic language model and the popular word2vec implementation, respectively. Every single modern neural network used for NLP which are covered in this chapter use a distributed vector representation as one of the first layers of the network \cite{att_cnn} \cite{cnn_rank} \cite{re_lstm} \cite{re_cnn}. \\ % maybe remove
+An extremely important innovation for neural networks is the word embeddings described in \autoref{sec:word_embeddings}. The seminal papers \citep{bengio2003} and \citep{mikolov2013} define the usage for neural networks as a probabilistic language model and the popular word2vec implementation, respectively. Every single modern neural network used for NLP which are covered in this chapter use a distributed vector representation as one of the first layers of the network \citep{att_cnn} \citep{cnn_rank} \citep{re_lstm} \citep{re_cnn}. \\ % maybe remove
 
-
-Recent work on neural networks can be roughly divided into networks that utilizes recurrent structures and work that uses convolutional kernels as their core component. 
+Recent work on neural networks in RC can be roughly divided into networks that utilizes recurrent structures and work that uses convolutional kernels as their respective core component. 
 
 \subsubsection{Convolutional Neural Networks}
 
-CNNs have been applied to a wide range of sentence classification and modelling tasks. \cite{collobert2008} presented a basic CNN which were used for six different NLP tasks including Semantic Role Labeling which is closely related to RC and RE. The paper defines the basic structure of a CNN for NLP which is the structure used in many subsequent papers:
+CNNs have been applied to a wide range of sentence classification and modelling tasks. \citep{collobert2008} presented a basic CNN which were used for six different NLP tasks including Semantic Role Labeling which is closely related to RC and RE. The paper defines the basic structure of a CNN for NLP which is the structure used in many subsequent papers:
 
 \begin{enumerate}
 \item Input sentences are transformed word-by-word to word embeddings.
@@ -75,8 +74,8 @@ CNNs have been applied to a wide range of sentence classification and modelling 
 
 \end{enumerate}
 
-This structure modeled the convolution as a linear operation. \cite{kalchbrenner2014} introduced the non-linearity to the convolution stage and introduced variable-sized downsampling, but is otherwise built directly on top of the previous network. 
-Building on top of recently published CNNs is a noticeable trend in recent years. Specifically for the SemEval 2010 dataset the last five years have been a series of increasing state-of-the-art performances by CNNs (among other networks). \cite{zeng2014}, \cite{re_cnn}, \cite{cnn_rank}, \cite{xu2015} and \cite{att_cnn} have all expanded on the core idea described above and pushed the accuracy on the dataset. I will briefly describe how each work expands on previous ideas:
+This structure modeled the convolution as a linear operation. \citep{kalchbrenner2014} introduced the non-linearity to the convolution stage and introduced variable-sized downsampling, but is otherwise built directly on top of the previous network. 
+Building on top of recently published CNNs is a noticeable trend in recent years. Specifically for the SemEval 2010 dataset the last five years have been a series of increasing state-of-the-art performances by CNNs (among other networks). \citep{zeng2014}, \citep{re_cnn}, \citep{cnn_rank}, \citep{xu2015} and \citep{att_cnn} have all expanded on the core idea described above and pushed the accuracy on the dataset. I will briefly describe how each work expands on previous ideas:
 
 \begin{itemize}
 
@@ -110,15 +109,16 @@ Santos et al.
 This net is almost like my net but uses a custom trained word vector and 
 
 \subsubsection{Recursive Neural Networks}
+\label{subsec:rnn}
 
-The other class of networks which have been used extensively in the past years for NLP and RC is the \emph{recursive neural network} \cite{pollack1990}. Recursive networks are a generalization of \emph{recurrent networks} \cite{elman1990} which can operate on tree-structures. The idea of a RNN is to learn a function $h$ which for a temporal sequence, of input outputs a state vector and an output for each step. The RNN is a very abstract model for recursive computations, and choosing a suitable $h$ is essential for implementing an effective learning model. The most commonly used model is the \emph{long short term memory network} (LSTM), which computes the state for each timestep by learning a series of memory gates. These gates are learned by the network and serves as controllers that filters input, filters output and updates the state \cite{schmidhuber2003}. The described networks in this section all use a LSTM or a variant of the original algorithm.
+The other class of networks which have been used extensively in the past years for NLP and RC is the \emph{recursive neural network} \citep{pollack1990}. Recursive networks are a generalization of \emph{recurrent networks} \citep{elman1990} which can operate on tree-structures. The idea of a RNN is to learn a function $h$ which for a temporal sequence, of input outputs a state vector and an output for each step. The RNN is a very abstract model for recursive computations, and choosing a suitable $h$ is essential for implementing an effective learning model. The most commonly used model is the \emph{long short term memory network} (LSTM), which computes the state for each timestep by learning a series of memory gates. These gates are learned by the network and serves as controllers that filters input, filters output and updates the state \citep{schmidhuber2003}. The described networks in this section all use a LSTM or a variant of the original algorithm.
 
-In NLP, a sentence can be seen as a temporal sequence where individual words are timesteps. For RC specifically, sentences are usually parsed and a RNN is applied to the tree to produce an output. \cite{socher2012} did exactly this with the goal of learning composite vectors for phrases and sentences. This work focuses mostly on this representation, which involves creating matrices for every word and learning functions which can combine them. However, the representation were then applied to different end tasks, including the SemEval 2010 task 8, and reported state-of-the-art performance. 
-The above mentioned strategy of using a parse tree as input is key to several recent results for the RC task. Additionally, most of these networks also use other NLP tools such as POS-tagging or WordNet hypernyms. \cite{xu2015a} and \cite{ebrahimi2015} both uses a \emph{dependency tree} to find the most relevant path of words between entities in a sentence. These paths are then input to a RNN along with linguistic features about each word. 
+In NLP, a sentence can be seen as a temporal sequence where individual words are timesteps. For RC specifically, sentences are usually parsed and a RNN is applied to the tree to produce an output. \citep{socher2012} did exactly this with the goal of learning composite vectors for phrases and sentences. This work focuses mostly on this representation, which involves creating matrices for every word and learning functions which can combine them. However, the representation were then applied to different end tasks, including the SemEval 2010 task 8, and reported state-of-the-art performance. 
+The above mentioned strategy of using a parse tree as input is key to several recent results for the RC task. Additionally, most of these networks also use other NLP tools such as POS-tagging or WordNet hypernyms. \citep{xu2015a} and \citep{ebrahimi2015} both uses a \emph{dependency tree} to find the most relevant path of words between entities in a sentence. These paths are then input to a RNN along with linguistic features about each word. 
 
-While a sentence is usually read once from left to right in a CNN or a simple RNN, RNNs such as the LSTM can also be modified to read the sentence backwards. A \emph{bidirectional LSTM} (BI-LSTM) records the state at each output as a concatenation of the states achieved by reading the sentence in both directions. \cite{re_lstm} uses a BI-LSTM to both extract entities and classify them, and achieves state-of-the-art results on the ACE 2005 dataset. Their model uses as input both a sequence for the entity detecting and a parse tree for the relation classification.
+While a sentence is usually read once from left to right in a CNN or a simple RNN, RNNs such as the LSTM can also be modified to read the sentence backwards. A \emph{bidirectional LSTM} (BI-LSTM) records the state at each output as a concatenation of the states achieved by reading the sentence in both directions. \citep{re_lstm} uses a BI-LSTM to both extract entities and classify them, and achieves state-of-the-art results on the ACE 2005 dataset. Their model uses as input both a sequence for the entity detecting and a parse tree for the relation classification.
 
-Finally, RNNs can be stacked to achieve depth in the model. While it is not theoretically well understood why stacked RNNs can perform better than single RNNs, they have shown promising results. \cite{goldberg2015} mentions several areas of NLP that have shown increases in performance with stacked RNNs. On the SemEval 2010 dataset, \cite{xu2016} uses a deep RNN which achieves state-of-the-art performance albeit with a heavy training cost. 
+Finally, RNNs can be stacked to achieve depth in the model. While it is not theoretically well understood why stacked RNNs can perform better than single RNNs, they have shown promising results. \citep{goldberg2015} mentions several areas of NLP that have shown increases in performance with stacked RNNs. On the SemEval 2010 dataset, \citep{xu2016} uses a deep RNN which achieves state-of-the-art performance albeit with a heavy training cost. 
 
 When comparing the RNNs to CNNs, it is important to notice that all of the recent results on RNNs use auxillary input such as parse trees, POS-taggers and WordNet Hypernyms. When these features are excluded, the RNNs in general do not perform significantly better or worse on the SemEval 2010 and the ACE 2005 dataset.   
 

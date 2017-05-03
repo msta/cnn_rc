@@ -1,0 +1,33 @@
+
+\section{Unmotivated complexity}
+
+\subsection{Case study: CNN}
+
+\subsubsection{Positional Embedding or Embedding Indicator?}
+Show that the positional embedding can be reduced to 1 without any loss in mean score. 
+
+\subsubsection{L2 Normalization or Nothing at all}
+Show that the l2 normalization does not matter and can be removed.
+
+\subsection{Solutions for complexity}
+
+\subsubsection{Reduce capacity of model}
+Every time a new feature is added to the network, the hyperparameters should be re-tuned. Sensitivities in the input (markup) influence effectiveness of other parameters. Embedding dimensions hugely influence the number of parameters in the system and should be kept at a bare minimum. 
+Have a clear motivational path for each part of the network to its theoretical grounding. I'm not a fan of ``well its a trick that works well'' strategies like the L2 normalization.
+
+\subsubsection{Use semi-supervised approaches}
+
+We could use more data. Learning curve here:
+
+
+Use it as regularizer: Only get sentences above a threshold that has same entity pairs as the training set. This almost guarantees candidate selection
+
+Use it to find a new signal: harder. Tried different datasets with no good results. 
+Reason: The dataset have a hard time generalizing to new data.  
+
+TODO
+
+make 3 folders
+stick text in for each problem
+and figures
+

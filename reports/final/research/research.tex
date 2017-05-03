@@ -1,0 +1,95 @@
+\chapter{Research}
+
+As shown in \autoref{sec:related_works}, the research community have come up with a multitude of solutions for the RC problems based on neural networks in the recent years. Models are frequently built upon each other. Techniques such as regularization are done with multiple techniques at an experimental level and the effects may overlap to an unknown extent. Finally, restrictions on computational power and time to execute experiments may limit the degree to which results are certain. Modern neural networks used for NLP have lots of randomness in them which influences the test scores. Since they usually also consist of many different layers, small implementation details can make small changes in the results which makes published results harder to reproduce. 
+
+GENERAL STORY IDEA -- CAN WE WRITE SIMPLER NETWORKS BY 1) CUTTING OUT UNMOTIVATED STUFF AND 2) PROPOSING MORE GENERAL SOLUTIONS TO REGULARIZATION AND DATA PROBLEMS  
+
+\section{Model Architecture}
+
+Convolutional Neural Network with Word and Positional Embeddings. After convolutions, apply a class embedding with dropout. 
+
+\section{Problems}
+
+\subsection{Measuring the Result}
+
+Gist: Scores are published en-masse with comparisons to other systems. It is hard to reproduce the results and hyperparameters are not properly specified
+
+\subsection{Solutions to increase reproduceability}
+
+\subsubsection{Complete hyperparameter setup}
+
+Assumptions about the input - what is the input, how are the tags processed, what is the tokenization options, are the input clipped to reduce noise.
+Embeddings - dimensions, training architecture, using others use a link, dataset specifications
+Layers: Bias, initializations, paddings, weight constraints, 
+Training: General algorithm, learning rates, regularizations, dropouts, early stopping splits, chosen epochs, loss functions
+
+\subsubsection{Publish minor statistics about test-scores}:
+100 runs - or appropriate runs for the dataset. Min, max, mean and stddev. 
+Why is this more useful? Better comparisons. Also allows a potential implementer of the system
+to choose if you want a system with less variance but a lower mean. 
+T-test as alternative for the stats. 
+
+
+\section{Unmotivated complexity}
+
+\subsection{Case study: CNN}
+
+\subsubsection{Positional Embedding or Embedding Indicator?}
+Show that the positional embedding can be reduced to 1 without any loss in mean score. 
+
+\subsubsection{L2 Normalization or Nothing at all}
+Show that the l2 normalization does not matter and can be removed.
+
+\subsection{Solutions for complexity}
+
+\subsubsection{Reduce capacity of model}
+Every time a new feature is added to the network, the hyperparameters should be re-tuned. Sensitivities in the input (markup) influence effectiveness of other parameters. Embedding dimensions hugely influence the number of parameters in the system and should be kept at a bare minimum. 
+Have a clear motivational path for each part of the network to its theoretical grounding. I'm not a fan of ``well its a trick that works well'' strategies like the L2 normalization.
+
+\subsubsection{Use semi-supervised approaches}
+
+We could use more data. Learning curve here:
+
+
+Use it as regularizer: Only get sentences above a threshold that has same entity pairs as the training set. This almost guarantees candidate selection
+
+Use it to find a new signal: harder. Tried different datasets with no good results. 
+Reason: The dataset have a hard time generalizing to new data.  
+
+TODO
+
+make 3 folders
+stick text in for each problem
+and figures
+
+
+
+\subsection{Overfitting as a community}
+
+\subsubsection{Problems with SemEval}
+
+.. How do we actually prove this? Perplexity from SemEval -> any other data set is poor. Also the train-test perplexity is relatively low.
+
+\subsubsection{Generalizes poorly}
+
+The entity selection process is obscure and hard to apply in general. Getting new entities is not easy ... ?
+Idea: Do a run of the experiment without pos embedding, and then observe self-training.?
+
+\subsection{Solutions to the SemEval problem}
+
+We are probably bound somewhat to the dataset due to the rarity of quality relation classification datasets.
+
+\subsubsection{Dont use the official test-train split}
+Generate a random test-train split from the data. The same samples are not interesting, not even for comparison.
+
+\subsubsection{Dont use the official scorer}
+Use test loss because it assumes less about the actual meaning of the systems. 
+Designing a system for semantic relation classification, not for semeval relation classification :)
+
+\subsubsection{Dont use SemEval without other tasks}
+
+The model should be applied to another similar tasks. The dataset sune showed is a good example.
+Effects on early stopping and the setup in general. 
+
+
+

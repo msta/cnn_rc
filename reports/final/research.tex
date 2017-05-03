@@ -1,0 +1,16 @@
+\chapter{Research}
+
+As shown in \autoref{sec:related_works}, the research community have come up with a multitude of solutions for the RC problems based on neural networks in the recent years. Models are frequently built upon each other. Techniques such as regularization are done with multiple techniques at an experimental level and the effects may overlap to an unknown extent. Finally, restrictions on computational power and time to execute experiments may limit the degree to which results are certain. Modern neural networks used for NLP have lots of randomness in them which influences the test scores. Since they usually also consist of many different layers, small implementation details can make small changes in the results which makes published results harder to reproduce. 
+
+This chapter presents a series of experiments which highlights three problems in the common approach to Relation Classification. We shall examine a common CNN baseline and highlight implementation problems that is caused by reproduceability issues. Then, we look at some simple reductions that can be made to the baseline without reducing general performance. And finally we shall investigate the problem of using the SemEval dataset and its associated practice. 
+
+Each section will presented an individual problem with suggested solutions. 
+
+\input{research/prob1/model_problem}
+\input{research/prob2/complexity}
+\input{research/prob3/semeval}
+
+
+
+
+

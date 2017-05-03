@@ -1,33 +1,54 @@
 \section{Deep Feedforward Neural Networks}
+\label{sec:neural_networks}
 
-There are many different algorithms to choose from when trying to learn a relation classifier. A widely used datastructure is the \emph{neural network}, which have been used extensively in recent years with significant results in several research areas including NLP. The recent work on neural networks in NLP and specifically RC will be covered in \autoref{related_works}. This section covers the definition of a deep feedforward neural network and how it is trained to approximate $h$ through derivatives. T
+There are many different algorithms to choose from when trying to learn a relation classifier. A widely used datastructure is the \emph{neural network}, which have been used extensively in recent years with significant results in several research areas including NLP. The recent work on neural networks in NLP and specifically RC will be covered in \autoref{related_works}. This section covers the definition of a deep feedforward neural network and how it is trained to approximate $h$ through derivatives. Choosing the correct structure of the network that approximates $h$ is a problem that often leads to the concept of \emph{overfitting} \citep[sec. 5.2]{dlbook}. The final part of this section covers a group of \emph{regularization} techniques that constrain the model to prevent this from happening. 
 
 \subsection{Definition}
 
-A deep feedforward neural network is a datastructure which can be used to learn a function $h : \mathcal(X) \mapsto \mathcal{Y}$ from a set of training data $D_{train}$. Usually, the term neural network also encompasses the algorithms which are used to build the datastructure and approximate the function $h$. A common way to describe neural networks is to describe each word:
+A deep feedforward neural network is a datastructure which can be used to learn and represent a function $h:X \mapsto Y$ from a set of training data $D_{train}$. Usually, the term neural network also encompasses the algorithms which are used to build the datastructure and approximate the function $h$. A common way to describe neural networks is to describe each word:
 
-The word `network' is used because the datastructure represents a series of functions which are chained together to form a network. This layering of functions forms a directed graph $f(0) \mapsto f(1) \ldots f(n-1) \mapsto {f-n}$ which begins with the input space $\mathcal{X}$ and ends with the output $\mathcal{Y}$.  
-Each layer in the network $f(i)$ receives input from the previous layer $f(i-1)$. The first layer $f(0)$ is called the \emph{input layer}, while the final layer is called the \emph{output layer}. Layers in between are called \emph{hidden layers}. The layers are called hidden because they are not defined by the training data and must be learned by the individual network\citep[chapter 6]{dl_book}. 
+The word `network' is used because the datastructure represents a series of functions which are chained together to form a network. This layering of functions forms a directed graph $f(0) \mapsto f(1) \ldots f(d-1) \mapsto f(d)$ which begins with the input space $\mathcal{X}$ and ends with the output $\mathcal{Y}$.  
+The first layer $f(0)$ is called the \emph{input layer}, while the final layer $f(d)$ is called the \emph{output layer}. Layers in between are called \emph{hidden layers}. The layers are called hidden because they are not defined by the training data and must be learned by the individual network\citep[chapter 6]{dl_book}. The number of hidden layers $d$ is called the \emph{depth} of the network.  
 
-The word `neural' is used to describe these structures because they take inspiration from models of biological brains. As an example, consider a network layer where the input is a vector $v$ of length $n$, which also defines the \emph{width} of the network.We can apply an entire vector-to-vector function $f(v)$ which outputs a new vector, the input for the next layer. We can also deconstruct $f(v)$ to its individual components:
+The word `feedforward' is used to describe that the network has no connections that leads back to previous layers. The information flows in one direction through the network when it is being activated. A network that has information from the output flowing back into the network is called a \emph{recurrent neural net}. Recurrent nets and their usage in NLP is detailed in \autoref{subsec:rnn}  
 
-$$ f(v) =  [f_{v}^{0};f_{v}^{1}\ldots;f_{v}^{n}]^T $$ 
+The word `deep' is used when the number of hidden layers are more than zero. A network with no hidden layers - so that the input layer is directly connected to the output layer - is commonly called a \emph{perceptron}. While it is true that a network with a single hidden layer can be used to approximate any function, it has been shown that increasing the depth greatly reduces the number of neurons needed in the network compared to a single layer network. % insert reference
 
-where $f_v^{i}$ act in parallel on the input vector. These components are now vector-to-scalar functions. The output of such a subfunction $f_{v}^{i}$ is inspired by a \emph{neuron} - or \emph{unit} - in the brain. The strength of the connection between an input and a neuron is called a \emph{weight}. All weights for a particular neuron are summed to form the \emph{activation} of the neuron. The activation is then a linear combination of the inputs determined by the weights $w_{j0}, w_{j1} \ldots w_{jn}$:
+Consider the $l$'th layer in a network. A common notation for the output of a layer $f(l)$ in a neural network is to write it as the input for the next layer $x_l$ The inputs for layer $l$ is a vector output of the previous layer function denoted $x^l = f(l-1)$. We can apply an entire vector-to-vector function on the previous input:
 
 $$
-    f_{v}^{i} =  \sum_{j=0}{n} v_j * w_{vj} 
+x^l = f(x^l-1)
 $$
+
+However, we can also deconstruct $x^l$ to its individual components:
+
+$$ 
+x^l =  [f_{0}^{l};f_{1}^{l}\ldots;f_{n}^{l}]^T 
+$$ 
+
+Each component $f_i^l$ is a vector-to-scalar function that can be applied in parallel on the input vector. Each component is called a \emph{neuron} or a \emph{unit}. The length $n_l = |f(l)|$ is called the \emph{width} and can also be seen as the number of neurons in the layer. For clarity we denote the width of the previous layer as $m = n_{l-1} = |x|$  
+The word `neural' is used in neural networks because the way these components are constructed take inspiration from models of biological brains. Each component consists of a vector, which individual values determines how much information flows from one neuron $f_{i}^{l-1}$ in the previous layer to a neuron in the next. The strength of these connections are called \emph{weights}. All weights for a particular neuron are summed to form the \emph{activation} of the neuron. The activation for a neuron $f_{i}^l$ is then a linear combination of the inputs determined by the weights $w_{i0}^l, w_{i1}^l \ldots w_{in_{l-1}}^l$:
+$$
+    f_{i}^{l} =  \sum_{j=0}^{|f(l-1)|} f_j^{l-1} * w_{ij}^l 
+$$
+
+Given the above definitions and the fact that $f(l)$ have $n$ activations with $m$ weights, we can write all the weights for a layer as a matrix $W^l \in \mathbb{R}^n \times m $ and the total activation of $f(l)$ as a matrix-vector product:
+
+$$
+    x^l = W^lx^l
+$$   
 
 \subsubsection{Activation and Bias}
-The \emph{activation function}, which is inspired by neuron activation, is applied to the above mentioned activation to introduce a non-linearity to the activation. The functions usually squeeze the input into a certain interval which is analogous to neurons ``firing'' in the brain when they have received enough signal to pass a threshold. In order for the threshold to be specific to each neuron a \emph{bias parameter} $b$ is added to the transformation described above:
+
+A neuron in the brain contains an \emph{axon} which is a transmitter that measures a potential in the \emph{soma} which is modeled with the summations described above. When the potential in the soma is large enough, the axon delivers a signal to neurons it is connected to. We can model this thresholding by introducing a non-linear \emph{activation function}, usually denoted $\sigma$, which ``fires'' when the input is large enough to pass a threshold. The functions usually squeeze the input into a certain interval which is analogous to neurons ``firing'' in the brain when they have received enough signal to pass a threshold. In order for the threshold to be specific to each neuron a \emph{bias parameter} $b$ is added to the transformation. We can now write the full output of a layer $f(l)$ once the activation and the bias have been applied:
 
 $$
-    f_{v}^{i} =  \sum_{j=0}{n} v_j * w_{vj} + b 
-$$
+    f(l) = \sigma(W^lx^l) + b
+$$   
+
+Note that $\sigma$ and $b$ is applied element-wise to each neuron in $l$.
 
 % TODO insert neural network graph
-
 As I will show in \autoref{nn_optimization} the derivative of the activation function is an important factor in choosing which activation function to use.
 
 The traditional activation function is the \emph{logistic sigmoid} function, which is a smooth ``S''-shaped function which centers around zero. The derivative is simple and easy to compute. However, the sigmoid suffers not being centered around zero, which is a problem for gradient-based optimization.\citep[p. 66]{dlbook}. To compensate for this problem, the \emph{hyperbolic tangent} function is used, which is centered around zero. Both functions suffer from \emph{saturation} which is also a problem for optimization \cite{activations}. A third option is then the \emph{rectified linear unit} (ReLU), which does not saturate. All three and their derivatives are shown below:
@@ -41,36 +62,47 @@ The traditional activation function is the \emph{logistic sigmoid} function, whi
 
 %Notice that the function $h : \mathcal{X} \mapsto \mathcal{Y}$ will be equal to () 
 
-The word `deep' is used when the number of hidden layers are more than zero. Accordingly, this number is called the \emph{depth} of the network. A network with no hidden layers - so that the input layer is directly connected to the output layer - is commonly called a \emph{perceptron}. While it is true that a single layer hidden network can approximate any function, it has been shown that increasing the depth greatly reduces the number of neurons needed in the network compared to a single layer network. % insert reference
-
-Finally, the word `feedforward' is used to describe that the network has no connections that leads back to previous layers. The information flows in one direction through the network when it is being activated. A network that has information from the output flowing back into the network is called a \emph{recurrent neural net}. 
+From the above components it is possible to define any function $h$ by a network defined by its depth, width, activation functions and its weights. The depth, width and activation function are chosen by the designer of the network while the specific weights are learned by the optimization algorithm. We can parameterize $h$ to include the weights $w = [w^i \ldots w^d ]$ by writing $h(x,w)$, where $x$ is the input to the first layer in the network.
 
 \subsection{Optimization}
 \label{nn_optimization}
-
-The question remains: how do we use the network to approximate $h:\mathcal{X}\mapsto{Y}$? Consider a supervised learning problem where $h$ maps each input $x_i$ to a single discrete output label $y_i \in \mathcal{Y}$. We can construct the output layer of the network such that each label has a corresponding output neuron. To find out which $y_i$ the network predicts from $x_i$ we inspect the activations of the neurons. One way of interpreting the values is as a probability $P(Y = y_i | X = x_i)$. 
-
-%% TODO FINISH THIS SHIT 
-
-If we design the output layer so that it represents a probability distribution over the labels in $\mathcal{Y}$
-
-Because the learning problem is supervised, each $x_i$ which is in $D_{train}$ already have a given
+ 
+The question remains: how do we use the network $h(x,w)$ to approximate $h:\mathcal{X}\mapsto{Y}$? To do this, we need to construct a way of measuring of how well $h(x,w)$ predicts the samples in $D_{train}$. The measures shown in \autoref{sec:f1measure} cannot reveal any information about \emph{why} the chosen setting of $w$ predicts incorrectly. Instead we need a more general function which directly depends on $w$ which, when minimized, indirectly maximizes the F1 score. This measure is usually called an \emph{objective function} or \emph{loss function} 
 
 \subsubsection{Objective function}
+Consider a supervised learning problem where $h$ maps input $x$ to a single discrete output label $y_i \in \mathcal{Y}$. We can construct the output layer $y(x)$ of the network $h(x,w)$ such that each label in $Y$ has a corresponding output neuron. To find out which $y_i$  we should choose from the network predictions we inspect the activations of the neurons. One way of interpreting the predictions is as a conditional probability distribution over the classes in $\mathcal{Y}$ given $x$: $P_{pred}(Y = y | X = x)$. To make sure that the output of the neurons correspond to a probability distribution over Y, we can use a different activation function which normalizes the output. A common example of such a function is the \emph{softmax}. Given the output layer described above the soft-max is defined as 
+\begin{equation}
+\sigma(y_i) = \frac{e^{y_i}} {\sum_{j=0}^K e^{y_j}} \label{eq:softmax}
+\end{equation}
 
+where $K$ is the total number of neurons in the output layer.
+
+Since we know the label for $x$ in advance because $x$ is in $D_{train}$, we can also construct the probability distribution $P_{true}$ over $Y$ by setting the probability for the label to 1 and all other probabilities to 0. Such a distribution is also called a \emph{one-hot encoding}. We can use how well the predicted distribution aligns with the true distribution of $D_train$ with a concept borrowed from information theory called the \emph{cross-entropy loss}. The loss is most useful when it is averaged over a number of samples $N$:
+
+$$
+Ê(P_{pred}, P_{true}) = - \frac{1}{N} \sum_i^N \sum_j^K P_{pred}^i(y_{j}) * log(P_{true}^i(y_{j}))
+$$
+
+In other words, the cross-entropy loss measures a distance between the predicted and true probability of a sample $i$ belonging to a class $y_j$.
+This cross-entropy is equivalent to the \emph(average negative log-likelihood), which provides additional theoretical grounding for using the loss as a measure of how well $h(x,w)$ predicts $D_{train}$. %%% TODO insert reference 
+It is important to notice that this loss function is defined only over the training data and therefore is not an exact measure of how well $h$ actually performs on new data. TODO - REFERENCE shows that it is possible to relate the loss to the generalization error  theoretically  under the assumption that $D_{train}$ is drawn from the same distribution as the new data. In practice, we can measure how well $h$ performs empirically by using the validation techniques shown in \autoref{sec:validation}
+
+\subsubsection{Backpropagation}
+
+Since $P_{pred}$ is subject to the chosen $h$ in the neural network and $P_{true}$ is given from $D_{train}$, we can write INSERT EQUALITY REF as a function of these: $Ê(h, D_{train})$. We now have a function subject to minimization with differential calculus. Since $h$ is defined by its weights $w$ (when the structure and the activation function of the network is fixed), we can apply an algorithm known as \emph{backpropagation} to calculate how each weight in $w$ contributes to $Ê$.  
 
 \subsection{Regularization}
-
-\subsubsection{L2 Constraints}
+\label{sec:regularization}
 
 \subsubsection{Early Stopping}
 
 A non-intrusive way of limiting overfitting on the training set is to continually measure the performance of the classification function on a set of validation data for which we can measure the loss without updating the network. When the validation loss stops decreasing, we record the number of training iterations run on the network. This method is called \emph{early stopping}. The validation data must be independent from the training data and the test data which is used to estimate the generalization error. Early stopping can be applied to any neural network. A drawback of the method is that the validation data is not used for training. A way to deal with this problem is to use the validation data to find the number of training iterations, and then re-train the network with all the available data. The full pseudocode for the algorithm is detailed in \citep[p. 242]{dl_book}. 
 
+\subsubsection{Dropout}
 
-\subsection{Word Embeddings}
-\label{sec:word_embeddings}
+Another popular technique for regularization is \emph{dropout} \cite{dropout}. A simple but powerful idea, dropout constraints a network by randomly setting the output of neurons to zero ("dropping out") with a probability $p$ during training. At test time, all connections are still active but their weights are multiplied with $p$. The effect of dropping out units is that a layer with $n$ units can be interpreted as $2^n$ smaller networks with parameter sharing that functions as an ensemble classifier. Dropout is a technique that has extensive use in NLP because it increases performance for most tasks. As I will show in \autoref{chap:related_works}, dropout is used for almost every single neural network in the RC task.
 
-Lorem ipsum dolor
+%% remember reference to dropout 
+
 
 \input{conv_nets.tex}

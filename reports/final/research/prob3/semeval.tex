@@ -1,0 +1,29 @@
+\subsection{Overfitting as a community}
+
+\subsubsection{Problems with SemEval}
+
+.. How do we actually prove this? Perplexity from SemEval -> any other data set is poor. Also the train-test perplexity is relatively low.
+
+\subsubsection{Generalizes poorly}
+
+The entity selection process is obscure and hard to apply in general. Getting new entities is not easy ... ?
+Idea: Do a run of the experiment without pos embedding, and then observe self-training.?
+
+\subsection{Solutions to the SemEval problem}
+
+We are probably bound somewhat to the dataset due to the rarity of quality relation classification datasets.
+
+\subsubsection{Dont use the official test-train split}
+Generate a random test-train split from the data. The same samples are not interesting, not even for comparison.
+
+\subsubsection{Dont use the official scorer}
+Use test loss because it assumes less about the actual meaning of the systems. 
+Designing a system for semantic relation classification, not for semeval relation classification :)
+
+\subsubsection{Dont use SemEval without other tasks}
+
+The model should be applied to another similar tasks. The dataset sune showed is a good example.
+Effects on early stopping and the setup in general. 
+
+
+

@@ -5,6 +5,8 @@ __pycache__/
 
 /logs
 
+
+*.pkl
 *.png
 
 data_backup

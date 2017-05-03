@@ -1,0 +1,80 @@
+
+\section{Baseline Experiment}
+
+As shown in \autoref{chap:related_works} CNNs have shown promising results for relation classification as n-gram selectors. I have chosen to implement a CNN for the SemEval dataset which is based on \cite{re_cnn}. The architecture is simple in that it only uses the input given in the dataset, pre-trained word-embeddings and no additional linguistic resources, but it also presents a number of problems which can be addressed. 
+
+\subsection{Model Architecture}
+
+I now describe the complete model architecture. The architecture consists of five sequential layers:
+
+\subsubsection{Preprocessing}
+Each input sentence is sanitized and tokenized. The index of each entity and the distance from each word to the entity words are calculated. 
+Finally, sentences which have entity distances greater than a bound $n = 15$ are removed from the training set to reduce noise.
+
+
+\subsubsection{Embedding layer}
+Each word $w^i$ in the sentence is mapped to a $d$-dimensional vector $w_i^d$. The calculated distances to the respective entities $e1$ and $e2$ are mapped to $p$-dimensional embeddings $w_i^{p1}$ and $w_i^{p1}$. These vectors are concatenated to form the word representation $s_i$, which is part of the full sentence representation $S$:
+
+$$
+s_i = [w_i^d;w_i^{p1};w_i^{p2}]^T  \textrm{and} S = [s_1, \ldots, s_n]
+$$
+
+These vectors are not initialized randomly but loaded from a set of pre-trained word vectors. A word that does not occur in the pre-trained set are initialized randomly and uniformly.  
+
+\subsubsection{Convolutional Layer}
+
+The third layer applies the convolution operator described in \eqref{eq:conv}. Several window sizes are applied at the same level, which represents examining different n-grams in the sentence. Each output neuron in a single convolution produces 
+a score $s_{i,j}$ where $i$ is the filter and $j$ is the n-gram. A full convolution with window size $w$ produces $S*^w \in \mathbb{R}^{(n-w+1) \times k}$, where $k$ is the number of filters. The entire layer with an example configuration ${2,3,4,5}$ produces a list of matrices $S*^2, S*^3, S*^4, S*^5$. I shall denote the number of windows as $n_d$
+
+\subsubsection{Pooling layer}
+
+Each convolved window $S*^w$ is max-pooled to produce a score sequence $P^w$. Each filter $i$ in $S*^w$ produces a single score $p_i^w$:
+\begin{equation}
+p_i^w = max\{S*_{i,1}^w, S*_{i,2}^w, \ldots, S*_{i,n-w+1}^w\} \textrm{and} $P^w$ = [p_1^w, p_2^w, \ldots, p_k^w] 
+\end{equation}  
+Each window size are concatenated to form a feature vector $z \in \mathbb{R}^k*n_d$. The example configuration from above is then $z = [P^2;P^3;P^4;P^5]$. 
+
+\subsubsection{Fully-connected layer with dropout}
+
+$z$ is input to a regular fully connected layer which measures the contribution of each pooling score to the target relations. Regularization is performed by using dropout on $z$ which outputs $z_p$ where each element is either kept or set to 0 according to a Bernoulli distribution over the hyperparameter $p$.
+The activation of this fully connected layer is the softmax function defined in \eqref{eq:softmax}, which outputs a discrete probability distribution for the sentence over the number of target relations.  
+
+\subsubsection{Training}
+
+The network is trained with stochastic gradient descent using shuffled mini-batches. The gradients are computed using the backpropagation algorithm while the weights are updated with the AdaDelta update rule.  
+
+
+\subsection{Reproduceability}
+ 
+When a chosen is baseline modeled over another described network - and it usually is to allow comparison -  the results from the network given a specific dataset should be very close to the same. However, two common problems are observed in the networks described in \autoref{ch:related_works}.
+
+\subsubsection{Hyperparameters}
+ The networks described in \autoref{ch:related_works} suffer from a description of the model that is sufficiently detailed as to allow re-implementation. I highlight a few examples from \cite{re_cnn}:
+
+\begin{itemize}
+    \item It is well documented that initial values of the parameters in the network can have significant effect on the results 
+
+
+\end{itemize}
+
+
+ The SemEval dataset is measured with the official scorer on a predesignated test split.    
+
+\subsubsection{Measuring the Result}
+
+Gist: Scores are published en-masse with comparisons to other systems. It is hard to reproduce the results and hyperparameters are not properly specified
+
+\subsection{Solutions to increase reproduceability}
+
+\subsubsection{Complete hyperparameter setup}
+
+Assumptions about the input - what is the input, how are the tags processed, what is the tokenization options, are the input clipped to reduce noise.
+Embeddings - dimensions, training architecture, using others use a link, dataset specifications
+Layers: Bias, initializations, paddings, weight constraints, 
+Training: General algorithm, learning rates, regularizations, dropouts, early stopping splits, chosen epochs, loss functions
+
+\subsubsection{Publish minor statistics about test-scores}:
+100 runs - or appropriate runs for the dataset. Min, max, mean and stddev. 
+Why is this more useful? Better comparisons. Also allows a potential implementer of the system
+to choose if you want a system with less variance but a lower mean. 
+T-test as alternative for the stats. 
