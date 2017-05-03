@@ -8,9 +8,9 @@ data/semeval/training/
 data/semeval/training/
 
 n-grams
-self_training_crap
+self-training-crap
 
-antonyms.txt
+
 
 *.sh
 

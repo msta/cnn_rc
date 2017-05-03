@@ -23,16 +23,15 @@ class SemevalTokenizer():
         return [d.strip() for d in text.split(" ") if d.strip()]
 
     def _fit(self, text):
-        for token in self._split(text):
-            n_token = re.sub(self.e_reg, "", token)
-            
+        text = re.sub(self.e_reg, "", text)
+        for token in self._split(text): 
             # try:
             #     word_idx = self.vocab.index(n_token)
                 
-            if n_token not in self.word_index:
+            if token not in self.word_index:
                 n_length = len(self.word_index) + 1
-                self.word_index[n_token] = n_length
-                self.reverse_index[n_length] = n_token
+                self.word_index[token] = n_length
+                self.reverse_index[n_length] = token
 
     def sequence(self, texts):
         return [self._sequence(text) for text in texts]
@@ -41,18 +40,21 @@ class SemevalTokenizer():
 
         nom_1 = nom_2 = -1
         seq_arr = []
+        
         for idx, token in enumerate(self._split(text)):
             if 'e1' in token:
                 nom_1 = idx
+                token = re.sub(self.e_reg, "", token)
             elif 'e2' in token:
                 nom_2 = idx
-            n_token = re.sub(self.e_reg, "", token)
+                token = re.sub(self.e_reg, "", token)
+
 
             ## When we are not fitting, we want an OOV-value instead
-            if n_token not in self.word_index:
-                self.word_index[n_token] = 0
+            if token not in self.word_index:
+                self.word_index[token] = 0
             
-            seq_arr.append(self.word_index[n_token])
+            seq_arr.append(self.word_index[token])
             
         return (seq_arr, (nom_1, nom_2))
 

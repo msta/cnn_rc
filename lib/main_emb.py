@@ -26,7 +26,7 @@ from sklearn.model_selection import KFold
 
 from .supersense import SupersenseLookup
 from .functions import *
-from .model import get_model, train_model
+from .model2 import get_model, train_model
 from .pretrained_model import get_pretrained_model
 
 from .argparser import build_argparser
@@ -82,20 +82,19 @@ def main(args):
         word_embeddings = {}
 
     if DATASET == 'semeval':
-        from .semeval.prep import Preprocessor, get_dict
-        prep = Preprocessor(clipping_value=CLIPPING_VALUE, merge=args.merge)
-        output_dict = prep.output_dict
-        reverse_dict = prep.reverse_dict 
+        from .semeval.prep import Preprocessor, output_dict, reverse_dict
+        prep = Preprocessor(clipping_value=CLIPPING_VALUE)
         dataset_full, labels_full = prep.read_dataset(TRAIN_FILE, debug=DEBUG,
                                                       EXCLUDE_OTHER=EXCLUDE_OTHER)
+
         test_path = "data/semeval/testing/" + TEST_FILE + ".txt"
 
         test_set = open(test_path)
 
         data, ids = prep.read_testset(test_set, output_dict)
 
-        #dataset_aug, labels_aug = prep.read_dataset("wiki_examples_done95", debug=DEBUG,
-        #                                                EXCLUDE_OTHER=EXCLUDE_OTHER)
+        dataset_aug, labels_aug = prep.read_dataset("wiki_examples_done95", debug=DEBUG,
+                                                        EXCLUDE_OTHER=EXCLUDE_OTHER)
     elif DATASET == 'ace2005':
         from .ace2005.prep import AcePrep
         prep = AcePrep(clipping_value=CLIPPING_VALUE)
@@ -107,9 +106,8 @@ def main(args):
 
     #### Compute number of output classes #################################
 
-    no_of_clz = len(reverse_dict)
+    no_of_clz = len(output_dict)
 
-    
     NO_OF_CLASSES = no_of_clz - 1 if args.exclude_other else no_of_clz
 
 
@@ -122,9 +120,9 @@ def main(args):
         _, _, _,
         Y) = prep.fit_transform(dataset_full, labels_full)
 
-    # (word_input_aug, nom_pos_aug_1, nom_pos_aug_2, 
-    #     _, _, _,
-    #     Y_aug) = prep.fit_transform(dataset_aug, labels_aug)
+    (word_input_aug, nom_pos_aug_1, nom_pos_aug_2, 
+         _, _, _,
+         Y_aug) = prep.fit_transform(dataset_aug, labels_aug)
 
     aux_texts = None
     (X_test, X_test_nom_pos1, X_test_nom_pos2, _, 
@@ -144,9 +142,9 @@ def main(args):
 
 
     X_train = [word_input]
-    #X_train = [np.append(word_input, word_input_aug, axis=0)]
-    #nom_pos_1 = np.append(nom_pos_1, nom_pos_aug_1, axis=0)
-    #nom_pos_2 = np.append(nom_pos_2, nom_pos_aug_2, axis=0)
+    X_train = [np.append(word_input, word_input_aug, axis=0)]
+    nom_pos_1 = np.append(nom_pos_1, nom_pos_aug_1, axis=0)
+    nom_pos_2 = np.append(nom_pos_2, nom_pos_aug_2, axis=0)
 
     
 
@@ -155,7 +153,7 @@ def main(args):
                             nom_pos_1, nom_pos_2,
                             [])
 
-    #Y = np.append(Y, Y_aug, axis=0)
+    Y = np.append(Y, Y_aug, axis=0)
 
 
     Y_train = build_label_representation(Y, OBJECTIVE=OBJECTIVE,
@@ -280,7 +278,7 @@ def main(args):
 
     lookup_labels = [reverse_dict[pred] for pred in preds_final]
 
-    with open("data/semeval/test_pred.txt"  , "w+") as f:
+    with open("data/semeval/test_pred_alt.txt"  , "w+") as f:
         for idx, i in enumerate(kept_ids):
             f.write(i + "\t" + lookup_labels[idx] + "\n")
 

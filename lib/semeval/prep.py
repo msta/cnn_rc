@@ -7,14 +7,14 @@ import logging
 from ..functions import debug_print, debug_print_dict
 
 
-from .classes import *
+from .classes import get_dict
 from .tokenizer import SemevalTokenizer
 from keras.preprocessing.sequence import pad_sequences
 
 class Preprocessor():
 
     def __init__(self, 
-        clipping_value=18):
+        clipping_value=18, merge=False):
 
         self.n = clipping_value
         self.tokenizer = SemevalTokenizer()
@@ -24,25 +24,10 @@ class Preprocessor():
         self.clipping_value = clipping_value
         self.oov_val = -1
         self.nompos_normalizer = {}
-    '''
-    oov_val shows the number of words in the tokenizer
-    with the first fitting
-    '''
-    def fit_tokenizer(self):
-        #self.tokenizer = SemevalTokenizer()
-        self.tokenizer.fit_on_texts(self.texts)
+        self.output_dict, self.reverse_dict = get_dict(merge)
 
-        self.oov_val = len(self.tokenizer.word_index)
-    
-    def normalize_nom_arr(self, arr):
-        def normalize(tok):
-            return tok + self.clipping_value - 1
-            # if tok not in self.nompos_normalizer
-            #     self.nompos_normalizer[tok] = len(self.nompos_normalizer)
-            #     return self.nompos_normalizer[tok]
-            # else:
-            #     return self.nompos_normalizer[tok]
-        return [normalize(tok) for tok in arr]
+    def remove_entities(self, texts):
+        return np.asarray([re.sub("(<e1>|</e1>|<e2>|</e2>)*", "", text) for text in texts])
 
     def load_dataset(self, TRAIN_FILE):
 
@@ -79,19 +64,19 @@ class Preprocessor():
                 if EXCLUDE_OTHER and line.strip() == 'Other':
                     X_raw = X_raw[:-1]
                 else:
-                    Y.append(output_dict[line.strip()])
+                    Y.append(self.output_dict[line.strip()])
             if i == 2 or i == 3:
                 pass
             i += 1
             if i % 4 == 0:
                 i = 0
         if debug:
-            return np.asarray(X_raw)[:5], np.asarray(Y)[:5]
+            return np.asarray(X_raw)[:500], np.asarray(Y)[:500]
         else:
             return np.asarray(X_raw), np.asarray(Y)
 
 
-    def read_semiset(self, aug_file, debug=False, EXCLUDE_OTHER=False):
+    def read_semiset(self, aug_file, debug=False, EXCLUDE_OTHER=False, for_training=True, merge=False):
 
         dataset = self.load_dataset(aug_file)
 
@@ -113,12 +98,10 @@ class Preprocessor():
             if i == 1:
                 if EXCLUDE_OTHER and line.strip() == 'Other':
                     X_raw = X_raw[:-1]
+                elif for_training:
+                    Y.append(self.output_dict[line.strip()])
                 else:
-                    stripped = line.strip().split("\t")
-                    to_app = [output_dict[x] for x in stripped]
-                    if revers_ent:
-                       [x-1 for x in to_app]
-                    Y.append(to_app)
+                    pass
             if i == 2 or i == 3 or i == 4:
                 pass
             i += 1
@@ -129,35 +112,36 @@ class Preprocessor():
         if len(X_raw) % 1000 == 0:
             print ("growing" + str(len(X_raw)))
         
-
         if debug:
-            return np.asarray(X_raw)[:5], np.asarray(Y)[:5]
+            return np.asarray(X_raw)[:500], np.asarray(Y)[:500], None
         else:
             return X_raw, np.asarray(Y), np.asarray(flip_clz)
 
 
+    def read_augset(self, aug_file, debug=False):
 
+        dataset = self.load_dataset(aug_file)
 
-
-    def gen_dataset(self, dataset, 
-                     output_dict, 
-                     merge_classes=False):
         X_raw = []
         Y = []
         i = 0
-        current_id = ""
+
         for line in dataset:
             if i == 0:
-                current_id = get_id(line)
-            if i == 1:
-                Y.append(current_id + "\t" + line.strip())
-            if i == 2 or i == 3:
+                text = self.get_text(line)
+                X_raw.append(text)
+            if i in  [1,2,3,4]:
                 pass
             i += 1
-            if i % 4 == 0:
+            if i % 5 == 0:
                 i = 0
-        return Y
+        if len(X_raw) % 1000 == 0:
+            print ("growing" + str(len(X_raw)))
 
+        if debug:
+            return np.asarray(X_raw)[:500]
+        else:
+            return X_raw
 
     def read_testset(self, dataset,
                     output_dict):
@@ -170,6 +154,26 @@ class Preprocessor():
         return data, ids
 
   
+    '''
+    oov_val shows the number of words in the tokenizer
+    with the first fitting
+    '''
+    def fit_tokenizer(self):
+        #self.tokenizer = SemevalTokenizer()
+        self.tokenizer.fit_on_texts(self.texts)
+
+        self.oov_val = len(self.tokenizer.word_index)
+    
+    def normalize_nom_arr(self, arr):
+        def normalize(tok):
+            return tok + self.clipping_value - 1
+            # if tok not in self.nompos_normalizer
+            #     self.nompos_normalizer[tok] = len(self.nompos_normalizer)
+            #     return self.nompos_normalizer[tok]
+            # else:
+            #     return self.nompos_normalizer[tok]
+        return [normalize(tok) for tok in arr]
+
 
     def in_range(self, nom_1, nom_2):
         return abs(nom_1 - nom_2) < self.clipping_value
@@ -192,6 +196,7 @@ class Preprocessor():
 
         self.texts = texts
         
+        logging.info("Tokenizing ...")
         if fit:
             self.fit_tokenizer()
 
@@ -200,14 +205,56 @@ class Preprocessor():
         
         self.Y = np.asarray(labels)
 
+        logging.info("Sequencing everything ...")
         sequences, nominal_heads = zip(*self.tokenizer.sequence(texts))
 
+        logging.info("Prepping the rest ...")
         e_pairs = self.get_e_pairs(sequences, nominal_heads)
-
-        texts = np.asarray(texts)
-        texts_to_return = self.find_sent_outside_window(texts, nominal_heads) 
+        e_pairs_clip = self.find_sent_outside_window(e_pairs, nominal_heads)
+#        texts = np.asarray(texts)
+ #       texts_to_return = self.find_sent_outside_window(texts, nominal_heads) 
         sequences_clip = self.find_sent_outside_window(sequences, nominal_heads)
         self.Y = self.find_sent_outside_window(self.Y, nominal_heads)
+        self.texts = self.find_sent_outside_window(np.asarray(texts), nominal_heads)
+
+        nominal_heads_clip = [nom for nom in nominal_heads if self.in_range(nom[0], nom[1])]
+
+        nominal_positions1, nominal_positions2 = (self.create_nom_arrays(sequences_clip, 
+                                                    nominal_heads_clip))
+        # Select sentence and fit to window so entities are in
+        padded_sequences = self.fit_to_window(sequences_clip, nominal_heads_clip)
+
+        nominal_positions1 = self.fit_to_window(nominal_positions1, nominal_heads_clip)
+        nominal_positions2 = self.fit_to_window(nominal_positions2, nominal_heads_clip)
+
+
+
+        nominal_positions1 = self.normalize_nom_arr(nominal_positions1)
+        nominal_positions2 = self.normalize_nom_arr(nominal_positions2)
+
+        return (padded_sequences, 
+            np.asarray(nominal_positions1), np.asarray(nominal_positions2), 
+            e_pairs_clip, None, None,
+            self.Y)
+
+    def fit_transform_aug(self, texts):
+
+        self.texts = texts
+        
+        logging.info("Tokenizing ...")
+        self.fit_tokenizer()
+
+
+        logging.info("Sequencing everything ...")
+        sequences, nominal_heads = zip(*self.tokenizer.sequence(texts))
+
+        logging.info("Prepping the rest ...")
+        e_pairs = self.get_e_pairs(sequences, nominal_heads)
+        e_pairs_clip = self.find_sent_outside_window(e_pairs, nominal_heads)
+#        texts = np.asarray(texts)
+ #       texts_to_return = self.find_sent_outside_window(texts, nominal_heads) 
+        sequences_clip = self.find_sent_outside_window(sequences, nominal_heads)
+        self.texts = self.find_sent_outside_window(texts, nominal_heads)
         nominal_heads_clip = [nom for nom in nominal_heads if self.in_range(nom[0], nom[1])]
 
         nominal_positions1, nominal_positions2 = (self.create_nom_arrays(sequences_clip, 
@@ -223,8 +270,7 @@ class Preprocessor():
 
         return (padded_sequences, 
             np.asarray(nominal_positions1), np.asarray(nominal_positions2), 
-            e_pairs, texts_to_return, None,
-            self.Y)
+            e_pairs_clip, self.texts)
 
     def get_e_pairs(self, sequences, nominal_heads):
         reverse_seqs = self.reverse_sequence(sequences)
@@ -285,8 +331,6 @@ class Preprocessor():
                     t += 1
                     n_rest -= 1
             padded_sequence.append( seq[h:t])
-            #old_head1, old_head2 = nominal_heads[seq_idx]
-            #nominal_heads[seq_idx] = old_head1 - h, old_head2 - h
         return pad_sequences(padded_sequence, self.clipping_value, value=0)
 
 
